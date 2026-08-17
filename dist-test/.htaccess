@@ -1,0 +1,50 @@
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+  # ---- LEGACY WORDPRESS URLS ------------------------------------------
+  # The old site ran four near-identical pages per town: /gympie/,
+  # /shipping-containers-for-sale-gympie/, /new-shipping-containers-gympie/
+  # and /used-shipping-containers-gympie/. That is 35 pages competing with
+  # each other for one intent — the doorway pattern, built internally rather
+  # than across domains — and it split every ranking signal three ways.
+  # James approved consolidation on 17/08/2026: one page per town, the three
+  # variants 301 into it.
+  #
+  # These are PATTERN rules rather than a hand-listed table on purpose. A
+  # legacy URL nobody recorded still lands somewhere sensible instead of
+  # 404ing, which is the failure mode that actually loses rankings.
+  RewriteRule ^(?:new|used)-shipping-containers-([a-z0-9-]+)/?$ /$1/ [R=301,L,NC]
+  RewriteRule ^shipping-containers-for-sale-([a-z0-9-]+)/?$ /$1/ [R=301,L,NC]
+  RewriteRule ^buy-shipping-containers-([a-z0-9-]+)/?$ /$1/ [R=301,L,NC]
+
+  # Service pages the old site slugged differently. Locality slugs are
+  # preserved 1:1 and are deliberately NOT in this list.
+  RewriteRule ^contact-us/?$ /contact/ [R=301,L]
+  RewriteRule ^our-story/?$ /about/ [R=301,L]
+  RewriteRule ^our-services/?$ /shipping-containers/ [R=301,L]
+  RewriteRule ^shipping-container-delivery/?$ /delivery/ [R=301,L]
+  RewriteRule ^faqs-2/?$ /faqs/ [R=301,L]
+  # Left over from an unrelated business. Not ours, never was.
+  RewriteRule ^cardio-hire-terms/?$ / [R=301,L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>

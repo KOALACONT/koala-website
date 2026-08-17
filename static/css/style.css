@@ -1,0 +1,522 @@
+/* ============================================================================
+   Koala Containers — stylesheet
+
+   COLOUR SYSTEM AND MEASURED CONTRAST
+   Brand yellow #FBDB59 comes from the CRM brands table (code KOA) and is the
+   colour in the logo. It is a LIGHT colour: at roughly 1.4:1 on white it can
+   never carry text on a white surface. The whole system is built around that
+   fact rather than fighting it — yellow lives on black, and black lives on
+   yellow. That inversion is the brand.
+
+   token          hex       on          ratio    used for
+   --ink          #14140F   #FFFFFF     18.47:1  headings, body
+   --ink          #14140F   --brand     13.53:1  PRIMARY BUTTON label
+   --ink          #14140F   --wash      17.34:1  headings, body on cream
+   --ink          #14140F   --grey      16.32:1  headings, body on grey
+   --muted        #5A5A4E   #FFFFFF      6.98:1  secondary and meta text
+   --muted        #5A5A4E   --wash       6.56:1  secondary and meta text
+   --brand-deep   #6B5200   #FFFFFF      7.42:1  links, small brand text
+   --brand-deep   #6B5200   --wash       6.96:1  links, small brand text
+   --brand        #FBDB59   --ink       13.53:1  DISPLAY TYPE ON DARK ONLY
+   --brand        #FBDB59   --black     14.43:1  display type on black
+   #FFFFFF        white     --ink       18.47:1  body text on the dark surface
+   --pale         #E8E6DC   --ink       14.76:1  body text on dark
+   --dim          #B9B5A3   --ink        8.97:1  secondary text on dark
+
+   NON-TEXT ONLY — never carries text:
+   --brand on white (1.4:1) — rules, plates, bars, borders, focus rings
+   --rule #E2E0D6 — hairlines and dividers
+
+   LAYOUT ARCHITECTURE — deliberately its own, and deliberately NOT the
+   architecture of the sibling site launched the same week. That one is a
+   two-tier masthead with a photographic mega-menu, a split hero with an
+   overlapping white quote card, full-bleed alternating editorial photo bands
+   and a three-column footer.
+
+   This site is: a single-tier sticky black masthead; a video-led hero on
+   black with the film as the centrepiece; yellow "plate" dividers carrying
+   condensed display type, echoing the bar in the logo; a horizontal depot
+   strip; hard-bordered cards with a 3px rule rather than a shadow; product
+   pages led by a dimension table rather than by prose; and a four-column
+   footer. There is no mega-menu and no alternating photo band anywhere in
+   this file.
+   ========================================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --ink: #14140F;
+  --black: #0B0B08;
+  --muted: #5A5A4E;
+  --brand: #FBDB59;
+  --brand-dim: #E5C64B;
+  --brand-deep: #6B5200;
+  --wash: #FFF8DC;
+  --grey: #F2F1EA;
+  --pale: #E8E6DC;
+  --dim: #B9B5A3;
+  --rule: #E2E0D6;
+  --rule-dark: #33322A;
+  --white: #FFFFFF;
+
+  --display: "Anton", "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
+  --text: "Barlow", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --wrap: 1240px;
+  --narrow: 740px;
+  --gap: clamp(1.25rem, 3vw, 2.5rem);
+  --bar: 3px;
+}
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: var(--text);
+  font-size: clamp(1.02rem, 0.45vw + 0.94rem, 1.14rem);
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; height: auto; }
+a { color: var(--brand-deep); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+
+h1, h2, h3, h4 { font-family: var(--text); font-weight: 800; line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 0.6em; }
+h1 { font-size: clamp(2.1rem, 5.2vw, 3.5rem); }
+h2 { font-size: clamp(1.65rem, 3.1vw, 2.4rem); }
+h3 { font-size: clamp(1.18rem, 1.5vw, 1.42rem); }
+h4 { font-size: 1.02rem; }
+p { margin: 0 0 1.1em; }
+ul, ol { margin: 0 0 1.1em; padding-left: 1.25rem; }
+li { margin-bottom: 0.4em; }
+
+.wrap { width: min(100% - 2.4rem, var(--wrap)); margin-inline: auto; }
+.wrapless { width: min(100%, 60ch); }
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 999; background: var(--brand); color: var(--ink); padding: 0.7rem 1.1rem; font-weight: 800; }
+
+:focus-visible { outline: 3px solid var(--brand-deep); outline-offset: 2px; }
+
+.eyebrow {
+  font-family: var(--display);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand-deep);
+  margin: 0 0 0.6rem;
+}
+.sec-dark .eyebrow, .hero .eyebrow, .band-dark .eyebrow { color: var(--brand); }
+
+/* ------------------------------------------------------------- buttons -- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-family: var(--text); font-weight: 800; font-size: 1rem;
+  padding: 0.85rem 1.5rem; border: var(--bar) solid var(--ink); border-radius: 0;
+  text-decoration: none; cursor: pointer; transition: transform .12s ease, background .12s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--brand); color: var(--ink); }
+.btn-primary:hover { background: var(--brand-dim); color: var(--ink); }
+.btn-dark { background: var(--ink); color: var(--brand); }
+.btn-dark:hover { background: var(--black); color: var(--brand); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { background: var(--brand); color: var(--ink); }
+.btn-ondark { background: transparent; color: var(--white); border-color: var(--white); }
+.btn-ondark:hover { background: var(--white); color: var(--ink); }
+.btn-lg { font-size: 1.08rem; padding: 1rem 1.8rem; }
+.btn-wide { width: 100%; }
+
+/* ------------------------------------------- single-tier black masthead -- */
+.top {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--black);
+  border-bottom: var(--bar) solid var(--brand);
+}
+.top > .wrap { display: flex; align-items: center; gap: 1.1rem; min-height: 76px; }
+.top-brand { display: flex; align-items: center; flex: 0 0 auto; }
+.top-brand svg, .top-brand img { height: 46px; width: auto; display: block; }
+
+.menu { display: flex; gap: 0.15rem; list-style: none; margin: 0 0 0 auto; padding: 0; align-items: center; }
+.menu li { margin: 0; }
+.menu > li > a {
+  display: block; padding: 0.6rem 0.72rem;
+  font-weight: 700; font-size: 0.95rem; letter-spacing: 0.01em;
+  color: var(--white); text-decoration: none;
+}
+.menu > li > a:hover, .menu > li > a[aria-current="page"] { color: var(--brand); }
+
+.top-tel {
+  display: inline-flex; flex-direction: column; line-height: 1.05;
+  margin-left: 0.9rem; padding: 0.5rem 0.95rem;
+  background: var(--brand); color: var(--ink);
+  font-family: var(--display); font-size: 1.28rem; letter-spacing: 0.01em;
+  text-decoration: none; white-space: nowrap;
+}
+.top-tel small { font-family: var(--text); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+.top-tel:hover { background: var(--brand-dim); color: var(--ink); }
+
+.burger { display: none; background: none; border: 2px solid var(--brand); color: var(--brand); font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.5rem 0.8rem; cursor: pointer; margin-left: auto; }
+
+@media (max-width: 1080px) {
+  .burger { display: block; }
+  .menu {
+    display: none; position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--black); border-bottom: var(--bar) solid var(--brand); padding: 0.5rem 0 1rem;
+  }
+  .menu.show { display: flex; }
+  .menu > li > a { padding: 0.85rem 1.2rem; border-bottom: 1px solid var(--rule-dark); font-size: 1.05rem; }
+  .top-tel { margin-left: 0; order: -1; }
+  .top > .wrap { flex-wrap: wrap; position: relative; }
+}
+@media (max-width: 560px) {
+  .top-tel { font-size: 1.08rem; padding: 0.4rem 0.7rem; }
+  .top-brand svg, .top-brand img { height: 38px; }
+}
+
+/* ---------------------------------------------------- the yellow plate --
+   The signature device. A yellow bar carrying condensed display type, taken
+   straight from the bar under the wordmark in the logo. It is the section
+   divider throughout the site and replaces the photo band entirely. */
+.plate {
+  background: var(--brand);
+  border-top: var(--bar) solid var(--ink);
+  border-bottom: var(--bar) solid var(--ink);
+  padding: 0.9rem 0;
+  overflow: hidden;
+}
+.plate .wrap { display: flex; align-items: baseline; gap: 1.2rem; flex-wrap: wrap; }
+.plate b {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+  letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink);
+}
+.plate span { color: var(--ink); font-weight: 600; font-size: 0.98rem; }
+
+/* ---------------------------------------------------------- video hero -- */
+.hero { background: var(--black); color: var(--white); padding: clamp(2.2rem, 5vw, 4rem) 0 0; }
+.hero .eyebrow { color: var(--brand); }
+.hero h1 { color: var(--white); font-size: clamp(2.3rem, 6vw, 4.1rem); letter-spacing: -0.02em; }
+.hero h1 em { font-style: normal; color: var(--brand); display: block; }
+.hero-lede { color: var(--pale); font-size: clamp(1.06rem, 1.1vw, 1.2rem); max-width: 54ch; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(1.6rem, 3vw, 3rem); align-items: start; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.4rem 0 1.6rem; }
+.hero-points { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+.hero-points li { color: var(--pale); padding-left: 1.6rem; position: relative; font-size: 1rem; }
+.hero-points li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 0.85rem; height: 3px; background: var(--brand); }
+
+.videowrap { margin-top: clamp(1.8rem, 3vw, 2.6rem); }
+.video {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  border: var(--bar) solid var(--brand); background: var(--ink); cursor: pointer; overflow: hidden;
+}
+.video img { width: 100%; height: 100%; object-fit: cover; opacity: 0.72; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-play {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: none; border: 0; cursor: pointer; color: var(--ink);
+}
+.video-play span {
+  display: flex; align-items: center; justify-content: center;
+  width: clamp(64px, 8vw, 92px); height: clamp(64px, 8vw, 92px);
+  background: var(--brand); border: var(--bar) solid var(--ink); border-radius: 50%;
+  font-size: 1.6rem; padding-left: 6px;
+}
+.video-play:hover span { background: var(--white); }
+.video-cap { color: var(--dim); font-size: 0.95rem; margin: 0.7rem 0 0; }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+}
+
+/* ------------------------------------------------------- the depot strip --
+   Nine towns where stock actually sits. No competitor can copy it, because
+   it is not a claim, it is a list of yards. */
+.depots { background: var(--ink); color: var(--white); border-top: var(--bar) solid var(--brand); padding: clamp(1.6rem, 3vw, 2.4rem) 0; }
+.depots h2 { color: var(--brand); font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(1.3rem, 2.4vw, 1.9rem); }
+.depotrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 1px; background: var(--rule-dark); border: 1px solid var(--rule-dark); }
+.depotrow div { background: var(--ink); padding: 0.85rem 0.9rem; }
+.depotrow b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(0.98rem, 1.1vw, 1.16rem); letter-spacing: 0.01em; text-transform: uppercase; color: var(--brand); overflow-wrap: anywhere; }
+.depotrow small { display: block; color: var(--dim); font-size: 0.83rem; line-height: 1.4; margin-top: 0.15rem; }
+.depots p { color: var(--dim); margin: 1rem 0 0; font-size: 0.95rem; }
+
+/* ------------------------------------------------------------- sections -- */
+.sec { padding: clamp(2.6rem, 5.5vw, 4.6rem) 0; }
+.sec-wash { background: var(--wash); }
+.sec-grey { background: var(--grey); }
+.sec-dark { background: var(--ink); color: var(--white); }
+.sec-dark h2, .sec-dark h3 { color: var(--white); }
+.sec-dark p, .sec-dark li { color: var(--pale); }
+.sec-dark a { color: var(--brand); }
+
+.sec-head { max-width: 68ch; margin-bottom: clamp(1.6rem, 3vw, 2.4rem); }
+.sec-head p { color: var(--muted); margin-bottom: 0; }
+.sec-dark .sec-head p { color: var(--dim); }
+
+.caveat { border-left: var(--bar) solid var(--brand); background: var(--wash); padding: 1rem 1.2rem; margin: 0; }
+.sec-dark .caveat { background: #1E1D16; border-color: var(--brand); }
+.fineprint { color: var(--muted); font-size: 0.92rem; margin-top: 1.2rem; }
+
+/* --------------------------------------------------- hard-bordered cards -- */
+.range { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.2rem; }
+.rangecard { border: var(--bar) solid var(--ink); background: var(--white); display: flex; flex-direction: column; }
+.rangecard-media { position: relative; border-bottom: var(--bar) solid var(--ink); background: var(--grey); }
+.rangecard-media:empty { display: none; }
+.rangecard-media img { aspect-ratio: 8 / 5; object-fit: cover; width: 100%; }
+.rangecard-size {
+  position: absolute; left: 0; bottom: 0;
+  background: var(--brand); color: var(--ink); border-top: var(--bar) solid var(--ink); border-right: var(--bar) solid var(--ink);
+  font-family: var(--display); font-size: 1.1rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.25rem 0.75rem;
+}
+.rangecard-body { padding: 1.1rem 1.2rem 1.3rem; flex: 1; display: flex; flex-direction: column; }
+.rangecard-body h3 { margin-bottom: 0.4rem; }
+.rangecard-body h3 a { color: var(--ink); text-decoration: none; }
+.rangecard-body h3 a:hover { text-decoration: underline; text-decoration-color: var(--brand); }
+.rangecard-body p { color: var(--muted); font-size: 0.98rem; }
+.rangecard-price { margin-top: auto; display: flex; gap: 1.4rem; border-top: 2px solid var(--rule); padding-top: 0.8rem; }
+.rangecard-price div { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.rangecard-price b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.4rem; letter-spacing: 0.01em; color: var(--ink); text-transform: none; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips a { border: 2px solid var(--ink); padding: 0.4rem 0.85rem; color: var(--ink); text-decoration: none; font-weight: 700; font-size: 0.95rem; }
+.chips a:hover { background: var(--brand); }
+
+/* ------------------------------------------------ spec-table-led product -- */
+.spectable { width: 100%; border-collapse: collapse; border: var(--bar) solid var(--ink); background: var(--white); }
+.spectable caption { text-align: left; font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.05rem; padding: 0 0 0.6rem; color: var(--ink); }
+.spectable th, .spectable td { padding: 0.72rem 0.95rem; text-align: left; border-bottom: 1px solid var(--rule); }
+.spectable th { font-weight: 700; width: 52%; }
+.spectable td { font-variant-numeric: tabular-nums; font-weight: 700; }
+.spectable tr:last-child th, .spectable tr:last-child td { border-bottom: 0; }
+.spectable tr:nth-child(odd) { background: var(--grey); }
+
+.pricebox { border: var(--bar) solid var(--ink); background: var(--wash); padding: 1.3rem; }
+.pricebox h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+.pricebox dl { margin: 0 0 1rem; }
+.pricebox dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; border-bottom: 2px solid var(--rule); padding: 0.5rem 0; }
+.pricebox dt { color: var(--muted); font-weight: 600; font-size: 0.95rem; }
+.pricebox dd { margin: 0; font-family: var(--display); font-weight: 400; font-size: 1.5rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.pricenote { color: var(--muted); font-size: 0.88rem; }
+
+.twocol { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(1.4rem, 3vw, 2.6rem); align-items: start; }
+@media (max-width: 860px) { .twocol { grid-template-columns: 1fr; } }
+
+/* ------------------------------------------------------------ page head -- */
+.phead { background: var(--black); color: var(--white); position: relative; padding: clamp(2.2rem, 5vw, 3.6rem) 0; border-bottom: var(--bar) solid var(--brand); }
+.phead-media { position: absolute; inset: 0; opacity: 0.3; }
+.phead-media img { width: 100%; height: 100%; object-fit: cover; }
+.phead .wrap { position: relative; }
+.phead h1 { color: var(--white); }
+.phead h1 em { font-style: normal; color: var(--brand); }
+.phead-lede { color: var(--pale); max-width: 62ch; font-size: 1.08rem; margin-bottom: 0; }
+.phead-meta { display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; margin-top: 1.1rem; color: var(--dim); font-size: 0.94rem; }
+.phead-meta b { color: var(--brand); font-weight: 700; }
+
+.crumb { background: var(--grey); border-bottom: 1px solid var(--rule); font-size: 0.88rem; }
+.crumb .wrap { padding: 0.55rem 0; color: var(--muted); }
+.crumb a { color: var(--muted); }
+.crumb strong { color: var(--ink); font-weight: 700; }
+
+/* --------------------------------------------------------------- steps -- */
+.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.2rem; }
+.steps li { counter-increment: s; margin: 0; border-top: var(--bar) solid var(--brand); padding-top: 0.9rem; }
+.steps li::before { content: counter(s, decimal-leading-zero); font-family: var(--display); font-size: 2rem; color: var(--brand); display: block; line-height: 1; margin-bottom: 0.4rem; }
+.steps h3 { font-size: 1.08rem; }
+
+/* ----------------------------------------------------------------- q&a -- */
+.qa { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.4rem 2rem; }
+.qa h3 { font-size: 1.08rem; margin-bottom: 0.35rem; }
+.qa p { color: var(--muted); margin: 0; }
+.sec-dark .qa p { color: var(--pale); }
+
+/* ------------------------------------------------------------ locality -- */
+.locgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.locgrid a { background: var(--white); padding: 0.7rem 0.9rem; text-decoration: none; color: var(--ink); font-weight: 700; display: block; }
+.locgrid a span { display: block; font-weight: 500; font-size: 0.82rem; color: var(--muted); }
+.locgrid a:hover { background: var(--brand); }
+
+.runlinks { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; }
+.runlinks a { font-size: 0.92rem; }
+
+/* --------------------------------------------------------------- forms -- */
+/* The quote card and the ask card sit on dark surfaces (.hero, .ask) which set
+   color:#fff. Without an explicit colour here every <label> inside them
+   inherits white and disappears against the white card — which is exactly what
+   happened on the first render. Set it on the card, not on each control. */
+.quotecard, .askcard { color: var(--ink); }
+.quotecard { background: var(--white); border: var(--bar) solid var(--brand); padding: clamp(1.2rem, 2vw, 1.7rem); }
+.quotecard h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em; font-size: 1.6rem; margin-bottom: 0.3rem; color: var(--ink); }
+.qc-sub { color: var(--muted); font-size: 0.95rem; }
+
+.field { margin-bottom: 0.85rem; }
+.field label { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; }
+.field input, .field select, .field textarea {
+  width: 100%; font: inherit; font-size: 1rem; padding: 0.7rem 0.8rem;
+  border: 2px solid var(--ink); background: var(--white); color: var(--ink); border-radius: 0;
+}
+.field textarea { min-height: 92px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 3px solid var(--brand); outline-offset: 0; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 520px) { .field-row { grid-template-columns: 1fr; } }
+.formnote { color: var(--muted); font-size: 0.85rem; margin: 0.6rem 0 0; }
+.formmsg { margin-top: 0.8rem; font-weight: 700; }
+.formmsg.err { color: #8A1B0A; }
+
+.ask { background: var(--ink); color: var(--white); padding: clamp(2.6rem, 5vw, 4.2rem) 0; }
+.ask h2 { color: var(--white); }
+.ask .sec-head { margin-inline: auto; text-align: center; }
+.ask-sub { color: var(--dim); }
+.ask .askcard, .ask .quoteform { max-width: 720px; margin-inline: auto; background: var(--white); border: var(--bar) solid var(--brand); padding: clamp(1.2rem, 2.4vw, 1.8rem); }
+.ask-or { text-align: center; color: var(--dim); margin: 1.1rem 0 0; }
+.ask-or a { color: var(--brand); }
+
+/* -------------------------------------------------------------- footer -- */
+.foot { background: var(--black); color: var(--pale); padding: clamp(2.4rem, 4.5vw, 3.6rem) 0 1.4rem; border-top: var(--bar) solid var(--brand); }
+.foot-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: clamp(1.4rem, 3vw, 2.6rem); }
+@media (max-width: 960px) { .foot-top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .foot-top { grid-template-columns: 1fr; } }
+.foot h4 { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand); font-size: 0.98rem; margin-bottom: 0.7rem; }
+.foot ul { list-style: none; padding: 0; margin: 0; }
+.foot li { margin-bottom: 0.32rem; }
+.foot a { color: var(--pale); text-decoration: none; font-size: 0.95rem; }
+.foot a:hover { color: var(--brand); text-decoration: underline; }
+.foot-brand svg, .foot-brand img { height: 52px; width: auto; }
+.foot-tag { color: var(--dim); font-size: 0.95rem; margin: 0.9rem 0; max-width: 42ch; }
+.foot-contact { display: grid; gap: 0.25rem; }
+.foot-tel { font-family: var(--display); font-size: 1.5rem; color: var(--brand) !important; letter-spacing: 0.01em; }
+.foot-addr { color: var(--dim); font-size: 0.92rem; font-style: normal; }
+.foot-locs { border-top: 1px solid var(--rule-dark); margin-top: 2rem; padding-top: 1.4rem; }
+.foot-locs a { color: var(--dim); }
+.foot-base { border-top: 1px solid var(--rule-dark); margin-top: 1.6rem; padding-top: 1.1rem; color: var(--dim); font-size: 0.85rem; }
+
+/* -------------------------------------------------- sticky action bar -- */
+.actionbar { display: none; }
+@media (max-width: 760px) {
+  .actionbar {
+    display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+    border-top: var(--bar) solid var(--ink);
+  }
+  .actionbar .btn { border-radius: 0; border-width: 0; padding: 0.9rem 0.5rem; font-size: 0.98rem; }
+  .actionbar .btn-dark { border-right: 2px solid var(--brand); }
+  body { padding-bottom: 58px; }
+}
+
+/* ------------------------------------------------------------ gallery -- */
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.gallery figure { margin: 0; border: var(--bar) solid var(--ink); }
+.gallery img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+.gallery figcaption { padding: 0.5rem 0.7rem; font-size: 0.86rem; color: var(--muted); border-top: 2px solid var(--ink); }
+
+/* -------------------------------------------------------------- prose -- */
+.prose { max-width: 72ch; }
+.prose h2 { margin-top: 2.2rem; }
+.prose h3 { margin-top: 1.6rem; }
+.prose > p:first-child { font-size: 1.12rem; }
+
+.postmeta { color: var(--muted); font-size: 0.9rem; }
+.postlist { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+.postcard { border: var(--bar) solid var(--ink); padding: 1.1rem 1.2rem; }
+.postcard h3 { margin-bottom: 0.4rem; font-size: 1.12rem; }
+.postcard h3 a { color: var(--ink); text-decoration: none; }
+.postcard h3 a:hover { text-decoration: underline; text-decoration-color: var(--brand); }
+.postcard p { color: var(--muted); font-size: 0.96rem; margin-bottom: 0.5rem; }
+
+/* --------------------------------------------------------- scroll reveal -- */
+/* Scroll reveal is OPT-IN. The hidden state only applies once app.js has put
+   .js-reveal on <html>, so if the script is blocked, fails or simply has not
+   run yet, every .reveal element is fully visible. The previous form set
+   opacity:0 in CSS and relied on JS to undo it — which means one blocked
+   script turns a 109-page content site into a blank page. Not a trade worth
+   making on the site the whole business runs on. */
+.js-reveal .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.js-reveal .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
+}
+@media print {
+  .top, .foot, .actionbar, .ask, .video { display: none !important; }
+}
+
+/* ------------------------------------------------- form success / failure -- */
+.q-ok { border: var(--bar) solid var(--brand); background: var(--wash); padding: 1.2rem 1.3rem; color: var(--ink); }
+.q-ok strong { display: block; font-family: var(--display); font-weight: 400; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.3rem; }
+.q-bad { border: var(--bar) solid #8A1B0A; background: #FDECE8; color: #6E1508; padding: 0.85rem 1rem; margin-bottom: 1rem; font-weight: 700; }
+.q-bad a, .q-ok a { color: var(--brand-deep); }
+
+/* ---------------------------------------------------------- band photo -- */
+.bandshot { border: var(--bar) solid var(--ink); }
+.bandshot img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+/* ------------------------------------------------------------- promise -- */
+.promise { background: var(--ink); color: var(--pale); border-bottom: var(--bar) solid var(--brand); }
+.promise .wrap { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; align-items: baseline; padding: 0.7rem 0; font-size: 0.95rem; }
+.promise b { color: var(--brand); font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; text-transform: uppercase; font-size: 1.02rem; }
+
+/* --------------------------------------------------------- page facts -- */
+.phead-facts { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; margin: 1.2rem 0 0; }
+.phead-facts > div { border-left: var(--bar) solid var(--brand); padding-left: 0.7rem; }
+.phead-facts dt { color: var(--dim); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.09em; font-weight: 700; }
+.phead-facts dd { margin: 0; color: var(--white); font-weight: 700; }
+
+/* ------------------------------------------------------ narrow measure -- */
+.narrow { max-width: 74ch; margin-inline: auto; }
+
+/* ---------------------------------------------------------- tick lists -- */
+.ticks { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.7rem 1.8rem; }
+.ticks li { position: relative; padding-left: 1.7rem; margin: 0; }
+.ticks li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 0.95rem; height: 3px; background: var(--brand-deep); }
+.sec-dark .ticks li::before { background: var(--brand); }
+
+/* ------------------------------------------------------ spec + aside -- */
+.spec { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(1.4rem, 3vw, 2.6rem); align-items: start; }
+@media (max-width: 900px) { .spec { grid-template-columns: 1fr; } }
+.specside { position: sticky; top: 100px; display: grid; gap: 1rem; }
+@media (max-width: 900px) { .specside { position: static; } }
+
+/* --------------------------------------------------------------- ask -- */
+.askcard { background: var(--white); border: var(--bar) solid var(--brand); padding: clamp(1.2rem, 2.4vw, 1.8rem); }
+.askcard-note { color: var(--muted); font-size: 0.88rem; margin: 0.7rem 0 0; }
+.qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+@media (max-width: 560px) { .qgrid { grid-template-columns: 1fr; } }
+.qnote { color: var(--muted); font-size: 0.85rem; margin: 0.6rem 0 0; }
+.qstage { margin-bottom: 1rem; }
+.qstage-h { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.07em; font-size: 0.88rem; color: var(--brand-deep); margin: 0 0 0.5rem; border-bottom: 2px solid var(--rule); padding-bottom: 0.3rem; }
+.qtoggle { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.qtoggle label { flex: 1 1 auto; }
+.qtoggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.qtoggle label { display: block; flex: 1 1 0; text-align: center; border: 2px solid var(--ink); padding: 0.55rem 0.9rem; font-weight: 700; cursor: pointer; background: var(--white); margin: 0; }
+.qtoggle input:checked + label { background: var(--brand); }
+.qtoggle input:focus-visible + label { outline: 3px solid var(--brand-deep); outline-offset: 2px; }
+
+/* The quote form's own controls. The markup is label-then-control rather than
+   the .field wrapper used elsewhere, so it is styled explicitly here. */
+.askcard label { display: block; font-weight: 700; font-size: 0.9rem; margin: 0 0 0.3rem; }
+.askcard input[type="text"], .askcard input[type="tel"], .askcard input[type="email"],
+.askcard select, .askcard textarea {
+  width: 100%; font: inherit; font-size: 1rem; padding: 0.68rem 0.8rem; margin-bottom: 0.8rem;
+  border: 2px solid var(--ink); background: var(--white); color: var(--ink); border-radius: 0; appearance: auto;
+}
+.askcard textarea { min-height: 84px; resize: vertical; font-family: var(--text); }
+.askcard input:focus, .askcard select:focus, .askcard textarea:focus { outline: 3px solid var(--brand); outline-offset: 0; }
+.askcard .qtoggle { margin-bottom: 1rem; }
+.askcard .qgrid > div { display: flex; flex-direction: column; }
+.askcard h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em; font-size: 1.4rem; margin-bottom: 0.3rem; }
+.quotecard .askcard { border: 0; padding: 0; }
+
+/* ------------------------------------------------------------- guides -- */
+.guides { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+.guidecard { border: var(--bar) solid var(--ink); display: flex; flex-direction: column; background: var(--white); }
+.guidecard img { aspect-ratio: 8 / 5; object-fit: cover; width: 100%; border-bottom: var(--bar) solid var(--ink); }
+.guidecard > div { padding: 1rem 1.15rem 1.2rem; }
+.guidecard h3 { font-size: 1.1rem; margin-bottom: 0.35rem; }
+.guidecard h3 a { color: var(--ink); text-decoration: none; }
+.guidecard h3 a:hover { text-decoration: underline; text-decoration-color: var(--brand); }
+.guidecard p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.4rem; }
+.meta { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.sec-dark .meta { color: var(--dim); }
+.foot-mail { word-break: break-word; }

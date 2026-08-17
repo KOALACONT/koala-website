@@ -1,0 +1,108 @@
+{
+  "name": "Koala Containers",
+  "short": "Koala",
+  "domain": "https://koalacontainers.com.au",
+  "phone": "1300 467 776",
+  "phoneHref": "tel:1300467776",
+  "email": "sales@koalacontainers.com.au",
+  "address": {
+    "street": "51–55 Bromley Street",
+    "suburb": "Cornubia",
+    "state": "QLD",
+    "postcode": "4130"
+  },
+  "geo": {
+    "lat": -27.6693,
+    "lng": 153.1626
+  },
+  "hours": "Mon-Fri 7:30am-5pm, Sat 8am-12pm",
+  "hoursSchema": [
+    "Mo-Fr 07:30-17:00",
+    "Sa 08:00-12:00"
+  ],
+  "region": "Australia",
+  "serviceArea": "in every state and territory",
+  "tagline": "Shipping containers for sale and hire, delivered to every state and territory, from a yard at Cornubia you are welcome to walk into and a network of depots from Grafton to Broome.",
+  "yardPromise": "A yard you can walk into",
+  "yardDetail": "The containers sit on hardstand at Cornubia, half an hour south-east of Brisbane off the M1. Ring first, drive over, open the doors and look down the floor yourself before you spend a dollar.",
+  "responsePromise": "Every enquiry answered within one business day",
+  "responseDetail": "You hear back from a person, not an autoresponder. Enquiries that land on a weekend are answered the next business day.",
+  "responseShort": "Answered within one business day",
+  "nationalPromise": "Stock in eight states and territories",
+  "nationalDetail": "Containers sit in depots at Cornubia, Grafton, Gympie, Rockhampton, Mackay, Townsville, Cairns, Darwin and Fremantle, so most of the country is a short run rather than a freight job across the continent.",
+  "depots": [
+    {
+      "town": "Cornubia",
+      "state": "QLD",
+      "signage": true,
+      "note": "Head yard. Walk in, ring first."
+    },
+    {
+      "town": "Gympie",
+      "state": "QLD",
+      "signage": false,
+      "note": "Inspection by arrangement"
+    },
+    {
+      "town": "Rockhampton",
+      "state": "QLD",
+      "signage": true,
+      "note": "Inspection by arrangement"
+    },
+    {
+      "town": "Mackay",
+      "state": "QLD",
+      "signage": true,
+      "note": "Inspection by arrangement"
+    },
+    {
+      "town": "Townsville",
+      "state": "QLD",
+      "signage": false,
+      "note": "Inspection by arrangement"
+    },
+    {
+      "town": "Cairns",
+      "state": "QLD",
+      "signage": false,
+      "note": "Inspection by arrangement"
+    },
+    {
+      "town": "Grafton",
+      "state": "NSW",
+      "signage": true,
+      "note": "Inspection by arrangement"
+    },
+    {
+      "town": "Darwin",
+      "state": "NT",
+      "signage": false,
+      "note": "Inspection by arrangement"
+    },
+    {
+      "town": "Fremantle",
+      "state": "WA",
+      "signage": false,
+      "note": "Inspection by arrangement"
+    }
+  ],
+  "video": {
+    "show": true,
+    "id": "sJfBc-p3TNg",
+    "title": "Inside a Koala Containers yard",
+    "caption": "Two minutes on what actually turns up when you order a container from us."
+  },
+  "leadEndpoint": "https://dcqbeydkbwfxgukfwwvm.supabase.co/functions/v1/web-lead-intake",
+  "leadBrand": "KOA",
+  "leadSource": "koalacontainers.com.au",
+  "photos": true,
+  "reviews": {
+    "show": false,
+    "rating": null,
+    "count": null,
+    "asOf": null,
+    "source": "Google Business Profile",
+    "maxAgeDays": 120,
+    "note": "OFF until the exact rating and count are read off the verified Koala Containers Google Business Profile. Do NOT invent figures - the 4.9/180 placeholder pulled off outback-website on 02/08/2026 is exactly this mistake. When the real numbers are read, set rating, count and asOf together and flip show to true; build.js then FAILS THE BUILD if asOf goes older than maxAgeDays."
+  }
+}
