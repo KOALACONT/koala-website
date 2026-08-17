@@ -1,0 +1,139 @@
+/* ============================================================================
+   VARIANT SURFACE — "soft"
+   Same architecture, modern surface. Radius, depth, hairlines instead of the
+   3px hard rule, more air, and a lift on the dark surfaces so the hero reads
+   as a lit space rather than a flat black rectangle.
+   ========================================================================= */
+:root {
+  --bar: 1px;
+  --r: 16px;
+  --r-sm: 10px;
+  --r-lg: 24px;
+  --shadow-sm: 0 1px 2px rgba(20,20,15,.06), 0 4px 12px rgba(20,20,15,.06);
+  --shadow-md: 0 2px 4px rgba(20,20,15,.05), 0 12px 32px rgba(20,20,15,.10);
+  --shadow-lg: 0 4px 8px rgba(20,20,15,.06), 0 24px 64px rgba(20,20,15,.16);
+  --rule: #EAE8DF;
+}
+
+body { font-size: clamp(1rem, .4vw + .92rem, 1.08rem); }
+h1, h2, h3 { letter-spacing: -0.025em; }
+
+/* buttons — pill, no hard border */
+.btn {
+  border-radius: 999px; border: 0; padding: .92rem 1.7rem;
+  box-shadow: var(--shadow-sm); font-weight: 700;
+  transition: transform .15s cubic-bezier(.2,.8,.3,1), box-shadow .15s ease, background .15s ease;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn:active { transform: translateY(0); }
+.btn-ghost { box-shadow: none; border: 1px solid var(--rule); background: var(--white); }
+.btn-ghost:hover { background: var(--brand); border-color: var(--brand); }
+.btn-ondark { border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.06); box-shadow: none; backdrop-filter: blur(8px); }
+.btn-ondark:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.5); color: var(--white); }
+.btn-lg { padding: 1.05rem 2rem; }
+
+/* masthead — floating, blurred, no hard yellow rule */
+.top {
+  background: rgba(11,11,8,.72); backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid rgba(251,219,89,.16);
+}
+.top > .wrap { min-height: 82px; }
+.top-tel { border-radius: 999px; padding: .55rem 1.15rem; box-shadow: 0 6px 20px rgba(251,219,89,.22); }
+.burger { border-radius: 999px; border-width: 1px; }
+@media (max-width:1080px){ .menu { border-radius: 0 0 var(--r) var(--r); border-bottom: 0; box-shadow: var(--shadow-lg); } }
+
+/* hero — a lit space, not a black rectangle */
+.hero {
+  background:
+    radial-gradient(80rem 40rem at 78% -10%, rgba(251,219,89,.16), transparent 60%),
+    radial-gradient(60rem 40rem at 5% 110%, rgba(251,219,89,.07), transparent 60%),
+    var(--black);
+  padding-top: clamp(2.6rem, 6vw, 5rem);
+}
+.hero h1 { letter-spacing: -0.035em; line-height: 1.04; }
+.hero-points li::before { border-radius: 2px; }
+
+/* the quote card — the thing James called out */
+.quotecard {
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(251,219,89,.10);
+  background: #fff;
+  padding: clamp(1.4rem, 2.2vw, 2rem);
+}
+.quotecard h2 { letter-spacing: .02em; font-size: 1.35rem; }
+
+.askcard input[type=text], .askcard input[type=tel], .askcard input[type=email],
+.askcard select, .askcard textarea,
+.field input, .field select, .field textarea {
+  border: 1px solid var(--rule); border-radius: var(--r-sm);
+  background: var(--grey); padding: .78rem .9rem;
+  transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.askcard input:focus, .askcard select:focus, .askcard textarea:focus,
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 0; background: #fff; border-color: var(--brand);
+  box-shadow: 0 0 0 4px rgba(251,219,89,.30);
+}
+.qtoggle { gap: .4rem; background: var(--grey); padding: .3rem; border-radius: 999px; }
+.qtoggle label { border: 0; border-radius: 999px; background: transparent; padding: .6rem 1rem; box-shadow: none; }
+.qtoggle input:checked + label { background: var(--brand); box-shadow: var(--shadow-sm); }
+.qstage-h { border-bottom: 0; color: var(--muted); letter-spacing: .12em; font-size: .74rem; }
+
+/* video */
+.video { border: 0; border-radius: var(--r-lg); box-shadow: var(--shadow-lg); }
+.video-play span { border: 0; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+
+/* plate — softer, inset, not a full-bleed slab */
+.plate { border: 0; padding: 0; background: transparent; }
+.plate .wrap {
+  background: var(--brand); border-radius: var(--r);
+  padding: 1rem 1.5rem; margin-block: clamp(1.6rem, 3vw, 2.4rem);
+  box-shadow: var(--shadow-sm);
+}
+
+/* depot strip */
+.depots { border-top: 0; background: var(--ink); }
+.depotrow { gap: .6rem; background: transparent; border: 0; }
+.depotrow div { border-radius: var(--r-sm); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+.depotrow div:hover { background: rgba(251,219,89,.10); border-color: rgba(251,219,89,.3); }
+
+/* cards */
+.rangecard {
+  border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden;
+  box-shadow: var(--shadow-sm); transition: transform .18s cubic-bezier(.2,.8,.3,1), box-shadow .18s ease;
+}
+.rangecard:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.rangecard-media { border-bottom: 0; }
+.rangecard-size { border: 0; border-radius: 999px; left: .8rem; bottom: .8rem; padding: .2rem .8rem; font-size: .95rem; }
+.rangecard-price { border-top: 1px solid var(--rule); }
+.chips a { border: 1px solid var(--rule); border-radius: 999px; background: #fff; }
+.postcard, .guidecard { border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--shadow-sm); overflow: hidden; }
+.guidecard img { border-bottom: 0; }
+.gallery figure { border: 0; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-sm); }
+.gallery figcaption { border-top: 0; background: var(--grey); }
+.bandshot { border: 0; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-md); }
+
+/* tables and boxes */
+.spectable { border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; }
+.spectable tr:nth-child(odd) { background: #FBFAF6; }
+.pricebox { border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--shadow-sm); background: #fff; }
+.pricebox dl > div { border-bottom: 1px solid var(--rule); }
+.caveat { border-left: 3px solid var(--brand); border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+.locgrid { gap: .5rem; background: transparent; border: 0; }
+.locgrid a { border-radius: var(--r-sm); border: 1px solid var(--rule); }
+.sec-dark .locgrid a { border-color: rgba(255,255,255,.10); background: rgba(255,255,255,.04); color: #fff; }
+.sec-dark .locgrid a span { color: var(--dim); }
+.sec-dark .locgrid a:hover { background: var(--brand); color: var(--ink); }
+.sec-dark .locgrid a:hover span { color: var(--ink); }
+.steps li { border-top: 0; padding-top: 0; }
+.steps li::before { font-family: var(--text); font-weight: 800; font-size: 1rem; color: var(--ink); background: var(--brand); width: 2.4rem; height: 2.4rem; border-radius: 999px; display: flex; align-items: center; justify-content: center; margin-bottom: .8rem; }
+.sec-dark .steps li::before { color: var(--ink); }
+.phead { border-bottom: 0; background: linear-gradient(180deg, #0B0B08, #14140F); }
+.crumb { background: transparent; border-bottom: 1px solid var(--rule); }
+.promise { border-bottom: 0; }
+.ask .askcard, .ask .quoteform { border: 0; border-radius: var(--r-lg); box-shadow: var(--shadow-lg); }
+.q-ok { border: 0; border-radius: var(--r); box-shadow: var(--shadow-sm); }
+.q-bad { border: 0; border-left: 3px solid #8A1B0A; border-radius: var(--r-sm); }
+.foot { border-top: 0; }
+@media (max-width:760px){ .actionbar { border-top: 0; box-shadow: 0 -8px 24px rgba(0,0,0,.18); } .actionbar .btn { border-radius: 0; } }

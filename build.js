@@ -78,6 +78,20 @@ const POSTS = require("./data/posts.js");
 const OUT = process.env.OUT_DIR || "dist";
 const DIST = path.isAbsolute(OUT) ? OUT : path.join(__dirname, OUT);
 const TEST = !!process.env.TEST_BUILD;
+/* DESIGN VARIANTS — James, 17/08/2026: "the layout isn't right for me... how
+   square the get a price box is... doesn't look modern enough". Rather than
+   argue in prose, three are built and rendered so he can look at them.
+   VARIANT=soft    surface only: radius, depth, hairlines, pill buttons
+   VARIANT=compact soft + a three-field hero form, video-dominant
+   VARIANT=cinema  soft + no form in the hero at all, full-bleed video
+   Unset = the original hard-edged build. */
+/* DEFAULT IS "classic" — James chose it 17/08/2026 after seeing five treatments
+   rendered side by side. Plain `node build.js` and the CI workflow therefore
+   produce the chosen design; the others stay reachable with VARIANT=<name> so a
+   future comparison costs one command rather than a rebuild. VARIANT=raw gives
+   the original hard-edged build back. */
+const VARIANT = process.env.VARIANT || "classic";
+const VCSS = { soft: ["v-soft.css"], compact: ["v-soft.css", "v-compact.css"], cinema: ["v-soft.css", "v-cinema.css"], hybrid: ["v-soft.css", "v-compact.css", "v-hybrid.css"], raw: [], classic: ["v-soft.css", "v-classic.css"], wide: ["v-soft.css", "v-compact.css", "v-hybrid.css", "v-wide.css"] }[VARIANT] || [];
 const D = S.domain;
 const pages = [];
 
@@ -298,6 +312,7 @@ ${noindex || TEST ? '<meta name="robots" content="noindex,nofollow">' : '<meta n
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css?v=${CSS_V}">
+${VCSS.map((f) => `<link rel="stylesheet" href="/css/${f}?v=${assetHash("css/" + f)}">`).join("")}
 <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
 <link rel="apple-touch-icon" href="/img/favicon.svg">
 ${schema ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>` : ""}
@@ -414,7 +429,30 @@ const promiseStrip = () => `<div class="promise"><div class="wrap"><b>${esc(PROM
    abandons a form. And the timeframe question leads with "Today", because it
    qualifies urgency at no cost and tells the sales desk who to ring first.
    Qualifying questions come BEFORE contact details, always. */
-function quoteForm(u, compact) {
+function quoteForm(u, compact, mode) {
+  /* "mini" is the three-field opener used by the compact hero. Qualifying
+     questions still come before contact details everywhere else; here the job
+     of the form is only to start a conversation, and the size/grade questions
+     are asked on the call instead. Fewer fields in the hero, same lead. */
+  if (mode === "mini") {
+    return `<form class="askcard askcard-mini" data-quote novalidate>
+      <div class="qtoggle">
+        <input type="radio" name="intent" value="buy" id="qi-b${u}" checked><label for="qi-b${u}">Buying</label>
+        <input type="radio" name="intent" value="hire" id="qi-h${u}"><label for="qi-h${u}">Hiring</label>
+      </div>
+      <input type="hidden" name="size" value="unsure">
+      <div class="mini-fields">
+        <label class="vh" for="q-suburb${u}">Delivery suburb or postcode</label>
+        <input name="suburb" id="q-suburb${u}" type="text" autocomplete="address-level2" placeholder="Delivery suburb or postcode">
+        <label class="vh" for="q-name${u}">Your name</label>
+        <input name="name" id="q-name${u}" type="text" autocomplete="name" placeholder="Your name" required>
+        <label class="vh" for="q-phone${u}">Phone</label>
+        <input name="phone" id="q-phone${u}" type="tel" autocomplete="tel" placeholder="Phone" required>
+        <button type="submit" class="btn btn-primary">Get a price</button>
+      </div>
+      <input type="text" name="business_url" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+    </form>`;
+  }
   return `<form class="askcard" data-quote novalidate>
     ${compact ? "" : `<h3>Tell us about the job</h3><p class="askcard-note">Four quick questions about the container, then how to reach you. ${esc(PROMISE)}.</p>`}
     <p class="qstage-h">1. Buying or hiring?</p>
@@ -713,7 +751,106 @@ function home() {
   ];
   const schema = g(faqLd(faqs), { "@type": "WebSite", "@id": `${D}/#site`, url: D, name: BRAND, publisher: { "@id": `${D}/#biz` } });
 
-  const body = `
+  /* Three hero treatments. Everything below the hero is shared — the variant
+     stylesheets restyle it, they do not restructure it. */
+  const heroPoints = `<ul class="hero-points">
+          <li>${esc(PROMISE)} — by a person, not an autoresponder</li>
+          <li>Every cargo-worthy unit checked wind and watertight before it leaves</li>
+          <li>Photos of your actual container on request, before delivery</li>
+          <li>Stock on the ground in nine depots, ${esc(ADDR.suburb)} to Fremantle</li>
+        </ul>`;
+  const heroCta = `<div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="#quote">Get a price</a>
+          <a class="btn btn-ondark btn-lg" href="${S.phoneHref}">${esc(S.phone)}</a>
+        </div>`;
+
+  const HERO_COMPACT = `
+<section class="hero hero-compact">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Sales &amp; hire · every state and territory</p>
+        <h1>Shipping containers, <em>and a yard you can walk into</em></h1>
+        <p class="hero-lede">${esc(S.tagline)}</p>
+        ${heroPoints}
+      </div>
+      <div class="hero-media">${videoBlock()}</div>
+    </div>
+    <div class="startbar">
+      <div class="startbar-say"><b>Get a price</b><span>Three details, and you hear back from a person within one business day.</span></div>
+      ${quoteForm("-hero", true, "mini")}
+      <a class="startbar-tel" href="${S.phoneHref}"><small>or ring</small>${esc(S.phone)}</a>
+    </div>
+  </div>
+</section>`;
+
+  /* HYBRID — James, 17/08/2026: "I don't mind B, but I do like the bigger
+     quote forms from A". So: B's hero grid (copy left, video right at equal
+     billing) with the FULL form rather than the three-field opener, laid out
+     across a wide floating card instead of a tall narrow slab. Header goes
+     solid black. */
+  const HERO_HYBRID = `
+<section class="hero hero-compact hero-hybrid">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Sales &amp; hire · every state and territory</p>
+        <h1>Shipping containers, <em>and a yard you can walk into</em></h1>
+        <p class="hero-lede">${esc(S.tagline)}</p>
+        ${heroPoints}
+        ${heroCta}
+      </div>
+      <div class="hero-media">${videoBlock()}</div>
+    </div>
+    <div class="startbar startbar-full" id="quote-top">
+      <div class="startbar-say">
+        <b>Get a price</b>
+        <span>Four questions about the container, then how to reach you. ${esc(PROMISE)}.</span>
+        <a class="startbar-tel" href="${S.phoneHref}"><small>or ring</small>${esc(S.phone)}</a>
+      </div>
+      ${quoteForm("-hero", true)}
+    </div>
+  </div>
+</section>`;
+
+  /* CLASSIC — the form goes back where James liked it: a tall card beside the
+     copy, full size, nothing shrunk. The film then runs FULL WIDTH beneath,
+     which makes it bigger than it ever was in the compact hero rather than
+     smaller. Solid black header. */
+  const HERO_CLASSIC = `
+<section class="hero hero-classic">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Sales &amp; hire · every state and territory</p>
+        <h1>Shipping containers, <em>and a yard you can walk into</em></h1>
+        <p class="hero-lede">${esc(S.tagline)}</p>
+        ${heroCta}
+        ${heroPoints}
+      </div>
+      <div class="quotecard">
+        <h2>Get a price</h2>
+        <p class="qc-sub">Four questions about the container, then how to reach you.</p>
+        ${quoteForm("-hero", true)}
+      </div>
+    </div>
+  </div>
+  <div class="hero-film"><div class="wrap">${videoBlock()}</div></div>
+</section>`;
+
+  const HERO_CINEMA = `
+<section class="hero hero-cinema">
+  <div class="cine-media">${videoBlock()}</div>
+  <div class="cine-copy"><div class="wrap">
+    <p class="eyebrow">Sales &amp; hire · every state and territory</p>
+    <h1>Shipping containers, <em>and a yard you can walk into</em></h1>
+    <p class="hero-lede">${esc(S.tagline)}</p>
+    ${heroCta}
+    ${heroPoints}
+  </div></div>
+</section>`;
+
+  const HERO_DEFAULT = `
 <section class="hero">
   <div class="wrap">
     <div class="hero-grid">
@@ -741,7 +878,12 @@ function home() {
     </div>
     ${videoBlock()}
   </div>
-</section>
+</section>`;
+
+  const HERO = { compact: HERO_COMPACT, cinema: HERO_CINEMA, hybrid: HERO_HYBRID, classic: HERO_CLASSIC, wide: HERO_HYBRID }[VARIANT] || HERO_DEFAULT;
+
+  const body = `
+${HERO}
 
 ${plate(SHORT + " Containers — " + (HOURS || "Mon–Fri"), PROMISE + ". " + PROMISE_DETAIL)}
 

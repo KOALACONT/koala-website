@@ -1,0 +1,30 @@
+/* ============================================================================
+   VARIANT — "classic"
+   The quote card goes back beside the copy at full height, which is the one
+   thing James said he liked. The film moves out from between them and runs
+   full width underneath, so it ends up LARGER than the compact hero gave it,
+   not smaller. Header solid black.
+   ========================================================================= */
+.top { background: var(--black); backdrop-filter: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+.top > .wrap { min-height: 88px; }
+.top-brand svg, .top-brand img { height: 56px; }
+@media (max-width: 560px) { .top-brand svg, .top-brand img { height: 42px; } }
+
+.hero-classic { padding-bottom: 0; }
+.hero-classic .hero-grid { grid-template-columns: 1.02fr .98fr; gap: clamp(1.8rem, 4vw, 3.6rem); align-items: start; }
+.hero-classic h1 { font-size: clamp(2.3rem, 4.8vw, 3.9rem); }
+.hero-classic .hero-cta { margin: 1.5rem 0 1.6rem; }
+.hero-classic .hero-points { margin-bottom: .5rem; }
+
+.hero-classic .quotecard { padding: clamp(1.5rem, 2.4vw, 2.1rem); }
+.hero-classic .quotecard h2 { font-size: 1.55rem; }
+.hero-classic .askcard input, .hero-classic .askcard select, .hero-classic .askcard textarea { margin-bottom: .75rem; }
+
+/* the film, full width, big */
+.hero-film { margin-top: clamp(2.4rem, 5vw, 4rem); padding-bottom: clamp(2.4rem, 5vw, 4rem); }
+.hero-film .video { aspect-ratio: 21 / 9; border-radius: var(--r-lg); }
+.hero-film .video-cap { text-align: center; margin-top: .9rem; }
+@media (max-width: 900px) {
+  .hero-classic .hero-grid { grid-template-columns: 1fr; }
+  .hero-film .video { aspect-ratio: 16 / 9; }
+}

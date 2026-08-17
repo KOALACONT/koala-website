@@ -1,0 +1,40 @@
+/* ============================================================================
+   VARIANT — "wide"
+   The hybrid card, laid out properly. The three-column version left a dead
+   gap down the left and ragged column heights. This puts the heading on one
+   row across the top and the nine fields in an even four-column grid beneath,
+   so every field lines up and there is no empty quarter.
+   ========================================================================= */
+.startbar-full { grid-template-columns: 1fr; gap: 1.1rem; padding: clamp(1.3rem, 2.4vw, 2rem) clamp(1.4rem, 2.8vw, 2.4rem); }
+
+.startbar-full .startbar-say {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: baseline;
+  gap: .4rem 1.4rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
+}
+.startbar-full .startbar-say b { font-size: 1.7rem; margin: 0; }
+.startbar-full .startbar-say span { margin: 0; }
+.startbar-full .startbar-tel { margin: 0; flex-direction: row; align-items: baseline; gap: .45rem; }
+
+.startbar-full .askcard { display: grid; grid-template-columns: 1fr; gap: 0; }
+.startbar-full .askcard > .qtoggle { grid-column: 1; margin-bottom: 1rem; }
+.startbar-full .askcard > .qgrid { grid-column: 1; grid-template-columns: repeat(4, 1fr); gap: .7rem; }
+.startbar-full .askcard > .qstage { grid-column: 1; margin: 0; }
+.startbar-full .askcard > .qstage > .qstage-h { display: none; }
+.startbar-full .askcard > .qstage > .qgrid { grid-template-columns: repeat(4, 1fr); gap: .7rem; }
+/* Email and "anything we should know" stay VISIBLE. Hiding them tidied the
+   grid but silently dropped the message field, which is where the access and
+   contents detail comes from — the single most useful thing on the form. */
+.startbar-full .askcard > .qstage > input[type="email"] { max-width: 50%; }
+.startbar-full .askcard > .qstage > textarea { min-height: 58px; }
+.startbar-full .askcard > button { grid-column: 1; justify-self: start; margin-top: .3rem; padding-inline: 2.8rem; }
+.startbar-full .askcard > .qnote { grid-column: 1; }
+.startbar-full .askcard label { font-size: .8rem; }
+.startbar-full .askcard input, .startbar-full .askcard select { margin-bottom: 0; }
+
+@media (max-width: 1100px) {
+  .startbar-full .startbar-say { grid-template-columns: 1fr; }
+  .startbar-full .askcard > .qgrid, .startbar-full .askcard > .qstage > .qgrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .startbar-full .askcard > .qgrid, .startbar-full .askcard > .qstage > .qgrid { grid-template-columns: 1fr; }
+}

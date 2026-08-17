@@ -1,0 +1,41 @@
+/* ============================================================================
+   VARIANT — "cinema"
+   No form in the hero at all. The film is the hero — full bleed, edge to edge,
+   with the headline sitting over it. The ask is a phone number and one button.
+   The full form still exists, further down at #quote, where somebody who has
+   read something is more likely to fill it in properly.
+   ========================================================================= */
+.hero-cinema { position: relative; padding: 0; min-height: min(88vh, 820px); display: flex; align-items: flex-end; overflow: hidden; }
+.hero-cinema .cine-media { position: absolute; inset: 0; }
+.hero-cinema .videowrap { margin: 0; height: 100%; }
+.hero-cinema .video { height: 100%; width: 100%; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
+.hero-cinema .video img { opacity: .5; height: 100%; }
+.hero-cinema .video-cap { display: none; }
+.hero-cinema .video-play { align-items: flex-start; justify-content: flex-end; padding: clamp(1.2rem, 3vw, 2.4rem); }
+
+.hero-cinema .cine-copy {
+  position: relative; z-index: 2; width: 100%;
+  padding: clamp(3rem, 10vw, 8rem) 0 clamp(2.4rem, 5vw, 4rem);
+  background: linear-gradient(180deg, rgba(11,11,8,0) 0%, rgba(11,11,8,.72) 42%, rgba(11,11,8,.94) 100%);
+  pointer-events: none;
+}
+.hero-cinema .cine-copy .wrap { pointer-events: auto; max-width: 1240px; }
+.hero-cinema h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); max-width: 18ch; letter-spacing: -.04em; text-shadow: 0 2px 30px rgba(0,0,0,.5); }
+.hero-cinema .hero-lede { max-width: 52ch; font-size: clamp(1.05rem, 1.2vw, 1.22rem); }
+.hero-cinema .hero-points { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); display: grid; gap: .5rem 2rem; margin-top: 1.8rem; max-width: 60rem; }
+.hero-cinema .hero-cta { margin-bottom: 1.6rem; }
+
+@media (max-width: 700px) {
+  .hero-cinema { min-height: 0; }
+  .hero-cinema .cine-media { position: relative; inset: auto; }
+  .hero-cinema .video { aspect-ratio: 16 / 9; height: auto; }
+  .hero-cinema .video img { opacity: .8; }
+  .hero-cinema .cine-copy { background: var(--black); padding-top: clamp(1.8rem, 5vw, 3rem); }
+  .hero-cinema h1 { text-shadow: none; }
+}
+
+/* a slim persistent quote strip so losing the hero form costs nothing */
+.hero-cinema + .plate .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+}

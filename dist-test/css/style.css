@@ -171,12 +171,23 @@ li { margin-bottom: 0.4em; }
   }
   .menu.show { display: flex; }
   .menu > li > a { padding: 0.85rem 1.2rem; border-bottom: 1px solid var(--rule-dark); font-size: 1.05rem; }
-  .top-tel { margin-left: 0; order: -1; }
-  .top > .wrap { flex-wrap: wrap; position: relative; }
+  /* The menu is absolutely positioned at this width, so the flex row is
+     brand | phone | burger. Order stays natural — an earlier version pulled
+     the phone in front of the logo with order:-1, which read as though the
+     number was the brand. */
+  .top-tel { margin-left: auto; }
+  .burger { margin-left: 0.6rem; }
+  .top > .wrap { flex-wrap: nowrap; position: relative; gap: 0.6rem; }
 }
-@media (max-width: 560px) {
-  .top-tel { font-size: 1.08rem; padding: 0.4rem 0.7rem; }
-  .top-brand svg, .top-brand img { height: 38px; }
+@media (max-width: 760px) {
+  /* The phone pill, the logo and the menu button do not all fit on a phone,
+     and the sticky action bar pinned to the bottom of the viewport already
+     carries "Call 1300 467 776" on every page. So the pill comes out of the
+     header here rather than being squeezed until the menu button clips off
+     the edge. Nothing is lost — the number is one thumb-reach away. */
+  .top-tel { display: none; }
+  .top-brand svg, .top-brand img { height: 40px; }
+  .burger { margin-left: auto; }
 }
 
 /* ---------------------------------------------------- the yellow plate --
