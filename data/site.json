@@ -22,14 +22,14 @@
   ],
   "region": "Australia",
   "serviceArea": "in every state and territory",
-  "tagline": "Shipping containers for sale and hire, delivered to every state and territory, from a yard at Cornubia you are welcome to walk into and a network of depots from Grafton to Broome.",
+  "tagline": "Shipping containers for sale and hire, delivered anywhere in Australia. Your unit comes out of the yard closest to you rather than being carted across the country, and you can walk into ours at Cornubia any weekday.",
   "yardPromise": "A yard you can walk into",
   "yardDetail": "The containers sit on hardstand at Cornubia, half an hour south-east of Brisbane off the M1. Ring first, drive over, open the doors and look down the floor yourself before you spend a dollar.",
   "responsePromise": "Every enquiry answered within one business day",
   "responseDetail": "You hear back from a person, not an autoresponder. Enquiries that land on a weekend are answered the next business day.",
   "responseShort": "Answered within one business day",
-  "nationalPromise": "Stock in eight states and territories",
-  "nationalDetail": "Containers sit in depots at Cornubia, Grafton, Gympie, Rockhampton, Mackay, Townsville, Cairns, Darwin and Fremantle, so most of the country is a short run rather than a freight job across the continent.",
+  "nationalPromise": "A container closer than you think",
+  "nationalDetail": "We hold and draw stock through yards and depot partners around the country, so for most addresses the container starts its run somewhere reasonably close rather than crossing the continent. Give us the address and we will tell you where yours comes from.",
   "depots": [
     {
       "town": "Cornubia",
@@ -104,5 +104,6 @@
     "source": "Google Business Profile",
     "maxAgeDays": 120,
     "note": "OFF until the exact rating and count are read off the verified Koala Containers Google Business Profile. Do NOT invent figures - the 4.9/180 placeholder pulled off outback-website on 02/08/2026 is exactly this mistake. When the real numbers are read, set rating, count and asOf together and flip show to true; build.js then FAILS THE BUILD if asOf goes older than maxAgeDays."
-  }
+  },
+  "depotsHeading": "Where your container comes from"
 }

@@ -15,6 +15,23 @@ jobs:
           node-version: 20
       - run: node build.js
       - run: TEST_BUILD=1 OUT_DIR=dist-test node build.js
+
+      # ---- CROSS-BRAND DUPLICATE COPY GUARD ----------------------------
+      # This engine was forked from fairdinkum-website. On the first pass the
+      # data was rewritten but the hardcoded service-page prose was not, and
+      # /delivery/ shipped at 86% identical to Fair Dinkum's LIVE delivery
+      # page. Both sites sell the same product to the same country, so that is
+      # self-competition and duplicate content at once — and it is invisible
+      # unless something measures it. It was caught by James reading a
+      # headline, which is not a control.
+      #
+      # The sibling is a public repo, so CI can just clone it and diff.
+      # Threshold 25%; the floor is ~14% (shared nav, footer, breadcrumbs).
+      - name: Check for copy inherited from the sibling brand
+        run: |
+          git clone --depth 1 -q https://github.com/KOALACONT/fairdinkum-website.git /tmp/sibling
+          node tools/overlap-check.js dist /tmp/sibling/dist 25
+
       - name: Commit built site
         run: |
           git config user.name "auto-build"
