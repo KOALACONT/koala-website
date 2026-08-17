@@ -239,9 +239,9 @@ li { margin-bottom: 0.4em; }
    it is not a claim, it is a list of yards. */
 .depots { background: var(--ink); color: var(--white); border-top: var(--bar) solid var(--brand); padding: clamp(1.6rem, 3vw, 2.4rem) 0; }
 .depots h2 { color: var(--brand); font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(1.3rem, 2.4vw, 1.9rem); }
-.depotrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--rule-dark); border: 1px solid var(--rule-dark); }
+.depotrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 1px; background: var(--rule-dark); border: 1px solid var(--rule-dark); }
 .depotrow div { background: var(--ink); padding: 0.85rem 0.9rem; }
-.depotrow b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.16rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--brand); }
+.depotrow b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(0.98rem, 1.1vw, 1.16rem); letter-spacing: 0.01em; text-transform: uppercase; color: var(--brand); overflow-wrap: anywhere; }
 .depotrow small { display: block; color: var(--dim); font-size: 0.83rem; line-height: 1.4; margin-top: 0.15rem; }
 .depots p { color: var(--dim); margin: 1rem 0 0; font-size: 0.95rem; }
 
@@ -266,6 +266,7 @@ li { margin-bottom: 0.4em; }
 .range { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.2rem; }
 .rangecard { border: var(--bar) solid var(--ink); background: var(--white); display: flex; flex-direction: column; }
 .rangecard-media { position: relative; border-bottom: var(--bar) solid var(--ink); background: var(--grey); }
+.rangecard-media:empty { display: none; }
 .rangecard-media img { aspect-ratio: 8 / 5; object-fit: cover; width: 100%; }
 .rangecard-size {
   position: absolute; left: 0; bottom: 0;
@@ -426,10 +427,16 @@ li { margin-bottom: 0.4em; }
 .postcard p { color: var(--muted); font-size: 0.96rem; margin-bottom: 0.5rem; }
 
 /* --------------------------------------------------------- scroll reveal -- */
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
-.reveal.in { opacity: 1; transform: none; }
+/* Scroll reveal is OPT-IN. The hidden state only applies once app.js has put
+   .js-reveal on <html>, so if the script is blocked, fails or simply has not
+   run yet, every .reveal element is fully visible. The previous form set
+   opacity:0 in CSS and relied on JS to undo it — which means one blocked
+   script turns a 109-page content site into a blank page. Not a trade worth
+   making on the site the whole business runs on. */
+.js-reveal .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.js-reveal .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
 }
 @media print {
   .top, .foot, .actionbar, .ask, .video { display: none !important; }

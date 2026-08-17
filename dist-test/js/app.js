@@ -197,6 +197,10 @@
      runs, nothing is hidden: the CSS also clears .reveal entirely under
      prefers-reduced-motion, and the no-JS fallback below reveals everything
      immediately so content is never dependent on this. */
+  /* Opt in to the hidden state only now that this script is definitely running
+     — see the note in style.css. Set before the observer so there is no frame
+     where content is visible and then hides. */
+  document.documentElement.classList.add("js-reveal");
   var reveals = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     reveals.forEach(function (el) { el.classList.add("in"); });
