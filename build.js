@@ -111,10 +111,22 @@ const D = S.domain;
      Phone Number Clicks   7qhNCJK4nNgZEIzks-0o
      Email Clicks          9ybfCJW4nNgZEIzks-0o
    The tag is suppressed on TEST_BUILD so staging can never fire a real
-   conversion into the live account. */
+   conversion into the live account.
+
+   allow_enhanced_conversions:false is DELIBERATE and load-bearing. Enhanced
+   conversions is switched ON against all three actions in the Ads account, so
+   gtag.js otherwise runs in automatic mode — observed live on 14/09/2026 as
+   ec_mode=a and gtm_ee=1 on the conversion ping, with POSTs to
+   /pagead/form-data/ and /ccm/form-data/. In that mode gtag scrapes the page's
+   form fields for an email address and phone number, hashes them and sends
+   them to Google with the conversion. James's instruction is no enhanced
+   conversions and no customer-data uploads, and the privacy page now tells
+   visitors their details are not passed to Google. This client-side switch
+   turns it off regardless of the account setting. Deleting this line silently
+   starts sending customer contact details and makes the privacy page untrue. */
 const ADS = (!TEST && S.ads && S.ads.id) ? S.ads : null;
 const adsTag = () => ADS ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${ADS.id}"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ADS.id}');</script>` : "";
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ADS.id}',{allow_enhanced_conversions:false});</script>` : "";
 const pages = [];
 
 const BRAND = S.name;
