@@ -29,6 +29,39 @@
   var EMAIL = CFG.email || "";
   var PROMISE = CFG.promise || "";
 
+  /* ---------------------------------------------------- Google Ads --------
+     Conversion actions are NOT created here. The ID and the three labels come
+     from data/site.json and match actions that already exist in the Ads
+     account; if a brand ships no "ads" block, every call below is a no-op.
+
+     Each kind fires AT MOST ONCE per page view. The form conversion is fired
+     only from ok(), which itself only runs after the intake endpoint has
+     accepted the lead — so a submit click, a validation failure, a network
+     error or a retry can never add a count. No name, phone, email, message or
+     address is ever passed as a parameter, and no enhanced-conversion user
+     data is sent. */
+  var ADS = CFG.ads || null;
+  var fired = {};
+  function adsConvert(kind) {
+    if (!ADS || !ADS.id || !ADS.labels || !ADS.labels[kind]) return;
+    if (fired[kind]) return;
+    fired[kind] = true;
+    if (typeof window.gtag !== "function") return;
+    try { window.gtag("event", "conversion", { send_to: ADS.id + "/" + ADS.labels[kind] }); } catch (e) {}
+  }
+
+  /* Phone and email clicks, delegated so links added later are covered too.
+     The click is never intercepted — no preventDefault, no delay — because a
+     tel: link that does not dial is a lost sale, and gtag posts the hit with
+     sendBeacon where the browser supports it. */
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+    var href = (a.getAttribute("href") || "").toLowerCase();
+    if (href.indexOf("tel:") === 0) adsConvert("phone");
+    else if (href.indexOf("mailto:") === 0) adsConvert("email");
+  }, true);
+
   // Mobile menu
   var burger = document.querySelector(".burger");
   var menu = document.querySelector(".menu");
@@ -291,10 +324,9 @@
           "Can't wait? Ring <a href='" + PHONE_HREF + "'>" + PHONE + "</a>.";
         form.parentNode.replaceChild(d, form);
         try { d.focus(); } catch (e2) {}
-        /* Conversion counts on ACCEPTED submit only, with no personal data as a
-           parameter. gtag is only called if some tag has defined it; this site
-           loads none of its own. */
-        if (window.gtag) { try { window.gtag("event", "generate_lead", { form_location: location.pathname }); } catch (e3) {} }
+        /* Conversion counts on ACCEPTED submit only, once, with no personal
+           data as a parameter. */
+        adsConvert("form");
         if (location.pathname !== "/thank-you/") setTimeout(function () { location.href = "/thank-you/"; }, 900);
       }
       /* The failure path shows a real failure and keeps every typed value.
