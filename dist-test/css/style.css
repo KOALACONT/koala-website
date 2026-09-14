@@ -531,3 +531,88 @@ li { margin-bottom: 0.4em; }
 .meta { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
 .sec-dark .meta { color: var(--dim); }
 .foot-mail { word-break: break-word; }
+
+/* ======================================================================
+   14/09/2026 — enquiry form rebuild, anchor offset, dark-section text,
+   local table scroll, accessible step numbers. Appended rather than woven
+   in so the diff reads as one change.
+   ====================================================================== */
+
+/* The hidden attribute must win over display:flex/grid set on the same
+   element, or a hidden field wrapper stays visible. */
+[hidden] { display: none !important; }
+
+/* Visually hidden, still read by assistive tech. */
+.vh { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* #quote (and any other in-page anchor) clears the sticky masthead. */
+:target, #quote, [id^="quote"] { scroll-margin-top: calc(92px + 1.2rem); }
+
+/* Dark sections: the generic .sec-head p rule (muted grey) was out-ranking
+   .ask-sub, leaving dark-grey text on the black quote band. Same for the
+   eyebrow, which used the on-white link colour. */
+.ask .eyebrow, .sec-dark .eyebrow, .depots .eyebrow { color: var(--brand); }
+.ask .sec-head p, .sec-dark .sec-head p, .ask .ask-sub { color: var(--dim); }
+.ask a:not(.btn) { color: var(--brand); }
+.ask-cta { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; margin: 0; }
+.ask-link .sec-head { margin-bottom: 1.4rem; }
+
+/* Tables scroll inside their own box on a narrow screen. The page never
+   scrolls sideways. */
+.tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+.tablewrap > table { min-width: 560px; }
+.article table { width: 100%; border-collapse: collapse; }
+.article th, .article td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.article th { font-weight: 700; }
+.spectable th { width: auto; }
+.spectable.spectable-kv th { width: 52%; }
+@media (max-width: 560px) { .spectable-kv th, .spectable-kv td { padding: 0.6rem 0.7rem; } }
+
+/* Step numbers: the visible "01" is decoration. The "/ ''" alternative text
+   keeps it out of the accessible name so the list is announced once. */
+.steps li::before { content: counter(s, decimal-leading-zero) / ""; }
+
+/* --------------------------------------------------------- the form -- */
+.askcard fieldset { border: 0; padding: 0; margin: 0 0 1rem; min-width: 0; }
+.askcard legend { padding: 0; display: block; width: 100%; }
+.askcard .qstage-h { margin-top: 0.4rem; }
+.qtoggle-3 label { flex: 1 1 calc(50% - 0.5rem); min-height: 44px; display: flex; align-items: center; justify-content: center; }
+@media (min-width: 720px) { .qtoggle-3 label { flex: 1 1 0; } }
+.askcard input[type="number"] { width: 100%; font: inherit; font-size: 1rem; padding: 0.68rem 0.8rem; margin-bottom: 0.8rem; border: 2px solid var(--ink); background: var(--white); color: var(--ink); border-radius: 0; }
+.askcard input, .askcard select, .askcard textarea, .askcard button { min-height: 44px; }
+.askcard input[type="checkbox"] { min-height: 0; width: 1.15rem; height: 1.15rem; margin: 0 0.55rem 0 0; accent-color: var(--brand-deep); flex: 0 0 auto; }
+.qcheck { display: flex; align-items: center; font-weight: 600; font-size: 0.95rem; margin: 0 0 0.9rem; cursor: pointer; min-height: 44px; }
+.req { color: #8A1B0A; text-decoration: none; font-weight: 800; border: 0; }
+.optional { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
+.qhint { color: var(--muted); font-size: 0.85rem; margin: -0.3rem 0 0.9rem; }
+.qhint a { color: var(--brand-deep); }
+.qsubmit { margin-top: 0.4rem; }
+.q-errors { border: var(--bar) solid #8A1B0A; border-left-width: 4px; background: #FDECE8; color: #6E1508; padding: 0.8rem 1rem; margin: 0 0 1rem; font-size: 0.95rem; }
+.q-errors ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+.q-err { color: #8A1B0A; font-size: 0.85rem; font-weight: 700; margin: -0.55rem 0 0.8rem; }
+.askcard [aria-invalid="true"] { border-color: #8A1B0A !important; box-shadow: 0 0 0 3px rgba(138,27,10,.18) !important; }
+.askcard[aria-busy="true"] { opacity: 0.85; }
+.askcard[aria-busy="true"] button[type="submit"] { cursor: progress; }
+.askcard-mini .btn { min-height: 44px; }
+
+/* Keyboard open: the mobile action bar must never sit over the field being
+   typed into. app.js adds .typing to body while a form control has focus. */
+@media (max-width: 760px) { body.typing .actionbar { display: none; } body.typing { padding-bottom: 0; } }
+
+/* Touch targets that were under 44px. */
+.chips a { min-height: 44px; display: inline-flex; align-items: center; }
+.runlinks a { display: inline-block; padding: 0.35rem 0; }
+.crumb a { display: inline-block; padding: 0.4rem 0; }
+.foot li a { display: inline-block; padding: 0.25rem 0; }
+.burger { min-height: 44px; }
+
+/* Home page: the hero card is the page's only form. Make it the target. */
+.quotecard#quote { scroll-margin-top: calc(92px + 1rem); }
+
+/* Locality opener — four short answers before the essays. */
+.quickans { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.6rem; margin: 0.4rem 0 1.4rem; }
+@media (max-width: 640px) { .quickans { grid-template-columns: 1fr; } }
+.quickans > div { border-left: var(--bar) solid var(--brand); padding-left: 0.85rem; }
+.quickans dt { font-weight: 800; margin-bottom: 0.25rem; }
+.quickans dd { margin: 0; color: var(--muted); font-size: 0.97rem; }
+.ask-cta-left { justify-content: flex-start; margin: 0 0 1rem; }

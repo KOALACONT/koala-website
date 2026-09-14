@@ -34,6 +34,31 @@ ErrorDocument 404 /404.html
   RewriteRule ^faqs-2/?$ /faqs/ [R=301,L]
   # Left over from an unrelated business. Not ours, never was.
   RewriteRule ^cardio-hire-terms/?$ / [R=301,L]
+
+  # 14/09/2026 — short URLs people type or that old CTAs pointed at.
+  # /hire was a live 404 (James's brief). Nothing here goes to the home
+  # page; every rule lands on the page that answers the intent.
+  RewriteRule ^hire/?$ /shipping-container-hire/ [R=301,L,NC]
+  RewriteRule ^container-hire/?$ /shipping-container-hire/ [R=301,L,NC]
+  RewriteRule ^shipping-container-hire-([a-z0-9-]+)/?$ /$1/ [R=301,L,NC]
+  RewriteRule ^(?:sales|buy|containers-for-sale|shipping-containers-for-sale)/?$ /container-sales/ [R=301,L,NC]
+  RewriteRule ^(?:containers|products?|our-containers|shop)/?$ /shipping-containers/ [R=301,L,NC]
+  RewriteRule ^(?:about-us|about-koala-containers)/?$ /about/ [R=301,L,NC]
+  RewriteRule ^(?:faq|frequently-asked-questions)/?$ /faqs/ [R=301,L,NC]
+  RewriteRule ^(?:delivery-area|areas-we-service|service-areas?|locations?)/?$ /delivery-areas/ [R=301,L,NC]
+  RewriteRule ^(?:privacy-policy|privacy-statement)/?$ /privacy/ [R=301,L,NC]
+  RewriteRule ^(?:modifications|container-modification|custom-containers)/?$ /container-modifications/ [R=301,L,NC]
+  RewriteRule ^(?:storage|container-storage-solutions|self-storage)/?$ /container-storage/ [R=301,L,NC]
+  RewriteRule ^(?:news|articles|guides)/?$ /blog/ [R=301,L,NC]
+  RewriteRule ^blog/page/\d+/?$ /blog/ [R=301,L,NC]
+  # WordPress dated posts, categories, tags and author archives -> guides hub
+  RewriteRule ^\d{4}/\d{2}(?:/\d{2})?(?:/[a-z0-9-]+)?/?$ /blog/ [R=301,L]
+  RewriteRule ^(?:category|tag|author)/[a-z0-9-]+/?$ /blog/ [R=301,L,NC]
+  # Old product pages under a shop prefix -> the matching size or the range hub
+  RewriteRule ^product/([a-z0-9-]*10ft[a-z0-9-]*)/?$ /10ft-shipping-containers/ [R=301,L,NC]
+  RewriteRule ^product/([a-z0-9-]*20ft[a-z0-9-]*)/?$ /20ft-shipping-containers/ [R=301,L,NC]
+  RewriteRule ^product/([a-z0-9-]*40ft[a-z0-9-]*)/?$ /40ft-shipping-containers/ [R=301,L,NC]
+  RewriteRule ^product/[a-z0-9-]+/?$ /shipping-containers/ [R=301,L,NC]
 </IfModule>
 
 <IfModule mod_deflate.c>
