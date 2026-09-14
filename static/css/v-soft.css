@@ -137,3 +137,10 @@ h1, h2, h3 { letter-spacing: -0.025em; }
 .q-bad { border: 0; border-left: 3px solid #8A1B0A; border-radius: var(--r-sm); }
 .foot { border-top: 0; }
 @media (max-width:760px){ .actionbar { border-top: 0; box-shadow: 0 -8px 24px rgba(0,0,0,.18); } .actionbar .btn { border-radius: 0; } }
+
+/* 14/09/2026 — number input matches the rest of the soft controls. */
+.askcard input[type=number] { border: 1px solid var(--rule); border-radius: var(--r-sm); background: var(--grey); padding: .78rem .9rem; }
+.askcard input[type=number]:focus { outline: 0; background: #fff; border-color: var(--brand); box-shadow: 0 0 0 4px rgba(251,219,89,.30); }
+.qtoggle-3 { border-radius: var(--r); }
+.qtoggle-3 label { border-radius: 999px; }
+.q-errors { border: 0; border-left: 4px solid #8A1B0A; border-radius: var(--r-sm); }

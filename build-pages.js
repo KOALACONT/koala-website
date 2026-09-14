@@ -6,7 +6,7 @@ const F = global.__FD;
 const { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, HOURS, SERVICE_AREA,
   PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto,
   crumbsLd, faqLd, g, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat,
-  rangeGrid, gallery, rank, pick, PRICES, PRICE_DISCLAIMER, PRICE_SUB, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS,
+  rangeGrid, gallery, rank, pick, PRICES, askLink, PRICE_DISCLAIMER, PRICE_SUB, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS,
   PROCESS_LINES, FREIGHT_LINES, ASK_LINES, ask, promiseStrip,
   plate, depotStrip, videoBlock, specTable, priceBox, productLd, reviewLine, SHOW_REVIEWS, REV } = F;
 
@@ -44,21 +44,45 @@ function localityPages() {
       areaServed: { "@type": "City", name: l.name, address: { "@type": "PostalAddress", addressLocality: l.name, addressRegion: l.state, postalCode: l.postcode, addressCountry: "AU" } }
     };
 
+    /* Lead-time and depot claims in the data files were written town by town
+       and do not always agree with each other or with the depots page. Until
+       James confirms each run they are rendered as indicative rather than
+       asserted — "usually", and "depends which yard holds the unit". */
+    const softTime = (t) => {
+      let x = String(t).trim().replace(/\.$/, "");
+      if (!/^(usually|often|typically|around|about)\b/i.test(x)) x = "Usually " + x.charAt(0).toLowerCase() + x.slice(1);
+      return x;
+    };
+    const depotLine = String(l.depot).trim().replace(/\.$/, "");
+
     const body = `${pageHead({
       crumbs, poolPhoto: ["pool-lochead", "lh", l.slug], eyebrow: `${l.name}, ${l.state}`,
       h1: `Shipping containers ${l.name}`,
       lede: l.line,
-      facts: [["Delivered from", l.depot], ["Typical lead time", l.leadTime], ["Usual truck", l.truck]]
+      facts: [["Stock usually drawn from", depotLine], ["Indicative timing", softTime(l.leadTime) + " — depends which yard holds the unit"], ["Likely truck", l.truck]]
     })}
 
 ${sec("", `<div class="narrow">
   <p class="eyebrow reveal">${esc(opener)}</p>
-  <div class="reveal"><h2>${esc(usesHead)}</h2><p>Around ${esc(l.name)} we deliver containers for ${esc(l.uses)}.</p></div>
-  <div class="reveal" style="margin-top:2.6rem"><h2>${esc(accessHead)}</h2>${paras(l.access)}</div>
-  <div style="margin-top:2rem">${locCaveat()}</div>
+  <div class="reveal"><h2>Buying or hiring a container in ${esc(l.name)}</h2>
+  <dl class="quickans">
+    <div><dt>What you can buy or hire here</dt><dd>10ft, 20ft and 40ft — general purpose, high cube, side opening, refrigerated and dangerous goods — in new single-trip, cargo-worthy used or as-is, to buy or to hire. Delivered to ${esc(l.name)} and the district around it.</dd></div>
+    <div><dt>How you get a delivered price</dt><dd>Send the form below or ring <a href="${S.phoneHref}">${esc(S.phone)}</a>. The container and the cartage to your address come back as one figure from a person — nothing on this page calculates it.</dd></div>
+    <div><dt>What we need from you</dt><dd>The delivery suburb or postcode, what is going in it, roughly when, and ideally three photos of the entry. ${esc(processLine)}</dd></div>
+    <div><dt>What changes availability and delivery</dt><dd>Which yard is holding the size and grade you want, the truck your site can take — the site and the carrier decide that, not the container — and what is already travelling that way. Timing on this page is indicative; the actual date comes with the quote.</dd></div>
+  </dl>
+  <p class="ask-cta ask-cta-left"><a class="btn btn-primary" href="#quote">Request a delivered price</a><a class="btn btn-ghost" href="${S.phoneHref}">${esc(S.phone)}</a></p>
+  <p class="fineprint">${esc(ADDR.suburb)} is the only yard you can walk into — ring first. Everywhere else, ask for photographs of the actual unit before delivery, or inspection by arrangement at a partner depot.</p>
+  </div>
+  <div style="margin-top:1.4rem">${locCaveat()}</div>
 </div>`)}
 
 ${sec("sec-wash", secHead("The range", `Containers we deliver to ${l.name}`, PRICE_SUB) + rangeGrid(P.sizes) + `<div style="margin-top:1.6rem">${typeChips()}</div>`)}
+
+${sec("", `<div class="narrow">
+  <div class="reveal"><h2>${esc(usesHead)}</h2><p>Around ${esc(l.name)} we deliver containers for ${esc(l.uses)}.</p></div>
+  <div class="reveal" style="margin-top:2.6rem"><h2>${esc(accessHead)}</h2>${paras(l.access)}</div>
+</div>`)}
 
 ${l.sections.map((s, i) => band({
       poolPhoto: ["pool-locband" + (i + 1), "lb" + (i + 1), l.slug],
@@ -67,13 +91,13 @@ ${l.sections.map((s, i) => band({
     })).join("\n")}
 
 ${sec("", `<div class="narrow">
-  <div class="reveal"><h2>What delivery to ${esc(l.name)} costs</h2><p>${esc(freightLine)}</p><p>${esc(processLine)}</p></div>
+  <div class="reveal"><h2>What delivery to ${esc(l.name)} costs</h2><p>${esc(freightLine)}</p></div>
   <div class="reveal" style="margin-top:2.4rem"><h2>${esc(nearHead)}</h2><p>We also deliver to ${l.near.map((n) => esc(n)).join(", ")} and the surrounding district. If your town is not on the list, ring — it almost certainly still works.</p><div class="chips" style="margin-top:1rem"><a href="/delivery-areas/">All delivery areas</a><a href="/delivery/">How delivery works</a></div></div>
 </div>`)}
 
 ${sec("sec-wash", secHead("Common questions", `Buying a container in ${l.name}`, null) + qaHtml(l.faqs))}
 
-${ask(askLine, `We deliver to ${l.name} and the surrounding district. Tell us what is going in it and what the access is like, and you will get a price with the cartage worked out. ${PROMISE}.`, l.slug)}`;
+${ask(askLine, `We deliver to ${l.name} and the surrounding district. Tell us what is going in it and what the access is like, and you will get a price with the cartage worked out.`, l.slug)}`;
 
     out(l.slug, shell({
       t: `Shipping Containers ${l.name} — For Sale & Hire | ${BRAND}`,
@@ -166,7 +190,7 @@ ${plate("Cartage is quoted with the container, for your address", "The run is on
 ${sec("", `<div class="narrow">${secHead("The truck", "Three ways a box gets put on the ground", "Which one your job needs is decided by the site, not by the container.")}
 <ol class="steps">
   <li><h3>Tilt-tray</h3><p>The bed lifts on rams and the container slides off the back under its own weight while the truck edges forward. It is the plainest gear for the job and the one you want if the site allows it. What it asks for is length — a straight, firm run at the spot with clear ground behind it for the box to travel back onto, and no bend halfway along that stops the truck lining up square.</p></li>
-  <li><h3>Side loader</h3><p>Two hydraulic lifting arms mounted on the trailer itself pick the container up and set it down alongside. It swaps the need for length for a need for width, so it suits narrow blocks, tight yards and anywhere the truck has to stay on the road while the box goes onto the property. One detail that catches people every time: the arms work off the driver's side, so the direction the truck can approach from decides which side of your block the container can land on.</p></li>
+  <li><h3>Side loader</h3><p>Two hydraulic lifting arms mounted on the trailer itself pick the container up and set it down alongside. It swaps the need for length for a need for width, so it suits narrow blocks, tight yards and anywhere the truck has to stay on the road while the box goes onto the property. One detail that catches people: on most side loaders the arms work off the driver's side, so the direction the truck can approach from tends to decide which side of your block the container can land on. The carrier confirms that for the truck actually sent.</p></li>
   <li><h3>Crane truck</h3><p>Lifts the container clear and swings it over whatever is in the way — a fence, a hedge, a retaining wall, a garden bed nobody wants driven across. It is the answer for courtyards, sloping blocks and places behind a house that no wheeled option reaches. It wants firm footing under the outriggers, room to put them down, and empty sky above the swing.</p></li>
 </ol>
 <p style="margin-top:1.6rem">There is no prize for booking heavier gear than the job needs, and the difference between these three shows up plainly on the invoice. Describe the site honestly and the cheapest truck that will actually work is the one that gets sent.</p>
@@ -254,7 +278,7 @@ ${sec("", `<div class="narrow">${secHead("The arrangement", "Booking, running an
 </div>`)}
 ${sec("sec-wash", secHead("Sizes", "What you can put on hire", null) + rangeGrid(P.sizes))}
 ${sec("", secHead("Questions", "About hiring a container", null) + qaHtml(faqs))}
-${ask("Get a hire figure", `Give us the size, roughly how long you need it and the town it is going to. You will get the weekly rate and the cartage together. ${PROMISE}.`, "hire")}`;
+${ask("Get a hire figure", `Give us the size, roughly how long you need it and the town it is going to. You will get the weekly rate and the cartage together.`, "hire", { intent: "hire" })}`;
   out("shipping-container-hire", shell({ t: `Container Hire — Weekly Rates, Terms And Collection | ${BRAND}`, d: `Hire a shipping container by the week in 10ft, 20ft or 40ft${PRICES ? `, from ${aud(twenty.hire)} a week ex GST` : " anywhere in Australia"}. Cargo-worthy units inspected wind and watertight, delivered and collected anywhere in Australia.`, c: "/shipping-container-hire/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
@@ -267,7 +291,7 @@ function sales() {
     { q: "How does payment work?", a: "The purchase is settled before the container is released for transport. That is standard in the trade and it is what allows a particular unit to be held with your name against it instead of being sold out from under you while paperwork moves. It is also exactly why we would rather you inspected it or looked at photographs of it first — nobody benefits from a surprise on the back of a truck." },
     { q: "Is a used container guaranteed?", a: "The grade is the guarantee, and it is a real one. Anything sold as cargo-worthy is inspected wind and watertight before it leaves, and if one turns up and is not, sorting it out is our problem rather than yours. As-is is the opposite arrangement done openly: the unit is sold on its faults, those faults are described and photographed, and it carries no watertight claim at all. What will not happen is a unit being described as something it is not." },
     { q: "Can you hold one while my slab cures?", a: "Usually, within reason, and plenty of people buy while the base is still being poured. There is a practical limit — a yard full of containers with names on them and no delivery dates is a yard that cannot trade — so treat it as a conversation rather than an assumption. Tell us the likely date when you buy and we will tell you honestly whether holding it that long works." },
-    { q: "Is one 40ft better value than two 20fts?", a: "On cost per cubic metre, almost always, and it arrives on one truck instead of two. The catch is entirely at your end: a 40ft wants a good deal more straight approach, more room to manoeuvre and a longer level pad, and there are plenty of blocks that will take a 20ft comfortably and simply cannot fit the longer box. Work out what the site allows first, then compare the prices." },
+    { q: "Is one 40ft better value than two 20fts?", a: "Often, on current quotes — a 40ft frequently costs only a little more than a 20ft for about twice the room, and it arrives on one truck instead of two. That depends on the grade, the units standing in the yard and the delivery run, so there is no blanket winner; ask for both figures. The catch is entirely at your end: a 40ft wants a good deal more straight approach, more room to manoeuvre and a longer level pad, and there are plenty of blocks that will take a 20ft comfortably and simply cannot fit the longer box. Work out what the site allows first, then compare the prices." },
     { q: "Do I need approval to put one on my property?", a: "It depends on your council, and the rules genuinely differ from one shire to the next — how long it is staying, whether it is visible from the street, how close to the boundary it sits and what you intend to use it for all come into it. It is one phone call to your own council and much better made before the container arrives than after somebody complains. There is a general rundown in our guide to council approval." }
   ];
   const body = `${pageHead({
@@ -297,7 +321,7 @@ ${sec("", `<div class="narrow">${secHead("What to look at", "In the order of wha
 ${sec("sec-wash", secHead("The range", "Sizes and configurations", null) + rangeGrid(P.sizes) + `<div style="margin-top:1.6rem">${typeChips()}</div><p class="fineprint" style="margin-top:1.6rem">${esc(PRICE_DISCLAIMER)}</p>`)}
 ${band({ photo: "inspect-yard", eyebrow: "Supply", h: "Where the unit comes from changes what is available", p: ["No two yards hold the same stock in the same week. A grade that is standing four deep at one is a fortnight away at another, and the honest answer sometimes is that the closest yard has an excellent container that is not quite the one you asked for. Tell us the delivery town early and the conversation gets much shorter.", "Buying a unit that is a long way from you is perfectly normal and happens every week — it just needs the photographs done properly and the cartage worked out before anything is agreed rather than after."], cta: ["/blog/buying-a-container-interstate/", "Buying from another state"], wash: true })}
 ${sec("", secHead("Questions", "About buying a container", null) + qaHtml(faqs))}
-${ask("Get a delivered price", `Tell us what the container has to do, the town it is going to and what the entry looks like. We will tell you which grade the job genuinely needs. ${PROMISE}.`, "sales")}`;
+${ask("Get a delivered price", `Tell us what the container has to do, the town it is going to and what the entry looks like. We will tell you which grade the job genuinely needs.`, "sales", { intent: "buy" })}`;
   out("container-sales", shell({ t: `Shipping Containers For Sale — Grades, Sizes And What To Check | ${BRAND}`, d: "Buying a shipping container without buying the wrong one: what new single-trip, cargo-worthy and as-is actually promise, what to inspect and in what order, and how the yard it comes from changes what is available.", c: "/container-sales/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
@@ -354,14 +378,14 @@ ${ask("Work out what suits", `Tell us what is going inside, roughly how long for
 function grades() {
   const crumbs = [HOME_CRUMB, ["Grades", "/container-grades/"]];
   const PICK = {
-    "new": ["Buy it when the container will be looked at, when it is going to be modified or fitted out, or when it has to last decades without an argument.", "Think again if it is going behind a shed to hold tools, where nobody will ever see it and the extra money buys you paint."],
+    "new": ["Buy it when the container will be looked at, when it is going to be modified or fitted out, or when you want the longest run before the doors or seals need attention.", "Think again if it is going behind a shed to hold tools, where nobody will ever see it and the extra money buys you paint."],
     "cargo-worthy": ["Buy it for almost everything: storage that has to stay dry, site use, machinery, stock, records, hire fleets and anything you want to resell later without explaining.", "Think again only if the contents genuinely do not care about weather, in which case the cheaper grade does the same job."],
-    "as-is": ["Buy it for a shell under an existing roof, a bund, a barrier, a base for a build, a dry-ish tool lock-up or anything being cut up anyway.", "Think again the moment the words \"keep it dry\" enter the conversation. This grade carries no watertight claim and it should not be talked into one."]
+    "as-is": ["Buy it for a shell under an existing roof, a barrier, a base for a build, a tool lock-up where damp does not matter, or anything being cut up anyway.", "Think again the moment the words \"keep it dry\" enter the conversation. This grade carries no watertight claim and it should not be talked into one."]
   };
   const faqs = [
-    { q: "Which grade should most buyers be looking at?", a: "Cargo-worthy used, and it is not close. It is a container still certified fit to carry freight at sea, which means the structure, the floor and the doors have to be sound, and every one we release is checked wind and watertight first. What you accept in return is cosmetic: dents, patches of surface rust, faded livery from whichever line ran it and paint in three colours. For storage, for site use and for hire that is the sensible place to spend money." },
+    { q: "Which grade should most buyers be looking at?", a: "Cargo-worthy used, and it is not close. It is a container whose structure, floor and doors are sound, and every one we release is checked wind and watertight first, for storage use. That is not the same as current CSC certification for shipping — if you need to export in it, say so and it gets checked on the specific unit. What you accept in return is cosmetic: dents, patches of surface rust, faded livery from whichever line ran it and paint in three colours. For storage, for site use and for hire that is the sensible place to spend money." },
     { q: "What does as-is actually mean in practice?", a: "That the container has finished its working life at sea and is being sold on its faults rather than despite them. It might have a previous repair, a section of floor that has gone soft, a seal that no longer pulls up hard, or a hole. As-is is not sold watertight, and no honest supplier will tell you otherwise. What you should get with it is a plain description of what is wrong with that individual unit and photographs of the faults on request, before delivery, so you are buying with your eyes open." },
-    { q: "Is a single-trip container really new?", a: "As new as a container gets in this country. It is built overseas, loaded once, sailed here and stripped out — one laden voyage. Nobody manufactures shipping containers in Australia at any scale, so single-trip is what the word new means on every price list in the market. Expect true walls, unmarked flooring, factory paint and seals that have barely weathered." },
+    { q: "Is a single-trip container really new?", a: "As new as a container gets in this country. It is built overseas, loaded once, sailed here and stripped out — one laden voyage. Nobody manufactures shipping containers in Australia at any scale, so single-trip is what the word new means on every price list in the market. Expect true walls, a clean floor, factory paint and seals that have barely weathered. Colour and markings vary from batch to batch, so ask what is on the ground." },
     { q: "Why does grade move the price more than size does?", a: "Because grade is the whole condition of the unit and size is just how much of it there is. The distance between an as-is 20ft and a new single-trip 20ft is wider than the distance between a used 20ft and a used 40ft, which surprises people every week. It is also the single most common reason one quote looks sharper than another — before comparing two numbers, check they are describing the same grade, because otherwise you are not comparing anything." },
     { q: "Are all your containers sold watertight?", a: "No, and treat any supplier who claims that as a warning. Cargo-worthy used and new single-trip units are checked wind and watertight before release. As-is units are explicitly not sold watertight — that is precisely why they cost what they cost. Which grade you need is decided by what is going inside, not by the budget you started with." },
     { q: "Can two containers of the same grade be very different?", a: "Yes, and expecting otherwise is how people end up disappointed. Cargo-worthy is a survey standard, not a description of appearance, so two units that both pass can look nothing alike — one straight and evenly faded, the other dented down one side with three patches of primer. Both are sound. If appearance matters to you, say so at the enquiry, because the difference is often free to accommodate and impossible to fix afterwards." },
@@ -380,7 +404,7 @@ ${sec("", `<div class="narrow">
   <div style="margin-top:1rem">${asIs()}</div>
 </div>`)}
 
-${sec("sec-wash", secHead("Side by side", "The three grades on one page", "Prices move with the individual unit and which yard it is released from. Grade is the first thing to settle and the only fair basis for comparing anybody's quote.") + `<div class="reveal">
+${sec("sec-wash", secHead("Side by side", "The three grades on one page", "Prices move with the individual unit and which yard it is released from. Grade is the first thing to settle and the only fair basis for comparing anybody's quote.") + `<div class="reveal tablewrap">
 <table class="spectable"><caption>What each grade is, and what you give up</caption>
 <thead><tr><th scope="col">Grade</th><th scope="col">Sold watertight</th><th scope="col">What it looks like</th><th scope="col">What you accept</th></tr></thead>
 <tbody>
@@ -395,8 +419,8 @@ ${band({ photo: "grades-floor", eyebrow: "Worth understanding", h: "Grade is a s
 
 ${sec("", secHead("Choosing", "Start from what is going inside it", null) + `<div class="narrow">
   <div class="reveal"><h2>If it has to stay dry, start at cargo-worthy</h2><p>Records, stock, tools, furniture, feed, anything with electronics in it or a warranty attached to it. Cargo-worthy is the floor of that conversation and new single-trip is the ceiling. There is no version of this where the cheap grade is a clever saving, because a container that lets water in has cost you the contents long before it has saved you the difference.</p></div>
-  <div class="reveal" style="margin-top:2.4rem"><h2>If it is being seen, or being modified, go new</h2><p>Shopfronts, display units, anything at the front of an acreage block, and anything destined to be cut, lined, insulated or fitted out. Straight walls and unmarked steel make modification work faster and cheaper, and paint that has not been through fifteen years of sun holds a new colour properly. High cube is usually the right pick alongside it — the reasons are on the <a href="/dimensions/">dimensions page</a>.</p></div>
-  <div class="reveal" style="margin-top:2.4rem"><h2>If the contents genuinely do not care, as-is earns its keep</h2><p>A shell under an existing roof, a bund wall, a barrier on a boundary, the base of a build, a store for steel or timber that lives outside anyway. As-is is not sold watertight and should never be talked into being watertight, but where that does not matter it is comfortably the best value in the yard — and the faults on the specific unit get described plainly and photographed on request before delivery.</p></div>
+  <div class="reveal" style="margin-top:2.4rem"><h2>If it is being seen, or being modified, go new</h2><p>Shopfronts, display units, anything at the front of an acreage block, and anything destined to be cut, lined, insulated or fitted out. Straight walls and clean steel make modification work faster and cheaper, and paint that has not been through fifteen years of sun holds a new colour properly. High cube is usually the right pick alongside it — the reasons are on the <a href="/dimensions/">dimensions page</a>.</p></div>
+  <div class="reveal" style="margin-top:2.4rem"><h2>If the contents genuinely do not care, as-is earns its keep</h2><p>A shell under an existing roof, a barrier on a boundary, the base of a build, a store for steel or timber that lives outside anyway. As-is is not sold watertight and should never be talked into being watertight, but where that does not matter it is comfortably the best value in the yard — and the faults on the specific unit get described plainly and photographed on request before delivery.</p></div>
   <div class="reveal" style="margin-top:2.4rem"><h2>If it is temporary, grade matters less than the term</h2><p>For a job lasting months rather than years, hiring often works out better than buying at any grade, and the unit that arrives is whatever suits the site rather than whatever you committed to. Have a look at <a href="/shipping-container-hire/">container hire</a> before settling on a purchase.</p></div>
 </div>`)}
 
@@ -404,7 +428,7 @@ ${sec("sec-wash", PRICES ? secHead("Guide prices", "What each grade starts at, b
 
 ${sec("", secHead("Common questions", "Grades, condition and what they are worth", null) + qaHtml(faqs))}
 
-${ask("Tell us what is going inside", `That one answer decides the grade, and it is a faster conversation than reading a price list. Ring ${S.phone} or send it through. ${PROMISE}.`, "grades")}`;
+${ask("Tell us what is going inside", `That one answer decides the grade, and it is a faster conversation than reading a price list. Ring ${S.phone} or send it through.`, "grades", { grade: "unsure" })}`;
   out("container-grades", shell({ t: `Container Grades — New Single-Trip, Cargo-Worthy Used And As-Is | ${BRAND}`, d: "The three container grades explained: what each one is really like, which are checked wind and watertight and which is not sold watertight, and how to pick the grade from what is going inside rather than from the price.", c: "/container-grades/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 

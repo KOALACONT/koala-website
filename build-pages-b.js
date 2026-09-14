@@ -72,7 +72,7 @@ ${sec("sec-wash", secHead("If you cannot get there", "The photographs to ask for
   <div class="chips" style="margin-top:1.4rem"><a href="/container-grades/">What each grade means</a><a href="/how-it-works/">How ordering works</a><a href="/delivery/">Delivery and access</a></div>
 </div>`)}
 
-${sec("", secHead("Reading a fault", "What it means and how much it should bother you", null) + `<div class="reveal"><table class="spectable"><caption>Common findings on used containers</caption>
+${sec("", secHead("Reading a fault", "What it means and how much it should bother you", null) + `<div class="reveal tablewrap"><table class="spectable"><caption>Common findings on used containers</caption>
 <thead><tr><th scope="col">What you find</th><th scope="col">What it usually is</th><th scope="col">How much it should bother you</th></tr></thead>
 <tbody>${faults.map((r) => `<tr><th scope="row">${esc(r[0])}</th><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("")}</tbody></table></div>
 <p class="fineprint" style="margin-top:1.4rem">Grade sets what you should expect to find before you start. Cargo-worthy and new single-trip units are checked wind and watertight before release; as-is units are sold on their faults and are not sold watertight. The <a href="/container-grades/">grades page</a> spells out the difference.</p>`)}
@@ -95,7 +95,7 @@ function dimensions() {
   const NOTES = {
     "10ft-shipping-containers": ["Short enough to tuck down the side of a house, behind a shed or into the corner of a small block where a longer unit simply will not turn. It weighs about as much as a small car empty, which widens the list of trucks that can bring it and the list of gateways it can get through.", "Inside, it is smaller than the cubic figure makes it sound once you allow for reaching things: about the floor area of a single garage bay, with full height. Trade tools, a locked store on a site with no shed, seasonal gear and overflow from a house move all fit comfortably. Anything on pallets is the test — two Australian standard pallets sit across the width with very little to spare, so plan the loading before you plan the purchase."],
     "20ft-shipping-containers": ["The default for good reason. Six metres of external length fits most driveways, most yards and most gateways, it is the size every truck in the game is set up to carry, and it is far and away the easiest unit to sell on again when you are finished with it.", "Inside you have a shade under six metres of usable run and full standing height. As a working rule it takes around ten Australian standard pallets on the floor in a single layer, or a small car with the doors shut and not much room to walk around it. If the contents are long rather than heavy — timber, pipe, racking — measure the load and remember it has to swing in through a 2.34m door rather than appear inside by magic."],
-    "40ft-shipping-containers": ["Twelve metres of container and, more to the point, a truck that is longer again. This is the size where access stops being a formality: the vehicle needs somewhere to line up straight, room to lay the unit down and space to pull clear afterwards, and a suburban cul-de-sac rarely has all three.", "The trade-off worth thinking about is two 20fts against one 40ft. Two shorter units cost more in total, need two deliveries and take more ground once you leave room to walk between them, but they will get into sites a 40ft cannot reach, they can sit in two different places, and they can be sold separately later. Where the run of clear ground exists, a single 40ft is the cheaper way to buy volume by a comfortable margin."]
+    "40ft-shipping-containers": ["Twelve metres of container and, more to the point, a truck that is longer again. This is the size where access stops being a formality: the vehicle needs somewhere to line up straight, room to lay the unit down and space to pull clear afterwards, and a suburban cul-de-sac rarely has all three.", "The trade-off worth thinking about is two 20fts against one 40ft. Two shorter units cost more in total, need two deliveries and take more ground once you leave room to walk between them, but they will get into sites a 40ft cannot reach, they can sit in two different places, and they can be sold separately later. Where the run of clear ground exists, a single 40ft is often the cheaper way to buy volume on current quotes — it depends on the grade, the units in the yard and the delivery run, so get both figures."]
   };
   const faqs = [
     { q: "How wide is a shipping container inside?", a: "About 2.35 metres, and that figure holds for every ISO container regardless of its length or height. Width is the dimension that never changes, which is why containers stack and mate the way they do. It matters most when you are loading pallets: two Australian standard pallets sit side by side across the width with a few centimetres to spare, so the width sets your loading pattern before the length does." },
@@ -109,7 +109,7 @@ function dimensions() {
   const body = `${pageHead({
     crumbs, photo: "head-dimensions", eyebrow: "Reference",
     h1: "Container sizes, dimensions, capacity and weights",
-    lede: "Every figure in one place — internal and external, door openings, cubic capacity and tare — along with the part a table cannot tell you: how much room the truck needs, how much ground the unit takes once it is standing, and which measurement catches people out.",
+    lede: "Every figure in one place — internal and external, door openings, cubic capacity and tare — along with the part a table cannot tell you: how much room the truck needs, how much ground the unit takes once it is standing, and which measurement catches people out. Figures are ISO standard values and approximate; if something has to fit to the millimetre, measure the actual unit.",
     facts: [["Width", "2.44m external on every size"], ["Standard height", "2.59m external"], ["High cube height", "2.90m external"]]
   })}
 
@@ -125,9 +125,9 @@ ${P.sizes.map((x, i) => sec(i % 2 === 0 ? "sec-wash" : "", secHead(x.short, x.ti
 </div>`)).join("\n")}
 
 ${sec("", secHead("The extra foot", "High cube containers", "Same footprint, same length, 300mm more headroom. The size to buy if anything is going to happen to the inside.") + `<div class="reveal">
-<table class="spectable"><caption>High cube dimensions and weights — figures approximate</caption>
+<div class="tablewrap"><table class="spectable"><caption>High cube dimensions and weights — ISO standard figures, approximate</caption>
 <thead><tr><th scope="col">Size</th><th scope="col">External L × W × H</th><th scope="col">Internal L × W × H</th><th scope="col">Door W × H</th><th scope="col">Capacity</th><th scope="col">Tare</th></tr></thead>
-<tbody>${HC.map((r) => `<tr><th scope="row">${esc(r.n)}</th><td>${esc(r.ext)}</td><td>${esc(r.int)}</td><td>${esc(r.door)}</td><td>${esc(r.cube)}</td><td>${esc(r.tare)}</td></tr>`).join("")}</tbody></table>
+<tbody>${HC.map((r) => `<tr><th scope="row">${esc(r.n)}</th><td>${esc(r.ext)}</td><td>${esc(r.int)}</td><td>${esc(r.door)}</td><td>${esc(r.cube)}</td><td>${esc(r.tare)}</td></tr>`).join("")}</tbody></table></div>
 </div>
 <div class="narrow" style="margin-top:2.4rem"><div class="reveal">
 <p>The door opening is the part people miss. A high cube door is 2.58m tall against 2.28m on a standard, and that half-metre is the difference between a machine driving in and a machine being craned over the side. If a forklift, a quad bike, a hoist or racking has to go in through the doors, measure the tallest thing at its tallest point and compare it with the door rather than the ceiling.</p>
@@ -244,7 +244,7 @@ function faqsPage() {
   const groups = [
     {
       h: "Working out what you need", faqs: [
-        { q: "How do I know whether to get a 20ft or a 40ft?", a: "Measure the ground before you measure the load. A 20ft wants roughly seven metres of level clear space to sit on and a straight approach to reach it. A 40ft is better value per cubic metre but takes a great deal more room to place — think about where the truck has to stop, not only where the box ends up. On a tight block, two 20fts dropped in separate spots often beat one 40ft that will not fit anywhere useful." },
+        { q: "How do I know whether to get a 20ft or a 40ft?", a: "Measure the ground before you measure the load. A 20ft wants roughly seven metres of level clear space to sit on and a straight approach to reach it. A 40ft often costs only a little more than a 20ft for about twice the room on current quotes, but it takes a great deal more space to place — think about where the truck has to stop, not only where the box ends up. On a tight block, two 20fts dropped in separate spots often beat one 40ft that will not fit anywhere useful." },
         { q: "Is a high cube worth the extra?", a: "If anything is going on the walls, over your head or up on a mezzanine, yes. A high cube stands a foot taller — 2.9m against 2.59m on the outside — and that foot is what lets you line and insulate the inside and still walk about upright. For plain pallet and gear storage, standard height is usually the sensible buy and the cheaper one." },
         { q: "Should I buy or hire?", a: "Hire suits a job with an end date on it: a build, a renovation, a season, a shutdown. Buying suits anything open-ended, because somewhere past a year or two of continuous hire the arithmetic stops favouring hire — and you will be told that rather than left on a billing cycle." },
         { q: "How much actually fits in one?", a: "About ten Australian standard pallets on the floor of a 20ft and roughly twenty-one in a 40ft, single stacked. In household terms a 20ft takes a typical three-bedroom house at a squeeze and a 40ft takes it without argument. Describe what is going in and which size you need usually answers itself." }
@@ -252,7 +252,7 @@ function faqsPage() {
     },
     {
       h: "Condition, grade and what those words mean", faqs: [
-        { q: "What do the grades actually mean?", a: "New, or single-trip, has made one loaded voyage and looks close to factory. Cargo-worthy is a used unit still certified fit to carry freight at sea — sound structure, sealing doors, solid floor — and cosmetically whatever a decade of weather and paint has left behind. As-is is sold on its faults: it might have a hole, a soft patch of floor or doors that need persuading, and the price reflects exactly that." },
+        { q: "What do the grades actually mean?", a: "New, or single-trip, has made one loaded voyage and looks close to factory. Cargo-worthy is a used unit with a sound structure, sealing doors and a solid floor, inspected wind and watertight for storage use — and cosmetically whatever a decade of weather and paint has left behind. Current CSC certification for shipping is a separate check on the specific unit. As-is is sold on its faults: it might have a hole, a soft patch of floor or doors that need persuading, and the price reflects exactly that." },
         { q: "Which grades are sold watertight?", a: "New and cargo-worthy units are wind and watertight, and that gets checked before one goes out. As-is units are not sold watertight, and that is the difference you are paying less for. If the contents have to stay dry, do not buy as-is on price alone — say what is going inside and we will point you at the right grade." },
         { q: "There is rust on it. Is that a problem?", a: "Usually not. These are built from weathering steel, which grows its own oxide skin and then largely stops eating itself. What matters is whether the rust has gone all the way through, whether it is sitting in a roof panel where water ponds after every storm, and whether the bottom rail has been chewed out by years of standing flat in wet grass. Staining on a side panel is cosmetic and always will be." },
         { q: "Will a container keep my things safe in a flood?", a: "No, and anyone who says otherwise is selling something. A sound container keeps rain off from above and that is where the claim stops. Floodwater comes in at the door seals, and an empty container will lift and travel. On a block that goes under, the only real answers are height above the flood line and being able to shift the contents out in time." }
@@ -316,7 +316,7 @@ ${ask("Rather just ask us?", `Ring or send an enquiry and you will get a straigh
   <p class="phead-lede">${esc(p.intro)}</p>
 </div></header>
 ${promiseStrip()}
-${sec("", `<div class="narrow article reveal">${p.body}</div>`)}
+${sec("", `<div class="narrow article reveal">${p.body.replace(/<table>/g, '<div class="tablewrap"><table>').replace(/<\/table>/g, "</table></div>")}</div>`)}
 ${sec("sec-wash", secHead("More guides", "Related reading", null) + `<div class="guides">${others.map((x) => `<article class="guidecard reveal"><h3><a href="/blog/${x.slug}/">${esc(x.title)}</a></h3><p>${esc(x.desc)}</p><div class="meta">${esc(String(x.mins))} min read</div></article>`).join("")}</div>`)}
 ${ask("Got a question this did not answer?", `Ring us — ${S.phone} — or send it through. ${PROMISE}.`, "g" + idx)}`;
     out("blog/" + p.slug, shell({ t: `${p.title} | ${BRAND}`, d: p.desc, c: `/blog/${p.slug}/`, schema: g(crumbsLd(c), art) }, body2));
@@ -338,11 +338,11 @@ function contact() {
   const body = `${pageHead({
     crumbs, photo: "head-contact", eyebrow: "Contact",
     h1: "Get a price on a container",
-    lede: `Give us the postcode, what is going in it and what the truck has to get past. That is normally enough for a firm number. ${PROMISE} — ${PROMISE_DETAIL.toLowerCase()}`,
+    lede: `Give us the postcode, what is going in it and what the truck has to get past. That is normally enough for a firm number, and it comes back from a person rather than an autoresponder.`,
     facts: [["Call", S.phone], ["Email", S.email], ["Head yard", ADDR_LINE]].concat(HOURS ? [["Open", HOURS]] : [])
   })}
 ${sec("", `<div class="spec">
-  <div>${F.quoteForm("-contact")}</div>
+  <div id="quote">${F.quoteForm("-contact")}</div>
   <div class="specside">
     <div class="pricebox reveal">
       <h3>Or use the phone</h3>
@@ -417,6 +417,7 @@ ${sec("", `<div class="narrow">
    of the plain locality page. Those all 301 into /{town}/ (see the redirect
    map in tail()). The condition INTENT is real though, so it gets three
    proper national pages here instead of thirty thin local ones. */
+const COND_GRADE = { "new-shipping-containers": "new", "used-shipping-containers": "cargo-worthy", "refurbished-shipping-containers": "cargo-worthy" };
 function conditionPages() {
   (P.conditions || []).forEach((x) => {
     const crumbs = [HOME_CRUMB, ["Shipping containers", "/shipping-containers/"], [x.name, `/${x.slug}/`]];
@@ -452,7 +453,7 @@ ${sec("sec-wash", secHead("What comes with it", "The points that matter", null) 
 ${sec("", secHead("By size", "Same condition, three sizes", null) + rangeGrid(P.sizes))}
 ${others.length ? sec("sec-grey", secHead("The other two", "How this compares", null) + `<div class="range">${others.map((o) => `<article class="rangecard reveal"><div class="rangecard-body"><h3><a href="/${o.slug}/">${esc(o.name)}</a></h3><p>${esc(o.bestFor)}</p></div></article>`).join("")}</div><p style="margin-top:1.4rem"><a class="btn btn-ghost" href="/container-grades/">Grades explained in full</a></p>`) : ""}
 ${sec("sec-wash", secHead("Common questions", "About " + x.name.toLowerCase(), null) + qaHtml(faqs))}
-${ask("Get a price", `Tell us the size, where it is going and what is going in it. ${PROMISE}.`, x.slug)}`;
+${ask("Get a price", `Tell us the size, where it is going and what is going in it.`, x.slug, { grade: COND_GRADE[x.slug] || "unsure" })}`;
     out(x.slug, shell({ t: `${x.title} For Sale | ${BRAND}`, d: x.metaDesc, c: `/${x.slug}/`, schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
   });
 }
@@ -463,8 +464,8 @@ function modifications() {
   const M = P.mods || [];
   const faqs = [
     { q: "Can you modify a container before it is delivered?", a: "Yes, and it is nearly always cheaper and better done that way. Cutting a door or a window into a container standing in a yard with power, hardstand and the right gear is a different job from doing it on a suburban block with a generator. Tell us what the container has to do at the enquiry rather than after it has landed." },
-    { q: "Does cutting into a container weaken it?", a: "It can, and that is exactly why the framing matters. A corrugated steel wall is structural, so any opening cut into one has to be reframed with steel to carry the load the panel was carrying. Done properly the unit is still stackable and still moves on the same trucks. Done badly it racks, and the doors are the first thing to tell you." },
-    { q: "Can a modified container still be moved later?", a: "Usually yes, provided the corner castings are untouched and the frame is intact — those are what the truck and the crane pick up on. Where it gets awkward is a container that has been built into a deck, a slab or a structure at the site end. If you think the unit may move again, say so before the modification is designed." },
+    { q: "Does cutting into a container weaken it?", a: "It can, and that is exactly why the framing matters. A corrugated steel wall is structural, so any opening cut into one has to be reframed with steel to carry the load the panel was carrying. Done properly the unit still moves on the same trucks. Whether a modified container can still be stacked or lifted loaded depends on what was cut and how it was reframed, and it needs a competent assessment of that unit rather than an assumption. Done badly it racks, and the doors are the first thing to tell you." },
+    { q: "Can a modified container still be moved later?", a: "Usually yes, provided the corner castings are untouched and the frame is intact — those are what the truck and the crane pick up on — but treat it as something to confirm for the specific unit and the specific modification rather than a given. Where it gets awkward is a container that has been built into a deck, a slab or a structure at the site end. If you think the unit may move again, say so before the modification is designed." },
     { q: "Do modifications need council approval?", a: "The container itself is one question and what you turn it into is another. A roller door on a storage unit is rarely anybody's business; a container fitted out as a habitable room, an office with people working in it or something plumbed and wired usually is. It varies by council and it is worth the phone call before the work starts." }
   ];
   const body = `${pageHead({
@@ -574,6 +575,31 @@ ErrorDocument 404 /404.html
   RewriteRule ^faqs-2/?$ /faqs/ [R=301,L]
   # Left over from an unrelated business. Not ours, never was.
   RewriteRule ^cardio-hire-terms/?$ / [R=301,L]
+
+  # 14/09/2026 — short URLs people type or that old CTAs pointed at.
+  # /hire was a live 404 (James's brief). Nothing here goes to the home
+  # page; every rule lands on the page that answers the intent.
+  RewriteRule ^hire/?$ /shipping-container-hire/ [R=301,L,NC]
+  RewriteRule ^container-hire/?$ /shipping-container-hire/ [R=301,L,NC]
+  RewriteRule ^shipping-container-hire-([a-z0-9-]+)/?$ /$1/ [R=301,L,NC]
+  RewriteRule ^(?:sales|buy|containers-for-sale|shipping-containers-for-sale)/?$ /container-sales/ [R=301,L,NC]
+  RewriteRule ^(?:containers|products?|our-containers|shop)/?$ /shipping-containers/ [R=301,L,NC]
+  RewriteRule ^(?:about-us|about-koala-containers)/?$ /about/ [R=301,L,NC]
+  RewriteRule ^(?:faq|frequently-asked-questions)/?$ /faqs/ [R=301,L,NC]
+  RewriteRule ^(?:delivery-area|areas-we-service|service-areas?|locations?)/?$ /delivery-areas/ [R=301,L,NC]
+  RewriteRule ^(?:privacy-policy|privacy-statement)/?$ /privacy/ [R=301,L,NC]
+  RewriteRule ^(?:modifications|container-modification|custom-containers)/?$ /container-modifications/ [R=301,L,NC]
+  RewriteRule ^(?:storage|container-storage-solutions|self-storage)/?$ /container-storage/ [R=301,L,NC]
+  RewriteRule ^(?:news|articles|guides)/?$ /blog/ [R=301,L,NC]
+  RewriteRule ^blog/page/\\d+/?$ /blog/ [R=301,L,NC]
+  # WordPress dated posts, categories, tags and author archives -> guides hub
+  RewriteRule ^\\d{4}/\\d{2}(?:/\\d{2})?(?:/[a-z0-9-]+)?/?$ /blog/ [R=301,L]
+  RewriteRule ^(?:category|tag|author)/[a-z0-9-]+/?$ /blog/ [R=301,L,NC]
+  # Old product pages under a shop prefix -> the matching size or the range hub
+  RewriteRule ^product/([a-z0-9-]*10ft[a-z0-9-]*)/?$ /10ft-shipping-containers/ [R=301,L,NC]
+  RewriteRule ^product/([a-z0-9-]*20ft[a-z0-9-]*)/?$ /20ft-shipping-containers/ [R=301,L,NC]
+  RewriteRule ^product/([a-z0-9-]*40ft[a-z0-9-]*)/?$ /40ft-shipping-containers/ [R=301,L,NC]
+  RewriteRule ^product/[a-z0-9-]+/?$ /shipping-containers/ [R=301,L,NC]
 </IfModule>
 
 <IfModule mod_deflate.c>
@@ -694,7 +720,26 @@ ErrorDocument 404 /404.html
     [/^\/our-services\/?$/, "/shipping-containers/"],
     [/^\/shipping-container-delivery\/?$/, "/delivery/"],
     [/^\/faqs-2\/?$/, "/faqs/"],
-    [/^\/cardio-hire-terms\/?$/, "/"]
+    [/^\/cardio-hire-terms\/?$/, "/"],
+    [/^\/hire\/?$/i, "/shipping-container-hire/"],
+    [/^\/container-hire\/?$/i, "/shipping-container-hire/"],
+    [/^\/shipping-container-hire-([a-z0-9-]+)\/?$/i, "/$1/"],
+    [/^\/(?:sales|buy|containers-for-sale|shipping-containers-for-sale)\/?$/i, "/container-sales/"],
+    [/^\/(?:containers|products?|our-containers|shop)\/?$/i, "/shipping-containers/"],
+    [/^\/(?:about-us|about-koala-containers)\/?$/i, "/about/"],
+    [/^\/(?:faq|frequently-asked-questions)\/?$/i, "/faqs/"],
+    [/^\/(?:delivery-area|areas-we-service|service-areas?|locations?)\/?$/i, "/delivery-areas/"],
+    [/^\/(?:privacy-policy|privacy-statement)\/?$/i, "/privacy/"],
+    [/^\/(?:modifications|container-modification|custom-containers)\/?$/i, "/container-modifications/"],
+    [/^\/(?:storage|container-storage-solutions|self-storage)\/?$/i, "/container-storage/"],
+    [/^\/(?:news|articles|guides)\/?$/i, "/blog/"],
+    [/^\/blog\/page\/\d+\/?$/i, "/blog/"],
+    [/^\/\d{4}\/\d{2}(?:\/\d{2})?(?:\/[a-z0-9-]+)?\/?$/, "/blog/"],
+    [/^\/(?:category|tag|author)\/[a-z0-9-]+\/?$/i, "/blog/"],
+    [/^\/product\/[a-z0-9-]*10ft[a-z0-9-]*\/?$/i, "/10ft-shipping-containers/"],
+    [/^\/product\/[a-z0-9-]*20ft[a-z0-9-]*\/?$/i, "/20ft-shipping-containers/"],
+    [/^\/product\/[a-z0-9-]*40ft[a-z0-9-]*\/?$/i, "/40ft-shipping-containers/"],
+    [/^\/product\/[a-z0-9-]+\/?$/i, "/shipping-containers/"]
   ];
   const resolveLegacy = (u) => {
     for (const [re, to] of REDIRECTS) if (re.test(u)) return u.replace(re, to);

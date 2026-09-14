@@ -432,106 +432,182 @@ function videoBlock() {
 const promiseStrip = () => `<div class="promise"><div class="wrap"><b>${esc(PROMISE)}.</b><span>${esc(PROMISE_DETAIL)}</span></div></div>`;
 
 /* ------------------------------------------------------------- the ask ---
-   Two conversion decisions are baked in and should not be undone without a
-   reason. Every dropdown ends in a "Not sure" option, because not knowing
-   which size or grade you need is the commonest reason a container buyer
-   abandons a form. And the timeframe question leads with "Today", because it
-   qualifies urgency at no cost and tells the sales desk who to ring first.
-   Qualifying questions come BEFORE contact details, always. */
-function quoteForm(u, compact, mode) {
-  /* "mini" is the three-field opener used by the compact hero. Qualifying
-     questions still come before contact details everywhere else; here the job
-     of the form is only to start a conversation, and the size/grade questions
-     are asked on the call instead. Fewer fields in the hero, same lead. */
+   ONE shared enquiry form, rebuilt 14/09/2026 to James's brief. The decisions
+   baked in, and why:
+     - Length and configuration are SEPARATE questions, so a 40ft high cube or
+       a 20ft side opener is a real answer rather than a fight between options.
+     - Every choice ends in "Not sure — help me choose". Not knowing is the
+       commonest reason a buyer abandons a container form.
+     - Timeframe defaults to "Not sure yet". "Today" as a default was tagging
+       every lead as urgent, which is the same as tagging none of them.
+     - Hire never offers as-is (nothing goes out on hire below cargo-worthy).
+     - Delivery suburb or postcode is REQUIRED and is never pre-filled from the
+       page. A Mackay landing page does not mean a Mackay delivery.
+     - Name plus ONE working contact method is the floor. Email becomes
+       required only when the person asks for the quote in writing.
+     - "Just a question" hides the container questions and is flagged in the
+       notes, so a specialist enquiry can never land in the CRM as a 20ft
+       purchase by default.
+     - method="post": if JS ever fails, the browser posts to the contact page
+       and nothing personal lands in a query string or a server log.
+     - The button asks for a delivered PRICE, not an instant quote. Nothing on
+       this site calculates a figure; a person does.
+   Presets come from the page (hire page = hiring, 10ft page = 10ft, new page
+   = new). The lead-intake reads `size` as 10/20/40 only — everything else is
+   carried in the message text by app.js so the sales desk still sees it. */
+function quoteForm(u, compact, mode, preset) {
+  const P0 = Object.assign({ intent: "buy", size: "unsure", config: "gp", grade: "cargo-worthy" }, preset || {});
+  const sel = (v, cur) => (v === cur ? " selected" : "");
+  const chk = (v, cur) => (v === cur ? " checked" : "");
+  const req = `<abbr class="req" title="required">*</abbr>`;
+  const opt = `<span class="optional">(optional)</span>`;
+  const trap = `<input type="text" name="business_url" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">`;
+  const noscript = `<noscript><p class="q-bad">This form needs JavaScript to send. Ring <a href="${S.phoneHref}">${esc(S.phone)}</a> or email <a href="mailto:${S.email}">${esc(S.email)}</a> instead.</p></noscript>`;
+
+  /* "mini" is the three-field opener used by the compact hero variant. The
+     job of that form is only to start a conversation; size and grade are
+     asked on the call. Same rules as the full form: POST, suburb required,
+     one contact method. */
   if (mode === "mini") {
-    return `<form class="askcard askcard-mini" data-quote novalidate>
-      <div class="qtoggle">
-        <input type="radio" name="intent" value="buy" id="qi-b${u}" checked><label for="qi-b${u}">Buying</label>
-        <input type="radio" name="intent" value="hire" id="qi-h${u}"><label for="qi-h${u}">Hiring</label>
+    return `<form class="askcard askcard-mini" data-quote method="post" action="/contact/#quote" novalidate>
+      ${noscript}
+      <div class="qtoggle" role="radiogroup" aria-label="Buying or hiring">
+        <input type="radio" name="intent" value="buy" id="qi-b${u}"${chk("buy", P0.intent)}><label for="qi-b${u}">Buying</label>
+        <input type="radio" name="intent" value="hire" id="qi-h${u}"${chk("hire", P0.intent)}><label for="qi-h${u}">Hiring</label>
       </div>
       <input type="hidden" name="size" value="unsure">
       <div class="mini-fields">
         <label class="vh" for="q-suburb${u}">Delivery suburb or postcode</label>
-        <input name="suburb" id="q-suburb${u}" type="text" autocomplete="address-level2" placeholder="Delivery suburb or postcode">
+        <input name="suburb" id="q-suburb${u}" type="text" autocomplete="address-level2" placeholder="Delivery suburb or postcode" required>
         <label class="vh" for="q-name${u}">Your name</label>
         <input name="name" id="q-name${u}" type="text" autocomplete="name" placeholder="Your name" required>
         <label class="vh" for="q-phone${u}">Phone</label>
         <input name="phone" id="q-phone${u}" type="tel" autocomplete="tel" placeholder="Phone" required>
-        <button type="submit" class="btn btn-primary">Get a price</button>
+        <button type="submit" class="btn btn-primary">Request a delivered price</button>
       </div>
-      <input type="text" name="business_url" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      ${trap}
     </form>`;
   }
-  return `<form class="askcard" data-quote novalidate>
-    ${compact ? "" : `<h3>Tell us about the job</h3><p class="askcard-note">Four quick questions about the container, then how to reach you. ${esc(PROMISE)}.</p>`}
-    <p class="qstage-h">1. Buying or hiring?</p>
-    <div class="qtoggle">
-      <input type="radio" name="intent" value="buy" id="qi-b${u}" checked><label for="qi-b${u}">Buying</label>
-      <input type="radio" name="intent" value="hire" id="qi-h${u}"><label for="qi-h${u}">Hiring</label>
-    </div>
-    <div class="qgrid">
-      <div>
-        <label for="q-size${u}">2. What size?</label>
-        <select name="size" id="q-size${u}">
-          <option value="20ft">20ft — the usual answer</option>
-          <option value="10ft">10ft</option>
-          <option value="40ft">40ft</option>
-          <option value="high-cube">High cube</option>
-          <option value="side-opening">Side opening</option>
-          <option value="dg">Dangerous goods</option>
-          <option value="unsure">Not sure — help me work it out</option>
-        </select>
+  return `<form class="askcard" data-quote method="post" action="/contact/#quote" novalidate>
+    ${noscript}
+    ${compact ? `<p class="askcard-note">Fields marked ${req} are required.</p>` : `<h3>Tell us about the job</h3><p class="askcard-note">A few quick questions about the container, then how to reach you. Fields marked ${req} are required.</p>`}
+    <div class="q-errors" aria-live="assertive" hidden></div>
+    <fieldset class="qfield">
+      <legend class="qstage-h">1. What are you after?</legend>
+      <div class="qtoggle qtoggle-3">
+        <input type="radio" name="intent" value="buy" id="qi-b${u}"${chk("buy", P0.intent)}><label for="qi-b${u}">Buying</label>
+        <input type="radio" name="intent" value="hire" id="qi-h${u}"${chk("hire", P0.intent)}><label for="qi-h${u}">Hiring</label>
+        <input type="radio" name="intent" value="unsure" id="qi-u${u}"${chk("unsure", P0.intent)}><label for="qi-u${u}">Not sure — help me choose</label>
+        <input type="radio" name="intent" value="question" id="qi-q${u}"${chk("question", P0.intent)}><label for="qi-q${u}">Just a question</label>
       </div>
-      <div>
-        <label for="q-grade${u}">3. What grade?</label>
-        <select name="grade" id="q-grade${u}">
-          <option value="cargo-worthy">Cargo-worthy used</option>
-          <option value="new">New single-trip</option>
-          <option value="as-is">As-is — cheapest</option>
-          <option value="unsure">Not sure — explain the difference</option>
-        </select>
-      </div>
-      <div>
-        <label for="q-when${u}">4. When do you need it?</label>
-        <select name="when" id="q-when${u}">
-          <option value="today">Today</option>
-          <option value="this-week">This week</option>
-          <option value="next-week">Next week</option>
-          <option value="next-month">Next month</option>
-          <option value="unsure">Not sure yet</option>
-        </select>
-      </div>
-      <div>
-        <label for="q-suburb${u}">Delivery suburb or postcode</label>
-        <input name="suburb" id="q-suburb${u}" type="text" autocomplete="address-level2" placeholder="e.g. Cornubia or 4130">
+    </fieldset>
+    <div class="qspec" data-spec>
+      <p class="qstage-h">2. The container</p>
+      <div class="qgrid">
+        <div>
+          <label for="q-size${u}">Length</label>
+          <select name="size" id="q-size${u}">
+            <option value="10ft"${sel("10ft", P0.size)}>10ft</option>
+            <option value="20ft"${sel("20ft", P0.size)}>20ft</option>
+            <option value="40ft"${sel("40ft", P0.size)}>40ft</option>
+            <option value="unsure"${sel("unsure", P0.size)}>Not sure — help me choose</option>
+          </select>
+        </div>
+        <div>
+          <label for="q-config${u}">Type</label>
+          <select name="config" id="q-config${u}">
+            <option value="gp"${sel("gp", P0.config)}>General purpose (standard height)</option>
+            <option value="high-cube"${sel("high-cube", P0.config)}>High cube (extra headroom)</option>
+            <option value="side-opening"${sel("side-opening", P0.config)}>Side opening</option>
+            <option value="dg"${sel("dg", P0.config)}>Dangerous goods</option>
+            <option value="reefer"${sel("reefer", P0.config)}>Refrigerated</option>
+            <option value="unsure"${sel("unsure", P0.config)}>Not sure — help me choose</option>
+          </select>
+        </div>
+        <div>
+          <label for="q-grade${u}">Grade</label>
+          <select name="grade" id="q-grade${u}">
+            <option value="cargo-worthy"${sel("cargo-worthy", P0.grade)}>Cargo-worthy used (checked wind and watertight)</option>
+            <option value="new"${sel("new", P0.grade)}>New single-trip</option>
+            <option value="as-is" data-buy-only${sel("as-is", P0.grade)}>As-is (cheapest, not sold watertight)</option>
+            <option value="unsure"${sel("unsure", P0.grade)}>Not sure — explain the difference</option>
+          </select>
+        </div>
+        <div>
+          <label for="q-qty${u}">How many</label>
+          <input name="quantity" id="q-qty${u}" type="number" inputmode="numeric" min="1" max="99" step="1" value="1">
+        </div>
+        <div data-hire-only hidden>
+          <label for="q-duration${u}">Roughly how long ${opt}</label>
+          <select name="duration" id="q-duration${u}" disabled>
+            <option value="">Not sure yet</option>
+            <option value="under-1-month">Under a month</option>
+            <option value="1-3-months">1 to 3 months</option>
+            <option value="3-6-months">3 to 6 months</option>
+            <option value="6-12-months">6 to 12 months</option>
+            <option value="over-1-year">Over a year</option>
+          </select>
+        </div>
+        <div>
+          <label for="q-when${u}">When do you need it</label>
+          <select name="when" id="q-when${u}">
+            <option value="unsure" selected>Not sure yet</option>
+            <option value="urgent">Urgent — this week</option>
+            <option value="next-week">Next week</option>
+            <option value="this-month">Within a month</option>
+            <option value="later">Later than that</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="qstage">
-      <p class="qstage-h">And how do we reach you?</p>
+      <p class="qstage-h"><span data-step-contact>3.</span> Where and who</p>
+      <label for="q-suburb${u}">Delivery suburb or postcode ${req}</label>
+      <input name="suburb" id="q-suburb${u}" type="text" autocomplete="address-level2" placeholder="e.g. Cornubia or 4130" required aria-required="true">
       <div class="qgrid">
-        <div><label for="q-name${u}">Your name</label><input name="name" id="q-name${u}" type="text" autocomplete="name" required></div>
-        <div><label for="q-phone${u}">Phone</label><input name="phone" id="q-phone${u}" type="tel" autocomplete="tel" required></div>
+        <div><label for="q-name${u}">Your name ${req}</label><input name="name" id="q-name${u}" type="text" autocomplete="name" required aria-required="true"></div>
+        <div><label for="q-phone${u}">Phone</label><input name="phone" id="q-phone${u}" type="tel" autocomplete="tel" inputmode="tel"></div>
       </div>
-      <label for="q-email${u}">Email (optional)</label><input name="email" id="q-email${u}" type="email" autocomplete="email">
-      <label for="q-msg${u}">Anything we should know?</label><textarea name="message" id="q-msg${u}" rows="2" placeholder="What's going in it, and what the access is like"></textarea>
+      <label for="q-email${u}">Email</label><input name="email" id="q-email${u}" type="email" autocomplete="email" inputmode="email">
+      <p class="qhint" id="q-contact-hint${u}">A phone number or an email is enough — we need one that works.</p>
+      <label class="qcheck"><input type="checkbox" name="written" value="yes" id="q-written${u}"> I'd like the price in writing (we'll need your email)</label>
+      <label for="q-msg${u}">Anything we should know? ${opt}</label><textarea name="message" id="q-msg${u}" rows="2" placeholder="What's going in it, what the access is like, or your question"></textarea>
+      <p class="qhint">Got photos of the site or the entry? Email them to <a href="mailto:${S.email}">${esc(S.email)}</a> after you send this and quote your suburb — they usually settle the truck and the timing in one reply.</p>
     </div>
-    <input type="text" name="business_url" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-    <button type="submit" class="btn btn-primary btn-wide btn-lg">Send it through</button>
-    <p class="qnote">${esc(PROMISE_DETAIL)} Your details stay with us.</p>
+    ${trap}
+    <div class="qsubmit">
+      <button type="submit" class="btn btn-primary btn-wide btn-lg">Request a delivered price</button>
+      <p class="qnote">${esc(PROMISE_DETAIL)} Your details stay with us — <a href="/privacy/">privacy</a>.</p>
+    </div>
   </form>`;
 }
 
-function ask(heading, sub, idSuffix) {
+/* The bottom-of-page ask. `preset` is passed straight through to the form.
+   The response promise is stripped from the sub-line here because it is
+   already on the promise strip (inner pages) or the plate (home) — James,
+   14/09/2026: "stop repeating one business day in every block". */
+function ask(heading, sub, idSuffix, preset) {
   const u = idSuffix ? "-" + idSuffix : "";
+  const subClean = String(sub || "").replace(new RegExp("\\s*" + PROMISE.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\.?", "g"), "").trim();
   return `<section class="ask" id="quote"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">Get a price</p><h2>${esc(heading)}</h2><p class="ask-sub">${esc(sub)}</p></div>
-  ${quoteForm(u)}
+  <div class="sec-head"><p class="eyebrow">Get a price</p><h2>${esc(heading)}</h2>${subClean ? `<p class="ask-sub">${esc(subClean)}</p>` : ""}</div>
+  ${quoteForm(u, false, null, preset)}
   <p class="ask-or">Or skip the form and ring us — <a href="${S.phoneHref}">${esc(S.phone)}</a>${HOURS ? ", " + esc(HOURS) : ""}</p>
 </div></section>`;
 }
 
+/* A dark call-to-action that points at a form already on the page, used on
+   the home page so there is ONE form (the hero card) rather than two that
+   each lose what the other had typed. */
+function askLink(heading, sub) {
+  return `<section class="ask ask-link"><div class="wrap">
+  <div class="sec-head"><p class="eyebrow">Get a price</p><h2>${esc(heading)}</h2><p class="ask-sub">${esc(sub)}</p></div>
+  <p class="ask-cta"><a class="btn btn-primary btn-lg" href="#quote">Request a delivered price</a><a class="btn btn-ondark btn-lg" href="${S.phoneHref}">${esc(S.phone)}</a></p>
+</div></section>`;
+}
+
 /* ---------------------------------------------------- four-column footer -- */
-function foot() {
+function foot(hasQuote) {
   const col = (label, items) => `<div><h4>${esc(label)}</h4><ul>${items.map((x) => `<li><a href="${x[0]}">${esc(x[1])}</a></li>`).join("")}</ul></div>`;
   const D9 = Array.isArray(S.depots) ? S.depots : [];
   return `<footer class="foot">
@@ -556,14 +632,14 @@ function foot() {
     <h4>Where we deliver</h4>
     <div class="runlinks">${LOCS.map((l) => `<a href="/${l.slug}/">${esc(l.name)}</a>`).join("")}<a href="/delivery-areas/">Everywhere else</a></div>
   </div>
-  <div class="foot-base">© ${new Date().getFullYear()} ${esc(BRAND)} — shipping container sales, hire and delivery ${esc(SERVICE_AREA)}. ${esc(PROMISE)}. ${PRICES ? "Prices shown are guide prices in AUD and exclude GST; delivery is quoted with the container." : "Every price is quoted for the exact unit with delivery to your address, in AUD ex GST."}</div>
+  <div class="foot-base">© ${new Date().getFullYear()} ${esc(BRAND)} — shipping container sales, hire and delivery ${esc(SERVICE_AREA)}. ${PRICES ? "Prices shown are guide prices in AUD and exclude GST; delivery is quoted with the container." : "Every price is quoted for the exact unit with delivery to your address, in AUD ex GST."}</div>
 </div></footer>
-<div class="actionbar"><a class="btn btn-dark" href="${S.phoneHref}">Call ${esc(S.phone)}</a><a class="btn btn-primary" href="/contact/">Get a price</a></div>
+<div class="actionbar"><a class="btn btn-dark" href="${S.phoneHref}">Call ${esc(S.phone)}</a><a class="btn btn-primary" href="${hasQuote ? "#quote" : "/contact/"}">Get a price</a></div>
 <script id="site-config" type="application/json">${JSON.stringify({ endpoint: S.leadEndpoint, brand: S.leadBrand, domain: S.leadSource, phone: S.phone, phoneHref: S.phoneHref, email: S.email, promise: PROMISE })}</script>
 <script src="/js/app.js?v=${JS_V}" defer></script></body></html>`;
 }
 
-const shell = (o, body) => head(o.t, o.d, o.c, o.schema, o.noindex) + mast() + `<main id="main">` + body + `</main>` + foot();
+const shell = (o, body) => head(o.t, o.d, o.c, o.schema, o.noindex) + mast() + `<main id="main">` + body + `</main>` + foot(body.includes('id="quote"'));
 const crumbHtml = (c) => `<nav class="crumb" aria-label="Breadcrumb"><div class="wrap">${c.map((x, i) => (i === c.length - 1 ? `<strong>${esc(x[0])}</strong>` : `<a href="${x[1]}">${esc(x[0])}</a> <span aria-hidden="true">/</span> `)).join("")}</div></nav>`;
 
 /* ------------------------------------------------------------ primitives -- */
@@ -608,13 +684,19 @@ function rangeGrid(items) {
     ${havePhoto("range-" + x.slug) ? `<div class="rangecard-media">${IMG("range-" + x.slug, x.title, { w: 800, h: 500 })}<span class="rangecard-size">${esc(x.short || x.name)}</span></div>` : ""}
     <div class="rangecard-body">
       <h3><a href="/${x.slug}/">${esc(x.title)}</a></h3>
-      <p>${esc(x.pickIf || x.lead.split(".")[0] + ".")}</p>
+      <p>${esc(x.pickIf || firstSentence(x.lead))}</p>
       ${x.usedFrom ? `<div class="rangecard-price"><div>Used from<b>${aud(x.usedFrom)}</b></div><div>New from<b>${aud(x.newFrom)}</b></div></div>` : ""}
     </div>
   </article>`).join("")}</div>`;
 }
 
-const specTable = (x) => `<table class="spectable"><caption>${esc(x.title)} — dimensions and weights</caption><tbody>
+/* First sentence of a lead, for card excerpts. Splitting on "." alone cut
+   "2.90m" in half and left the high cube card ending at "on top — 2." */
+const firstSentence = (t) => {
+  const m = String(t).match(/^[\s\S]*?[.!?](?=\s+[A-Z]|\s*$)/);
+  return (m ? m[0] : String(t)).trim();
+};
+const specTable = (x) => `<table class="spectable spectable-kv"><caption>${esc(x.title)} — dimensions and weights (ISO standard figures, approximate)</caption><tbody>
 <tr><th scope="row">External (L × W × H)</th><td>${esc(x.specs.ext)}</td></tr>
 <tr><th scope="row">Internal (L × W × H)</th><td>${esc(x.specs.int)}</td></tr>
 <tr><th scope="row">Door opening (W × H)</th><td>${esc(x.specs.door)}</td></tr>
@@ -624,7 +706,7 @@ const specTable = (x) => `<table class="spectable"><caption>${esc(x.title)} — 
 
 const priceBox = (x) => !PRICES ? `<div class="pricebox reveal">
   <h3>Get a price — ${esc(x.short)}</h3>
-  <p class="pricenote">Every ${esc(x.short)} is priced on the individual unit, the grade you settle on and the run to your address, and the number you get covers the container and the delivery together. Ring ${esc(S.phone)} or send the form — ${esc(S.responseShort ? S.responseShort.toLowerCase() : "answered within one business day")}.</p>
+  <p class="pricenote">Every ${esc(x.short)} is priced on the individual unit, the grade you settle on and the run to your address, and the number you get covers the container and the delivery together. Ring ${esc(S.phone)} or send the form.</p>
   <a class="btn btn-primary btn-wide" href="/contact/">Get a price for your address</a>
 </div>` : `<div class="pricebox reveal">
   <h3>Guide prices — ${esc(x.short)}</h3>
@@ -757,7 +839,7 @@ function home() {
   const faqs = [
     { q: "Which yard does my container actually come out of?", a: `Whichever one is closest to your address with the right unit standing in it. Stock is held at ${ADDR.suburb} and drawn through yards and depot partners spread right around the country, so a box bound for the Territory or the west coast does not begin its life on a truck in south-east Queensland. Give us the delivery postcode on the first call and you will be told where yours is being released from and what that does to the timing.` },
     { q: "Do you sell into every state, or only Queensland?", a: "Every state and territory, on the one 1300 number. East coast runs are the busiest and the quickest. Inland and northern runs are the ones worth talking through, because what is moving in that direction that week matters more than the map does. The far corners of the country get an honest answer rather than an optimistic one — some of those jobs wait on a truck already heading that way, and you will hear that while we are quoting, not afterwards." },
-    { q: "Which grade is the one to buy?", a: "For most jobs, cargo-worthy used. It is a working box still certified fit to carry freight at sea, inspected wind and watertight before release, and it costs a long way less than new. Step up to new single-trip when the container is going to be looked at or cut into and converted. As-is sits at the bottom of the price range, carries no watertight claim at all, and earns its keep as a lock-up under an existing roof or as the shell of a build. The grades page sets the three of them out beside each other." },
+    { q: "Which grade is the one to buy?", a: "For most jobs, cargo-worthy used. It is a sound working box, inspected wind and watertight before release for storage use, and it costs a long way less than new. If you need to ship in it, current CSC certification is a separate check on the specific unit. Step up to new single-trip when the container is going to be looked at or cut into and converted. As-is sits at the bottom of the price range, carries no watertight claim at all, and earns its keep as a lock-up under an existing roof or as the shell of a build. The grades page sets the three of them out beside each other." },
     { q: "What decides what delivery costs?", a: "Two things, and the kilometres are only the first of them. The second is what the truck has to do once it turns off the road. A level industrial pad with a wide gate and a sloping residential drive with a power line across the entrance are different jobs even when they sit the same distance from the yard. So cartage is worked out per address and quoted with the container, which puts a single figure in front of you instead of a price with a question mark hanging off it. A call and a couple of photographs of the entrance normally settles it." },
     { q: "How soon can one be on the ground?", a: "A standard 20ft going to an address with reasonable access near a capital is usually a few business days. Regional runs depend on what else is travelling that way that week. Through the wet, unsealed roads across the north and the centre close for weeks at a stretch and no amount of money reopens them. Tell us the date the job genuinely needs it by, rather than the polite version, and you will get a straight answer on whether that is achievable." },
     { q: "Will the council have something to say about it?", a: "Possibly, and the only reliable answer comes from your own council rather than from us. The requirements differ from one shire to the next and they turn on how long the container is staying, what is going inside it, and whether it can be seen from the street. Newer estates often carry a covenant that is tighter than anything the council itself asks for. It is a short call to the planning counter, and it is far better made before the truck is booked than after the container is sitting on the block." }
@@ -767,7 +849,7 @@ function home() {
   /* Three hero treatments. Everything below the hero is shared — the variant
      stylesheets restyle it, they do not restructure it. */
   const heroPoints = `<ul class="hero-points">
-          <li>${esc(PROMISE)} — by somebody who sells containers for a living</li>
+          <li>Answered by somebody who sells containers for a living, not an autoresponder</li>
           <li>Cargo-worthy and new stock inspected wind and watertight before release</li>
           <li>Photographs of the exact unit on request, sent before delivery</li>
           <li>Released from the yard nearest your address, not carted across the country</li>
@@ -789,7 +871,7 @@ function home() {
       </div>
       <div class="hero-media">${videoBlock()}</div>
     </div>
-    <div class="startbar">
+    <div class="startbar" id="quote">
       <div class="startbar-say"><b>Get a price</b><span>Three details, and a person gets back to you inside a business day.</span></div>
       ${quoteForm("-hero", true, "mini")}
       <a class="startbar-tel" href="${S.phoneHref}"><small>or ring</small>${esc(S.phone)}</a>
@@ -815,7 +897,7 @@ function home() {
       </div>
       <div class="hero-media">${videoBlock()}</div>
     </div>
-    <div class="startbar startbar-full" id="quote-top">
+    <div class="startbar startbar-full" id="quote">
       <div class="startbar-say">
         <b>Get a price</b>
         <span>Four questions about the box, then the best number to get you on. ${esc(PROMISE)}.</span>
@@ -841,7 +923,7 @@ function home() {
         ${heroCta}
         ${heroPoints}
       </div>
-      <div class="quotecard">
+      <div class="quotecard" id="quote">
         <h2>Get a price</h2>
         <p class="qc-sub">Four questions about the box, then the best number to get you on.</p>
         ${quoteForm("-hero", true)}
@@ -876,14 +958,14 @@ function home() {
           <a class="btn btn-ondark btn-lg" href="${S.phoneHref}">${esc(S.phone)}</a>
         </div>
         <ul class="hero-points">
-          <li>${esc(PROMISE)} — by somebody who sells containers for a living</li>
+          <li>Answered by somebody who sells containers for a living, not an autoresponder</li>
           <li>Cargo-worthy and new stock inspected wind and watertight before release</li>
           <li>Photographs of the exact unit on request, sent before delivery</li>
           <li>Released from the yard nearest your address, not carted across the country</li>
           ${SHOW_REVIEWS ? `<li>Rated ${esc(reviewLine())}</li>` : ""}
         </ul>
       </div>
-      <div class="quotecard">
+      <div class="quotecard" id="quote">
         <h2>Get a price</h2>
         <p class="qc-sub">Four questions about the box, then the best number to get you on.</p>
         ${quoteForm("-hero", true)}
@@ -920,9 +1002,9 @@ ${band({
     cta: ["/delivery/", "How delivery works"]
   })}
 
-${sec("sec-grey", secHead("Grades", P.gradeNote, null) + `<div class="range">${P.grades.map((gr) => `<article class="rangecard reveal"><div class="rangecard-body"><h3>${esc(gr.name)}</h3><p>${esc(gr.blurb)}</p></div></article>`).join("")}</div><p style="margin-top:1.6rem"><a class="btn btn-ghost" href="/container-grades/">Grades explained in full</a></p>`)}
+${sec("sec-grey", secHead("Grades", "Three grades, and which one to buy", P.gradeNote) + `<div class="range">${P.grades.map((gr) => `<article class="rangecard reveal"><div class="rangecard-body"><h3>${esc(gr.name)}</h3><p>${esc(gr.blurb)}</p></div></article>`).join("")}</div><p style="margin-top:1.6rem"><a class="btn btn-ghost" href="/container-grades/">Grades explained in full</a></p>`)}
 
-${(P.conditions && P.conditions.length) ? sec("", secHead("New, used or refurbished", "Three ways to buy the same steel box", "Condition decides more of the final figure than length does, and it is the thing that settles whether a unit is sold watertight at all.") + `<div class="range">${P.conditions.map((c) => `<article class="rangecard reveal"><div class="rangecard-body"><h3><a href="/${c.slug}/">${esc(c.name)}</a></h3><p>${esc(c.lead.split(". ")[0] + ".")}</p><p style="font-size:.92rem;color:var(--muted)"><strong>Best for:</strong> ${esc(c.bestFor)}</p></div></article>`).join("")}</div>`) : ""}
+${(P.conditions && P.conditions.length) ? sec("", secHead("New, used or refurbished", "Three ways to buy the same steel box", "Condition decides more of the final figure than length does, and it is the thing that settles whether a unit is sold watertight at all.") + `<div class="range">${P.conditions.map((c) => `<article class="rangecard reveal"><div class="rangecard-body"><h3><a href="/${c.slug}/">${esc(c.name)}</a></h3><p>${esc(firstSentence(c.lead))}</p><p style="font-size:.92rem;color:var(--muted)"><strong>Best for:</strong> ${esc(c.bestFor)}</p></div></article>`).join("")}</div>`) : ""}
 
 ${sec("sec-dark", secHead("Where we deliver", "Into every state and territory", "We go everywhere. Listed below are the towns there is something worth saying about — what the roads do, what the ground does, which trucks fit down them, and where the drops usually come unstuck.") + `<div class="locgrid">${LOCS.map((l) => `<a href="/${l.slug}/">${esc(l.name)}<span>${esc(l.state)} ${esc(l.postcode)}</span></a>`).join("")}</div><p style="margin-top:1.5rem"><a class="btn btn-ondark" href="/delivery-areas/">Everywhere else</a></p>`)}
 
@@ -935,7 +1017,7 @@ ${sec("", secHead("How it works", "Four steps, and nothing sprung on you at the 
 
 ${sec("sec-wash", secHead("Common questions", "What people ask on the first call", null) + qaHtml(faqs) + `<p style="margin-top:1.8rem"><a class="btn btn-ghost" href="/faqs/">All frequently asked questions</a></p>`)}
 
-${ask("Tell us where it is going", "Four questions about the container and the address it is headed for, then the best number to reach you on. " + PROMISE + ".", "home")}
+${VARIANT === "cinema" ? ask("Tell us where it is going", "A few questions about the container and the address it is headed for, then the best number to reach you on.", "home") : askLink("Tell us where it is going", "The form at the top of the page is the only one you need — a few questions about the container and the address, then the best number to reach you on.")}
 `;
   out("", shell({ t: `Shipping Containers For Sale & Hire, Australia-Wide | ${BRAND}`, d: `Buy or hire 10ft, 20ft and 40ft shipping containers in new, cargo-worthy and as-is grades. Your unit is released from the yard nearest your address and delivered in every state and territory. ${PROMISE}.`, c: "/", schema }, body));
 }
@@ -943,7 +1025,7 @@ ${ask("Tell us where it is going", "Four questions about the container and the a
 /* ============================== RANGE HUB =============================== */
 function hub() {
   const faqs = [
-    { q: "How do I pick the right size?", a: "Measure the ground before you shortlist a length. A 20ft wants roughly seven metres of straight, near-level standing and is the cheapest steel per cubic metre most weeks of the year, which is why it is the default. A 40ft holds double for nowhere near double the money, but it will not get in anywhere without a long, clear, unobstructed approach. A 10ft exists for the block that genuinely will not take a 20ft, and you pay more per cubic metre for it every single time." },
+    { q: "How do I pick the right size?", a: "Measure the ground before you shortlist a length. A 20ft wants roughly seven metres of straight, near-level standing and is the default because it is the size every yard and every truck is set up for. A 40ft holds about double and, on current quotes, often costs only a little more — but it will not get in anywhere without a long, clear, unobstructed approach. A 10ft exists for the block that genuinely will not take a 20ft, and it is usually the dearer way to buy room. Which is the better buy depends on the grade and the delivery run, so ask for the figures side by side." },
     { q: "Is a high cube worth the extra?", a: "It buys 300mm of internal height and nothing else — 2.90m to the top rail rather than 2.59m. Left empty as a store, that foot is not worth a great deal. The moment the container is being lined, fitted with a roller door a forklift has to drive through with the tynes up, or hung with a mezzanine across one end, it is the difference between a comfortable fit-out and a compromised one. Anything being converted, buy the high cube." },
     { q: "Can I buy one sight unseen?", a: `Most people do, and there is nothing wrong with it provided you are looking at the right photographs. Ask and images of the actual unit will be sent rather than a catalogue shot — corners, door end, roof and floor — on request and before delivery. If you are close enough to ${ADDR.suburb} to drive over, ring ahead and do that instead on used stock. Everywhere else, the photographs are the substitute and they are of your box, not a box like it.` },
     { q: "Do you hire these as well as sell them?", a: "Yes, across the range and into every state we deliver to. Hire suits a container with an end date attached — a build, a fit-out, a season, a shed being put back up after a storm. Buying wins the moment the box is still going to be standing there in a couple of years, because the weekly rate and the purchase price cross over sooner than most people assume. Tell us how long it is needed for and we will work out which side of that line the job sits on." },
@@ -1006,12 +1088,19 @@ ${gallery(["gal-" + x.slug + "-1", "gal-" + x.slug + "-2", "gal-" + x.slug + "-3
 ${band({ photo: "size-alt-" + x.slug, eyebrow: "Access", h: `What a ${x.short} wants at your end`, p: [x.access, "Three photographs settle it: one taken standing at the street looking in, one along the run itself, and one of the ground the box has to sit on. Send them with the enquiry and you will be told which truck the job wants, and whether the drop is straightforward, before anybody talks money."], cta: ["/delivery/", "Delivery and access"], dark: true, alt: true })}
 ${sec("", secHead("Other lengths", "If this one is not the fit", null) + rangeGrid(others) + `<div style="margin-top:1.6rem">${typeChips()}</div>`)}
 ${sec("sec-wash", secHead("Questions", `The ${x.short}, answered`, null) + qaHtml(faqs))}
-${ask(`Price a ${x.short} to your address`, `Give us the delivery postcode and a description of the entrance, and the cartage comes back in the same number as the container. ${PROMISE}.`, x.slug)}`;
+${ask(`Price a ${x.short} to your address`, `Give us the delivery postcode and a description of the entrance, and the cartage comes back in the same number as the container.`, x.slug, { size: x.short })}`;
     out(x.slug, shell({ t: PRICES ? `${x.title} — Buy Or Hire From ${aud(x.usedFrom)} | ${BRAND}` : `${x.title} For Sale And Hire Australia-Wide | ${BRAND}`, d: `${x.title} to buy or hire${PRICES ? ` from ${aud(x.usedFrom)} ex GST` : ", priced with delivery to your address"}. ${x.specs.ext} outside, ${x.specs.cube} inside. New, cargo-worthy and as-is grades, released from the yard closest to you and delivered nationally.`, c: `/${x.slug}/`, schema: g(crumbsLd(crumbs), faqLd(faqs), productLd(x)) }, body));
   });
 }
 
 /* ============================== TYPE PAGES ============================== */
+const TYPE_CONFIG = {
+  "general-purpose-shipping-containers": "gp",
+  "high-cube-shipping-containers": "high-cube",
+  "side-opening-shipping-containers": "side-opening",
+  "refrigerated-shipping-containers": "reefer",
+  "dangerous-goods-shipping-containers": "dg"
+};
 function typePages() {
   P.types.forEach((x) => {
     const others = P.types.filter((y) => y.slug !== x.slug);
@@ -1040,7 +1129,7 @@ ${sec("", `<div class="spec">
   <div class="specside">
     <div class="pricebox reveal">
       <h3>Price this one</h3>
-      <p style="color:var(--pale);font-size:.95rem">Give us the length, the grade and the delivery postcode. ${esc(PROMISE)}.</p>
+      <p style="color:var(--pale);font-size:.95rem">Give us the length, the grade and the delivery postcode.</p>
       <a class="btn btn-primary btn-wide" href="/contact/">Send an enquiry</a>
       <a class="btn btn-ondark btn-wide" style="margin-top:.6rem" href="${S.phoneHref}">${esc(S.phone)}</a>
       <p class="pricenote">Cartage is worked out per address and quoted with the box, because the access at the delivery end shifts the figure as much as the kilometres do.</p>
@@ -1051,7 +1140,7 @@ ${gallery(["gal-" + x.slug + "-1", "gal-" + x.slug + "-2", "gal-" + x.slug + "-3
 ${sec("sec-dark", secHead("Lengths", "Available as", null) + rangeGrid(P.sizes))}
 ${sec("", secHead("Other configurations", "Something else in the range", null) + rangeGrid(others))}
 ${sec("sec-wash", secHead("Questions", `${x.name} containers, answered`, null) + qaHtml(faqs))}
-${ask(`Price a ${low} unit`, `Describe the job and give us the delivery postcode. ${PROMISE}.`, x.slug)}`;
+${ask(`Price a ${low} unit`, `Describe the job and give us the delivery postcode.`, x.slug, { config: TYPE_CONFIG[x.slug] || "unsure" })}`;
     out(x.slug, shell({ t: `${x.title} — Sale & Hire, Delivered Nationally | ${BRAND}`, d: x.metaDesc, c: `/${x.slug}/`, schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
   });
 }
@@ -1062,7 +1151,7 @@ module.exports = { esc, aud };
    below, purely to keep each file readable. Both halves share this module's
    helpers through the object exported above and the globals assigned here. */
 Object.assign(global, {
-  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, mast, promiseStrip, quoteForm, ask, foot, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, PRICES, PRICE_DISCLAIMER, PRICE_SUB, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
+  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, mast, promiseStrip, quoteForm, ask, askLink, foot, firstSentence, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, PRICES, PRICE_DISCLAIMER, PRICE_SUB, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
 });
 
 home();

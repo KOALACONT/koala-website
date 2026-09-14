@@ -1,8 +1,8 @@
 {
- "note": "Every URL live on the WordPress site at koalacontainers.com.au, captured from page-sitemap.xml on 17/08/2026. The build FAILS if any of these would 404 on the new site. Redirect rules live in tail() in build-pages.js and are pattern-based, so a legacy URL missed here is still caught by the pattern rules. Verify against Search Console before cutover.",
+ "note": "Every URL live on the WordPress site at koalacontainers.com.au, captured from page-sitemap.xml on 17/08/2026. The build FAILS if any of these would 404 on the new site. Redirect rules live in tail() in build-pages-b.js and are pattern-based, so a legacy URL missed here is still caught by the pattern rules. Verify against Search Console before cutover. Extended 14/09/2026 with /hire (a live 404), short-form service URLs, WordPress dated/category/tag/author archives and /product/ URLs — each must resolve to the page that answers the intent, never blanket to home.",
  "capturedOn": "2026-08-17",
  "source": "https://koalacontainers.com.au/page-sitemap.xml",
- "count": 78,
+ "count": 92,
  "urls": [
   "/",
   "/10ft-shipping-containers/",
@@ -81,6 +81,20 @@
   "/used-shipping-containers-rockhampton/",
   "/used-shipping-containers-sunshine-coast/",
   "/used-shipping-containers-toowoomba/",
-  "/warwick/"
+  "/warwick/",
+  "/hire/",
+  "/hire",
+  "/container-hire/",
+  "/about-us/",
+  "/privacy-policy/",
+  "/faq/",
+  "/blog/",
+  "/blog/page/2/",
+  "/2024/03/12/some-old-post/",
+  "/category/news/",
+  "/product/20ft-shipping-container/",
+  "/product/40ft-high-cube/",
+  "/product/side-opening-container/",
+  "/shipping-container-hire-brisbane/"
  ]
 }
