@@ -59,6 +59,230 @@ ErrorDocument 404 /404.html
   RewriteRule ^product/([a-z0-9-]*20ft[a-z0-9-]*)/?$ /20ft-shipping-containers/ [R=301,L,NC]
   RewriteRule ^product/([a-z0-9-]*40ft[a-z0-9-]*)/?$ /40ft-shipping-containers/ [R=301,L,NC]
   RewriteRule ^product/[a-z0-9-]+/?$ /shipping-containers/ [R=301,L,NC]
+
+  # Canonical case and trailing slash. The filesystem is case sensitive, so
+  # /Jimboomba 404s while /jimboomba/ is a real page — and capitalised URLs
+  # turn up constantly in ad destinations, printed material and typed guesses.
+  # mod_rewrite cannot lowercase a string without a RewriteMap (server config,
+  # not available in .htaccess), so the rules are generated one per page from
+  # the build's own page list. The RewriteCond stops the already-correct URL
+  # matching its own rule, which would loop.
+  RewriteCond %{REQUEST_URI} !^/shipping-containers/$
+  RewriteRule ^shipping-containers/?$ /shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/10ft-shipping-containers/$
+  RewriteRule ^10ft-shipping-containers/?$ /10ft-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/20ft-shipping-containers/$
+  RewriteRule ^20ft-shipping-containers/?$ /20ft-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/40ft-shipping-containers/$
+  RewriteRule ^40ft-shipping-containers/?$ /40ft-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/general-purpose-shipping-containers/$
+  RewriteRule ^general-purpose-shipping-containers/?$ /general-purpose-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/high-cube-shipping-containers/$
+  RewriteRule ^high-cube-shipping-containers/?$ /high-cube-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/side-opening-shipping-containers/$
+  RewriteRule ^side-opening-shipping-containers/?$ /side-opening-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/refrigerated-shipping-containers/$
+  RewriteRule ^refrigerated-shipping-containers/?$ /refrigerated-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/dangerous-goods-shipping-containers/$
+  RewriteRule ^dangerous-goods-shipping-containers/?$ /dangerous-goods-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/brisbane/$
+  RewriteRule ^brisbane/?$ /brisbane/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/sydney/$
+  RewriteRule ^sydney/?$ /sydney/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/melbourne/$
+  RewriteRule ^melbourne/?$ /melbourne/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/perth/$
+  RewriteRule ^perth/?$ /perth/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/adelaide/$
+  RewriteRule ^adelaide/?$ /adelaide/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/canberra/$
+  RewriteRule ^canberra/?$ /canberra/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/hobart/$
+  RewriteRule ^hobart/?$ /hobart/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/darwin/$
+  RewriteRule ^darwin/?$ /darwin/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/gold-coast/$
+  RewriteRule ^gold-coast/?$ /gold-coast/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/sunshine-coast/$
+  RewriteRule ^sunshine-coast/?$ /sunshine-coast/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/ipswich/$
+  RewriteRule ^ipswich/?$ /ipswich/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/logan/$
+  RewriteRule ^logan/?$ /logan/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/redlands/$
+  RewriteRule ^redlands/?$ /redlands/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/jimboomba/$
+  RewriteRule ^jimboomba/?$ /jimboomba/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/beaudesert/$
+  RewriteRule ^beaudesert/?$ /beaudesert/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/toowoomba/$
+  RewriteRule ^toowoomba/?$ /toowoomba/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/warwick/$
+  RewriteRule ^warwick/?$ /warwick/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/tweed-heads/$
+  RewriteRule ^tweed-heads/?$ /tweed-heads/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/ballina/$
+  RewriteRule ^ballina/?$ /ballina/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/lismore/$
+  RewriteRule ^lismore/?$ /lismore/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/grafton/$
+  RewriteRule ^grafton/?$ /grafton/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/mullumbimby/$
+  RewriteRule ^mullumbimby/?$ /mullumbimby/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/coffs-harbour/$
+  RewriteRule ^coffs-harbour/?$ /coffs-harbour/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/port-macquarie/$
+  RewriteRule ^port-macquarie/?$ /port-macquarie/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/gympie/$
+  RewriteRule ^gympie/?$ /gympie/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/hervey-bay/$
+  RewriteRule ^hervey-bay/?$ /hervey-bay/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/maryborough/$
+  RewriteRule ^maryborough/?$ /maryborough/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/bundaberg/$
+  RewriteRule ^bundaberg/?$ /bundaberg/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/gladstone/$
+  RewriteRule ^gladstone/?$ /gladstone/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/rockhampton/$
+  RewriteRule ^rockhampton/?$ /rockhampton/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/mackay/$
+  RewriteRule ^mackay/?$ /mackay/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/townsville/$
+  RewriteRule ^townsville/?$ /townsville/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/cairns/$
+  RewriteRule ^cairns/?$ /cairns/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/dalby/$
+  RewriteRule ^dalby/?$ /dalby/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/chinchilla/$
+  RewriteRule ^chinchilla/?$ /chinchilla/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/kingaroy/$
+  RewriteRule ^kingaroy/?$ /kingaroy/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/roma/$
+  RewriteRule ^roma/?$ /roma/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/charleville/$
+  RewriteRule ^charleville/?$ /charleville/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/longreach/$
+  RewriteRule ^longreach/?$ /longreach/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/emerald/$
+  RewriteRule ^emerald/?$ /emerald/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/moranbah/$
+  RewriteRule ^moranbah/?$ /moranbah/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/mount-isa/$
+  RewriteRule ^mount-isa/?$ /mount-isa/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/newcastle/$
+  RewriteRule ^newcastle/?$ /newcastle/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/wollongong/$
+  RewriteRule ^wollongong/?$ /wollongong/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/tamworth/$
+  RewriteRule ^tamworth/?$ /tamworth/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/dubbo/$
+  RewriteRule ^dubbo/?$ /dubbo/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/wagga-wagga/$
+  RewriteRule ^wagga-wagga/?$ /wagga-wagga/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/albury/$
+  RewriteRule ^albury/?$ /albury/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/orange/$
+  RewriteRule ^orange/?$ /orange/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/bathurst/$
+  RewriteRule ^bathurst/?$ /bathurst/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/geelong/$
+  RewriteRule ^geelong/?$ /geelong/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/ballarat/$
+  RewriteRule ^ballarat/?$ /ballarat/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/bendigo/$
+  RewriteRule ^bendigo/?$ /bendigo/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/shepparton/$
+  RewriteRule ^shepparton/?$ /shepparton/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/mildura/$
+  RewriteRule ^mildura/?$ /mildura/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/launceston/$
+  RewriteRule ^launceston/?$ /launceston/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/devonport/$
+  RewriteRule ^devonport/?$ /devonport/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/mount-gambier/$
+  RewriteRule ^mount-gambier/?$ /mount-gambier/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/whyalla/$
+  RewriteRule ^whyalla/?$ /whyalla/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/port-augusta/$
+  RewriteRule ^port-augusta/?$ /port-augusta/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/kalgoorlie/$
+  RewriteRule ^kalgoorlie/?$ /kalgoorlie/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/bunbury/$
+  RewriteRule ^bunbury/?$ /bunbury/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/geraldton/$
+  RewriteRule ^geraldton/?$ /geraldton/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/port-hedland/$
+  RewriteRule ^port-hedland/?$ /port-hedland/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/karratha/$
+  RewriteRule ^karratha/?$ /karratha/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/broome/$
+  RewriteRule ^broome/?$ /broome/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/alice-springs/$
+  RewriteRule ^alice-springs/?$ /alice-springs/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/delivery-areas/$
+  RewriteRule ^delivery-areas/?$ /delivery-areas/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/delivery/$
+  RewriteRule ^delivery/?$ /delivery/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/shipping-container-hire/$
+  RewriteRule ^shipping-container-hire/?$ /shipping-container-hire/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/container-sales/$
+  RewriteRule ^container-sales/?$ /container-sales/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/container-storage/$
+  RewriteRule ^container-storage/?$ /container-storage/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/container-grades/$
+  RewriteRule ^container-grades/?$ /container-grades/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/container-inspection/$
+  RewriteRule ^container-inspection/?$ /container-inspection/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/dimensions/$
+  RewriteRule ^dimensions/?$ /dimensions/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/how-it-works/$
+  RewriteRule ^how-it-works/?$ /how-it-works/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/about/$
+  RewriteRule ^about/?$ /about/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/faqs/$
+  RewriteRule ^faqs/?$ /faqs/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/$
+  RewriteRule ^blog/?$ /blog/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/what-a-shipping-container-costs/$
+  RewriteRule ^blog/what-a-shipping-container-costs/?$ /blog/what-a-shipping-container-costs/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/shipping-container-council-approval/$
+  RewriteRule ^blog/shipping-container-council-approval/?$ /blog/shipping-container-council-approval/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/moving-a-shipping-container/$
+  RewriteRule ^blog/moving-a-shipping-container/?$ /blog/moving-a-shipping-container/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/container-markings-and-csc-plate/$
+  RewriteRule ^blog/container-markings-and-csc-plate/?$ /blog/container-markings-and-csc-plate/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/types-of-shipping-containers/$
+  RewriteRule ^blog/types-of-shipping-containers/?$ /blog/types-of-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/how-long-does-a-shipping-container-last/$
+  RewriteRule ^blog/how-long-does-a-shipping-container-last/?$ /blog/how-long-does-a-shipping-container-last/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/anchoring-a-shipping-container/$
+  RewriteRule ^blog/anchoring-a-shipping-container/?$ /blog/anchoring-a-shipping-container/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/packing-a-shipping-container/$
+  RewriteRule ^blog/packing-a-shipping-container/?$ /blog/packing-a-shipping-container/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/shipping-container-vs-shed/$
+  RewriteRule ^blog/shipping-container-vs-shed/?$ /blog/shipping-container-vs-shed/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/containers-on-farms-and-rural-blocks/$
+  RewriteRule ^blog/containers-on-farms-and-rural-blocks/?$ /blog/containers-on-farms-and-rural-blocks/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/stacking-shipping-containers/$
+  RewriteRule ^blog/stacking-shipping-containers/?$ /blog/stacking-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/blog/buying-a-container-interstate/$
+  RewriteRule ^blog/buying-a-container-interstate/?$ /blog/buying-a-container-interstate/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/contact/$
+  RewriteRule ^contact/?$ /contact/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/new-shipping-containers/$
+  RewriteRule ^new-shipping-containers/?$ /new-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/used-shipping-containers/$
+  RewriteRule ^used-shipping-containers/?$ /used-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/refurbished-shipping-containers/$
+  RewriteRule ^refurbished-shipping-containers/?$ /refurbished-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/container-modifications/$
+  RewriteRule ^container-modifications/?$ /container-modifications/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/depots/$
+  RewriteRule ^depots/?$ /depots/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/thank-you/$
+  RewriteRule ^thank-you/?$ /thank-you/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/privacy/$
+  RewriteRule ^privacy/?$ /privacy/ [R=301,L,NC]
 </IfModule>
 
 <IfModule mod_deflate.c>
