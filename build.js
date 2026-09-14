@@ -50,6 +50,15 @@ const path = require("path");
 
 const S = require("./data/site.json");
 const P = require("./data/products.json");
+/* PRICES. James, 14/09/2026: "hide prices for now". showPrices:false strips
+   every guide figure - range cards, price boxes, hire rates, AggregateOffer
+   schema, the price disclaimer - and every heading that promised a figure
+   swaps to a ring-for-a-price line. Flip showPrices to true and put the
+   confirmed Koala figures in usedFrom/newFrom/hire to bring them back. */
+const PRICES = P.showPrices !== false;
+if (!PRICES) for (const x of [...P.sizes, ...(P.types || []), ...(P.conditions || [])]) { delete x.usedFrom; delete x.newFrom; delete x.hire; }
+const PRICE_DISCLAIMER = PRICES ? P.disclaimer : P.priceHiddenNote;
+const PRICE_SUB = PRICES ? "Guide prices in AUD, ex GST. Delivery is quoted with the container." : "Priced with delivery to your address - one call, one number.";
 
 /* Localities are split across regional files under data/locations/ rather than
    one 300KB blob — easier to edit, easier to review in a diff, and it keeps any
@@ -347,7 +356,7 @@ const faqLd = (faqs) => (faqs && faqs.length ? { "@type": "FAQPage", mainEntity:
 const productLd = (x) => ({
   "@type": "Product", name: x.title, description: x.lead,
   brand: { "@type": "Brand", name: BRAND },
-  offers: { "@type": "AggregateOffer", priceCurrency: "AUD", lowPrice: x.usedFrom, highPrice: x.newFrom, availability: "https://schema.org/InStock", seller: { "@id": `${D}/#biz` } }
+  ...(x.usedFrom && x.newFrom ? { offers: { "@type": "AggregateOffer", priceCurrency: "AUD", lowPrice: x.usedFrom, highPrice: x.newFrom, availability: "https://schema.org/InStock", seller: { "@id": `${D}/#biz` } } } : {})
 });
 const g = (...items) => ({ "@context": "https://schema.org", "@graph": [biz(), ...items.filter(Boolean)] });
 
@@ -547,7 +556,7 @@ function foot() {
     <h4>Where we deliver</h4>
     <div class="runlinks">${LOCS.map((l) => `<a href="/${l.slug}/">${esc(l.name)}</a>`).join("")}<a href="/delivery-areas/">Everywhere else</a></div>
   </div>
-  <div class="foot-base">© ${new Date().getFullYear()} ${esc(BRAND)} — shipping container sales, hire and delivery ${esc(SERVICE_AREA)}. ${esc(PROMISE)}. Prices shown are guide prices in AUD and exclude GST; delivery is quoted with the container.</div>
+  <div class="foot-base">© ${new Date().getFullYear()} ${esc(BRAND)} — shipping container sales, hire and delivery ${esc(SERVICE_AREA)}. ${esc(PROMISE)}. ${PRICES ? "Prices shown are guide prices in AUD and exclude GST; delivery is quoted with the container." : "Every price is quoted for the exact unit with delivery to your address, in AUD ex GST."}</div>
 </div></footer>
 <div class="actionbar"><a class="btn btn-dark" href="${S.phoneHref}">Call ${esc(S.phone)}</a><a class="btn btn-primary" href="/contact/">Get a price</a></div>
 <script id="site-config" type="application/json">${JSON.stringify({ endpoint: S.leadEndpoint, brand: S.leadBrand, domain: S.leadSource, phone: S.phone, phoneHref: S.phoneHref, email: S.email, promise: PROMISE })}</script>
@@ -613,7 +622,11 @@ const specTable = (x) => `<table class="spectable"><caption>${esc(x.title)} — 
 <tr><th scope="row">Tare weight</th><td>${esc(x.specs.tare)}</td></tr>
 </tbody></table>`;
 
-const priceBox = (x) => `<div class="pricebox reveal">
+const priceBox = (x) => !PRICES ? `<div class="pricebox reveal">
+  <h3>Get a price — ${esc(x.short)}</h3>
+  <p class="pricenote">Every ${esc(x.short)} is priced on the individual unit, the grade you settle on and the run to your address, and the number you get covers the container and the delivery together. Ring ${esc(S.phone)} or send the form — ${esc(S.responseShort ? S.responseShort.toLowerCase() : "answered within one business day")}.</p>
+  <a class="btn btn-primary btn-wide" href="/contact/">Get a price for your address</a>
+</div>` : `<div class="pricebox reveal">
   <h3>Guide prices — ${esc(x.short)}</h3>
   <dl>
     <div><dt>Cargo-worthy used, from</dt><dd>${aud(x.usedFrom)}</dd></div>
@@ -889,7 +902,7 @@ ${plate(SHORT + " Containers — " + (HOURS || "Mon–Fri"), PROMISE + ". " + PR
 
 ${depotStrip()}
 
-${sec("", secHead("The range", "Three lengths, five configurations, three grades", "The figures beneath each card are starting points for the grade named on it. Where an individual price lands comes down to the condition of the box, what is physically in stock the week you ring, and which yard it has to be released from.") + rangeGrid(P.sizes) + `<div style="margin-top:1.6rem">${typeChips()}</div><div style="margin-top:1.6rem">${asIs()}</div>`)}
+${sec("", secHead("The range", "Three lengths, five configurations, three grades", PRICES ? "The figures beneath each card are starting points for the grade named on it. Where an individual price lands comes down to the condition of the box, what is physically in stock the week you ring, and which yard it has to be released from." : "Settle the length and the grade first. Where the price lands comes down to the condition of the box, what is physically in stock the week you ring, and which yard it has to be released from — so it is quoted for the unit, with delivery, rather than guessed.") + rangeGrid(P.sizes) + `<div style="margin-top:1.6rem">${typeChips()}</div><div style="margin-top:1.6rem">${asIs()}</div>`)}
 
 ${plate("One number, wherever it is going", S.phone + " — " + (HOURS || "Mon–Fri") + ". Sales, hire, modifications and delivery.")}
 
@@ -944,7 +957,7 @@ function hub() {
   <p class="phead-lede">Ten, twenty and forty foot. General purpose, high cube, side opening, refrigerated and dangerous goods. New single-trip, cargo-worthy used and as-is. This page is the map — what each one is genuinely for, and which of them is wrong for the job you have in mind.</p>
 </div></header>
 ${promiseStrip()}
-${sec("", secHead("By size", "Measure the ground first", "More containers are ordered at the wrong length because somebody sized the load and never walked the driveway. Access rules a size out at least as often as volume does.") + rangeGrid(P.sizes) + `<div style="margin-top:1.8rem">${asIs()}</div><p class="fineprint">${esc(P.disclaimer)}</p>`)}
+${sec("", secHead("By size", "Measure the ground first", "More containers are ordered at the wrong length because somebody sized the load and never walked the driveway. Access rules a size out at least as often as volume does.") + rangeGrid(P.sizes) + `<div style="margin-top:1.8rem">${asIs()}</div><p class="fineprint">${esc(PRICE_DISCLAIMER)}</p>`)}
 ${sec("sec-wash", secHead("By configuration", "What the box has been set up to do", null) + rangeGrid(P.types))}
 ${band({ photo: "grades-lineup", eyebrow: "Grades", h: "Two boxes the same length can be a long way apart on price", p: [P.gradeNote, "The gap is almost always the floor and the door seals, and neither of them shows up in a listing that only gives you a length and a figure. Settle the grade before you start ringing around, because it is the only thing that makes two quotes comparable."], cta: ["/container-grades/", "Grades explained"], dark: true, alt: true })}
 ${sec("", secHead("Common questions", "Before you settle on one", null) + qaHtml(faqs))}
@@ -959,7 +972,7 @@ function sizePages() {
     const faqs = [
       { q: `What are the dimensions of a ${x.short} shipping container?`, a: `Outside, ${x.specs.ext}. Inside, ${x.specs.int}, which gives ${x.specs.cube} of usable room, through a door opening of ${x.specs.door}, at an empty weight of ${x.specs.tare}. Those are ISO figures and they hold whoever built the box, so there is no point shopping on them. What does differ from one ${x.short} to the next is how sound the floor is and how hard the doors pull up against the seal, and that is a grade question rather than a dimensions one.` },
       { q: `What fits in a ${x.short} container?`, a: x.fits },
-      { q: `How much does a ${x.short} shipping container cost?`, a: `Guide figures, ex GST: cargo-worthy used from ${aud(x.usedFrom)}, new single-trip from ${aud(x.newFrom)}. Where any individual unit lands inside that comes down to its condition, to what is physically standing in the yard the week you ring, and to which yard it has to be released from. Cartage is worked out per address and quoted alongside the box rather than published, because the access at the far end shifts it as much as the distance does.` },
+      { q: `How much does a ${x.short} shipping container cost?`, a: `${PRICES ? `Guide figures, ex GST: cargo-worthy used from ${aud(x.usedFrom)}, new single-trip from ${aud(x.newFrom)}. Where any individual unit lands inside that` : `It is priced on the grade — new single-trip, cargo-worthy used or as-is — and quoted for the exact unit with delivery to your address, in AUD ex GST. Where any individual ${x.short} lands`} comes down to its condition, to what is physically standing in the yard the week you ring, and to which yard it has to be released from. Cartage is worked out per address and quoted alongside the box rather than published, because the access at the far end shifts it as much as the distance does.` },
       { q: `What does a ${x.short} container need for delivery?`, a: x.access },
       { q: `Can I hire a ${x.short} rather than buy one?`, a: `Yes${x.hire ? `, from ${aud(x.hire)} a week ex GST` : ""}. Hire earns its keep when the container has a finish date on it — a build, a fit-out, a harvest, a rebuild after storm damage. If it is still going to be sitting there in two years, buying is nearly always the cheaper end of the deal by a wide margin. Give us the period and both numbers get run for you.` }
     ];
@@ -972,8 +985,9 @@ function sizePages() {
   <dl class="phead-facts">
     <div><dt>External</dt><dd>${esc(x.specs.ext)}</dd></div>
     <div><dt>Internal volume</dt><dd>${esc(x.specs.cube)}</dd></div>
-    <div><dt>Used from</dt><dd>${aud(x.usedFrom)} ex GST</dd></div>
-    <div><dt>New from</dt><dd>${aud(x.newFrom)} ex GST</dd></div>
+    ${PRICES ? `<div><dt>Used from</dt><dd>${aud(x.usedFrom)} ex GST</dd></div>
+    <div><dt>New from</dt><dd>${aud(x.newFrom)} ex GST</dd></div>` : `<div><dt>Grades</dt><dd>New, cargo-worthy, as-is</dd></div>
+    <div><dt>Delivery</dt><dd>Quoted with the unit</dd></div>`}
   </dl>
 </div></header>
 ${promiseStrip()}
@@ -986,14 +1000,14 @@ ${sec("", `<div class="spec">
     <div style="margin-top:2.4rem">${specTable(x)}</div>
     <div style="margin-top:1.8rem">${asIs()}</div>
   </div>
-  <div class="specside">${priceBox(x)}<p class="fineprint">${esc(P.disclaimer)}</p></div>
+  <div class="specside">${priceBox(x)}<p class="fineprint">${esc(PRICE_DISCLAIMER)}</p></div>
 </div>`)}
 ${gallery(["gal-" + x.slug + "-1", "gal-" + x.slug + "-2", "gal-" + x.slug + "-3"], [`${x.title} — exterior`, `${x.title} — doors and locking bars`, `${x.title} — interior and floor`]) ? sec("sec-wash", secHead("Photos", `${x.short} units we have put on the ground`, "Actual jobs rather than catalogue imagery. Ask and photographs of the specific container you are buying will be sent through on request, before delivery.") + gallery(["gal-" + x.slug + "-1", "gal-" + x.slug + "-2", "gal-" + x.slug + "-3"], [`${x.title} — exterior`, `${x.title} — doors and locking bars`, `${x.title} — interior and floor`])) : ""}
 ${band({ photo: "size-alt-" + x.slug, eyebrow: "Access", h: `What a ${x.short} wants at your end`, p: [x.access, "Three photographs settle it: one taken standing at the street looking in, one along the run itself, and one of the ground the box has to sit on. Send them with the enquiry and you will be told which truck the job wants, and whether the drop is straightforward, before anybody talks money."], cta: ["/delivery/", "Delivery and access"], dark: true, alt: true })}
 ${sec("", secHead("Other lengths", "If this one is not the fit", null) + rangeGrid(others) + `<div style="margin-top:1.6rem">${typeChips()}</div>`)}
 ${sec("sec-wash", secHead("Questions", `The ${x.short}, answered`, null) + qaHtml(faqs))}
 ${ask(`Price a ${x.short} to your address`, `Give us the delivery postcode and a description of the entrance, and the cartage comes back in the same number as the container. ${PROMISE}.`, x.slug)}`;
-    out(x.slug, shell({ t: `${x.title} — Buy Or Hire From ${aud(x.usedFrom)} | ${BRAND}`, d: `${x.title} to buy or hire from ${aud(x.usedFrom)} ex GST. ${x.specs.ext} outside, ${x.specs.cube} inside. New, cargo-worthy and as-is grades, released from the yard closest to you and delivered nationally.`, c: `/${x.slug}/`, schema: g(crumbsLd(crumbs), faqLd(faqs), productLd(x)) }, body));
+    out(x.slug, shell({ t: PRICES ? `${x.title} — Buy Or Hire From ${aud(x.usedFrom)} | ${BRAND}` : `${x.title} For Sale And Hire Australia-Wide | ${BRAND}`, d: `${x.title} to buy or hire${PRICES ? ` from ${aud(x.usedFrom)} ex GST` : ", priced with delivery to your address"}. ${x.specs.ext} outside, ${x.specs.cube} inside. New, cargo-worthy and as-is grades, released from the yard closest to you and delivered nationally.`, c: `/${x.slug}/`, schema: g(crumbsLd(crumbs), faqLd(faqs), productLd(x)) }, body));
   });
 }
 
@@ -1048,7 +1062,7 @@ module.exports = { esc, aud };
    below, purely to keep each file readable. Both halves share this module's
    helpers through the object exported above and the globals assigned here. */
 Object.assign(global, {
-  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, mast, promiseStrip, quoteForm, ask, foot, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
+  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, mast, promiseStrip, quoteForm, ask, foot, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, PRICES, PRICE_DISCLAIMER, PRICE_SUB, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
 });
 
 home();
