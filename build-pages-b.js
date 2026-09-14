@@ -403,7 +403,7 @@ ${sec("", `<div class="narrow">
   <h2>Who else sees it</h2><p>The yard the container is coming out of and the transport operator carrying it, because they need an address and a contact number to do the job at all. It also sits in the email and customer-record software we run the business on. Nobody buys it from us, because none of it is for sale, and it is not passed to anyone for their own advertising.</p>
   <h2>How long it is kept</h2><p>Live enquiries stay while they are live and for a while after, because container jobs have a habit of coming back around months later. Completed sales and hires are held for as long as tax and business-record obligations require them to be.</p>
   <h2>Seeing it, correcting it, deleting it</h2><p>Ring ${esc(S.phone)} or email <a href="mailto:${S.email}">${esc(S.email)}</a> and ask. You will be told what is on file against your name, anything wrong gets fixed, and anything we are not obliged to keep gets deleted.</p>
-  <h2>Cookies</h2><p>This site sets no advertising or profiling cookies of its own. What the browser stores is what the site needs in order to work.</p>
+  <h2>Cookies and advertising measurement</h2><p>We advertise on Google, and the site carries Google's advertising tag so we can see which ads actually produce an enquiry, a phone call or an email. It sets cookies in your browser for that purpose, and it is the only third-party tag on the site. What gets counted is the action — an enquiry was sent, the phone number was tapped — never what you typed. Your name, phone number, email address, message and delivery address are sent to us and to nobody else; they are not passed to Google or to any other advertising system. Beyond that tag, the site sets nothing for advertising or profiling, and it runs no analytics, remarketing or social pixels. Blocking cookies for this site in your browser stops the measurement and does not affect anything you came here to do.</p>
   <h2>Keeping it safe</h2><p>Enquiries travel to us over an encrypted connection and are stored in access-controlled systems. No arrangement is perfect, and if something ever went wrong with information we hold, the people affected would hear it from us.</p>
   <h2>If you are unhappy about any of this</h2><p>Say so on the phone first — we are a small enough outfit that the person answering can usually deal with it there and then. If that does not resolve it, the Office of the Australian Information Commissioner takes privacy complaints.</p>
 </div>`)}`));
@@ -539,6 +539,12 @@ function tail() {
   fs.writeFileSync(path.join(DIST, "robots.txt"),
     TEST ? `User-agent: *\nDisallow: /\n` : `User-agent: *\nAllow: /\nDisallow: /thank-you/\n\nSitemap: ${D}/sitemap.xml\n`);
 
+  const CANONICAL_CASE = pages
+    .map((p) => p.replace(/^\/|\/$/g, ""))
+    .filter(Boolean)
+    .map((slug) => `  RewriteCond %{REQUEST_URI} !^/${slug}/$\n  RewriteRule ^${slug}/?$ /${slug}/ [R=301,L,NC]`)
+    .join("\n");
+
   fs.writeFileSync(path.join(DIST, ".htaccess"), `Options -Indexes
 DirectoryIndex index.html
 ErrorDocument 404 /404.html
@@ -600,6 +606,15 @@ ErrorDocument 404 /404.html
   RewriteRule ^product/([a-z0-9-]*20ft[a-z0-9-]*)/?$ /20ft-shipping-containers/ [R=301,L,NC]
   RewriteRule ^product/([a-z0-9-]*40ft[a-z0-9-]*)/?$ /40ft-shipping-containers/ [R=301,L,NC]
   RewriteRule ^product/[a-z0-9-]+/?$ /shipping-containers/ [R=301,L,NC]
+
+  # Canonical case and trailing slash. The filesystem is case sensitive, so
+  # /Jimboomba 404s while /jimboomba/ is a real page — and capitalised URLs
+  # turn up constantly in ad destinations, printed material and typed guesses.
+  # mod_rewrite cannot lowercase a string without a RewriteMap (server config,
+  # not available in .htaccess), so the rules are generated one per page from
+  # the build's own page list. The RewriteCond stops the already-correct URL
+  # matching its own rule, which would loop.
+${CANONICAL_CASE}
 </IfModule>
 
 <IfModule mod_deflate.c>
@@ -743,6 +758,8 @@ ErrorDocument 404 /404.html
   ];
   const resolveLegacy = (u) => {
     for (const [re, to] of REDIRECTS) if (re.test(u)) return u.replace(re, to);
+    /* mirrors the generated canonical-case block in .htaccess above */
+    if (/[A-Z]/.test(u)) return u.toLowerCase();
     return u;
   };
   const built = new Set(pages.map((x) => x.replace(/\/$/, "") || "/"));

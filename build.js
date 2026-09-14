@@ -102,6 +102,19 @@ const TEST = !!process.env.TEST_BUILD;
 const VARIANT = process.env.VARIANT || "classic";
 const VCSS = { soft: ["v-soft.css"], compact: ["v-soft.css", "v-compact.css"], cinema: ["v-soft.css", "v-cinema.css"], hybrid: ["v-soft.css", "v-compact.css", "v-hybrid.css"], raw: [], classic: ["v-soft.css", "v-classic.css"], wide: ["v-soft.css", "v-compact.css", "v-hybrid.css", "v-wide.css"] }[VARIANT] || [];
 const D = S.domain;
+
+/* Google Ads. The IDs live in site.json so this engine stays brand-agnostic:
+   a brand with no "ads" block simply ships no tag. Conversion actions are
+   NEVER created from code — these three already exist in the Koala account
+   (661-693-9117) and the labels were read off it on 14/09/2026:
+     Form Submissions      _PQOCJi4nNgZEIzks-0o
+     Phone Number Clicks   7qhNCJK4nNgZEIzks-0o
+     Email Clicks          9ybfCJW4nNgZEIzks-0o
+   The tag is suppressed on TEST_BUILD so staging can never fire a real
+   conversion into the live account. */
+const ADS = (!TEST && S.ads && S.ads.id) ? S.ads : null;
+const adsTag = () => ADS ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${ADS.id}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ADS.id}');</script>` : "";
 const pages = [];
 
 const BRAND = S.name;
@@ -309,6 +322,7 @@ const markLight = LOGO_FILE("logo-light.svg") ? `<img src="/img/logo-light.svg" 
 function head(t, d, canon, schema, noindex) {
   return `<!DOCTYPE html><html lang="en-AU"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+${adsTag()}
 <title>${esc(t)}</title>
 <meta name="description" content="${esc(d)}">
 <link rel="canonical" href="${D}${canon}">
@@ -635,7 +649,7 @@ function foot(hasQuote) {
   <div class="foot-base">© ${new Date().getFullYear()} ${esc(BRAND)} — shipping container sales, hire and delivery ${esc(SERVICE_AREA)}. ${PRICES ? "Prices shown are guide prices in AUD and exclude GST; delivery is quoted with the container." : "Every price is quoted for the exact unit with delivery to your address, in AUD ex GST."}</div>
 </div></footer>
 <div class="actionbar"><a class="btn btn-dark" href="${S.phoneHref}">Call ${esc(S.phone)}</a><a class="btn btn-primary" href="${hasQuote ? "#quote" : "/contact/"}">Get a price</a></div>
-<script id="site-config" type="application/json">${JSON.stringify({ endpoint: S.leadEndpoint, brand: S.leadBrand, domain: S.leadSource, phone: S.phone, phoneHref: S.phoneHref, email: S.email, promise: PROMISE })}</script>
+<script id="site-config" type="application/json">${JSON.stringify({ endpoint: S.leadEndpoint, brand: S.leadBrand, domain: S.leadSource, phone: S.phone, phoneHref: S.phoneHref, email: S.email, promise: PROMISE, ads: ADS })}</script>
 <script src="/js/app.js?v=${JS_V}" defer></script></body></html>`;
 }
 
