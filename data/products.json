@@ -1,26 +1,26 @@
 {
  "showPrices": false,
- "priceHiddenNote": "Prices are quoted with the container and the delivery together, so the figure you get is the whole cost to your address rather than a headline that grows later. Ring 1300 467 776 or send the form and you will have a price for the exact unit within one business day.",
+ "priceHiddenNote": "Prices are quoted with the container and the delivery together, so the figure you get is the whole cost to your address rather than a headline that grows later. Ring 1300 467 776 or send the form and you will have a price for the exact unit.",
  "disclaimer": "Every figure on this page is a starting price in Australian dollars, before GST, for the grade named beside it. Where it finally lands depends on the individual unit, what is physically standing in stock that week, and which yard the container has to be released from — Cornubia, or one of the depots at Gympie, Rockhampton, Mackay, Townsville, Cairns, Grafton, Darwin or Fremantle. Nothing here becomes a quote until we have worked out the run to your address.",
- "asIsNote": "Grade is what decides whether the box keeps water out. Anything sold as cargo-worthy is inspected wind and watertight before release, and new single-trip units — one loaded voyage, unmarked paint, rubbers that have barely weathered — are sealed as well. As-is is the cheap end and carries no watertight claim at all: expect a previous repair, a floor section that has gone soft, or a gasket that no longer pulls up hard against the frame. We list those faults and photograph them on request, before delivery, so nothing turns up as a surprise when the truck does. If what goes inside has to stay dry, start at cargo-worthy.",
+ "asIsNote": "Grade is what decides whether the box keeps water out. Anything sold as cargo-worthy is inspected wind and watertight before release — for storage use, which is separate from the CSC certification an export job needs — and new single-trip units, one loaded voyage with rubbers that have barely weathered, are sealed as well. As-is is the cheap end and carries no watertight claim at all: expect a previous repair, a floor section that has gone soft, or a gasket that no longer pulls up hard against the frame. We list those faults and photograph them on request, before delivery, so nothing turns up as a surprise when the truck does. If what goes inside has to stay dry, start at cargo-worthy.",
  "gradeNote": "Three grades cover nearly everything we move. The money between the top and the bottom of that range is usually larger than the gap between two yards quoting on the same grade, so settle the grade first and treat it as the only fair basis for comparing anybody's price.",
  "grades": [
   {
    "key": "new",
    "name": "New (single-trip)",
-   "blurb": "Manufactured, packed once, sailed once, then stripped out at this end. Walls still true, floor unmarked, paint the original factory colour, rubbers that have seen almost no weather. Where the container will be on show — a shopfront, a display, the front of an acreage block — start here.",
+   "blurb": "Manufactured, packed once, sailed once, then stripped out at this end. Walls true, floor clean, factory paint, rubbers that have seen almost no weather. Appearance varies from batch to batch — colour, markings and the odd handling scuff — so ask what is on the ground. Where the container will be on show or converted, start here.",
    "watertight": true
   },
   {
    "key": "cargo-worthy",
    "name": "Cargo-worthy used",
-   "blurb": "Still certified fit to carry freight at sea, which is the entire point of the grade. Scuffs, patches of surface rust and faded shipping-line livery come with it. Inspected wind and watertight before release. This is what most buyers should be looking at, and it is the bulk of what leaves the Cornubia yard.",
+   "blurb": "A used unit that is structurally sound, with a solid floor and doors that seal. Scuffs, patches of surface rust and faded shipping-line livery come with it. Inspected wind and watertight before release, for storage use — current CSC certification for shipping is a separate matter and is checked on the specific unit if you need it. This is what most buyers should be looking at, and it is the bulk of what leaves the Cornubia yard.",
    "watertight": true
   },
   {
    "key": "as-is",
    "name": "As-is",
-   "blurb": "Finished with sea service and priced on its faults. Cheapest by a distance, and perfectly serviceable for plenty of jobs — a locked store under an existing roof, a bund, the shell of a site office, the base of a build. Not sold watertight. The faults on the individual unit get described plainly and photographed on request before it goes anywhere near a truck.",
+   "blurb": "Finished with sea service and priced on its faults. Cheapest by a distance, and perfectly serviceable for plenty of jobs — a locked store under an existing roof, the shell of a site office, the base of a build. Not sold watertight, and not a sealed vessel either. The faults on the individual unit get described plainly and photographed on request before it goes anywhere near a truck.",
    "watertight": false
   }
  ],
@@ -30,7 +30,7 @@
    "name": "10ft Containers",
    "short": "10ft",
    "title": "10ft Shipping Containers",
-   "lead": "The size that gets a phone call when the block is pinched and the fence sits closer than anybody would like. A ten is not usually a shortened twenty, whatever the assumption — most leave the factory at that length or are built short deliberately, and that is why a cubic metre inside one costs more than a cubic metre in the box twice its length.",
+   "lead": "The size that gets a phone call when the block is pinched and the fence sits closer than anybody would like. A ten is not usually a shortened twenty, whatever the assumption — most leave the factory at that length or are built short deliberately, which is why it is rarely the cheap option per cubic metre.",
    "usedFrom": 4350,
    "newFrom": 6400,
    "hire": 22,
@@ -46,7 +46,7 @@
    "why": [
     "Slips past the side of an ordinary suburban home where a twenty has no chance. On a standard side passage that fact alone usually settles the argument.",
     "Comes off an ordinary tilt-tray and wants about half the approach a twenty needs, so a lot of sites that would otherwise fail become workable.",
-    "Works out dearer per cubic metre than a twenty every single time. Where there is room for the longer box, the longer box is nearly always the smarter buy, and you will hear that from us on the phone instead of an easy yes."
+    "Usually works out dearer per cubic metre than a twenty, because supply is thin and the build is not simply a cut-down box. Where there is room for the longer box, ask for both figures before deciding, and you will hear which one suits from us rather than an easy yes."
    ],
    "watch": "Ten-footers are the tightest supply of any size in the country. Used ones can turn over inside a week, so a figure somebody gave you last month may not hold today. Ring and ask what is physically standing at Cornubia, or at whichever depot is nearest you.",
    "access": "A ten lands off a standard tilt-tray and wants roughly half the approach a twenty does — around 12 metres of straight run, 3 metres clear where it pinches, and 4.5 metres overhead while the tray tips. That is precisely why the size exists. Tight suburban blocks, pinched side passages and awkward courtyards in the inner city become workable at this length and stay impossible at anything longer."
@@ -56,7 +56,7 @@
    "name": "20ft Containers",
    "short": "20ft",
    "title": "20ft Shipping Containers",
-   "lead": "The default, and usually the correct default. The whole industry is built around this length — the deepest stock, the widest choice of grade, the lowest cost per cubic metre, and no drama at all getting a truck underneath one.",
+   "lead": "The default, and usually the correct default. The whole industry is built around this length — the deepest stock, the widest choice of grade, and no drama at all getting a truck underneath one.",
    "usedFrom": 2200,
    "newFrom": 3300,
    "hire": 27,
@@ -70,11 +70,11 @@
    },
    "fits": "The contents of a three-bedroom house, packed with some thought. Or a complete trade fit-out — racking along one wall, a bench across the end, and enough floor left to walk in and pull one thing out without emptying the front half first.",
    "why": [
-    "Week in and week out the cheapest container in the country measured per cubic metre. Supply runs deep enough that you get to choose a grade rather than accept whatever has turned up.",
+    "The deepest supply of any size, week in and week out, so you get to choose a grade rather than accept whatever has turned up. What it costs depends on the grade and the delivery run, and it is quoted for the unit.",
     "Goes on and off a standard tilt-tray. Wants around 20 metres of straight approach and 3.5 metres of width where the drive narrows, which most suburban and rural blocks can manage.",
     "Sits inside most council rules for a temporary or secondary structure without argument. Ring your council anyway — the requirements genuinely vary from one shire to the next."
    ],
-   "watch": "The regret we hear most often comes from somebody who bought a twenty and wanted a forty. A pair of twenties costs noticeably more than one forty and arrives on two separate trucks. If there is any prospect of the job growing, get a price on the forty before you decide.",
+   "watch": "The regret we hear most often comes from somebody who bought a twenty and wanted a forty. A pair of twenties generally costs more than one forty and arrives on two separate trucks. If there is any prospect of the job growing, get a price on the forty before you decide — on current quotes a 40ft often costs only a little more than a 20ft for about twice the volume, though it always comes down to the grade, the unit and the run.",
    "access": "Around 20 metres of straight approach, 3.5 metres of width where the drive narrows, and 4.5 metres of clearance above while the tray is raised. Most blocks, suburban or rural, can find that much, which is part of why this length is the standard answer. What catches people is getting back out again: a long drive with no turning circle means the truck reverses the full length of it to the road."
   },
   {
@@ -82,11 +82,11 @@
    "name": "40ft Containers",
    "short": "40ft",
    "title": "40ft Shipping Containers",
-   "lead": "Double the length, near enough double the room, and nowhere near double the money — a used forty is regularly the best value per cubic metre standing in the yard. What decides it is never the container. It is whether a truck can get in, and whether the ground will let the thing lie flat.",
+   "lead": "Double the length and near enough double the room. On current quotes a used forty often costs only a little more than a used twenty, so where the site takes it, it is usually the most room per dollar — but that depends on the grade, the unit and the delivery run, and it is never the container that decides. It is whether a truck can get in, and whether the ground will let the thing lie flat.",
    "usedFrom": 2600,
    "newFrom": 5500,
    "hire": 42,
-   "pickIf": "You have the space, the approach is genuinely open, and the aim is the largest amount of storage per dollar spent that anybody sells.",
+   "pickIf": "You have the space, the approach is genuinely open, and you want the most storage per dollar the site will allow.",
    "specs": {
     "ext": "12.19m × 2.44m × 2.59m",
     "int": "12.03m × 2.35m × 2.39m",
@@ -96,12 +96,12 @@
    },
    "fits": "A big house plus the contents of the shed, or a proper workshop with an aisle down the centre to work in. Frequently bought two at a time and stood parallel, with a roof spanning the gap to make a covered bay.",
    "why": [
-    "Best value per cubic metre we sell in most weeks. A used forty is often only a few hundred dollars above a used twenty for twice the volume.",
+    "Often only a little more than a used twenty for about twice the volume on current quotes. Grade and the delivery run move that, so ask for both figures rather than assuming.",
     "One truck instead of two, one lot of cartage instead of two, one prepared footing instead of two.",
     "Mates and stacks neatly with a second forty, which is what makes the twin-container covered bay such a common build."
    ],
-   "watch": "Everything hinges on access at this length. Reckon on 30 metres of straight approach, 4 metres of width at the tightest point, nothing hanging over any of it, and ground firm enough that four corner castings will not sink into it. A side loader manages tighter ground than a tilt-tray, though it sets the container down off the driver's side of the trailer, so the direction of approach matters. Send three photos through and we will give you an answer before anybody prices it.",
-   "access": "Reckon on 30 metres of straight approach, 4 metres of width at the tightest point, and nothing overhanging any part of the run. A side loader copes with a good deal less room than a tilt-tray, but it lays the container off the driver's side of the trailer — so the direction the truck can come in from dictates which side of the block the box can end up on. Settle that well before delivery day."
+   "watch": "Everything hinges on access at this length. Reckon on 30 metres of straight approach, 4 metres of width at the tightest point, nothing hanging over any of it, and ground firm enough that four corner castings will not sink into it. A side loader manages tighter ground than a tilt-tray; on most side loaders the container comes off the driver's side of the trailer, so the direction of approach matters and the carrier confirms it on the day. Send three photos through and we will give you an answer before anybody prices it.",
+   "access": "Reckon on 30 metres of straight approach, 4 metres of width at the tightest point, and nothing overhanging any part of the run. A side loader copes with a good deal less room than a tilt-tray, but on most side loaders the container comes off the driver's side of the trailer — so the direction the truck can come in from tends to dictate which side of the block the box can end up on. The site and the carrier decide which truck it is; settle that well before delivery day."
   }
  ],
  "types": [
@@ -134,13 +134,13 @@
     "300mm more clear height inside, with the length and width unchanged",
     "Offered in 20ft and 40ft, new single-trip or cargo-worthy used",
     "The one to buy if the container is being lined, converted or fitted with a roller door",
-    "Mates and stacks with other high cubes — never mix heights within a single stack",
+    "Designed to mate and stack with other high cubes; mixing heights in one stack is generally avoided and needs a competent assessment of the units involved",
     "Black and yellow hatching along the top rail makes them easy to pick out on site"
    ],
    "detail": [
     "The argument for a high cube is entirely about what the extra 300mm buys. Enough room to line walls and ceiling and still stand upright underneath. Clearance for a roller door a forklift can drive under with the tynes up. Depth enough to hang a mezzanine across one end. Attempt any of those inside a standard container and every one of them ends up a compromise.",
     "The costs are genuine but modest. A high cube runs a little dearer than the standard version of the same length, and it stands 300mm taller on the trailer — which matters under a carport, beneath a branch, or through a gateway with a beam across the top. Measure the height at every point the truck has to pass, not simply the width.",
-    "One thing worth settling before buying a pair: do not stack a high cube on a standard. The corner castings will line up but the loads do not run where the design intends them to, and the arrangement is unsafe. If stacking is even a possibility later on, buy both at the same height now."
+    "One thing worth settling before buying a pair: mixing heights in a stack is generally avoided. The corner castings line up, but whether a particular high cube can safely sit on a particular standard box depends on the units, the base and the loads, and it wants a competent assessment rather than an assumption. If stacking is even a possibility later on, buy both at the same height now."
    ]
   },
   {
@@ -207,27 +207,27 @@
    "name": "New (Single-Trip)",
    "title": "New Shipping Containers",
    "lead": "A new container has been built, loaded once, carried one voyage and opened up at this end. That single trip is why the trade says one-tripper rather than new, and it is the only honest description — a container that had genuinely never carried anything would still be sitting outside the factory.",
-   "metaDesc": "New single-trip shipping containers for sale — unmarked paint, true walls, clean floors, checked wind and watertight. 10ft, 20ft and 40ft Australia-wide.",
+   "metaDesc": "New single-trip shipping containers for sale — true walls, clean floors, factory paint, checked wind and watertight. 10ft, 20ft and 40ft Australia-wide.",
    "points": [
-    "One loaded voyage, then straight into the yard — walls true, floor clean, paint unfaded",
+    "One loaded voyage, then straight into the yard — walls true, floor clean, paint barely weathered",
     "Checked wind and watertight before release, the same as cargo-worthy stock",
     "Available in 10ft, 20ft and 40ft, standard height or high cube",
     "Usually offered in the factory colour of the run, so ask what is on the ground before settling on a shade",
     "The right starting point where the container will be converted, lined, or seen from the street"
    ],
    "detail": [
-    "What you are paying for is the condition of the steel and the rubber. A one-trip unit has square corners, doors that swing without persuasion, and gaskets that have not spent a decade baking in the sun. On any container it is the doors and the seals that go first, so starting from new buys years before either becomes a job you have to think about.",
+    "What you are paying for is the condition of the steel and the rubber. A one-trip unit has square corners, doors that swing without persuasion, and gaskets that have not spent a decade baking in the sun. On any container it is the doors and the seals that go first, so starting from new buys time before either becomes a job you have to think about. Like any steel box left outside it will still weather, and appearance varies from batch to batch.",
     "It also matters where the container will be looked at. A cargo-worthy unit wears the marks of its working life and most buyers do not mind at all. Put one at the front of an acreage block, behind a shopfront, or on a site a client walks past every day, and suddenly the paint matters. New is the answer when appearance is part of the brief.",
     "For conversions there is a further reason. Cutting a doorway or a window into a container that already carries patched repairs, filler or a wavy side wall makes the fabricator's job harder and the finish worse. Anybody doing a fit-out will thank you for handing them a straight box to start from."
    ],
-   "bestFor": "Conversions and fit-outs, display and customer-facing sites, long-term storage of anything that must stay dry, and buyers who would rather not think about doors or seals again for a decade.",
+   "bestFor": "Conversions and fit-outs, display and customer-facing sites, long-term storage of anything that must stay dry, and buyers who want the longest run before doors or seals need attention.",
    "watch": "Single-trip stock arrives in batches and the colour varies from one run to the next. If you are matching an existing container or want a particular shade, ask what is actually available before you settle on it, and be ready to wait for the next arrival."
   },
   {
    "slug": "used-shipping-containers",
    "name": "Cargo-Worthy Used",
    "title": "Used Shipping Containers",
-   "lead": "Used covers a lot of ground, which is why it gets graded. Cargo-worthy is the line worth knowing: a container still certified fit to carry freight at sea, inspected and confirmed wind and watertight before it goes on a truck. Below that sits as-is, which is a different proposition entirely and priced accordingly.",
+   "lead": "Used covers a lot of ground, which is why it gets graded. Cargo-worthy is the line worth knowing: a structurally sound container with a solid floor and sealing doors, inspected and confirmed wind and watertight before it goes on a truck — for storage use. If you need to ship in it, current CSC certification is a separate check on the specific unit. Below cargo-worthy sits as-is, which is a different proposition entirely and priced accordingly.",
    "metaDesc": "Used shipping containers for sale — cargo-worthy grade inspected wind and watertight. As-is units cheaper and not sold watertight. 10ft, 20ft and 40ft.",
    "points": [
     "Cargo-worthy units inspected wind and watertight before they leave",
@@ -239,7 +239,7 @@
    "detail": [
     "Most people should be buying at this grade. A cargo-worthy twenty does the same storage job as a new one, keeps the weather off just as well, and leaves a substantial sum in your pocket. The trade-off is cosmetic: expect faded livery, square patches where a shipping line painted over its own logo, dents through the side walls, and a floor that has obviously carried things.",
     "Two things decide whether a used container is any good, and they are the floor and the doors. A floor that has carried something wet for years goes soft between the cross-members and you can feel it underfoot before you can see it. Gaskets perish, and once one has taken a set it will not pull up against the frame however hard the bars are cranked. Both get checked before a unit is released and both get photographed.",
-    "As-is deserves saying plainly. It has finished its working life at sea, it is priced on its faults, it is not sold watertight, and a given unit may carry a patched repair, a soft section of floor, or a seal that no longer seats. For a lock-up under an existing roof, a bund, a site shell or the base of a build it is often exactly the right buy. For anything that has to stay dry, it is not."
+    "As-is deserves saying plainly. It has finished its working life at sea, it is priced on its faults, it is not sold watertight, and a given unit may carry a patched repair, a soft section of floor, or a seal that no longer seats. For a lock-up under an existing roof, a site shell or the base of a build it is often exactly the right buy. For anything that has to stay dry, it is not."
    ],
    "bestFor": "General storage, site security, farm and trade use, hire fleets, and anyone who wants the container to work rather than to look new.",
    "watch": "Two cargo-worthy containers standing side by side can be a long way apart in condition and both still be honestly graded. Ask for photos of the specific unit on request before delivery rather than assuming the grade alone tells you everything about it."
