@@ -33,9 +33,20 @@
   var burger = document.querySelector(".burger");
   var menu = document.querySelector(".menu");
   if (burger && menu) {
-    burger.addEventListener("click", function () {
-      var open = menu.classList.toggle("show");
+    if (!menu.id) menu.id = "site-menu";
+    burger.setAttribute("aria-controls", menu.id);
+    function setMenu(open) {
+      menu.classList.toggle("show", open);
       burger.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    burger.addEventListener("click", function () { setMenu(!menu.classList.contains("show")); });
+    // Escape closes the menu and returns focus to the button.
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && menu.classList.contains("show")) { setMenu(false); burger.focus(); }
+    });
+    // Mark the current page in the nav for assistive tech and the hover style.
+    menu.querySelectorAll("a").forEach(function (a) {
+      if (a.getAttribute("href") === location.pathname) a.setAttribute("aria-current", "page");
     });
   }
 
@@ -51,22 +62,20 @@
     return o;
   }
 
-  /* Size dropdown values map to real specifications only. A value that is not a
-     size — "unsure", a hire option, a type — must NEVER be sent as a literal
-     size, because the CRM treats size as a genuine specification and a
-     fabricated "20ft" against an unsure enquiry produces a wrong quote. Every
-     dropdown on this site ends in a "Not sure" option, because not knowing
-     which size or grade you need is the commonest reason a container buyer
-     abandons a form. That option has to arrive at the CRM as empty, not as a
-     guess. */
-  var SIZE_MAP = {
-    "10ft": "10ft",
-    "20ft": "20ft",
-    "40ft": "40ft",
-    "high-cube": "High Cube",
-    "side-opening": "Side Opening",
-    "dg": "Dangerous Goods",
-    "unsure": ""
+  /* ---- the enquiry form ---------------------------------------------------
+     Rebuilt 14/09/2026. One shared component (build.js quoteForm) on every
+     page; this handler owns behaviour, validation and submission.
+
+     The lead-intake contract: `size` is normalised to 10ft/20ft/40ft and
+     anything else is stored as null, so ONLY a real length is sent in that
+     field. Configuration, quantity, duration, intent, grade, the written-quote
+     flag and the "just a question" flag travel in the message text, which
+     the sales desk reads. Nothing is ever sent as a guess: "Not sure" arrives
+     as exactly that. */
+  var SIZE_MAP = { "10ft": "10ft", "20ft": "20ft", "40ft": "40ft" };
+  var CONFIG_LABEL = {
+    "gp": "General purpose", "high-cube": "High cube", "side-opening": "Side opening",
+    "dg": "Dangerous goods", "reefer": "Refrigerated", "unsure": "Not sure which type"
   };
   var GRADE_LABEL = {
     "cargo-worthy": "Cargo-worthy (checked wind and watertight)",
@@ -74,41 +83,163 @@
     "as-is": "As-is (cheapest, not sold watertight)",
     "unsure": "Not sure which grade"
   };
-  /* Timeframe leads with "Today" deliberately — it qualifies urgency at no cost
-     to the person filling the form and it tells the sales desk who to ring
-     first. */
   var WHEN_LABEL = {
-    "today": "Wants it TODAY",
-    "this-week": "This week",
+    "urgent": "URGENT - this week",
     "next-week": "Next week",
-    "next-month": "Next month",
+    "this-month": "Within a month",
+    "later": "Later",
     "unsure": "No fixed date"
   };
+  var DURATION_LABEL = {
+    "under-1-month": "under a month", "1-3-months": "1-3 months", "3-6-months": "3-6 months",
+    "6-12-months": "6-12 months", "over-1-year": "over a year", "": "not sure"
+  };
+  var INTENT_LABEL = { "buy": "BUY", "hire": "HIRE", "unsure": "NOT SURE (buy or hire)", "question": "QUESTION ONLY - not an order" };
 
-  // Quote forms
+  function fieldWrap(el) { return el.closest(".qgrid > div, .qstage, .qfield") || el.parentNode; }
+
+  function setup(form) {
+    var intents = form.querySelectorAll('input[name="intent"]');
+    var spec = form.querySelector("[data-spec]");
+    var hireOnly = form.querySelectorAll("[data-hire-only]");
+    var grade = form.querySelector('select[name="grade"]');
+    var asIs = grade ? grade.querySelector('option[data-buy-only]') : null;
+    var written = form.querySelector('input[name="written"]');
+    var email = form.querySelector('input[name="email"]');
+    var phone = form.querySelector('input[name="phone"]');
+    var msg = form.querySelector('textarea[name="message"]');
+    var stepNo = form.querySelector("[data-step-contact]");
+
+    function intent() {
+      var c = form.querySelector('input[name="intent"]:checked');
+      return c ? c.value : "buy";
+    }
+    function apply() {
+      var i = intent();
+      var q = i === "question";
+      if (spec) {
+        spec.hidden = q;
+        spec.querySelectorAll("select, input").forEach(function (el) { el.disabled = q; });
+      }
+      if (stepNo) stepNo.textContent = q ? "2." : "3.";
+      hireOnly.forEach(function (el) {
+        var on = i === "hire";
+        el.hidden = !on;
+        el.querySelectorAll("select, input").forEach(function (c) { c.disabled = !on || q; });
+      });
+      if (asIs) {
+        // Hire never offers as-is. If it was selected, fall back to cargo-worthy.
+        asIs.disabled = i === "hire";
+        asIs.hidden = i === "hire";
+        if (i === "hire" && grade.value === "as-is") grade.value = "cargo-worthy";
+      }
+      if (msg) {
+        var lbl = form.querySelector('label[for="' + msg.id + '"]');
+        if (lbl) {
+          var o = lbl.querySelector(".optional");
+          if (q) { if (o) o.hidden = true; msg.setAttribute("aria-required", "true"); }
+          else { if (o) o.hidden = false; msg.removeAttribute("aria-required"); }
+        }
+      }
+      if (email && written) {
+        var lbl2 = form.querySelector('label[for="' + email.id + '"]');
+        if (lbl2) lbl2.innerHTML = written.checked ? 'Email <abbr class="req" title="required">*</abbr>' : "Email";
+        if (written.checked) email.setAttribute("aria-required", "true"); else email.removeAttribute("aria-required");
+      }
+    }
+    intents.forEach(function (r) { r.addEventListener("change", apply); });
+    if (written) written.addEventListener("change", apply);
+    apply();
+    return { intent: intent };
+  }
+
+  function clearErrors(form) {
+    var box = form.querySelector(".q-errors");
+    if (box) { box.hidden = true; box.innerHTML = ""; }
+    form.querySelectorAll("[aria-invalid]").forEach(function (el) {
+      el.removeAttribute("aria-invalid");
+      var hint = document.getElementById(el.id + "-err");
+      if (hint) hint.parentNode.removeChild(hint);
+      el.removeAttribute("aria-describedby");
+    });
+  }
+  function flag(el, text) {
+    el.setAttribute("aria-invalid", "true");
+    var hint = document.createElement("p");
+    hint.className = "q-err";
+    hint.id = el.id + "-err";
+    hint.textContent = text;
+    el.parentNode.insertBefore(hint, el.nextSibling);
+    el.setAttribute("aria-describedby", hint.id);
+  }
+  function validate(form, ctx) {
+    clearErrors(form);
+    var errs = [];
+    var f = {};
+    new FormData(form).forEach(function (v, k) { f[k] = String(v).trim(); });
+    var q = ctx.intent() === "question";
+    var el;
+    if (!f.suburb) { el = form.querySelector('[name="suburb"]'); errs.push([el, "Tell us the delivery suburb or postcode."]); }
+    if (!f.name) { el = form.querySelector('[name="name"]'); errs.push([el, "We need a name to reply to."]); }
+    var hasPhone = /\d{6,}/.test((f.phone || "").replace(/\D/g, ""));
+    var hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email || "");
+    if (f.email && !hasEmail) { el = form.querySelector('[name="email"]'); errs.push([el, "That email address doesn't look right."]); }
+    if (f.phone && !hasPhone) { el = form.querySelector('[name="phone"]'); errs.push([el, "That phone number doesn't look right."]); }
+    if (!f.phone && !f.email) { el = form.querySelector('[name="phone"]'); errs.push([el, "Give us a phone number or an email so we can get back to you."]); }
+    if (f.written === "yes" && !hasEmail) { el = form.querySelector('[name="email"]'); errs.push([el, "A written quote needs an email address to go to."]); }
+    if (q && !f.message) { el = form.querySelector('[name="message"]'); errs.push([el, "Type your question in the box."]); }
+    if (f.quantity !== undefined && f.quantity !== "" && !(parseInt(f.quantity, 10) >= 1)) { el = form.querySelector('[name="quantity"]'); errs.push([el, "How many containers? One or more."]); }
+    if (errs.length) {
+      var box = form.querySelector(".q-errors");
+      var seen = {};
+      errs.forEach(function (e) { if (e[0] && !seen[e[0].id]) { seen[e[0].id] = 1; flag(e[0], e[1]); } });
+      if (box) {
+        box.innerHTML = "<strong>Please check " + (errs.length === 1 ? "one thing" : errs.length + " things") + " before sending:</strong><ul>" +
+          errs.map(function (e) { return "<li>" + e[1] + "</li>"; }).join("") + "</ul>";
+        box.hidden = false;
+      }
+      var first = errs[0][0];
+      if (first) { try { first.focus({ preventScroll: false }); } catch (e2) { first.focus(); } }
+      return null;
+    }
+    return f;
+  }
+
   document.querySelectorAll("form[data-quote]").forEach(function (form) {
+    var ctx = setup(form);
+    var busy = false;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+      if (busy) return;                                   // block double-submit
       var trap = form.querySelector('input[name="business_url"]');
-      if (trap && trap.value) return; // honeypot
+      if (trap && trap.value) return;                     // honeypot
 
-      var f = {};
-      new FormData(form).forEach(function (v, k) { f[k] = String(v); });
-      var parts = (f.name || "").trim().split(/\s+/);
+      var f = validate(form, ctx);
+      if (!f) return;
+
+      var parts = (f.name || "").split(/\s+/);
       var u = utm();
-      var ctx = [];
-      if (f.intent) ctx.push("Wants to: " + f.intent.toUpperCase());
-      if (f.when && WHEN_LABEL[f.when]) ctx.push("When: " + WHEN_LABEL[f.when]);
-      if (f.grade && GRADE_LABEL[f.grade]) ctx.push("Grade: " + GRADE_LABEL[f.grade]);
-      ctx.push("Page: " + location.pathname);
-      if (u.utm_source) ctx.push("Source: " + u.utm_source + (u.utm_campaign ? " / " + u.utm_campaign : ""));
-      if (u.gclid) ctx.push("Google Ads click");
+      var i = ctx.intent();
+      var q = i === "question";
+      var ctxLines = [];
+      ctxLines.push("Wants to: " + (INTENT_LABEL[i] || i.toUpperCase()));
+      if (!q) {
+        if (f.size) ctxLines.push("Length: " + (SIZE_MAP[f.size] || "not sure"));
+        if (f.config) ctxLines.push("Type: " + (CONFIG_LABEL[f.config] || f.config));
+        if (f.grade) ctxLines.push("Grade: " + (GRADE_LABEL[f.grade] || f.grade));
+        if (f.quantity) ctxLines.push("Qty: " + f.quantity);
+        if (i === "hire") ctxLines.push("Duration: " + (DURATION_LABEL[f.duration || ""] || f.duration));
+        if (f.when) ctxLines.push("When: " + (WHEN_LABEL[f.when] || f.when));
+      }
+      if (f.written === "yes") ctxLines.push("Wants the quote IN WRITING (email)");
+      ctxLines.push("Page: " + location.pathname);
+      if (u.utm_source) ctxLines.push("Source: " + u.utm_source + (u.utm_campaign ? " / " + u.utm_campaign : ""));
+      if (u.gclid) ctxLines.push("Google Ads click");
 
       /* The location field accepts a suburb OR a postcode. Send the raw string
          as the suburb, and only populate postcode when the value really is a
-         four digit number. Sending suburb text into the postcode column fills
-         it with words and breaks freight lookups. */
-      var loc = (f.suburb || "").trim();
+         four digit number. */
+      var loc = f.suburb || "";
       var isPostcode = /^\d{4}$/.test(loc);
 
       var payload = {
@@ -121,9 +252,16 @@
         email: f.email || null,
         suburb: loc || null,
         postcode: isPostcode ? loc : null,
-        size: SIZE_MAP.hasOwnProperty(f.size) ? SIZE_MAP[f.size] : (f.size || ""),
-        message: (f.message ? f.message + "\n\n" : "") + "— " + ctx.join(" | "),
-        intent: f.intent || null,
+        size: (!q && SIZE_MAP[f.size]) ? SIZE_MAP[f.size] : "",
+        message: (f.message ? f.message + "\n\n" : "") + "— " + ctxLines.join(" | "),
+        intent: i,
+        configuration: q ? null : (f.config || null),
+        grade: q ? null : (f.grade || null),
+        quantity: q ? null : (parseInt(f.quantity, 10) || 1),
+        duration: (i === "hire" && f.duration) ? f.duration : null,
+        when: q ? null : (f.when || null),
+        written_quote: f.written === "yes",
+        question_only: q,
         source_page: location.pathname,
         page_title: document.title,
         submitted_at: new Date().toISOString(),
@@ -133,26 +271,43 @@
 
       var btn = form.querySelector('button[type="submit"]');
       var was = btn ? btn.textContent : "";
+      busy = true;
+      form.setAttribute("aria-busy", "true");
       if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
 
+      function done() {
+        busy = false;
+        form.removeAttribute("aria-busy");
+        if (btn) { btn.disabled = false; btn.textContent = was; }
+      }
+      /* Success ONLY after the server has accepted the lead. */
       function ok() {
         var d = document.createElement("div");
         d.className = "q-ok";
+        d.setAttribute("role", "status");
+        d.setAttribute("tabindex", "-1");
         d.innerHTML = "<strong>Got it — that's with us.</strong> " +
           (PROMISE ? PROMISE + ". " : "") +
           "Can't wait? Ring <a href='" + PHONE_HREF + "'>" + PHONE + "</a>.";
         form.parentNode.replaceChild(d, form);
-        if (window.gtag) { try { window.gtag("event", "generate_lead", { form_id: form.id || "quote" }); } catch (e) {} }
+        try { d.focus(); } catch (e2) {}
+        /* Conversion counts on ACCEPTED submit only, with no personal data as a
+           parameter. gtag is only called if some tag has defined it; this site
+           loads none of its own. */
+        if (window.gtag) { try { window.gtag("event", "generate_lead", { form_location: location.pathname }); } catch (e3) {} }
         if (location.pathname !== "/thank-you/") setTimeout(function () { location.href = "/thank-you/"; }, 900);
       }
-      /* The failure path shows a real failure. Never fake a success here: a lead
-         that silently vanished is worse than one the customer knows to re-send. */
+      /* The failure path shows a real failure and keeps every typed value.
+         Never fake a success: a lead that silently vanished is worse than one
+         the customer knows to re-send. */
       function bad() {
-        if (btn) { btn.disabled = false; btn.textContent = was; }
+        done();
         var d = form.querySelector(".q-bad") || document.createElement("div");
         d.className = "q-bad";
-        d.innerHTML = "That didn't send — sorry. Ring <a href='" + PHONE_HREF + "'>" + PHONE + "</a> or email <a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>.";
+        d.setAttribute("role", "alert");
+        d.innerHTML = "That didn't send — sorry. Your details are still in the form, so try again in a moment, or ring <a href='" + PHONE_HREF + "'>" + PHONE + "</a> or email <a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>.";
         form.insertBefore(d, form.firstChild);
+        try { d.scrollIntoView({ block: "nearest" }); } catch (e4) {}
       }
 
       if (!CONFIG.endpoint || !CONFIG.brand) { bad(); return; }
@@ -161,10 +316,42 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-      }).then(function (r) { r.ok ? ok() : bad(); }).catch(bad);
+      }).then(function (r) {
+        if (!r.ok) { bad(); return; }
+        return r.json().then(function (j) {
+          if (j && j.success === false) bad(); else ok();
+        }, function () { ok(); });
+      }).catch(bad);
     });
   });
 
+  /* "#quote" links: the sticky header would otherwise hide the top of the
+     form (CSS scroll-margin handles the offset); this moves keyboard focus to
+     the first control so the jump is real for everyone, not just sighted
+     mouse users. */
+  function focusQuote() {
+    var target = document.getElementById("quote");
+    if (!target) return;
+    var first = target.querySelector('input[type="radio"]:checked, select, input:not([type="hidden"]):not([type="radio"])');
+    if (first) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
+  }
+  document.querySelectorAll('a[href="#quote"]').forEach(function (a) {
+    a.addEventListener("click", function () { setTimeout(focusQuote, 350); });
+  });
+  if (location.hash === "#quote") setTimeout(focusQuote, 200);
+
+  /* The mobile action bar sits over the bottom of the viewport, which is
+     where the on-screen keyboard pushes the focused field. Hide it while a
+     form control has focus so it can never cover what the person is typing. */
+  document.addEventListener("focusin", function (e) {
+    if (e.target && e.target.closest && e.target.closest("form[data-quote]")) document.body.classList.add("typing");
+  });
+  document.addEventListener("focusout", function () {
+    setTimeout(function () {
+      var a = document.activeElement;
+      if (!(a && a.closest && a.closest("form[data-quote]"))) document.body.classList.remove("typing");
+    }, 50);
+  });
 
   /* Click-to-load video facade. James asked to keep the film on the front page.
      Loading a YouTube iframe on first paint costs roughly half a megabyte and
