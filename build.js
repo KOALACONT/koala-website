@@ -316,15 +316,15 @@ const MARK_SUB = BRAND.slice(SHORT.length).trim() || "Containers";
 /* The wordmark. STAND-IN — James supplied the new logo as a black-background
    PNG in chat and it is not in this repo. This SVG reproduces its structure
    (heavy condensed caps, KOALA in brand yellow over CONTAINERS in white, with
-   the yellow rule beneath) using the same Anton face the site loads, so it
+   the yellow rule beneath) using Londrina Solid, the logo's own face, so it
    sits correctly at every size and weighs nothing. Drop the real artwork in at
    static/img/logo.svg and logo-light.svg and this falls through to it
    automatically — see logoOr() below. Do not ship to production on the
    stand-in without James seeing it. */
 const LOGO_FILE = (n) => fs.existsSync(path.join(__dirname, "static", "img", n));
 const mark = (topFill, subFill, ruleFill) => `<svg viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(BRAND)}">
-  <text x="0" y="38" font-family="Anton, 'Arial Narrow', sans-serif" font-size="42" letter-spacing="1.5" fill="${topFill}">${esc(MARK_TOP.toUpperCase())}</text>
-  <text x="0" y="78" font-family="Anton, 'Arial Narrow', sans-serif" font-size="42" letter-spacing="0.5" fill="${subFill}">${esc(MARK_SUB.toUpperCase())}</text>
+  <text x="0" y="38" font-family="'Londrina Solid', 'Arial Narrow', sans-serif" font-size="42" letter-spacing="1.5" fill="${topFill}">${esc(MARK_TOP.toUpperCase())}</text>
+  <text x="0" y="78" font-family="'Londrina Solid', 'Arial Narrow', sans-serif" font-size="42" letter-spacing="0.5" fill="${subFill}">${esc(MARK_SUB.toUpperCase())}</text>
   <rect x="0" y="84" width="96" height="6" fill="${ruleFill}"/>
 </svg>`;
 /* 15/09/2026 — static/img/logo.svg is the real artwork: James's PNG traced to
@@ -349,7 +349,7 @@ ${noindex || TEST ? '<meta name="robots" content="noindex,nofollow">' : '<meta n
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0B0B08">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css?v=${CSS_V}">
 ${VCSS.map((f) => `<link rel="stylesheet" href="/css/${f}?v=${assetHash("css/" + f)}">`).join("")}
 <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
