@@ -66,3 +66,21 @@
 .hero-classic .quotecard { padding: clamp(1.3rem, 2vw, 1.7rem); }
 .hero-classic .quotecard h2 { font-size: 1.45rem; }
 .hero-classic .qc-sub { margin-bottom: 1rem; }
+
+/* ======================================================================
+   15/09/2026 — headings in the logo's typeface.
+   The Koala logo is set in Londrina Solid (Black). Matched by overlaying
+   60 display faces on James's artwork: Londrina Solid 900 scored 0.89 IoU,
+   the next best 0.74. James: use it for the headings throughout.
+   Only the 900 weight is loaded (build.js font link), so every heading and
+   every var(--display) element — eyebrows, plates, depot names, footer
+   headings, the phone pill — resolves to the Black cut whatever weight the
+   older rules ask for. Anton is no longer loaded. Body text stays Barlow.
+   Set here rather than in style.css because v-classic is the live variant
+   and loads last; the dormant comparison variants fall back to Arial Narrow.
+   Tracking goes to neutral: the negative letter-spacing tuned for Barlow
+   crushes a condensed hand-drawn face.
+   ====================================================================== */
+:root { --display: "Londrina Solid", "Arial Narrow", ui-sans-serif, system-ui, sans-serif; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 900; letter-spacing: .005em; line-height: 1.05; }
+.hero h1 { letter-spacing: .005em; line-height: 1.02; }
