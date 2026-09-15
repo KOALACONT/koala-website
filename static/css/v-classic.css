@@ -28,3 +28,39 @@
   .hero-classic .hero-grid { grid-template-columns: 1fr; }
   .hero-film .video { aspect-ratio: 16 / 9; }
 }
+
+/* ======================================================================
+   15/09/2026 — photo behind the home hero, five-field hero form.
+   ====================================================================== */
+
+/* The photo sits behind the hero copy and the quote card. It is darkened
+   twice — a flat scrim and a left-to-right gradient — so the yellow and
+   white display type keep their measured contrast on every part of the
+   image. The isolation keeps the negative z-index inside the hero. */
+.hero-photo { position: relative; isolation: isolate; }
+.hero-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: var(--black); }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 45%; opacity: .72; }
+.hero-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(11,11,8,.80) 0%, rgba(11,11,8,.50) 42%, rgba(11,11,8,.28) 100%),
+    linear-gradient(180deg, rgba(11,11,8,.30) 0%, rgba(11,11,8,.10) 35%, rgba(11,11,8,.92) 100%);
+}
+.hero-photo h1, .hero-photo .hero-lede, .hero-photo .hero-points li { text-shadow: 0 1px 2px rgba(0,0,0,.45); }
+.hero-photo .hero-lede { color: var(--white); }
+@media (max-width: 900px) {
+  .hero-bg img { object-position: 60% 50%; opacity: .55; }
+}
+
+/* The five-field hero form. Length, suburb, name and phone, one button. */
+.askcard-mini .mini-fields { display: block; }
+.askcard-mini .qgrid { margin: 0; }
+.askcard-mini .btn-wide { margin-top: .2rem; }
+.askcard-mini .qhint { margin: .9rem 0 0; }
+.askcard-mini .qtoggle { margin-bottom: 1rem; }
+
+/* 15/09/2026 — the quote card carries five fields now, so it no longer needs
+   the extra padding that made it a slab. */
+.hero-classic .quotecard { padding: clamp(1.3rem, 2vw, 1.7rem); }
+.hero-classic .quotecard h2 { font-size: 1.45rem; }
+.hero-classic .qc-sub { margin-bottom: 1rem; }
