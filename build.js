@@ -327,8 +327,12 @@ const mark = (topFill, subFill, ruleFill) => `<svg viewBox="0 0 300 90" xmlns="h
   <text x="0" y="78" font-family="Anton, 'Arial Narrow', sans-serif" font-size="42" letter-spacing="0.5" fill="${subFill}">${esc(MARK_SUB.toUpperCase())}</text>
   <rect x="0" y="84" width="96" height="6" fill="${ruleFill}"/>
 </svg>`;
-const markDark  = LOGO_FILE("logo.svg")       ? `<img src="/img/logo.svg" width="300" height="90" alt="${esc(BRAND)}">`       : mark("#FBDB59", "#FFFFFF", "#FBDB59");
-const markLight = LOGO_FILE("logo-light.svg") ? `<img src="/img/logo-light.svg" width="300" height="90" alt="${esc(BRAND)}">` : mark("#FBDB59", "#FFFFFF", "#FBDB59");
+/* 15/09/2026 — static/img/logo.svg is the real artwork: James's PNG traced to
+   two vector paths (KOALA + rule + phone in #FBDB59, CONTAINERS in white),
+   viewBox 2034x876. Both the masthead and the footer sit on black, so the
+   footer falls back to the same file when no logo-light.svg exists. */
+const markDark  = LOGO_FILE("logo.svg")       ? `<img src="/img/logo.svg" width="232" height="100" alt="${esc(BRAND)}">`       : mark("#FBDB59", "#FFFFFF", "#FBDB59");
+const markLight = LOGO_FILE("logo-light.svg") ? `<img src="/img/logo-light.svg" width="232" height="100" alt="${esc(BRAND)}">` : markDark;
 
 /* ------------------------------------------------------------- the shell -- */
 function head(t, d, canon, schema, noindex) {
@@ -490,26 +494,39 @@ function quoteForm(u, compact, mode, preset) {
   const trap = `<input type="text" name="business_url" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">`;
   const noscript = `<noscript><p class="q-bad">This form needs JavaScript to send. Ring <a href="${S.phoneHref}">${esc(S.phone)}</a> or email <a href="mailto:${S.email}">${esc(S.email)}</a> instead.</p></noscript>`;
 
-  /* "mini" is the three-field opener used by the compact hero variant. The
-     job of that form is only to start a conversation; size and grade are
-     asked on the call. Same rules as the full form: POST, suburb required,
-     one contact method. */
+  /* "mini" is the hero form (and the compact variant's opener). 15/09/2026, James: name, email,
+     phone, container size, suburb, postcode, message — and nothing else. Buying/hiring stays
+     as a one-tap toggle because the sales desk needs it. Same rules as the
+     full form: POST, suburb required, one working contact method. */
   if (mode === "mini") {
     return `<form class="askcard askcard-mini" data-quote method="post" action="/contact/#quote" novalidate>
       ${noscript}
+      <div class="q-errors" aria-live="assertive" hidden></div>
       <div class="qtoggle" role="radiogroup" aria-label="Buying or hiring">
         <input type="radio" name="intent" value="buy" id="qi-b${u}"${chk("buy", P0.intent)}><label for="qi-b${u}">Buying</label>
         <input type="radio" name="intent" value="hire" id="qi-h${u}"${chk("hire", P0.intent)}><label for="qi-h${u}">Hiring</label>
       </div>
-      <input type="hidden" name="size" value="unsure">
       <div class="mini-fields">
-        <label class="vh" for="q-suburb${u}">Delivery suburb or postcode</label>
-        <input name="suburb" id="q-suburb${u}" type="text" autocomplete="address-level2" placeholder="Delivery suburb or postcode" required>
-        <label class="vh" for="q-name${u}">Your name</label>
-        <input name="name" id="q-name${u}" type="text" autocomplete="name" placeholder="Your name" required>
-        <label class="vh" for="q-phone${u}">Phone</label>
-        <input name="phone" id="q-phone${u}" type="tel" autocomplete="tel" placeholder="Phone" required>
-        <button type="submit" class="btn btn-primary">Request a delivered price</button>
+        <div class="qgrid">
+          <div><label for="q-name${u}">Name ${req}</label><input name="name" id="q-name${u}" type="text" autocomplete="name" required aria-required="true"></div>
+          <div><label for="q-phone${u}">Phone ${req}</label><input name="phone" id="q-phone${u}" type="tel" autocomplete="tel" inputmode="tel" required aria-required="true"></div>
+        </div>
+        <label for="q-email${u}">Email</label>
+        <input name="email" id="q-email${u}" type="email" autocomplete="email" inputmode="email">
+        <label for="q-size${u}">Container size</label>
+        <select name="size" id="q-size${u}">
+          <option value="20ft"${sel("20ft", P0.size)}>20ft — the most common</option>
+          <option value="10ft"${sel("10ft", P0.size)}>10ft</option>
+          <option value="40ft"${sel("40ft", P0.size)}>40ft</option>
+          <option value="unsure"${sel("unsure", P0.size)}>Not sure — help me choose</option>
+        </select>
+        <div class="qgrid qgrid-suburb">
+          <div><label for="q-suburb${u}">Delivery suburb ${req}</label><input name="suburb" id="q-suburb${u}" type="text" autocomplete="address-level2" required aria-required="true"></div>
+          <div><label for="q-postcode${u}">Postcode</label><input name="postcode" id="q-postcode${u}" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="4" pattern="[0-9]{4}"></div>
+        </div>
+        <label for="q-msg${u}">Message or notes ${opt}</label>
+        <textarea name="message" id="q-msg${u}" rows="2" placeholder="What it's for, site access, or anything else we should know"></textarea>
+        <button type="submit" class="btn btn-primary btn-lg btn-wide">Get a price</button>
       </div>
       ${trap}
     </form>`;
@@ -938,8 +955,15 @@ function home() {
      copy, full size, nothing shrunk. The film then runs FULL WIDTH beneath,
      which makes it bigger than it ever was in the compact hero rather than
      smaller. Solid black header. */
+  /* 15/09/2026 — James: a good container photo behind the hero, darkened so
+     the type still reads; and a shorter hero form (see quoteForm "mini"). The photo
+     slot is hero-home; until a dedicated shot lands it borrows the golden-hour
+     new 20ft from the "new" page head. The full form stays on /contact/. */
+  const heroShot = havePhoto("hero-home") ? "hero-home" : havePhoto("head-new-shipping-containers") ? "head-new-shipping-containers" : null;
+  const heroBg = heroShot ? `<div class="hero-bg" aria-hidden="true">${IMG(heroShot, "", { w: 1600, h: 1200, eager: true })}</div>` : "";
   const HERO_CLASSIC = `
-<section class="hero hero-classic">
+<section class="hero hero-classic${heroShot ? " hero-photo" : ""}">
+  ${heroBg}
   <div class="wrap">
     <div class="hero-grid">
       <div>
@@ -951,8 +975,8 @@ function home() {
       </div>
       <div class="quotecard" id="quote">
         <h2>Get a price</h2>
-        <p class="qc-sub">Four questions about the box, then the best number to get you on.</p>
-        ${quoteForm("-hero", true)}
+        <p class="qc-sub">Tell us what you need and where it's going — a real person comes back with a delivered price.</p>
+        ${quoteForm("-hero", true, "mini")}
       </div>
     </div>
   </div>

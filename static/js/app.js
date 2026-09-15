@@ -213,6 +213,9 @@
     var q = ctx.intent() === "question";
     var el;
     if (!f.suburb) { el = form.querySelector('[name="suburb"]'); errs.push([el, "Tell us the delivery suburb or postcode."]); }
+    /* 15/09/2026 — the hero form has a separate postcode box. Optional, but
+       if something is typed it has to be a four digit Australian postcode. */
+    if (f.postcode && !/^\d{4}$/.test(f.postcode)) { el = form.querySelector('[name="postcode"]'); errs.push([el, "Postcodes are four digits."]); }
     if (!f.name) { el = form.querySelector('[name="name"]'); errs.push([el, "We need a name to reply to."]); }
     var hasPhone = /\d{6,}/.test((f.phone || "").replace(/\D/g, ""));
     var hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email || "");
@@ -271,9 +274,11 @@
 
       /* The location field accepts a suburb OR a postcode. Send the raw string
          as the suburb, and only populate postcode when the value really is a
-         four digit number. */
+         four digit number — unless the form carried its own postcode box
+         (the hero form does, from 15/09/2026), in which case that wins. */
       var loc = f.suburb || "";
       var isPostcode = /^\d{4}$/.test(loc);
+      var pc = f.postcode || (isPostcode ? loc : null);
 
       var payload = {
         secret: CONFIG.secret,
@@ -284,7 +289,7 @@
         phone: f.phone || null,
         email: f.email || null,
         suburb: loc || null,
-        postcode: isPostcode ? loc : null,
+        postcode: pc || null,
         size: (!q && SIZE_MAP[f.size]) ? SIZE_MAP[f.size] : "",
         message: (f.message ? f.message + "\n\n" : "") + "— " + ctxLines.join(" | "),
         intent: i,
