@@ -19,15 +19,21 @@ function pageHead(o) {
   <p class="eyebrow">${esc(o.eyebrow)}</p>
   <h1>${esc(o.h1)}</h1>
   <p class="phead-lede">${esc(o.lede)}</p>
-  ${o.facts ? `<dl class="phead-facts">${o.facts.map((f) => `<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join("")}</dl>` : ""}
+  ${o.facts ? `<dl class="phead-facts">${o.facts.map((f) => `<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join("")}</dl>` : ""}${o.cta ? `<div class="hero-cta"><a class="btn btn-primary btn-lg" href="${o.cta[0]}">${esc(o.cta[1])}</a><a class="btn btn-ondark btn-lg" href="${S.phoneHref}">${esc(S.phone)}</a></div>` : ""}
 </div></header>
 ${promiseStrip()}`;
 }
 F.pageHead = pageHead; /* shared with build-pages-b.js */
 
 /* ============================ LOCALITY PAGES ============================ */
+/* 17/09/2026 SEO pulse: "shipping containers for sale" sits at position ~18
+   with 1,500 impressions a month. The highest-impression locality pages send
+   one contextual text link into /container-sales/ so the sale page inherits
+   their authority. Deliberately a short list, not all 67. */
+const SALE_LINK_SLUGS = new Set(["brisbane", "gold-coast", "sunshine-coast", "toowoomba", "ipswich", "logan"]);
 function localityPages() {
   LOCS.forEach((l) => {
+    const saleLink = SALE_LINK_SLUGS.has(l.slug) ? ` Buying outright? See our <a href="/container-sales/">shipping containers for sale</a> — new and used, with what each grade promises and what to check on the unit itself.` : "";
     const crumbs = [HOME_CRUMB, ["Where we deliver", "/delivery-areas/"], [l.name, `/${l.slug}/`]];
     const usesHead = pick(USES_HEADS, "uses", l.slug);
     const accessHead = pick(ACCESS_HEADS, "access", l.slug);
@@ -66,7 +72,7 @@ ${sec("", `<div class="narrow">
   <p class="eyebrow reveal">${esc(opener)}</p>
   <div class="reveal"><h2>Buying or hiring a container in ${esc(l.name)}</h2>
   <dl class="quickans">
-    <div><dt>What you can buy or hire here</dt><dd>10ft, 20ft and 40ft — general purpose, high cube, side opening, refrigerated and dangerous goods — in new single-trip, cargo-worthy used or as-is, to buy or to hire. Delivered to ${esc(l.name)} and the district around it.</dd></div>
+    <div><dt>What you can buy or hire here</dt><dd>10ft, 20ft and 40ft — general purpose, high cube, side opening, refrigerated and dangerous goods — in new single-trip, cargo-worthy used or as-is, to buy or to hire. Delivered to ${esc(l.name)} and the district around it.${saleLink}</dd></div>
     <div><dt>How you get a delivered price</dt><dd>Send the form below or ring <a href="${S.phoneHref}">${esc(S.phone)}</a>. The container and the cartage to your address come back as one figure from a person — nothing on this page calculates it.</dd></div>
     <div><dt>What we need from you</dt><dd>The delivery suburb or postcode, what is going in it, roughly when, and ideally three photos of the entry. ${esc(processLine)}</dd></div>
     <div><dt>What changes availability and delivery</dt><dd>Which yard is holding the size and grade you want, the truck your site can take — the site and the carrier decide that, not the container — and what is already travelling that way. Timing on this page is indicative; the actual date comes with the quote.</dd></div>
@@ -286,6 +292,10 @@ ${ask("Get a hire figure", `Give us the size, roughly how long you need it and t
 function sales() {
   const crumbs = [HOME_CRUMB, ["Buying a container", "/container-sales/"]];
   const faqs = [
+    { q: "What is the difference between a new and a used shipping container?", a: "A new container here means single-trip: built overseas, loaded once for the voyage to Australia, then stripped out and sold. Factory paint, a clean floor, seals that have barely seen weather, and the top of the price range. A used container has done years of sea service and is sold on its grade: cargo-worthy used is structurally sound, floor solid, doors sealing, and inspected wind and watertight before it leaves; as-is is retired with its faults described and photographed on request, and is not sold watertight. For plain storage most buyers are best served by cargo-worthy used. Where the container will be on show, lined out or converted, new single-trip is the safer start." },
+    { q: "Which size shipping container should I buy?", a: "Settle what the site can take before what you would like. A 10ft suits a pinched side access or a small lock-up for tools and a mower. A 20ft is the default for the trade and for household storage, wants about seven metres of straight, level ground, and carries the deepest stock and the widest choice of grade. A 40ft gives near enough double the room and usually costs only a little more than a 20ft of the same grade, but needs a long, open approach and a crane truck. A high cube adds 300mm of headroom to a 20ft or 40ft and is the one to buy if the box is being lined, fitted with a roller door or converted. Ring with the address and we will tell you which of those actually fits." },
+    { q: "Do you deliver shipping containers for sale Australia-wide?", a: "Yes. The head yard is at Cornubia, south-east of Brisbane, and stock is held and drawn through yards and depot partners in every state and territory, so a container bought here is released from the yard closest to your address rather than carted across the country. Delivery is quoted with the container, in one figure, because it moves with distance and with what your entry will take — give us the suburb or postcode and you get the whole cost to your address, not a headline that grows later." },
+    { q: "How quickly can a container for sale be delivered?", a: "It depends on which yard holds the size and grade you have settled on and what is already travelling your way, so the honest answer comes with the quote rather than as a promise on a web page. Near a yard, a unit in stock is often on the ground within a few business days; a long regional run or a grade that has to be released from a yard in another state takes longer. Tell us the date you are working to when you enquire and we will say plainly whether it is realistic." },
     { q: "How do I work out which grade I need?", a: "Ask what happens if the contents get damp. If the answer is nothing much — steel, timber, garden gear, building materials, a lock-up already standing under a roof — as-is is a genuinely good buy and paying for a higher grade buys you nothing you will use. If the answer is that something is ruined, start at cargo-worthy, which is inspected wind and watertight before release. New single-trip is for the jobs where the container is on show or is going to be built into something." },
     { q: "Can I look at the actual container first?", a: `Yes, and it is the best hour you can spend. The Cornubia yard at ${ADDR_LINE} is open on weekdays and Saturday mornings — ring ahead so the unit is pulled out of the row rather than buried three high. If the container you want is standing at a yard nowhere near you, ask and we will photograph that individual unit on request, before delivery: doors open, the length of the floor, the roof and any repair that has been done to it.` },
     { q: "How does payment work?", a: "The purchase is settled before the container is released for transport. That is standard in the trade and it is what allows a particular unit to be held with your name against it instead of being sold out from under you while paperwork moves. It is also exactly why we would rather you inspected it or looked at photographs of it first — nobody benefits from a surprise on the back of a truck." },
@@ -295,10 +305,11 @@ function sales() {
     { q: "Do I need approval to put one on my property?", a: "It depends on your council, and the rules genuinely differ from one shire to the next — how long it is staying, whether it is visible from the street, how close to the boundary it sits and what you intend to use it for all come into it. It is one phone call to your own council and much better made before the container arrives than after somebody complains. There is a general rundown in our guide to council approval." }
   ];
   const body = `${pageHead({
-    crumbs, photo: "head-sales", eyebrow: "Buying",
-    h1: "Buying a container outright",
-    lede: "You are not buying a model off a shelf. You are buying one particular steel box with a serial number on the door and a working life behind it that you cannot see. Which is why the grade, and knowing exactly what a grade promises, decides more than the length or the colour ever will.",
-    facts: [["Grades", "New single-trip, cargo-worthy, as-is"], ["Sizes", "10ft, 20ft and 40ft"], ["Inspection", "Cornubia in person, elsewhere on request"], ["Prices", "AUD ex GST, cartage quoted with it"]]
+    crumbs, photo: "head-sales", eyebrow: "Shipping containers for sale",
+    h1: "Shipping containers for sale — new and used, Australia-wide",
+    lede: "New single-trip, cargo-worthy used and as-is containers in 10ft, 20ft, 40ft and high cube, sold from our yard near Brisbane and released from the yard nearest your address. You are not buying a model off a shelf but one particular steel box with a serial number on the door, which is why the grade, and knowing exactly what a grade promises, decides more than the length or the colour ever will.",
+    facts: [["Sizes", "10ft, 20ft, 40ft and high cube"], ["Grades", "New single-trip, cargo-worthy used, as-is"], ["Delivered", "Australia-wide, from the nearest yard"], ["Price", "Quoted for the unit with delivery — ask for today's"]],
+    cta: ["#quote", "Enquire about shipping containers for sale"]
   })}
 ${sec("", `<div class="narrow">
   <div class="reveal"><p class="eyebrow">Start here</p><h2>Individual units, not a product line</h2>
@@ -318,11 +329,22 @@ ${sec("", `<div class="narrow">${secHead("What to look at", "In the order of wha
   <li><strong>The smell.</strong> Shut the doors, wait a moment, open them. A container that carried something it should not have keeps the memory of it, and no amount of pressure washing removes it.</li>
 </ul>
 </div>`)}
-${sec("sec-wash", secHead("The range", "Sizes and configurations", null) + rangeGrid(P.sizes) + `<div style="margin-top:1.6rem">${typeChips()}</div><p class="fineprint" style="margin-top:1.6rem">${esc(PRICE_DISCLAIMER)}</p>`)}
+${sec("sec-wash", secHead("Sizes for sale", "10ft, 20ft, 40ft and high cube — which one suits the job", "Every size is sold new single-trip or cargo-worthy used, and most in as-is. Prices are quoted for the individual unit with delivery to your address, so ask for today's price rather than working from a list.") + `<div class="reveal tablewrap">
+<table class="spectable"><caption>Shipping containers for sale — sizes at a glance</caption>
+<thead><tr><th scope="col">Size</th><th scope="col">Suits</th><th scope="col">Grades available</th><th scope="col">Price</th></tr></thead>
+<tbody>
+<tr><th scope="row"><a href="/10ft-shipping-containers/">10ft</a></th><td>Tight side access, small setbacks, a lockable spot for tools, a mower and a compressor. Goes in on a tilt-tray.</td><td>New single-trip, cargo-worthy used, as-is</td><td><a href="#quote">Ask for today's price</a></td></tr>
+<tr><th scope="row"><a href="/20ft-shipping-containers/">20ft</a></th><td>The default for household storage, site stores and trade lock-ups. About seven metres of straight, level ground; deepest stock and widest choice of grade.</td><td>New single-trip, cargo-worthy used, as-is</td><td><a href="#quote">Ask for today's price</a></td></tr>
+<tr><th scope="row"><a href="/40ft-shipping-containers/">40ft</a></th><td>Near enough double the room for only a little more than a 20ft of the same grade. Needs an open approach, a long level pad and usually a crane truck.</td><td>New single-trip, cargo-worthy used, as-is</td><td><a href="#quote">Ask for today's price</a></td></tr>
+<tr><th scope="row"><a href="/high-cube-shipping-containers/">High cube</a></th><td>A 20ft or 40ft with another 300mm of headroom. The one to buy if it is being lined, fitted with a roller door or converted into a workshop or office.</td><td>New single-trip, cargo-worthy used</td><td><a href="#quote">Ask for today's price</a></td></tr>
+</tbody></table>
+</div>
+<p class="fineprint" style="margin-top:1.4rem"><strong>New or used?</strong> New single-trip and cargo-worthy used are both inspected wind and watertight before release. As-is is the cheap end, sold on its faults and not sold watertight — right for a lock-up under a roof, wrong for anything that must stay dry. The <a href="/container-grades/">grades page</a> has the full rundown.</p>
+<div style="margin-top:1.6rem">${typeChips()}</div><p class="fineprint" style="margin-top:1.6rem">${esc(PRICE_DISCLAIMER)}</p>`)}
 ${band({ photo: "inspect-yard", eyebrow: "Supply", h: "Where the unit comes from changes what is available", p: ["No two yards hold the same stock in the same week. A grade that is standing four deep at one is a fortnight away at another, and the honest answer sometimes is that the closest yard has an excellent container that is not quite the one you asked for. Tell us the delivery town early and the conversation gets much shorter.", "Buying a unit that is a long way from you is perfectly normal and happens every week — it just needs the photographs done properly and the cartage worked out before anything is agreed rather than after."], cta: ["/blog/buying-a-container-interstate/", "Buying from another state"], wash: true })}
 ${sec("", secHead("Questions", "About buying a container", null) + qaHtml(faqs))}
-${ask("Get a delivered price", `Tell us what the container has to do, the town it is going to and what the entry looks like. We will tell you which grade the job genuinely needs.`, "sales", { intent: "buy" })}`;
-  out("container-sales", shell({ t: `Shipping Containers For Sale — Grades, Sizes And What To Check | ${BRAND}`, d: "Buying a shipping container without buying the wrong one: what new single-trip, cargo-worthy and as-is actually promise, what to inspect and in what order, and how the yard it comes from changes what is available.", c: "/container-sales/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+${ask("Request a free price", `Tell us the size, the grade you are leaning towards, the town it is going to and what the entry looks like. A person comes back with a price for the exact unit, delivered, and tells you plainly which grade the job genuinely needs.`, "sales", { intent: "buy" })}`;
+  out("container-sales", shell({ t: `Shipping Containers for Sale — New & Used | ${BRAND}`, d: "New and used shipping containers for sale — 10ft, 20ft, 40ft and high cube — delivered Australia-wide from our yard near Brisbane. Ask for today’s price.", c: "/container-sales/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* =============================== STORAGE ================================ */
