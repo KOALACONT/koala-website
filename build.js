@@ -199,6 +199,16 @@ const aud = (n) => "$" + Number(n).toLocaleString("en-AU");
 const auDate = (iso) => { const d = new Date(iso + "T00:00:00Z"); return String(d.getUTCDate()).padStart(2, "0") + "/" + String(d.getUTCMonth() + 1).padStart(2, "0") + "/" + d.getUTCFullYear(); };
 const para = (v) => (Array.isArray(v) ? v : [v]).map((x) => `<p>${esc(x)}</p>`).join("");
 
+/* Contextual internal links inside body copy that lives in the data files.
+   The JSON stays plain text — markup in a data file is how data files turn
+   into templates — so a link is written as [anchor text](/path/) and turned
+   into an anchor here, after escaping. Only site-relative paths are accepted,
+   and the build's "every internal link resolves" check validates them. */
+const BODY_LINK = /\[([^\]\[]+)\]\((\/[a-z0-9\-\/]*)\)/g;
+const richPara = (v) => (Array.isArray(v) ? v : [v])
+  .map((x) => `<p>${esc(x).replace(BODY_LINK, (m, t, u) => `<a href="${u}">${t}</a>`)}</p>`)
+  .join("");
+
 /* Locality "access" copy arrives from the data files as one 220–360 word
    string. Rendered as a single <p> it is a wall — so split it at sentence
    boundaries into roughly even paragraphs of about 90 words. Splitting on
@@ -885,7 +895,7 @@ function home() {
     { q: "Do you sell into every state, or only Queensland?", a: "Every state and territory, on the one 1300 number. East coast runs are the busiest and the quickest. Inland and northern runs are the ones worth talking through, because what is moving in that direction that week matters more than the map does. The far corners of the country get an honest answer rather than an optimistic one — some of those jobs wait on a truck already heading that way, and you will hear that while we are quoting, not afterwards." },
     { q: "Which grade is the one to buy?", a: "For most jobs, cargo-worthy used. It is a sound working box, inspected wind and watertight before release for storage use, and it costs a long way less than new. If you need to ship in it, current CSC certification is a separate check on the specific unit. Step up to new single-trip when the container is going to be looked at or cut into and converted. As-is sits at the bottom of the price range, carries no watertight claim at all, and earns its keep as a lock-up under an existing roof or as the shell of a build. The grades page sets the three of them out beside each other." },
     { q: "What decides what delivery costs?", a: "Two things, and the kilometres are only the first of them. The second is what the truck has to do once it turns off the road. A level industrial pad with a wide gate and a sloping residential drive with a power line across the entrance are different jobs even when they sit the same distance from the yard. So cartage is worked out per address and quoted with the container, which puts a single figure in front of you instead of a price with a question mark hanging off it. A call and a couple of photographs of the entrance normally settles it." },
-    { q: "How soon can one be on the ground?", a: "A standard 20ft going to an address with reasonable access near a capital is usually a few business days. Regional runs depend on what else is travelling that way that week. Through the wet, unsealed roads across the north and the centre close for weeks at a stretch and no amount of money reopens them. Tell us the date the job genuinely needs it by, rather than the polite version, and you will get a straight answer on whether that is achievable." },
+    { q: "How soon can one be on the ground?", a: "It depends on which yard holds the size and grade you have settled on, what else is travelling your way, and what the access at your end asks of the truck, so the honest answer comes with the quote rather than as a promise on a web page. Regional runs depend on what else is travelling that way that week. Through the wet, unsealed roads across the north and the centre close for weeks at a stretch and no amount of money reopens them. Tell us the date the job genuinely needs it by, rather than the polite version, and you will get a straight answer on whether that is achievable." },
     { q: "Will the council have something to say about it?", a: "Possibly, and the only reliable answer comes from your own council rather than from us. The requirements differ from one shire to the next and they turn on how long the container is staying, what is going inside it, and whether it can be seen from the street. Newer estates often carry a covenant that is tighter than anything the council itself asks for. It is a short call to the planning counter, and it is far better made before the truck is booked than after the container is sitting on the block." }
   ];
   const schema = g(faqLd(faqs), { "@type": "WebSite", "@id": `${D}/#site`, url: D, name: BRAND, publisher: { "@id": `${D}/#biz` } });
@@ -1090,7 +1100,7 @@ function hub() {
   <p class="phead-lede">Ten, twenty and forty foot. General purpose, high cube, side opening, refrigerated and dangerous goods. New single-trip, cargo-worthy used and as-is. This page is the map — what each one is genuinely for, and which of them is wrong for the job you have in mind.</p>
 </div></header>
 ${promiseStrip()}
-${sec("", secHead("By size", "Measure the ground first", "More containers are ordered at the wrong length because somebody sized the load and never walked the driveway. Access rules a size out at least as often as volume does.") + rangeGrid(P.sizes) + `<div style="margin-top:1.8rem">${asIs()}</div><p class="fineprint">${esc(PRICE_DISCLAIMER)}</p>`)}
+${sec("", secHead("By size", "Measure the ground first", "More containers are ordered at the wrong length because somebody sized the load and never walked the driveway. Access rules a size out at least as often as volume does.") + rangeGrid(P.sizes) + `<p class="fineprint" style="margin-top:1.6rem">Where the block is pinched or the side passage is the only way in, <a href="/10ft-shipping-containers/">10ft shipping containers for sale and hire</a> go where a longer unit cannot turn.</p><div style="margin-top:1.8rem">${asIs()}</div><p class="fineprint">${esc(PRICE_DISCLAIMER)}</p>`)}
 ${sec("sec-wash", secHead("By configuration", "What the box has been set up to do", null) + rangeGrid(P.types))}
 ${band({ photo: "grades-lineup", eyebrow: "Grades", h: "Two boxes the same length can be a long way apart on price", p: [P.gradeNote, "The gap is almost always the floor and the door seals, and neither of them shows up in a listing that only gives you a length and a figure. Settle the grade before you start ringing around, because it is the only thing that makes two quotes comparable."], cta: ["/container-grades/", "Grades explained"], dark: true, alt: true })}
 ${sec("", secHead("Common questions", "Before you settle on one", null) + qaHtml(faqs))}
@@ -1107,13 +1117,20 @@ function sizePages() {
       { q: `What fits in a ${x.short} container?`, a: x.fits },
       { q: `How much does a ${x.short} shipping container cost?`, a: `${PRICES ? `Guide figures, ex GST: cargo-worthy used from ${aud(x.usedFrom)}, new single-trip from ${aud(x.newFrom)}. Where any individual unit lands inside that` : `It is priced on the grade — new single-trip, cargo-worthy used or as-is — and quoted for the exact unit with delivery to your address, in AUD ex GST. Where any individual ${x.short} lands`} comes down to its condition, to what is physically standing in the yard the week you ring, and to which yard it has to be released from. Cartage is worked out per address and quoted alongside the box rather than published, because the access at the far end shifts it as much as the distance does.` },
       { q: `What does a ${x.short} container need for delivery?`, a: x.access },
-      { q: `Can I hire a ${x.short} rather than buy one?`, a: `Yes${x.hire ? `, from ${aud(x.hire)} a week ex GST` : ""}. Hire earns its keep when the container has a finish date on it — a build, a fit-out, a harvest, a rebuild after storm damage. If it is still going to be sitting there in two years, buying is nearly always the cheaper end of the deal by a wide margin. Give us the period and both numbers get run for you.` }
+      { q: `Can I hire a ${x.short} rather than buy one?`, a: `Yes${x.hire ? `, from ${aud(x.hire)} a week ex GST` : ""}. Hire earns its keep when the container has a finish date on it — a build, a fit-out, a harvest, a rebuild after storm damage. If it is still going to be sitting there in two years, buying is nearly always the cheaper end of the deal by a wide margin. Give us the period and both numbers get run for you.` },
+      ...(x.extraFaqs || [])
     ];
+    /* Optional per-size depth sections. Prose lives in data/products.json and
+       may carry [anchor](/path/) links; see richPara. Sizes without a `depth`
+       key render exactly as they always have. */
+    const depthHtml = (x.depth || []).length
+      ? sec("", secHead("In detail", `Choosing a ${x.short}`, null) + (x.depth || []).map((d) => `<div class="reveal" style="margin-top:2.4rem"><h3>${esc(d.h)}</h3>${richPara(d.p)}</div>`).join("")) + "\n"
+      : "";
     const crumbs = [["Home", "/"], ["Shipping containers", "/shipping-containers/"], [x.title, `/${x.slug}/`]];
     const body = `${crumbHtml(crumbs)}
 <header class="phead"><div class="phead-media">${IMG("head-" + x.slug, x.title, { w: 1800, h: 900, eager: true })}</div><div class="wrap">
   <p class="eyebrow">${esc(x.short)} containers</p>
-  <h1>${esc(x.title)} for sale and hire</h1>
+  <h1>${esc(x.h1 || `${x.title} for sale and hire`)}</h1>
   <p class="phead-lede">${esc(x.lead)}</p>
   <dl class="phead-facts">
     <div><dt>External</dt><dd>${esc(x.specs.ext)}</dd></div>
@@ -1137,10 +1154,15 @@ ${sec("", `<div class="spec">
 </div>`)}
 ${gallery(["gal-" + x.slug + "-1", "gal-" + x.slug + "-2", "gal-" + x.slug + "-3"], [`${x.title} — exterior`, `${x.title} — doors and locking bars`, `${x.title} — interior and floor`]) ? sec("sec-wash", secHead("Photos", `${x.short} units we have put on the ground`, "Actual jobs rather than catalogue imagery. Ask and photographs of the specific container you are buying will be sent through on request, before delivery.") + gallery(["gal-" + x.slug + "-1", "gal-" + x.slug + "-2", "gal-" + x.slug + "-3"], [`${x.title} — exterior`, `${x.title} — doors and locking bars`, `${x.title} — interior and floor`])) : ""}
 ${band({ photo: "size-alt-" + x.slug, eyebrow: "Access", h: `What a ${x.short} wants at your end`, p: [x.access, "Three photographs settle it: one taken standing at the street looking in, one along the run itself, and one of the ground the box has to sit on. Send them with the enquiry and you will be told which truck the job wants, and whether the drop is straightforward, before anybody talks money."], cta: ["/delivery/", "Delivery and access"], dark: true, alt: true })}
-${sec("", secHead("Other lengths", "If this one is not the fit", null) + rangeGrid(others) + `<div style="margin-top:1.6rem">${typeChips()}</div>`)}
+${depthHtml}${sec("", secHead("Other lengths", "If this one is not the fit", null) + rangeGrid(others) + `<div style="margin-top:1.6rem">${typeChips()}</div>`)}
 ${sec("sec-wash", secHead("Questions", `The ${x.short}, answered`, null) + qaHtml(faqs))}
 ${ask(`Price a ${x.short} to your address`, `Give us the delivery postcode and a description of the entrance, and the cartage comes back in the same number as the container.`, x.slug, { size: x.short })}`;
-    out(x.slug, shell({ t: PRICES ? `${x.title} — Buy Or Hire From ${aud(x.usedFrom)} | ${BRAND}` : `${x.title} For Sale And Hire Australia-Wide | ${BRAND}`, d: `${x.title} to buy or hire${PRICES ? ` from ${aud(x.usedFrom)} ex GST` : ", priced with delivery to your address"}. ${x.specs.ext} outside, ${x.specs.cube} inside. New, cargo-worthy and as-is grades, released from the yard closest to you and delivered nationally.`, c: `/${x.slug}/`, schema: g(crumbsLd(crumbs), faqLd(faqs), productLd(x)) }, body));
+    /* seoTitle / seoDesc, where a size carries them, are hand-written to fit
+       inside Google's ~60 / ~155 character snippet. The generated fallbacks
+       overrun both and truncate in the results page. */
+    const t = x.seoTitle || (PRICES ? `${x.title} — Buy Or Hire From ${aud(x.usedFrom)} | ${BRAND}` : `${x.title} For Sale And Hire Australia-Wide | ${BRAND}`);
+    const d = x.seoDesc || `${x.title} to buy or hire${PRICES ? ` from ${aud(x.usedFrom)} ex GST` : ", priced with delivery to your address"}. ${x.specs.ext} outside, ${x.specs.cube} inside. New, cargo-worthy and as-is grades, released from the yard closest to you and delivered nationally.`;
+    out(x.slug, shell({ t, d, c: `/${x.slug}/`, schema: g(crumbsLd(crumbs), faqLd(faqs), productLd(x)) }, body));
   });
 }
 
