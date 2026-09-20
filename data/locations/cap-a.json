@@ -7,7 +7,7 @@
    "postcode": "4000",
    "flagship": true,
    "depot": "our own yard at 51–55 Bromley Street, Cornubia, with stock also drawn from the Port of Brisbane at Fisherman Islands and the Wacol–Richlands depot corridor",
-   "leadTime": "Usually 2–4 business days from order to on the ground, and often next day on the southside",
+   "leadTime": "Which of the Cornubia, port and Wacol yards is holding your size and grade",
    "truck": "Tilt-tray for 10ft and 20ft where there is a straight run in; crane truck for 40ft, high-set houses and anything that has to go over a fence",
    "metaDesc": "Shipping containers for sale and hire in Brisbane, delivered from our Cornubia yard. Come and look at the actual unit before it goes on your block.",
    "line": "Brisbane is where our yard is, so the container you buy here is usually one you can walk up to and open before it goes anywhere. That takes the guesswork out of the easy half of the job. The hard half is the ten metres between the kerb and the spot you have picked, because this city was laid out across ridges, gullies and old river bends, and a great many of its best blocks were surveyed when the biggest thing anyone expected down the street was a coal lorry and a milk cart.",
@@ -49,7 +49,7 @@
     },
     {
      "q": "How quickly can you get a container onto a Brisbane block?",
-     "a": "Two to four business days is the normal window, and southside addresses within reach of Cornubia are frequently next business day on a standard 20ft with clear access. What adds time is a crane booking, a unit that has to come across from a port depot first, or wet weather on silt or fresh fill where waiting two days beats leaving a pair of ruts across your lawn. If you are working to a fixed date — a settlement, a removalist, a site start — say so at the enquiry and we will build the run around it instead of telling you afterwards that it did not fit."
+     "a": "Southside addresses within reach of Cornubia are the quickest of it on a standard 20ft with clear access; the rest depends on which yard is holding your size and grade. What adds time is a crane booking, a unit that has to come across from a port depot first, or wet weather on silt or fresh fill where waiting two days beats leaving a pair of ruts across your lawn. If you are working to a fixed date — a settlement, a removalist, a site start — say so at the enquiry and we will build the run around it instead of telling you afterwards that it did not fit."
     },
     {
      "q": "Do I need approval to put a container on a residential block in Brisbane?",
@@ -71,7 +71,7 @@
    "postcode": "2000",
    "flagship": true,
    "depot": "container depots behind Port Botany, with stock also drawn from the yards through Chullora, Yennora and the Erskine Park corridor",
-   "leadTime": "Usually 3–5 business days from order to on the ground",
+   "leadTime": "Depot stock behind Port Botany, and whether a crane, a strata window or a permit is involved",
    "truck": "Tilt-tray where there is a straight run in off the street; crane truck for terraces, strata sites and anything without side access",
    "metaDesc": "Shipping containers for sale and hire across Sydney, supplied off Port Botany. Terraces, strata sites and crane lifts scoped before we book a truck.",
    "line": "Sydney has no shortage of containers. Port Botany moves more boxes than anywhere in the country and the depots behind it hold real depth in every common size, so choice is rarely what holds a job up. The city is what holds it up. Sydney was built on sandstone around a harbour, and the result is narrow streets, split-level blocks, strata buildings, benched driveways and back yards you cannot see from the road. Almost every hard job here reduces to two questions: where can the truck legally stand, and how does the container get from there to the spot.",
@@ -97,7 +97,7 @@
     {
      "h": "Booking around a Sydney working day",
      "p": [
-      "Distance is not what makes a Sydney delivery slow. Windows are. A truck coming out of a Port Botany depot to Castle Hill, Penrith or Helensburgh is committed to a run that has to clear the clearways at each end, dodge the tunnels and the toll network sensibly, and still have time to set up and unload in daylight. That is why we schedule the metro work in blocks and why a firm morning slot on a tight street is worth asking for rather than assuming. Three to five business days from order to on the ground is what to plan for, and a crane booking, a strata window or a council permit will push the far end of it out.",
+      "Distance is not what makes a Sydney delivery slow. Windows are. A truck coming out of a Port Botany depot to Castle Hill, Penrith or Helensburgh is committed to a run that has to clear the clearways at each end, dodge the tunnels and the toll network sensibly, and still have time to set up and unload in daylight. That is why we schedule the metro work in blocks and why a firm morning slot on a tight street is worth asking for rather than assuming. What to plan for is the depot having your unit standing and ready; a crane booking, a strata window or a council permit are what push a Sydney date out.",
       "The most useful thing you can do is give us the constraints at the enquiry rather than at the door. Whether the street is a clearway and when. Whether the building has a nominated delivery time. Whether the neighbours can be asked to move two cars off the frontage for an hour, which on a narrow inner-west street is frequently the entire difference between the job going in and the truck going home. Whether there is a gate, and what it measures at the narrowest point rather than at the posts. Tell us those four things and a Sydney delivery becomes ordinary. The more of it we know before the truck is loaded, the less of it turns into a problem on the day."
      ]
     }
@@ -135,7 +135,7 @@
    "postcode": "3000",
    "flagship": true,
    "depot": "the Port of Melbourne and the container depot belt through Altona, Laverton and Truganina, with stock also held out through Dandenong South",
-   "leadTime": "Usually 3–5 business days; wet-winter drops onto soft ground get scheduled with a little slack",
+   "leadTime": "Port and Altona depot stock, and how soft the ground is through a wet winter",
    "truck": "Tilt-tray where the street and the run in allow it; crane truck for terraces, laneway sites and anything under a canopy or near overhead wiring",
    "metaDesc": "Shipping containers for sale and hire in Melbourne, off the port and the Altona depots. Laneways, tram wires and reactive clay planned for properly.",
    "line": "Melbourne is an easy city to supply and a genuinely awkward one to deliver into, and the awkwardness is at least predictable. Boxes come off the wharves and sit in the depot belt through Altona, Laverton and Truganina, so getting hold of the right size is straightforward. Getting it behind a single-fronted terrace in Fitzroy with a bluestone lane and overhead wiring, or onto a Tarneit block sitting on clay that swells all winter and shrinks all summer, is where the actual work is. That is the part worth talking through before you order.",
@@ -199,7 +199,7 @@
    "postcode": "6000",
    "flagship": true,
    "depot": "our Fremantle depot, where stock for the whole Perth metropolitan area is held and inspection can be arranged",
-   "leadTime": "Usually 3–7 business days from order to on the ground, depending on what is standing in Fremantle",
+   "leadTime": "Decided by what is standing at our Fremantle depot when you order",
    "truck": "Tilt-tray for 10ft and 20ft on most Perth blocks; crane truck for 40ft, hills sites and anything going over a fence",
    "metaDesc": "Shipping containers for sale and hire in Perth, held at our Fremantle depot. Sand, limestone and the scarp allowed for before we book a truck.",
    "line": "Perth runs on its own supply and it pays to understand what that means. The stock we sell here sits at a depot in Fremantle, because carting a container across the Nullarbor costs more than any sensible person would want to pay for a steel box. Two things follow. What is standing in Fremantle this week is what you can actually have this week, so ringing early is worth more in Perth than in any other city we serve. And once it is yours, the run out to almost any metropolitan address is short, flat and quick.",
@@ -211,7 +211,7 @@
     {
      "h": "Why Perth stock is Perth stock",
      "p": [
-      "It is worth being straight about how supply works on this side of the country, because it changes how you should approach buying. There is no realistic way to shuttle a container over from the east for an individual customer — the cartage across the Nullarbor is a large multiple of what the box is worth, and anyone who tells you otherwise is quietly building it into a number somewhere. So what we sell in Perth is what is on the ground at our Fremantle depot. In practice the range is good and covers the common sizes and grades. What it does not do is respond instantly to an unusual request, so if you want something specific — a particular height, a door configuration, a set number of matching units for a project — start the conversation two or three weeks out rather than two or three days.",
+      "It is worth being straight about how supply works on this side of the country, because it changes how you should approach buying. There is no realistic way to shuttle a container over from the east for an individual customer — the cartage across the Nullarbor is a large multiple of what the box is worth, and anyone who tells you otherwise is quietly building it into a number somewhere. So what we sell in Perth is what is on the ground at our Fremantle depot. In practice the range is good and covers the common sizes and grades. What it does not do is respond instantly to an unusual request, so if you want something specific — a particular height, a door configuration, a set number of matching units for a project — start the conversation well ahead rather than at the last minute.",
       "The upside of a single local holding point is that everything after the phone call is short. Fremantle to Joondalup, Armadale, Midland or Rockingham is an easy run on good roads, and the whole metropolitan area is reachable inside a morning. Inspection at Fremantle is by arrangement rather than a walk-in, because it is a working depot with machines moving all day. Ring, tell us what you are after, and we will set a time when someone can walk you to the unit and open it up for you. If a trip across town is not practical, ask and we will send photos of the actual container on request before delivery. Give us a couple of days' notice for an inspection and it is straightforward to organise."
      ]
     },
@@ -237,7 +237,7 @@
     },
     {
      "q": "How long does delivery take in Perth?",
-     "a": "Three to seven business days is the usual window, and where it lands in that range depends mostly on what is standing at Fremantle when you order. Once the unit is allocated, the run to a metropolitan address is short. What stretches it out is a crane booking, a request for something less common in size or configuration, or a delivery beyond the metro that has to be scheduled around a route. If you are working to a fixed date, say so at the enquiry — with Perth supply being local and finite, early notice is genuinely the thing that gets you what you want."
+     "a": "It depends mostly on what is standing at our Fremantle depot when you order, and we will tell you that on the phone rather than guess at a date. Once the unit is allocated, the run to a metropolitan address is short. What stretches it out is a crane booking, a request for something less common in size or configuration, or a delivery beyond the metro that has to be scheduled around a route. If you are working to a fixed date, say so at the enquiry — with Perth supply being local and finite, early notice is genuinely the thing that gets you what you want."
     },
     {
      "q": "Will a container sink into sand on a Perth block?",
