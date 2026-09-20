@@ -83,17 +83,37 @@
     });
   }
 
-  // UTM capture
+  // Keep the latest tagged visit across pages in this tab, for up to 30 minutes.
+  // Replace the whole attribution on a new campaign; never mix Google and Meta.
+  var ATTR_KEY = "koala_campaign_attribution_v1";
+  var ATTR_TTL = 30 * 60 * 1000;
+  var ATTR_FIELDS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
   function utm() {
     var o = {};
     try {
       var p = new URLSearchParams(location.search);
-      ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"].forEach(function (k) {
-        if (p.get(k)) o[k] = p.get(k);
+      ATTR_FIELDS.forEach(function (k) {
+        if (p.get(k)) o[k] = p.get(k).slice(0, 500);
       });
     } catch (e) {}
+    try {
+      if (Object.keys(o).length) {
+        sessionStorage.setItem(ATTR_KEY, JSON.stringify({ at: Date.now(), values: o }));
+      } else {
+        var saved = JSON.parse(sessionStorage.getItem(ATTR_KEY) || "null");
+        var age = saved && Date.now() - saved.at;
+        if (saved && typeof saved.at === "number" && age >= 0 && age < ATTR_TTL && saved.values) {
+          ATTR_FIELDS.forEach(function (k) {
+            if (typeof saved.values[k] === "string") o[k] = saved.values[k].slice(0, 500);
+          });
+        } else {
+          sessionStorage.removeItem(ATTR_KEY);
+        }
+      }
+    } catch (e) {} // Blocked/full storage must never prevent an enquiry.
     return o;
   }
+  utm(); // Capture on arrival, before the visitor navigates to another page.
 
   /* ---- the enquiry form ---------------------------------------------------
      Rebuilt 14/09/2026. One shared component (build.js quoteForm) on every
@@ -444,3 +464,4 @@
     }, 60);
   }
 })();
+
