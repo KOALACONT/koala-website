@@ -50,22 +50,19 @@ function localityPages() {
       areaServed: { "@type": "City", name: l.name, address: { "@type": "PostalAddress", addressLocality: l.name, addressRegion: l.state, postalCode: l.postcode, addressCountry: "AU" } }
     };
 
-    /* Lead-time and depot claims in the data files were written town by town
-       and do not always agree with each other or with the depots page. Until
-       James confirms each run they are rendered as indicative rather than
-       asserted — "usually", and "depends which yard holds the unit". */
-    const softTime = (t) => {
-      let x = String(t).trim().replace(/\.$/, "");
-      if (!/^(usually|often|typically|around|about)\b/i.test(x)) x = "Usually " + x.charAt(0).toLowerCase() + x.slice(1);
-      return x;
-    };
+    /* House rule: no published delivery timeframes (the other brand sites
+       were swept of them on 20/09/2026; this repo on 21/09/2026). leadTime
+       in the data files describes what governs timing in each town (stock,
+       the run, the ground), not a number of days, and the actual date is
+       confirmed with the quote. Do not reintroduce a window here. */
+    const timingLine = (t) => String(t).trim().replace(/\.$/, "");
     const depotLine = String(l.depot).trim().replace(/\.$/, "");
 
     const body = `${pageHead({
       crumbs, poolPhoto: ["pool-lochead", "lh", l.slug], eyebrow: `${l.name}, ${l.state}`,
       h1: `Shipping containers ${l.name}`,
       lede: l.line,
-      facts: [["Stock usually drawn from", depotLine], ["Indicative timing", softTime(l.leadTime) + " — depends which yard holds the unit"], ["Likely truck", l.truck]]
+      facts: [["Stock usually drawn from", depotLine], ["What sets the timing", timingLine(l.leadTime) + " — the date is confirmed when you place the order"], ["Likely truck", l.truck]]
     })}
 
 ${sec("", `<div class="narrow">
@@ -137,7 +134,7 @@ function deliveryAreas() {
     { q: "My town is not on the list. Do you still deliver there?", a: "Almost certainly. What you are looking at is the list of places we can write something specific and true about — the approaches, the ground, the thing that usually catches people out. It is a far shorter list than the places we go. Give us a postcode and you will get a straight yes or no, plus what it goes on and how long it takes." },
     { q: "Which yard will my container come from?", a: "Whichever one makes the shortest sensible run to your address while still holding the size and grade you have asked for. Now and then those two pull against each other — the closest unit is not the one you want — and when that happens we put both options in front of you instead of quietly picking one." },
     { q: "Is it dearer to deliver to a country town than to a capital city?", a: "Not as a rule. The kilometres are only half of it and the job waiting at your end is frequently the bigger half. A wide paddock gate three hours inland can be a far easier drop than an inner-suburban frontage with a plane tree over the kerb. Delivery is worked out per address alongside the container itself, once we know both ends of the run." },
-    { q: "How much notice do you need for a country or interstate delivery?", a: "As much as you can spare. Around a week is comfortable for most regional runs. Tasmania, the far north and the Territory through the wet want longer, because sailings and road conditions set that timetable, not us. If there is a fixed date at your end — a settlement, a shutdown, a removalist booked — put it in the first message and we will build the run around it." },
+    { q: "How much notice do you need for a country or interstate delivery?", a: "As much as you can spare. Regional runs are scheduled rather than sent on demand, and Tasmania, the far north and the Territory through the wet want more again, because sailings and road conditions set that timetable, not us. If there is a fixed date at your end — a settlement, a shutdown, a removalist booked — put it in the first message and we will build the run around it." },
     { q: "Can I pick one up myself instead?", a: `From the head yard at ${ADDR_LINE}, yes, by arrangement. You need a trailer rated for the weight and the means to restrain it properly, because a loaded twenty-footer is not something to improvise a tie-down for. Let us know when you are coming so the unit is pulled out and the paperwork is done before you get here.` }
   ];
   const body = `${pageHead({
@@ -155,11 +152,11 @@ ${sec("", `<div class="narrow">
 </div>`)}
 ${plate("A container closer than you think", "Tell us the postcode and we will tell you where yours comes from.")}
 ${sec("sec-wash", secHead("What changes with distance", "The three things that move on a long run", null) + `<div class="range">
-  <article class="rangecard reveal"><div class="rangecard-body"><h3>How soon it lands</h3><p>Within reach of a yard, a standard unit with clear access can be on your ground in a couple of days. Further out, the clock is set by the truck's run rather than by our paperwork. You get a date and you get told plainly what would push it.</p></div></article>
+  <article class="rangecard reveal"><div class="rangecard-body"><h3>How soon it lands</h3><p>Within reach of a yard, a standard unit with clear access is the simplest job there is. Further out, the clock is set by the truck's run rather than by our paperwork. You get a date when you order and you get told plainly what would push it.</p></div></article>
   <article class="rangecard reveal"><div class="rangecard-body"><h3>What it arrives on</h3><p>Tilt-tray where there is a straight run in and firm ground to slide it onto. Crane truck where there is not, or where the box has to travel over a fence, a carport or a roofline. Some remote runs go flat-top with a machine at your end, which has to be sorted before the truck leaves.</p></div></article>
   <article class="rangecard reveal"><div class="rangecard-body"><h3>What is standing near you</h3><p>Choice is deepest near the ports and thins out the further inland you go. If you want a particular grade, a high cube rather than a standard, or a specific door arrangement, flag it in the enquiry — occasionally the right unit is worth waiting a few days for.</p></div></article>
 </div>`)}
-${order.filter((st) => byState[st]).map((st, i) => sec(i % 2 ? "" : "sec-wash", secHead(st, NAME[st] || st, BLURB[st] || null) + `<div class="locgrid">${byState[st].map((l) => `<a href="/${l.slug}/">${esc(l.name)}<span>${esc(l.postcode)} · ${esc(l.leadTime.replace(/^Usually /, ""))}</span></a>`).join("")}</div>`)).join("\n")}
+${order.filter((st) => byState[st]).map((st, i) => sec(i % 2 ? "" : "sec-wash", secHead(st, NAME[st] || st, BLURB[st] || null) + `<div class="locgrid">${byState[st].map((l) => `<a href="/${l.slug}/">${esc(l.name)}<span>${esc(l.postcode)} · ${esc(l.leadTime)}</span></a>`).join("")}</div>`)).join("\n")}
 ${band({ photo: "yard-cornubia", eyebrow: "Everywhere else", h: "Not on the list is not off the map", p: ["The towns above are the ones written up properly, because we have put enough steel on the ground in them to say something useful. They are not a boundary. Containers go a very long way past every one of them, including to places with a pub, a silo and not a great deal else.", `Ring ${S.phone} with an address and you will hear what the run looks like, which yard it starts from and how long it takes, before anybody starts talking about money.`], cta: ["/contact/", "Send us the address"], dark: true })}
 ${sec("", secHead("Common questions", "Coverage, timing and pick-up", null) + qaHtml(faqs))}
 ${ask("Tell us where it is going", `A suburb or a postcode is enough to start. ${PROMISE}.`, "areas")}`;
@@ -171,7 +168,7 @@ function delivery() {
   const crumbs = [HOME_CRUMB, ["Delivery", "/delivery/"]];
   const faqs = [
     { q: "Where does my container actually come from?", a: "From whichever yard nearest you is holding the size and grade you asked for. That is the first thing we work out on any order, ahead of the price, because it sets both the cartage and the date. Sometimes the closest yard has the exact unit standing on hardstand; sometimes the grade you want is further away and the sensible answer is a slightly different unit much closer. Give us the town at the start of the conversation and we will tell you which way it falls." },
-    { q: "How soon can a truck be there?", a: "In and around the capitals and the larger regional centres it is usually a matter of days once the grade is settled and we know the site takes a truck. Further out it depends on when a truck is next running that way, because a container heading a long way inland generally travels with other freight rather than on its own. Deliveries run Monday to Friday, with Saturday mornings by arrangement, and you get a window rather than a minute." },
+    { q: "How soon can a truck be there?", a: "In and around the capitals and the larger regional centres it comes down to which yard holds the grade and whether the site takes a truck, and the date is confirmed when you order. Further out it depends on when a truck is next running that way, because a container heading a long way inland generally travels with other freight rather than on its own. Deliveries run Monday to Friday, with Saturday mornings by arrangement, and you get a window rather than a minute." },
     { q: "Does somebody need to be on site when it lands?", a: "Somebody should be, even if it is a neighbour with your phone number. The driver will place the unit where you point, and the person pointing is the one who knows which way the doors have to face and where the drainage runs. If nobody can be there, peg the corners out, leave the gate open and send a photo of the marked spot through beforehand so the driver is not guessing." },
     { q: "How precisely can the container be placed?", a: "It depends on the truck. A tilt-tray sets the box down as the truck creeps forward, so the final position is a metre or so of judgement rather than a surveyed line. A side loader is far more exact and can drop a unit into a marked footprint. A crane truck is the most precise of the lot. If it has to land on pads, piers or a slab edge, say so when you enquire, because that is a side loader or crane job nine times out of ten." },
     { q: "What happens if the truck turns up and cannot get in?", a: "The load goes back on and everybody has lost a day, which is why we would rather spend ten minutes on it beforehand than argue about it afterwards. Send photographs with your enquiry — one from the road, one down the approach, one of the spot — and we will tell you which truck the job wants, or tell you it will not work as described, before anything is booked. Phone photographs are fine. Nobody needs a survey." },
@@ -187,7 +184,7 @@ function delivery() {
   })}
 ${sec("", `<div class="narrow">
   <div class="reveal"><p class="eyebrow">Before the price</p><h2>The first question is which yard it leaves from</h2>
-  <p>Containers are heavy, they are bulky, and every kilometre of road under one is money and time nobody gets back. So on any order the first thing worked out is not the figure — it is where the box is standing right now. Stock sits at yards and partner depots spread around the country, and the same cargo-worthy 20ft can be a couple of hours from your gate or the better part of a week away, depending only on which one has it.</p>
+  <p>Containers are heavy, they are bulky, and every kilometre of road under one is money and time nobody gets back. So on any order the first thing worked out is not the figure — it is where the box is standing right now. Stock sits at yards and partner depots spread around the country, and the same cargo-worthy 20ft can be a short run from your gate or a long haul away, depending only on which one has it.</p>
   <p>That is the whole point of running it this way. Your unit starts its run somewhere reasonably close instead of being dragged across the continent, which means it lands sooner, it costs less to cart, and it gets handled fewer times. Handling is where paint gets scraped, door gear gets knocked out of line and a tidy container stops being tidy.</p>
   <p>Cornubia, south-east of Brisbane, is the yard you can walk into on a weekday and look down the floor of a container yourself. Everywhere else, inspection is by arrangement and we photograph the individual unit on request instead. Either way, tell us the delivery town in the first message and you will get a straight answer about where yours would come from.</p>
   <div class="chips" style="margin-top:1.4rem"><a href="/delivery-areas/">Towns we deliver to</a><a href="/depots/">How supply works</a><a href="/contact/">Get a delivered price</a></div>
@@ -342,7 +339,7 @@ ${sec("sec-wash", secHead("Sizes for sale", "10ft, 20ft, 40ft and high cube — 
 <p class="fineprint" style="margin-top:1.4rem">Short on room? <a href="/10ft-shipping-containers/">10ft shipping containers for sale</a> are the pick where a longer unit will not turn — and the <a href="/20ft-shipping-containers/">20ft</a> is the better buy per cubic metre wherever the ground takes it.</p>
 <p class="fineprint" style="margin-top:1.4rem"><strong>New or used?</strong> New single-trip and cargo-worthy used are both inspected wind and watertight before release. As-is is the cheap end, sold on its faults and not sold watertight — right for a lock-up under a roof, wrong for anything that must stay dry. The <a href="/container-grades/">grades page</a> has the full rundown.</p>
 <div style="margin-top:1.6rem">${typeChips()}</div><p class="fineprint" style="margin-top:1.6rem">${esc(PRICE_DISCLAIMER)}</p>`)}
-${band({ photo: "inspect-yard", eyebrow: "Supply", h: "Where the unit comes from changes what is available", p: ["No two yards hold the same stock in the same week. A grade that is standing four deep at one is a fortnight away at another, and the honest answer sometimes is that the closest yard has an excellent container that is not quite the one you asked for. Tell us the delivery town early and the conversation gets much shorter.", "Buying a unit that is a long way from you is perfectly normal and happens every week — it just needs the photographs done properly and the cartage worked out before anything is agreed rather than after."], cta: ["/blog/buying-a-container-interstate/", "Buying from another state"], wash: true })}
+${band({ photo: "inspect-yard", eyebrow: "Supply", h: "Where the unit comes from changes what is available", p: ["No two yards hold the same stock in the same week. A grade that is standing four deep at one is a long way off at another, and the honest answer sometimes is that the closest yard has an excellent container that is not quite the one you asked for. Tell us the delivery town early and the conversation gets much shorter.", "Buying a unit that is a long way from you is perfectly normal and happens every week — it just needs the photographs done properly and the cartage worked out before anything is agreed rather than after."], cta: ["/blog/buying-a-container-interstate/", "Buying from another state"], wash: true })}
 ${sec("", secHead("Questions", "About buying a container", null) + qaHtml(faqs))}
 ${ask("Request a free price", `Tell us the size, the grade you are leaning towards, the town it is going to and what the entry looks like. A person comes back with a price for the exact unit, delivered, and tells you plainly which grade the job genuinely needs.`, "sales", { intent: "buy" })}`;
   out("container-sales", shell({ t: `Shipping Containers for Sale — New & Used | ${BRAND}`, d: "New and used shipping containers for sale — 10ft, 20ft, 40ft and high cube — delivered Australia-wide from our yard near Brisbane. Ask for today’s price.", c: "/container-sales/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));

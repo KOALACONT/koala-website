@@ -7,10 +7,10 @@
    "postcode": "4570",
    "flagship": false,
    "depot": "stock we hold at a depot in Gympie itself, topped up from the Cornubia yard when a particular size or grade is not standing locally",
-   "leadTime": "Often next business day on a unit already sitting in Gympie; otherwise usually 2–4 business days",
+   "leadTime": "A unit already standing at our Gympie depot is the short path; otherwise it comes from Cornubia",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft and for the drives that fall away off the ridge streets",
    "metaDesc": "Shipping containers for sale and hire in Gympie. Stock held locally, inspection by arrangement, and straight advice on steep drives and Mary River siting.",
-   "line": "We hold stock in Gympie, so a container for a Gympie address does not have to start its life on a truck three hundred kilometres south. That is worth more than it sounds when you want one this week. The awkward part is the town. Gympie was laid out around gold rather than around trucks, so the streets follow the gullies and the ridges instead of a grid, and a good half of the residential blocks fall away hard from the kerb. Add the Mary and where you put the thing matters as much as which one you buy.",
+   "line": "We hold stock in Gympie, so a container for a Gympie address does not have to start its life on a truck three hundred kilometres south. That is worth more than it sounds when you are working to a date. The awkward part is the town. Gympie was laid out around gold rather than around trucks, so the streets follow the gullies and the ridges instead of a grid, and a good half of the residential blocks fall away hard from the kerb. Add the Mary and where you put the thing matters as much as which one you buy.",
    "uses": "hay, fencing wire and machinery parts on the beef and dairy country through the Mary Valley, dry storage for the macadamia and small crop growers around Amamoor, Kandanga and Imbil, timber and tool storage for the forestry and harvesting contractors working out of Curra, Glastonbury and Wolvi, boats, crab pots and dive gear at Tin Can Bay and Rainbow Beach where the garage gave up years ago, site stores on the new builds at Southside and Jones Hill, and household storage while a Queenslander at Monkland or One Mile gets restumped and reclad",
    "access": [
     "Gympie divides into ridge and river, and the two want different trucks. The high ground — Victory Heights, Jones Hill, The Palms, the top end of Monkland — is where most of the housing sits, and it got that way because the flats were never a safe bet. Those streets were pushed through gullies and the driveways come off them at a pitch a car takes without noticing and a loaded tilt-tray does not. Where a drive drops sharply at the kerb, the back of the bed touches bitumen before the container has slid clear. Where it crests halfway up, the same thing happens in the middle instead of at the start. On a lot of those blocks the sensible answer is to lift over the fence from the street rather than try to back in. The old town on the flat is the opposite complaint: short frontages, side accesses set out long before anyone owned a car, and fifty years of fig and camphor laurel hanging over the road at exactly truck height. Out through the Mary Valley it turns rural again — Kandanga, Amamoor, Imbil, Widgee, Glastonbury — with unsealed drives that have a crown and table drains, private grids nobody can put a rating to, and turning space at the far end that needs to be real rather than hopeful. Ground varies enormously over short distances here. Down on the flats it is river silt, firm in September and treacherous a week into February. Up on the ridges it is shallow soil over rock, which carries anything you like and is almost never level. Neither stops a delivery, but both change how the unit gets bedded down. Tell us the street, what the last hundred metres looks like and whether it is sealed, and we will have the truck and the size settled before anything is booked."
@@ -19,7 +19,7 @@
     {
      "h": "Stock on the ground in Gympie",
      "p": [
-      "We keep containers at a depot in Gympie, which is not something most sellers quoting this postcode can say. It changes two things. The first is timing — a unit already standing in town can be on your block inside a day or two rather than waiting on a slot in a run coming up the Bruce. The second is that you can lay eyes on it. Inspection is by arrangement rather than a walk-in, because the yard is not set up or staffed for the public, so ring and we will book a time and have someone there. What we will not do is print an address on a website and let you drive to a locked gate on a Saturday.",
+      "We keep containers at a depot in Gympie, which is not something most sellers quoting this postcode can say. It changes two things. The first is timing — a unit already standing in town is not waiting on a slot in a run coming up the Bruce. The second is that you can lay eyes on it. Inspection is by arrangement rather than a walk-in, because the yard is not set up or staffed for the public, so ring and we will book a time and have someone there. What we will not do is print an address on a website and let you drive to a locked gate on a Saturday.",
       "What is standing locally moves from week to week, so the honest answer on grade and size is that it depends. If you want something specific — a high cube instead of a standard, a double-door unit, a particular grade — say so when you ring. Sometimes it is already in Gympie. Sometimes it comes up on the next run and adds a few days to the date. You will be told which of those two it is, in plain terms, at the quote. If you cannot get to an inspection, ask for photos of the actual unit on request and we will send them through before delivery. Those are photos of the unit that is coming to you rather than a stock shot of something similar — corners, door end, roof and the length of the floor. It takes us two minutes and it saves a difficult conversation on the morning the truck arrives."
      ]
     },
@@ -70,7 +70,7 @@
    "postcode": "4655",
    "flagship": false,
    "depot": "our Gympie depot up the Bruce, with anything not standing there carted from the Cornubia yard",
-   "leadTime": "Usually 3–5 business days from order to on the ground",
+   "leadTime": "Gympie depot stock, topped up from Cornubia when a size is not standing there",
    "truck": "Tilt-tray on the flat coastal blocks; crane truck for village lots, tight culs-de-sac and anything going over a fence",
    "metaDesc": "Shipping containers for sale and hire in Hervey Bay. Sandy ground, over-50s village access and boat and van storage handled by people who deliver here.",
    "line": "Nothing about the run to Hervey Bay is hard. It is flat, it is sealed, and a truck gets from the Bruce to Urangan without meeting a hill worth mentioning. The whole job is the last thirty metres, and it is nearly always one of two things: sand that carries far less than it looks like it will, or a village or estate road built to a scale that stops at a removalist truck. Sort those two out at the quote and a Hervey Bay delivery is a quiet twenty minutes.",
@@ -116,7 +116,7 @@
     },
     {
      "q": "How long does delivery to Hervey Bay take?",
-     "a": "Three to five business days is the usual window from order. A plain 20ft heading to a block with an easy approach sits at the short end of that. It stretches out where a crane has to be booked, where we are waiting on a village delivery window, or where the grade or configuration you have asked for has to come up from our Cornubia yard. Where the date is locked in at your end — a handover, a truck full of furniture arriving, a season about to start — tell us when you ring and the run gets planned to suit it."
+     "a": "What decides it is whether the Gympie depot is holding your size and grade, or whether it has to come up from Cornubia. A plain 20ft heading to a block with an easy approach sits at the short end of that. It stretches out where a crane has to be booked, where we are waiting on a village delivery window, or where the grade or configuration you have asked for has to come up from our Cornubia yard. Where the date is locked in at your end — a handover, a truck full of furniture arriving, a season about to start — tell us when you ring and the run gets planned to suit it."
     }
    ],
    "near": [
@@ -134,7 +134,7 @@
    "postcode": "4650",
    "flagship": false,
    "depot": "our Gympie depot, an easy run north up the Bruce, backed by the Cornubia yard",
-   "leadTime": "Usually 3–5 business days from order to on the ground",
+   "leadTime": "What the Gympie depot holds, and the short run north up the Bruce",
    "truck": "Tilt-tray for most of the old grid; crane truck for 40ft and for high-set houses where the only usable ground is out the back",
    "metaDesc": "Shipping containers for sale and hire in Maryborough. Wide heritage streets, high-set Queenslanders and Mary River flats — access and siting sorted first.",
    "line": "Maryborough is the easiest town on this stretch of coast to get a truck around, and it is not close. The surveyors laid out a proper grid with generous carriageways when the port was the point of the place, and a century and a half on, that grid still swallows a rigid truck without complaint. What it does not solve is the two things that are actually particular to Maryborough: houses built high off the ground on stumps with the good yard underneath them, and a river that has come up over Tinana and Granville often enough for everyone to have an opinion about levels.",
@@ -172,7 +172,7 @@
     },
     {
      "q": "How long does a container take to reach Maryborough?",
-     "a": "Three to five business days is normal. It is quicker where a standard 20ft is already standing at our Gympie depot and the approach at your end is clear, and it stretches where a crane has to be booked, where you have asked for a specific grade or configuration that has to come from Cornubia, or where wet weather has put a river-flat address out of action for a couple of days. If there is a fixed date on your end, tell us when you enquire."
+     "a": "The Gympie depot and the short run north up the Bruce are what set it. It is quicker where a standard 20ft is already standing at our Gympie depot and the approach at your end is clear, and it stretches where a crane has to be booked, where you have asked for a specific grade or configuration that has to come from Cornubia, or where wet weather has put a river-flat address out of action for a couple of days. If there is a fixed date on your end, tell us when you enquire."
     },
     {
      "q": "Can I put a container on a block at Tinana or Granville that has flooded before?",
@@ -198,7 +198,7 @@
    "postcode": "4670",
    "flagship": false,
    "depot": "our Gympie depot or the Cornubia yard, depending on which has the size and grade you are after",
-   "leadTime": "Usually 3–6 business days from order to on the ground",
+   "leadTime": "Whichever of Gympie or Cornubia has the size and grade you are after",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft, and a longer trailer for farm drops with a straight run in",
    "metaDesc": "Shipping containers for sale and hire in Bundaberg. Red soil, cane tramway crossings and salt air at Bargara, planned for how the district works.",
    "line": "Two things shape a Bundaberg delivery and neither is the highway. The first is red soil, which is superb country to grow things in and a genuinely deceptive surface to park twenty tonne on — it sets like a road in October and turns greasy within an hour of a storm. The second is that a lot of the district is cut up by cane tramway, and from about June the roads and headlands are busy with bins and haul-outs that were there first. Work around both and the run is easy.",
@@ -240,7 +240,7 @@
     },
     {
      "q": "How quickly can you get a container to Bundaberg?",
-     "a": "Three to six business days is the normal window from order. A standard 20ft going to a clear address at the shorter end, and it stretches where a crane is needed, where a specific grade or configuration has to come from Cornubia rather than Gympie, or where rain has taken a farm track or a soft block off the list for a couple of days. Where your date is fixed, say so when you ring and the run gets planned to suit it rather than the reverse."
+     "a": "Whichever of Gympie or Cornubia has your size and grade standing is what sets the date. A standard 20ft going to a clear address at the shorter end, and it stretches where a crane is needed, where a specific grade or configuration has to come from Cornubia rather than Gympie, or where rain has taken a farm track or a soft block off the list for a couple of days. Where your date is fixed, say so when you ring and the run gets planned to suit it rather than the reverse."
     },
     {
      "q": "Should I be worried about salt air at Bargara or Innes Park?",
@@ -262,7 +262,7 @@
    "postcode": "4680",
    "flagship": false,
    "depot": "the Cornubia yard, or Rockhampton where we have the right unit standing closer",
-   "leadTime": "Usually 4–7 business days; site deliveries are scheduled around your induction and gate access",
+   "leadTime": "Your site induction and gate access shape this as much as the yard does",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft, over-fence lifts and hillside blocks with no side access",
    "metaDesc": "Shipping containers for sale and hire in Gladstone. Site inductions, laydown yards and shutdown hire handled properly, plus advice on hillside blocks.",
    "line": "Gladstone runs on projects, and projects run on dates. A shutdown has a start and a finish written on a wall somewhere, and everything feeding it either lands inside that window or is a problem. That is the main thing we plan around here — not the drive, which is straightforward, but the gate. The other half of the district is domestic, and Gladstone housing is built across some genuinely steep ground with cut-and-fill blocks and retaining walls that decide where a container can go long before you do.",
@@ -308,7 +308,7 @@
     },
     {
      "q": "How long does delivery to Gladstone take?",
-     "a": "Four to seven business days is the usual window, and site deliveries are scheduled around your induction and gate access rather than around our run, so a firm window at your end tightens ours. It stretches where a crane truck is needed, where a particular grade or size has to come north, or where wet weather has made a rural approach out toward Calliope or Ubobo unsafe for a loaded truck. If the date is tied to a shutdown start, tell us early and we will plan backwards from it."
+     "a": "Site deliveries are scheduled around your induction and gate access rather than around our run, so a firm window at your end tightens ours. It stretches where a crane truck is needed, where a particular grade or size has to come north, or where wet weather has made a rural approach out toward Calliope or Ubobo unsafe for a loaded truck. If the date is tied to a shutdown start, tell us early and we will plan backwards from it."
     }
    ],
    "near": [
@@ -326,7 +326,7 @@
    "postcode": "4700",
    "flagship": true,
    "depot": "stock we hold at a depot in Rockhampton, backed by the Cornubia yard for anything not standing locally",
-   "leadTime": "Often 1–3 business days on a unit already in Rockhampton; longer where it has to come up from the south",
+   "leadTime": "Shortest on a unit already standing in Rockhampton; longer where it has to come up from the south",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft; side loader where a laydown wants several placed in a row",
    "metaDesc": "Shipping containers for sale and hire in Rockhampton. Stock held locally, inspection by arrangement, and real advice on black soil and Fitzroy siting.",
    "line": "There is stock in Rockhampton, which is the single most useful fact on this page, because it means a container for a Rockhampton address does not have to be trucked a thousand kilometres before it does any work. The thing that catches people out here is not supply and it is not the highway. It is black soil. Heavy cracking clay opens up wide enough in October to lose a tape measure down, closes over in the wet, and will quietly take one corner of a container with it if nobody put anything underneath.",
@@ -338,7 +338,7 @@
     {
      "h": "Local stock, and the corridor west",
      "p": [
-      "We hold containers at a depot in Rockhampton. That matters for two reasons. The obvious one is speed — a unit already standing in town can be on a Rockhampton, Gracemere or Yeppoon address in a day or two rather than waiting on a truck coming north. The less obvious one is that it makes the whole region workable. Rockhampton is the front door for a lot of country that has no realistic container supply of its own, and having stock here is what makes a delivery out to the grazing country or west along the Capricorn Highway a run rather than an expedition. It also means we can be flexible when something changes. A booking pulled because a paddock has gone soft, or a unit that needs to come back and be swapped, is a short trip rather than a thousand-kilometre problem, and that is what decides whether a supplier is any use to you when a job does not go to plan.",
+      "We hold containers at a depot in Rockhampton. That matters for two reasons. The obvious one is speed — a unit already standing in town goes to a Rockhampton, Gracemere or Yeppoon address without waiting on a truck coming north. The less obvious one is that it makes the whole region workable. Rockhampton is the front door for a lot of country that has no realistic container supply of its own, and having stock here is what makes a delivery out to the grazing country or west along the Capricorn Highway a run rather than an expedition. It also means we can be flexible when something changes. A booking pulled because a paddock has gone soft, or a unit that needs to come back and be swapped, is a short trip rather than a thousand-kilometre problem, and that is what decides whether a supplier is any use to you when a job does not go to plan.",
       "Looking at a unit before you order is welcome and it needs arranging, since there is no public counter at the depot. Ring, tell us what you are after, and we will lock in a time with somebody on hand and the unit pulled out where you can open the doors and walk the length of the floor. If the trip does not suit, photos of the actual unit are available on request and we send them before delivery, covering the roof, both ends, the corner posts and the full length of the floor. And be specific at the enquiry about what you want, because what is standing locally changes week to week, and if a particular size or grade has to come up from Cornubia you should hear that when you ask rather than when you are waiting."
      ]
     },
@@ -390,7 +390,7 @@
    "postcode": "4740",
    "flagship": true,
    "depot": "stock we hold at a depot in Mackay, with anything not standing locally carted from the Cornubia yard",
-   "leadTime": "Often 2–3 business days on a unit already in Mackay; allow a week or more if it has to come north",
+   "leadTime": "Local Mackay stock is the short path; anything carted north takes its own time",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft and for cane-country blocks where the only approach is a headland",
    "metaDesc": "Shipping containers for sale and hire in Mackay. Local stock with inspection by arrangement, plus real advice on cane access, wet season and tie-downs.",
    "line": "Mackay is the one town on this coast where three completely different customers ring in the same morning. A cane grower wants somewhere lockable for chemical before the season. A mining services outfit wants six units on a yard at Paget before a shutdown starts at Moranbah. A bloke at Blacks Beach wants his boat gear out of the weather. What ties them together is the calendar, because between the crush, the Bowen Basin schedule and the wet, there is not a lot of the year in Mackay that is not somebody's busy period.",
@@ -402,7 +402,7 @@
     {
      "h": "Stock in Mackay and the run to the Basin",
      "p": [
-      "We hold containers at a depot in Mackay. That is the difference between a container being a same-week decision and a fortnight-long logistics exercise, and it matters more the further north you go. It also makes Mackay the practical supply point for a lot of country that has nothing of its own — the Pioneer Valley, the coast toward Sarina, and the corridor west toward the Bowen Basin mining towns where a lot of the gear and consumables that go underground are staged out of a yard at Paget first. The practical effect is that a Mackay order behaves like an ordinary purchase with a date on it, rather than a freight exercise where nobody can tell you when the truck is coming. That is not a small thing this far up the coast, and it is worth asking any supplier quoting you here whether the container they are describing is actually in town.",
+      "We hold containers at a depot in Mackay. That is the difference between a container being a local purchase and a long logistics exercise, and it matters more the further north you go. It also makes Mackay the practical supply point for a lot of country that has nothing of its own — the Pioneer Valley, the coast toward Sarina, and the corridor west toward the Bowen Basin mining towns where a lot of the gear and consumables that go underground are staged out of a yard at Paget first. The practical effect is that a Mackay order behaves like an ordinary purchase with a date on it, rather than a freight exercise where nobody can tell you when the truck is coming. That is not a small thing this far up the coast, and it is worth asking any supplier quoting you here whether the container they are describing is actually in town.",
       "Seeing a unit before you order one is fine by us, it just has to be booked, because the depot runs without anybody stationed on a gate for visitors. Ring, say what you are after and when suits, and we will have someone there with the unit accessible so you can open the doors and look down the floor yourself. If getting there is not practical, photos of the actual unit are available on request and we send them before delivery. What is standing in Mackay changes week to week, so if you want something particular — a high cube, a double-door unit, a specific grade — ask at the enquiry and you will get a straight answer about whether it is here or coming."
      ]
     },
@@ -454,7 +454,7 @@
    "postcode": "4810",
    "flagship": true,
    "depot": "stock we hold at a depot in Townsville, with the Cornubia yard covering anything not standing locally",
-   "leadTime": "Usually 2–4 business days on local stock; longer where a specific grade or size has to come north",
+   "leadTime": "Local depot stock is the deciding factor here, not a freight timeline",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft and for base or port work where placement has to be precise",
    "metaDesc": "Shipping containers for sale and hire in Townsville. Stock held locally, inspection by arrangement, and straight advice on tie-downs, clay and 2019 siting.",
    "line": "Townsville is a garrison town, a port and a dry-tropics city that gets most of its rain in a handful of weeks, and every one of those facts changes what a container is for and how it should be set up. People arrive on posting and leave again, which puts a floor under storage demand year-round. The port and the corridor west to Mount Isa run on staged gear. And February 2019 taught the whole city something about where water goes that no amount of website copy could.",
@@ -488,7 +488,7 @@
    "faqs": [
     {
      "q": "Do you have containers in Townsville, or does everything come from down south?",
-     "a": "We hold stock at a depot in Townsville, which is why local orders usually run to a two to four day window rather than a freight timeline. Not every size and grade is standing here in a given week, and anything we do not have comes north from the Cornubia yard and takes noticeably longer — you will be told which applies at the quote. If you want to see one first, ring and we will arrange it; the depot is not a retail yard and there is nobody there to open up on spec."
+     "a": "We hold stock at a depot in Townsville, which is why a local order behaves like a purchase rather than a freight job. Not every size and grade is standing here in a given week, and anything we do not have comes north from the Cornubia yard and takes noticeably longer — you will be told which applies at the quote. If you want to see one first, ring and we will arrange it; the depot is not a retail yard and there is nobody there to open up on spec."
     },
     {
      "q": "Can you get a container across to Magnetic Island?",
@@ -518,7 +518,7 @@
    "postcode": "4870",
    "flagship": true,
    "depot": "stock we hold at a depot in Cairns, with the Cornubia yard covering anything that has to be sent north",
-   "leadTime": "Usually 2–4 business days on stock already in Cairns; allow a week or more for anything carted up from the south",
+   "leadTime": "Stock already in Cairns goes soonest; anything sent north from Cornubia is a longer proposition",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft and for beachside blocks with no side access; range work is sized to the road",
    "metaDesc": "Shipping containers for sale and hire in Cairns. Local stock with inspection by arrangement, plus real advice on the wet, corrosion and the range roads.",
    "line": "The honest starting point for Cairns is distance. It is a very long way from the eastern seaboard container depots, and anything trucked up here carries that distance in the price and in the calendar. So the fact that we hold stock in Cairns is not a nice extra, it is the whole reason a Cairns order behaves like a normal purchase instead of a freight project. After that, the local problems are the wet, which is a genuine wet rather than a southern idea of one, and the ranges up to the Tablelands.",
@@ -530,7 +530,7 @@
     {
      "h": "Why local stock matters more here than anywhere",
      "p": [
-      "Cairns is roughly a two-day truck run from the south-east Queensland depots, and that distance is why container buying in the far north has a reputation for being slow and awkward. We hold stock at a depot in Cairns specifically so that most orders do not have to touch that run at all. A unit already standing here can be on a Cairns, Edmonton or Smithfield address in a few days. A unit that has to be carted up is a different conversation, and it is one you should have at the quote rather than discover two weeks in. It is also the question worth putting to anybody quoting you a Cairns job: is the container you are describing actually in Cairns, or is it a photograph of something standing in a yard two days south. The answer changes the date, and up here the date is usually what people are really buying.",
+      "Cairns is roughly a two-day truck run from the south-east Queensland depots, and that distance is why container buying in the far north has a reputation for being slow and awkward. We hold stock at a depot in Cairns specifically so that most orders do not have to touch that run at all. A unit already standing here goes out to a Cairns, Edmonton or Smithfield address on a local run. A unit that has to be carted up is a different conversation, and it is one you should have at the quote rather than discover two weeks in. It is also the question worth putting to anybody quoting you a Cairns job: is the container you are describing actually in Cairns, or is it a photograph of something standing in a yard two days south. The answer changes the date, and up here the date is usually what people are really buying.",
       "So be specific when you ring. If a standard 20ft will do the job, there is a good chance one is here now. If you want a high cube, a double-door unit or a particular grade, ask, and you will be told plainly whether it is in Cairns or coming north and what that does to the date. Inspecting one is arranged in advance rather than dropped in on, because nobody is stationed at the depot to receive visitors — ring and we will set a time with somebody there and the unit pulled out where you can open the doors and walk the floor. If that is not practical, photos of the actual unit are available on request and we send them before delivery."
      ]
     },
@@ -552,7 +552,7 @@
    "faqs": [
     {
      "q": "Do you actually have containers in Cairns?",
-     "a": "Yes, we hold stock at a depot in Cairns, which is what keeps a far north order to a few days rather than a fortnight. Not every size and grade is standing here every week, and anything that has to come up from our Cornubia yard adds substantially to the date — you will be told which applies when we quote, not afterwards. Looking at one before you order is fine and we do it regularly; it needs a phone call first, because the depot has no public counter."
+     "a": "Yes, we hold stock at a depot in Cairns, which is what keeps a far north order local rather than turning it into a linehaul. Not every size and grade is standing here every week, and anything that has to come up from our Cornubia yard adds substantially to the date — you will be told which applies when we quote, not afterwards. Looking at one before you order is fine and we do it regularly; it needs a phone call first, because the depot has no public counter."
     },
     {
      "q": "Can you get a container up to Atherton, Malanda or Kuranda?",

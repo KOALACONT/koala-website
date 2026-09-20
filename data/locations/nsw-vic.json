@@ -7,7 +7,7 @@
    "postcode": "2300",
    "flagship": true,
    "depot": "Stock for the Hunter comes south down the Pacific Highway from our Grafton depot, with anything out of the ordinary carted from the Cornubia yard in south-east Queensland.",
-   "leadTime": "Usually 4–7 business days, scheduled around the southbound run",
+   "leadTime": "The southbound schedule from Grafton, and what that run is already carrying",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft, for the old terrace streets and for any lift over a fence",
    "metaDesc": "Shipping containers for sale and hire in Newcastle and the Hunter. Delivery planned for terrace streets, harbour fill, Stockton sand and soft river flats.",
    "line": "Nobody in Newcastle needs a container explained to them. The harbour handles them by the thousand, the industrial land at Mayfield and Kooragang was laid out around moving steel and coal, and half the trades in the city have worked around one at some point. That familiarity is worth something, because it means the conversation starts at the useful end. What still catches people out is the last hundred metres. The inner suburbs were surveyed for a horse and cart, the coastal end is dune sand, and a fair slice of the western suburbs sits over ground that was mined long before anybody built on it.",
@@ -19,7 +19,7 @@
     {
      "h": "Coming down the highway, not out of a Newcastle yard",
      "p": [
-      "We will be straight about how a Newcastle container reaches you. It is carted down the Pacific Highway from the Grafton depot, or occasionally from the Cornubia yard further north, and it travels on a scheduled run rather than on a truck kept idling in the Hunter waiting for your order. That is why four to seven business days is the honest window and why we will not promise you tomorrow afternoon. What you get in exchange is that the run is regular and the container is chosen before it is loaded, so you are not taking whatever happened to be nearest the gate.",
+      "We will be straight about how a Newcastle container reaches you. It is carted down the Pacific Highway from the Grafton depot, or occasionally from the Cornubia yard further north, and it travels on a scheduled run rather than on a truck kept idling in the Hunter waiting for your order. That is why we talk about which run you are going on rather than promising you tomorrow afternoon. What you get in exchange is that the run is regular and the container is chosen before it is loaded, so you are not taking whatever happened to be nearest the gate.",
       "The practical upshot is planning. If you have a fixed date — a settlement, a site start, a removalist already booked, a shed being demolished — tell us at the enquiry rather than after you have ordered, and we will build the run around it. If your date is soft, say that too, because a flexible date can often slot into a truck that is already coming this way. The one thing that does not help anybody is finding out on the Thursday that the container was needed on the Monday."
      ]
     },
@@ -49,7 +49,7 @@
     },
     {
      "q": "How long does delivery to Newcastle actually take?",
-     "a": "Four to seven business days is the normal window. The container comes south from the Grafton depot on a scheduled run rather than sitting in a Hunter yard, so this is a planned delivery, not a same-day one. A crane booking, a unit that needs a lockbox or vents fitted, or a stretch of wet weather on soft ground will add a day or two. Give us your date at the enquiry and we will work the schedule around it."
+     "a": "The southbound run from Grafton is what sets it, and how loaded that run already is. The container comes south from the Grafton depot on a scheduled run rather than sitting in a Hunter yard, so this is a planned delivery, not a same-day one. A crane booking, a unit that needs a lockbox or vents fitted, or a stretch of wet weather on soft ground will add a day or two. Give us your date at the enquiry and we will work the schedule around it."
     },
     {
      "q": "Can I see the container before it turns up in Newcastle?",
@@ -71,7 +71,7 @@
    "postcode": "2500",
    "flagship": true,
    "depot": "Containers for the Illawarra run down from our Grafton depot on the coastal schedule, with the last leg through Sydney and down the motorway.",
-   "leadTime": "Usually 5–8 business days; northern-suburbs and escarpment drops are booked into a quiet part of the day",
+   "leadTime": "The coastal run down from Grafton, then the last leg through Sydney and down the motorway",
    "truck": "Tilt-tray where there is a straight run onto the block; crane truck for below-street houses, the northern villages and most 40ft work",
    "metaDesc": "Shipping containers for sale and hire in Wollongong and the Illawarra. Mount Ousley, Bulli Pass, below-street driveways and escarpment ground allowed for.",
    "line": "There is not much flat ground in Wollongong and what there is has a house on it. The city is wedged onto a narrow shelf between the escarpment and the sea, which is lovely to live on and awkward to deliver to, because the streets follow contours rather than a grid and a great many houses sit below the level of the road they are addressed from. Add the grades a loaded truck has to negotiate to get here at all, and the Illawarra becomes a place where the access conversation happens before the price conversation, not after it.",
@@ -117,7 +117,7 @@
     },
     {
      "q": "How long is delivery to Wollongong?",
-     "a": "Five to eight business days is the normal window. Illawarra containers come down from the Grafton depot on a scheduled coastal run, so it is a planned delivery rather than a next-day one, and a crane booking or a northern-suburbs address can add a day. If you have a fixed date, tell us at the enquiry and we will build the run around it instead of telling you afterwards it did not fit."
+     "a": "It is set by the coastal run down from Grafton and the last leg through Sydney. Illawarra containers come down from the Grafton depot on a scheduled coastal run, so it is a planned delivery rather than a next-day one, and a crane booking or a northern-suburbs address can add a day. If you have a fixed date, tell us at the enquiry and we will build the run around it instead of telling you afterwards it did not fit."
     }
    ],
    "near": [
@@ -135,7 +135,7 @@
    "postcode": "2340",
    "flagship": false,
    "depot": "Tamworth stock is carted inland from our Grafton depot, up over the ranges and onto the New England, on a scheduled run rather than a truck kept waiting locally.",
-   "leadTime": "Usually 5–9 business days, built around the inland run",
+   "leadTime": "A scheduled inland run up over the ranges, not a truck kept waiting in town",
    "truck": "Tilt-tray for most town and property drops; crane truck where a gate, a yard or a set of powerlines makes a tilt unsafe",
    "metaDesc": "Shipping containers for sale and hire in Tamworth and the New England. Black soil, horse properties, long driveways and cattle grids planned for.",
    "line": "Half the containers we send to Tamworth end up on a property with horses on it, and that changes how a delivery has to be run. The other half go to town blocks and to the sheds at Taminda, where the job is simpler. What links the two is the soil. Black soil is the best growing dirt in the country and the worst thing you can stand a heavy truck on after rain, and it does not give you much warning about which mode it is in. Getting the timing and the pad right is most of the work here.",
@@ -181,7 +181,7 @@
     },
     {
      "q": "How long will it take to get a container to Tamworth?",
-     "a": "Five to nine business days is the usual window. Tamworth stock is carted inland from the Grafton depot, so it travels on a scheduled run rather than coming out of a local yard, and that is why we quote a window rather than a day. Wet ground, a crane booking, or the country festival week in January will all stretch it. If you have a fixed date — a shearing, a harvest, a shed being pulled down — give it to us at the enquiry and we will schedule to it."
+     "a": "The inland run up over the ranges sets it, and we confirm the day when your order goes on. Tamworth stock is carted inland from the Grafton depot, so it travels on a scheduled run rather than coming out of a local yard, and that is why we quote a window rather than a day. Wet ground, a crane booking, or the country festival week in January will all stretch it. If you have a fixed date — a shearing, a harvest, a shed being pulled down — give it to us at the enquiry and we will schedule to it."
     }
    ],
    "near": [
@@ -199,7 +199,7 @@
    "postcode": "2830",
    "flagship": false,
    "depot": "Dubbo containers travel west from our Grafton depot, and go onto the western schedule rather than a truck of their own.",
-   "leadTime": "Usually 6–10 business days, run with the western schedule",
+   "leadTime": "Goes onto the western schedule, so what is already travelling that way matters",
    "truck": "Tilt-tray for town blocks and firm property access; crane truck where the yard is tight or the ground will not take a truck close in",
    "metaDesc": "Shipping containers for sale and hire in Dubbo and the central west. Freight-town scheduling, red soil, river flats and real property access advice.",
    "line": "Everything that moves across this state seems to turn at Dubbo. The Newell, the Mitchell and the Golden all meet here, the rail yards work through the night, and the town has built a genuine freight economy on being the place where the road changes direction. That works in your favour on scheduling, because a truck coming this way is a normal week rather than a special trip. It does not change the two things that actually decide the job: what your ground does when it is wet, and how much room a rigid truck has once it is through your gate.",
@@ -211,7 +211,7 @@
     {
      "h": "A freight town is easier to schedule for",
      "p": [
-      "Dubbo has one real advantage over most inland towns: it is on the way to everywhere. The road network converges here, so a container heading west from the Grafton depot is on a run that would exist anyway rather than a dedicated trip made for one order. That is what keeps a six to ten business day window realistic instead of a fortnight, and it is why a flexible delivery date is worth something to you. If you can take the container in a window rather than on a named day, tell us — it often slots into a truck already coming this way.",
+      "Dubbo has one real advantage over most inland towns: it is on the way to everywhere. The road network converges here, so a container heading west from the Grafton depot is on a run that would exist anyway rather than a dedicated trip made for one order. That is what keeps a Dubbo delivery a scheduled job rather than a special trip, and it is why a flexible delivery date is worth something to you. If you can take the container in a window rather than on a named day, tell us — it often slots into a truck already coming this way.",
       "The other side is that we will not pretend to a same-week turnaround we cannot make. Dubbo is a road run from the eastern seaboard, not a local yard job, and anyone promising you tomorrow is either guessing or has already loaded something for somebody else. If you have a hard date — a lease starting, a shed coming down, a contractor arriving — give it to us at the enquiry, and we will tell you honestly whether it fits the schedule."
      ]
     },
@@ -237,7 +237,7 @@
     },
     {
      "q": "Why is delivery to Dubbo measured in a window rather than a day?",
-     "a": "Because the container is carted west from our Grafton depot on a scheduled run rather than sitting in a yard here. Six to ten business days is the honest range, and it is shorter when your date is flexible enough to fit an existing run. A crane booking, wet ground on the clay country or a unit needing vents or a lockbox fitted will push it out. Tell us your date at the enquiry and we will say straight away whether it works."
+     "a": "Because the container is carted west from our Grafton depot on a scheduled run rather than sitting in a yard here. The western schedule sets it, and it is shorter when your date is flexible enough to fit an existing run. A crane booking, wet ground on the clay country or a unit needing vents or a lockbox fitted will push it out. Tell us your date at the enquiry and we will say straight away whether it works."
     },
     {
      "q": "Is a container a sensible place to store chemicals and animal health products out here?",
@@ -263,7 +263,7 @@
    "postcode": "2650",
    "flagship": false,
    "depot": "Riverina orders come down the inland route from our Grafton depot and are scheduled onto the southern run.",
-   "leadTime": "Usually 7–12 business days, scheduled onto the southern run",
+   "leadTime": "The inland route from Grafton onto the southern run, rather than a Riverina yard",
    "truck": "Tilt-tray for town blocks, industrial yards and firm farm access; crane truck where a yard is tight or the container has to go over something",
    "metaDesc": "Shipping containers for sale and hire in Wagga Wagga and the Riverina. Frost, river flats, defence-base access and honest lead times on the southern run.",
    "line": "Wagga is a good town to deliver to and a long way to deliver from. The road in is easy — the Sturt and the Olympic Highway feed straight into a town laid out with room in it, and the industrial land at Bomen was built around rail and freight, so heavy vehicles are not a novelty. The distance is the honest constraint. This is a scheduled southern run, not a truck sitting at Bomen waiting on your order, and the two local factors that then decide the job are the river flats and the cold.",
@@ -289,7 +289,7 @@
     {
      "h": "Ordering ahead of the season",
      "p": [
-      "Riverina demand runs on a calendar. Storage gets wanted before harvest, before shearing, before a contractor starts, and everyone wants it in the same fortnight. Since Wagga containers travel down on a scheduled run rather than sitting in a local yard, the seven to twelve business day window is real and the way to beat it is to order ahead of the rush rather than during it. A month's notice before harvest gets you the size and grade you asked for. Three days' notice gets you whatever is already loaded.",
+      "Riverina demand runs on a calendar. Storage gets wanted before harvest, before shearing, before a contractor starts, and everyone wants it in the same fortnight. Since Wagga containers travel down on a scheduled run rather than sitting in a local yard, the way to get the best of it is to order ahead of the rush rather than during it. A month's notice before harvest gets you the size and grade you asked for. Last-minute notice gets you whatever is already loaded.",
       "Hire is worth a look where the need has an end date on it — a season, a build, a lease, a shed being replaced after a storm. Buying makes sense where the container becomes part of how the place runs, and out here they generally do. If it is going to live in the open holding grain, seed, feed, tools or anything that must stay dry, ask for cargo-worthy, which is inspected wind and watertight before it is loaded. The grades page sets out what separates the grades so you can pick on facts rather than on price alone."
      ]
     }
@@ -305,7 +305,7 @@
     },
     {
      "q": "Why is delivery to Wagga slower than the coast?",
-     "a": "Distance and honesty. The container is carted from our Grafton depot on a scheduled southern run rather than sitting in a Riverina yard, so seven to twelve business days is the realistic window. Frost, fog and wet ground on the river flats can shift a booking by a morning or a day. If you have a hard date, tell us before you order and we will say plainly whether it fits rather than agreeing and disappointing you later."
+     "a": "Distance and honesty. The container is carted from our Grafton depot on a scheduled southern run rather than sitting in a Riverina yard, so the run is what sets your date. Frost, fog and wet ground on the river flats can shift a booking by a morning or a day. If you have a hard date, tell us before you order and we will say plainly whether it fits rather than agreeing and disappointing you later."
     },
     {
      "q": "What size suits a Riverina farm store?",
@@ -327,7 +327,7 @@
    "postcode": "2640",
    "flagship": false,
    "depot": "Border orders come down the inland route from our Grafton depot and are scheduled onto the same southern run as the Riverina.",
-   "leadTime": "Usually 7–12 business days on the southern schedule",
+   "leadTime": "Shares the southern run with the Riverina, so that schedule sets yours",
    "truck": "Tilt-tray for most town, estate and industrial drops; crane truck for tight yards, over-fence lifts and awkward river-block access",
    "metaDesc": "Shipping containers for sale and hire in Albury, Wodonga and along the Murray. Cross-border realities, frost, river flats and honest delivery windows.",
    "line": "Albury is one address and two sets of rules. The Murray runs through the middle of it, the state line runs with the river, and a container going into a Lavington back yard and the same container going into a Wodonga back yard are answerable to different councils even though the two blocks are ten minutes apart. That is worth knowing before you order rather than after. The road side is comparatively kind: the Hume runs straight past, the freight and rail precinct north of town is built for heavy vehicles, and access is rarely the hard part.",
@@ -365,7 +365,7 @@
     },
     {
      "q": "How long does a container take to reach Albury?",
-     "a": "Seven to twelve business days is the honest window. Border deliveries come down from our Grafton depot on a scheduled southern run rather than out of a local yard, so this is a planned delivery and we would rather tell you that up front than promise a date we would miss. Winter frost, fog and wet rural driveways can shift a booking by a morning. Give us your date at the enquiry and we will tell you straight away whether it fits the schedule."
+     "a": "The southern run from Grafton sets it, and we confirm the day once your order is on that run. Border deliveries come down from our Grafton depot on a scheduled southern run rather than out of a local yard, so this is a planned delivery and we would rather tell you that up front than promise a date we would miss. Winter frost, fog and wet rural driveways can shift a booking by a morning. Give us your date at the enquiry and we will tell you straight away whether it fits the schedule."
     },
     {
      "q": "Will a container be alright sitting under river red gums on a Murray block?",
@@ -391,7 +391,7 @@
    "postcode": "2800",
    "flagship": false,
    "depot": "Central west orders are carted inland from our Grafton depot and go onto the scheduled tablelands run.",
-   "leadTime": "Usually 6–10 business days; winter drops on unsealed ground are booked for later in the morning",
+   "leadTime": "The scheduled tablelands run, and what winter has done to unsealed ground",
    "truck": "Tilt-tray for town blocks, orchards and firm farm tracks; crane truck for tight yards and where a truck cannot get close to the spot",
    "metaDesc": "Shipping containers for sale and hire in Orange and district. Cold-climate condensation, basalt soil, orchard and vineyard access and honest lead times.",
    "line": "Orange sits high enough that the weather is a genuine part of the specification, not small talk. Frost most of winter, snow on Canobolas some years, and cold clear nights that make a steel box sweat on the inside if nobody has thought about ventilation. Then there is the soil, which is the deep red basalt that grows the apples and the cherries and holds water like a sponge through a long wet winter. Both of those change what you should buy and how the delivery has to be timed, and both are easier to deal with before the truck is booked.",
@@ -433,7 +433,7 @@
     },
     {
      "q": "How long is delivery to Orange?",
-     "a": "Six to ten business days is the usual window. Containers for the central west are carted inland from the Grafton depot on a scheduled run rather than sitting in a yard here, so it is a planned delivery rather than a next-day one. Winter ground conditions and crane bookings can add a day or two. If you have a fixed date — a harvest, a contractor starting, a shed coming down — tell us at the enquiry and we will schedule around it."
+     "a": "The scheduled tablelands run sets it, along with what winter has done to unsealed ground. Containers for the central west are carted inland from the Grafton depot on a scheduled run rather than sitting in a yard here, so it is a planned delivery rather than a next-day one. Winter ground conditions and crane bookings can add a day or two. If you have a fixed date — a harvest, a contractor starting, a shed coming down — tell us at the enquiry and we will schedule around it."
     },
     {
      "q": "What can I do about damp getting into stored goods over winter?",
@@ -455,7 +455,7 @@
    "postcode": "2795",
    "flagship": false,
    "depot": "Bathurst orders travel inland from our Grafton depot and are scheduled onto the same tablelands run as the rest of the central west.",
-   "leadTime": "Usually 6–10 business days; avoid the week of the October race meeting",
+   "leadTime": "The tablelands run from Grafton; the October race meeting is the week to work around",
    "truck": "Tilt-tray for town blocks, industrial yards and firm rural access; crane truck where the yard is tight or the spot cannot be reached directly",
    "metaDesc": "Shipping containers for sale and hire in Bathurst, Kelso and district. Frost hollows, granite country, race-week scheduling and cold-climate condensation.",
    "line": "Two things shape a Bathurst delivery and neither of them is the container. The first is cold. This is a frost hollow on a plain at nine hundred metres, the fog sits in it on winter mornings, and a sealed steel box in that climate will collect water on the inside of its roof unless somebody has thought about airflow. The second is one week in October, when the town's population multiplies, every road in is busy and a truck on a schedule is optimistic. Plan around both and the rest of the job is comparatively simple.",
@@ -501,7 +501,7 @@
     },
     {
      "q": "How long does a container take to get to Bathurst?",
-     "a": "Six to ten business days is the normal window. Containers for the central west are carted inland from our Grafton depot on a scheduled run rather than sitting in a local yard, which is why we quote a window rather than a day. Winter ground conditions, a crane booking or the October event week will push it out. Tell us your date at the enquiry and we will confirm honestly whether that fits the schedule."
+     "a": "The tablelands run from Grafton sets it, and we confirm the day when the order goes on. Containers for the central west are carted inland from our Grafton depot on a scheduled run rather than sitting in a local yard, which is why we quote a window rather than a day. Winter ground conditions, a crane booking or the October event week will push it out. Tell us your date at the enquiry and we will confirm honestly whether that fits the schedule."
     }
    ],
    "near": [
@@ -519,19 +519,19 @@
    "postcode": "3220",
    "flagship": true,
    "depot": "Geelong orders are carted south from the Cornubia yard and the Grafton depot on the interstate schedule, which is why we quote a window and mean it.",
-   "leadTime": "Usually 8–14 business days on the interstate schedule",
+   "leadTime": "The far end of our interstate schedule, so the run south is what governs it",
    "truck": "Tilt-tray for estate blocks, industrial yards and firm ground; crane truck for laneway access, over-fence lifts and most 40ft placements on tight lots",
    "metaDesc": "Shipping containers for sale and hire in Geelong, the Bellarine and Surf Coast. Reactive clay, coastal sand, laneway access and honest lead times.",
-   "line": "Geelong knows containers better than most cities its size. The port works them, the industrial land north of town was built around heavy manufacturing, and a lot of local trades have loaded or unloaded one at some point. What we will not pretend about is where ours come from. Geelong is the far end of our run and the container travels a long way south to reach you, which is why the window is a fortnight rather than a few days. Say your date early and it is a non-issue. Leave it late and no amount of goodwill fixes the distance.",
+   "line": "Geelong knows containers better than most cities its size. The port works them, the industrial land north of town was built around heavy manufacturing, and a lot of local trades have loaded or unloaded one at some point. What we will not pretend about is where ours come from. Geelong is the far end of our run and the container travels a long way south to reach you, which is why we talk about which interstate run you are on rather than a date plucked out of the air. Say your date early and it is a non-issue. Leave it late and no amount of goodwill fixes the distance.",
    "uses": "trade and plant storage across the industrial land at North Geelong, Corio and Breakwater, site stores for the constant estate build work at Armstrong Creek, Charlemont and Mount Duneed, surf, board and wetsuit storage through Torquay and Jan Juc where the garage gave up years ago, boat and fishing gear storage on the Bellarine at Ocean Grove, Barwon Heads and Portarlington, hay and machinery storage on the basalt plains grazing country out through Lara, Little River and Bannockburn, and household storage while a Newtown or Geelong West weatherboard is renovated",
    "access": [
     "Three different ground types sit within twenty minutes of each other here and each one wants a different approach. The basalt plains north and west — Lara, Little River, Corio and out toward Bannockburn — are heavy black cracking clay. Dry, it is hard enough to carry anything and opens into cracks you can lose a tape measure down. Wet, it becomes grease that a loaded rigid truck will not climb or steer on, and it stays that way for days after the surface looks dry. The Armstrong Creek and Charlemont growth corridor is the same reactive clay with cut-and-fill estate blocks on top of it, so you get young ground that has not settled combined with soil that swells and shrinks through the year, which is the worst combination there is for a container left sitting on bare turf. Those estate streets also bring the familiar list: narrow carriageways, cars both sides, and service pits and stormwater grates at the kerb line that a loaded rear axle will crack, at the property owner's cost rather than the driver's. The Bellarine and Surf Coast are the opposite problem — Ocean Grove, Barwon Heads, Point Lonsdale and the Torquay side are sand over a shallow water table, which drains beautifully and carries very little, and a truck will sit down into a nature strip that looked entirely solid. Older Geelong is a third case again. Geelong West, Newtown and Chilwell have narrow streets, bluestone kerbs, rear laneways barely wide enough for a ute and side gates set out for a wheelbarrow, so a crane lift from the street is often quicker and safer than trying to thread a tilt-tray down the side. And the wind belongs on this list. A strong south-westerly off Corio Bay will stop a crane lift, because nobody swings a six-metre steel sail over a roof in a gale. We will move the hour rather than take the risk."
    ],
    "sections": [
     {
-     "h": "Why the window is a fortnight",
+     "h": "Why the run south is the thing that decides your date",
      "p": [
-      "We would rather be straight about this than clever. Geelong is the southern end of our run, the container is carted down from the Cornubia yard or the Grafton depot on an interstate schedule, and eight to fourteen business days is the honest window from order to on the ground. There is no local yard here with your container standing in it, and any supplier who quotes you a day rather than a window is either working off a different model entirely or telling you what you want to hear.",
+      "We would rather be straight about this than clever. Geelong is the southern end of our run, the container is carted down from the Cornubia yard or the Grafton depot on an interstate schedule, and that run is what decides when it lands rather than anything at your end. There is no local yard here with your container standing in it, and any supplier who quotes you a day rather than a window is either working off a different model entirely or telling you what you want to hear.",
       "The practical way to work with that is simple. If your date is fixed — a settlement, a lease start, a site handover, a build program — tell us at the enquiry, before anything is ordered, and we will say plainly whether it fits. If your date is flexible, say that too, because a flexible order slots into a run that is already heading south. And if the requirement is genuinely urgent and we cannot make it, we will tell you that on the phone rather than take the order and let you find out."
      ]
     },
@@ -553,7 +553,7 @@
    "faqs": [
     {
      "q": "Why is a Geelong delivery slower than a coastal New South Wales one?",
-     "a": "Distance, plainly. Containers for Geelong are carted south from our Cornubia yard and Grafton depot on an interstate schedule rather than pulled out of a local yard, so eight to fourteen business days is the realistic window. It is a scheduled truck, not a next-day service. The trade-off is that the unit is chosen and checked before it is loaded rather than being whatever was closest to the gate. Give us your date at the enquiry and we will tell you honestly whether it works."
+     "a": "Distance, plainly. Containers for Geelong are carted south from our Cornubia yard and Grafton depot on an interstate schedule rather than pulled out of a local yard, so the schedule is what sets your date. It is a scheduled truck, not a next-day service. The trade-off is that the unit is chosen and checked before it is loaded rather than being whatever was closest to the gate. Give us your date at the enquiry and we will tell you honestly whether it works."
     },
     {
      "q": "My Geelong West house only has a rear laneway. Can you deliver?",

@@ -7,7 +7,7 @@
    "postcode": "5000",
    "flagship": true,
    "depot": "container depots around Outer Harbor and the Wingfield–Gillman industrial area, topped up from the eastern seaboard when a grade or a size runs short",
-   "leadTime": "Usually 3–6 business days from order to on the ground",
+   "leadTime": "What the Outer Harbor and Wingfield yards hold, and what has to come east to fill a gap",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft, for Hills blocks and for any inner-suburban lift over a fence",
    "metaDesc": "Shipping containers for sale and hire in Adelaide. Reactive clay, narrow inner streets and Hills access allowed for before the truck is booked.",
    "line": "Adelaide sits on some of the most reactive ground in the country, and that is the one thing worth getting right here. The clay across the plains and the older inner suburbs takes up water through a wet winter and gives it back over a dry summer, and it shifts a long way doing it. A container dropped straight onto that follows it down, one corner at a time, and a racked box is a box whose doors fight you every morning. Everything else — Hills roads, Stobie poles, narrow bluestone frontages — is solvable with a phone call. The ground needs planning.",
@@ -49,7 +49,7 @@
     },
     {
      "q": "How long does delivery take in Adelaide?",
-     "a": "Three to six business days is the normal window from order to on the ground for a standard unit going to an address with workable access. What stretches it is a crane booking, a grade or size that has to come across from the eastern states first, or wet weather on a Hills driveway where waiting two days beats cutting ruts through your property. If you have a fixed date — a settlement, a site start, a vintage, a removalist already booked — say so at the enquiry and the run gets built around it."
+     "a": "For a standard unit going to an address with workable access, the question is simply whether Outer Harbor or Wingfield is holding it. What stretches it is a crane booking, a grade or size that has to come across from the eastern states first, or wet weather on a Hills driveway where waiting two days beats cutting ruts through your property. If you have a fixed date — a settlement, a site start, a vintage, a removalist already booked — say so at the enquiry and the run gets built around it."
     },
     {
      "q": "Can I see the container before it is delivered to my Adelaide address?",
@@ -71,7 +71,7 @@
    "postcode": "2600",
    "flagship": true,
    "depot": "the Sydney container depots, run down the Hume and in off the Federal Highway — the ACT has no port of its own",
-   "leadTime": "Usually 4–7 business days from order to on the ground",
+   "leadTime": "The ACT has no port of its own, so the run down the Hume from Sydney sets it",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft and for verges crowded with mature street trees",
    "metaDesc": "Shipping containers for sale and hire in Canberra and the ACT. Road-freighted from Sydney, with frost, condensation and wind planned for properly.",
    "line": "Nothing reaches Canberra by sea. Every container in the ACT has been carted down the Hume and in off the Federal from a Sydney depot, and that road leg sets both the timing and what is genuinely available in a given week. Once it is here the city is one of the easier deliveries in the country — wide streets, deep verges, room to work a truck. The two things that catch people out are not access at all. They are the cold, which does interesting things to the inside of a sealed steel box, and the wind that comes off the Monaro.",
@@ -83,7 +83,7 @@
     {
      "h": "Everything arrives down the Hume",
      "p": [
-      "The ACT has no port and no container terminal, so every box that lands in Canberra has already done a road leg from a Sydney depot. That is not a disadvantage so much as a scheduling fact, and it explains why the honest window here is four to seven business days rather than the two or three you would hear quoted on the coast. It also means the practical selection in any given week is whatever the Sydney depots are holding plus what can be moved onto a truck heading south. If you want something specific — a matched pair, a particular door setup, a high cube rather than a standard — the earlier that is on the table the better the answer will be.",
+      "The ACT has no port and no container terminal, so every box that lands in Canberra has already done a road leg from a Sydney depot. That is not a disadvantage so much as a scheduling fact, and it is why a Canberra date is set by the Hume run rather than by a local yard. It also means the practical selection in any given week is whatever the Sydney depots are holding plus what can be moved onto a truck heading south. If you want something specific — a matched pair, a particular door setup, a high cube rather than a standard — the earlier that is on the table the better the answer will be.",
       "On whether to buy or hire, the road leg pushes the decision a little further toward buying than it would on the coast, simply because moving a container in and out of the Territory is a real trip in both directions. Hire still makes clear sense where the need has an end date on it: a build with a program attached, a club season, a records purge, a house being extended. Where the container becomes part of how a site works — a permanent store on a Hume or Fyshwick lot, a gear shed on a rural block at Sutton — buying usually wins. Grade is the separate question, and for anything living outdoors through a Canberra winter with contents that matter, cargo-worthy is the grade to ask for, since those units are graded wind and watertight. The grades page lays out what each one actually means."
      ]
     },
@@ -105,7 +105,7 @@
    "faqs": [
     {
      "q": "Why does a container take longer to reach Canberra than the coast?",
-     "a": "Because the ACT has no port and no container terminal. Everything comes off a ship in Sydney, sits in a depot there, and then does a road leg down the Hume and in off the Federal before it gets anywhere near your block. Four to seven business days is the realistic window, and a specific grade, size or door configuration can add to that if it has to be found and moved onto the right truck first. Tell us your date at the enquiry and we will tell you honestly whether it fits rather than promising a coastal timeframe we cannot hold to."
+     "a": "Because the ACT has no port and no container terminal. Everything comes off a ship in Sydney, sits in a depot there, and then does a road leg down the Hume and in off the Federal before it gets anywhere near your block. It is set by the run down the Hume, and a specific grade, size or door configuration adds to it if the unit has to be found and moved onto the right truck first. Tell us your date at the enquiry and we will tell you honestly whether it fits rather than promising a coastal timeframe we cannot hold to."
     },
     {
      "q": "Will condensation be a problem in a Canberra winter?",
@@ -135,7 +135,7 @@
    "postcode": "7000",
    "flagship": true,
    "depot": "the Melbourne depots, shipped across Bass Strait to the north-west coast and carted down the Midland Highway",
-   "leadTime": "Usually 10–15 business days, and it moves with the Bass Strait sailing schedule",
+   "leadTime": "The Bass Strait sailing schedule sets the clock, then the Midland Highway leg",
    "truck": "Tilt-tray for 10ft and 20ft where the drive allows it; crane truck for 40ft and for the steep blocks above the city",
    "metaDesc": "Shipping containers for sale and hire in Hobart. Honest Bass Strait lead times, steep dolerite blocks and Channel deliveries sorted before you order.",
    "line": "Bass Strait is the honest answer to most questions about a Hobart delivery. Containers reach Tasmania on a sailing rather than a schedule you can lean on, then run down the Midland Highway, and that means ordering earlier than you would on the mainland. We would rather give you a real date than a hopeful one. The other half of the job is what the container lands on. Hobart is built up the flank of a dolerite mountain — the streets climb, the blocks fall away, and there is rock a spade's depth under a lot of it.",
@@ -147,7 +147,7 @@
     {
      "h": "Bass Strait sets the calendar",
      "p": [
-      "There is no way to make a container arrive in Hobart as fast as one arrives in a mainland capital, and we are not going to pretend otherwise. The unit is picked in a Melbourne depot, loaded for a sailing, crosses to the north-west coast and then runs down the Midland Highway to you. Every one of those legs has a schedule attached and none of them are ours to move. Ten to fifteen business days is the realistic window, and it can be shorter if the timing lines up with a sailing that is already loading and longer if it does not, or if the weather closes the Strait. What that means practically is simple: order earlier than feels necessary. If there is a fixed date on the other end — a harvest, a settlement, a build starting, a lease ending — tell us at the enquiry and we will work backwards from it rather than forwards from today.",
+      "There is no way to make a container arrive in Hobart as fast as one arrives in a mainland capital, and we are not going to pretend otherwise. The unit is picked in a Melbourne depot, loaded for a sailing, crosses to the north-west coast and then runs down the Midland Highway to you. Every one of those legs has a schedule attached and none of them are ours to move. It can be shorter if the timing lines up with a sailing that is already loading and longer if it does not, or if the weather closes the Strait. What that means practically is simple: order earlier than feels necessary. If there is a fixed date on the other end — a harvest, a settlement, a build starting, a lease ending — tell us at the enquiry and we will work backwards from it rather than forwards from today.",
       "The distance also changes the buy-or-hire calculation. Sending a hire container back across the water at the end of a job is a real movement, so short hires make less sense here than they do in Melbourne or Brisbane, while long hires and purchases both hold up well. If the container is going to be part of how a farm, a wharf-side operation or a workshop runs, buying is usually the sensible end of it. Grade is the separate call: for anything sitting outdoors in this climate with contents you need dry, cargo-worthy is what to ask for, because those units are graded wind and watertight. The grades page explains the differences properly."
      ]
     },
@@ -169,7 +169,7 @@
    "faqs": [
     {
      "q": "How long does it take to get a container to Hobart?",
-     "a": "Ten to fifteen business days is the realistic window, and we would rather say that than quote a mainland timeframe we cannot meet. The unit is picked in Melbourne, loaded for a Bass Strait sailing, crosses to the north-west coast and then runs down the Midland Highway. Those schedules are not ours to move and rough weather in the Strait can add to them. Order earlier than feels necessary, and tell us any fixed date up front. Since you are buying across water, ask for photos of the actual unit on request and we will send them before delivery — corners, door end, roof and internal floor."
+     "a": "The sailing schedule sets it rather than a truck, and we would rather say that than quote a mainland timeframe we cannot meet. The unit is picked in Melbourne, loaded for a Bass Strait sailing, crosses to the north-west coast and then runs down the Midland Highway. Those schedules are not ours to move and rough weather in the Strait can add to them. Order earlier than feels necessary, and tell us any fixed date up front. Since you are buying across water, ask for photos of the actual unit on request and we will send them before delivery — corners, door end, roof and internal floor."
     },
     {
      "q": "Can you deliver to a steep block in West Hobart or Sandy Bay?",
@@ -199,7 +199,7 @@
    "postcode": "0800",
    "flagship": true,
    "depot": "our own stock held at a Darwin depot, topped up off the wharf at East Arm — inspection there by arrangement",
-   "leadTime": "Usually 2–5 business days through the dry; rural drops stretch through the wet",
+   "leadTime": "Darwin depot stock decides it, and rural drops stretch out through the wet",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck or side loader for 40ft and for tight Palmerston frontages",
    "metaDesc": "Shipping containers for sale and hire in Darwin, with stock held locally. Wet season access, tropical corrosion and rural block delivery handled straight.",
    "line": "Darwin runs on two calendars and a container sits in the middle of both. Through the dry everything is easy — the ground is hard, the rural tracks hold up and a truck goes where you point it. From the build-up through to April it is a different town. Black soil turns to porridge, driveways get cut, and a job that took an hour in July becomes a conversation about whether it is worth waiting a week. We hold stock at a Darwin depot rather than carting every box up the track, and that is what keeps any of this workable.",
