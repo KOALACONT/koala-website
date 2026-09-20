@@ -339,7 +339,7 @@
         if (btn) { btn.disabled = false; btn.textContent = was; }
       }
       /* Success ONLY after the server has accepted the lead. */
-      function ok() {
+      function ok(receipt) {
         var d = document.createElement("div");
         d.className = "q-ok";
         d.setAttribute("role", "status");
@@ -351,7 +351,10 @@
         try { d.focus(); } catch (e2) {}
         /* Conversion counts on ACCEPTED submit only, once, with no personal
            data as a parameter. */
-        adsConvert("form");
+        if (receipt.duplicate !== true) {
+          adsConvert("form");
+          if (typeof window.koalaMetaLead === "function") window.koalaMetaLead();
+        }
         if (location.pathname !== "/thank-you/") setTimeout(function () { location.href = "/thank-you/"; }, 900);
       }
       /* The failure path shows a real failure and keeps every typed value.
@@ -376,8 +379,8 @@
       }).then(function (r) {
         if (!r.ok) { bad(); return; }
         return r.json().then(function (j) {
-          if (j && j.success === false) bad(); else ok();
-        }, function () { ok(); });
+          if (j && j.success === true && typeof j.id === "string" && j.id) ok(j); else bad();
+        }, bad);
       }).catch(bad);
     });
   });

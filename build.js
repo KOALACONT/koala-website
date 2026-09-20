@@ -678,7 +678,8 @@ function foot(hasQuote) {
   <div class="foot-base">© ${new Date().getFullYear()} ${esc(BRAND)} — shipping container sales, hire and delivery ${esc(SERVICE_AREA)}. ${PRICES ? "Prices shown are guide prices in AUD and exclude GST; delivery is quoted with the container." : "Every price is quoted for the exact unit with delivery to your address, in AUD ex GST."}</div>
 </div></footer>
 <div class="actionbar"><a class="btn btn-dark" href="${S.phoneHref}">Call ${esc(S.phone)}</a><a class="btn btn-primary" href="${hasQuote ? "#quote" : "/contact/"}">Get a price</a></div>
-<script id="site-config" type="application/json">${JSON.stringify({ endpoint: S.leadEndpoint, brand: S.leadBrand, domain: S.leadSource, phone: S.phone, phoneHref: S.phoneHref, email: S.email, promise: PROMISE, ads: ADS })}</script>
+<script id="site-config" type="application/json">${JSON.stringify({ endpoint: S.leadEndpoint, brand: S.leadBrand, domain: S.leadSource, phone: S.phone, phoneHref: S.phoneHref, email: S.email, promise: PROMISE, ads: ADS, metaPixel: TEST ? null : S.metaPixel })}</script>
+${S.metaPixel && !TEST ? `<script src="/js/meta.js?v=${assetHash("js/meta.js")}" defer></script>` : ""}
 <script src="/js/app.js?v=${JS_V}" defer></script></body></html>`;
 }
 
