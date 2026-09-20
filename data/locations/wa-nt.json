@@ -7,7 +7,7 @@
    "postcode": "6430",
    "flagship": true,
    "depot": "our Fremantle depot, carted east up the Great Eastern Highway through Southern Cross and Coolgardie",
-   "leadTime": "Usually 7-12 business days from order to on the ground, and faster when a truck is already running east",
+   "leadTime": "Shorter when a truck is already running east up the Great Eastern Highway",
    "truck": "Tilt-tray for 10ft and 20ft where the approach is firm; side loader or crane truck for 40ft and for anything lifted into a fenced compound",
    "metaDesc": "Shipping containers for sale and hire in Kalgoorlie. Carted east from Fremantle for Goldfields mine sites, workshops, yards and homes. Call 1300 467 776.",
    "line": "Six hundred kilometres of Great Eastern Highway separates the Goldfields from the nearest port, and that one fact shapes every container decision made in Kalgoorlie. Cartage is not a rounding error out here. The way to keep it sensible is to travel on a truck already heading east rather than sending one out for a single box, which means being a bit flexible about the day and very precise about the specification. Nobody wants the wrong container standing in a yard at Boulder with six hundred kilometres of highway between it and anywhere it could be swapped.",
@@ -41,7 +41,7 @@
    "faqs": [
     {
      "q": "How long does a container take to get to Kalgoorlie?",
-     "a": "Usually seven to twelve business days from order to on the ground. The container itself is rarely the hold-up. What sets the date is when a truck is next running east with room on the deck, and whether the unit needs anything fitted before it goes, like extra vents, a personnel door or a paint job. If you have a fixed date, a shutdown, a site start or a lease ending, tell us at the enquiry and we will work backwards from it. Ordering a fortnight early costs nothing and buys you the good end of that range."
+     "a": "The container itself is rarely the hold-up. What sets the date is when a truck is next running east with room on the deck, and whether the unit needs anything fitted before it goes, like extra vents, a personnel door or a paint job. If you have a fixed date, a shutdown, a site start or a lease ending, tell us at the enquiry and we will work backwards from it. Ordering well ahead costs nothing and gives us the best chance of putting you on a run already heading east."
     },
     {
      "q": "Can you deliver straight to a mine site or exploration camp out past Leonora?",
@@ -71,7 +71,7 @@
    "postcode": "6230",
    "flagship": true,
    "depot": "our Fremantle depot, a straight run down the Forrest Highway of about two hours",
-   "leadTime": "Usually 3-6 business days from order to on the ground",
+   "leadTime": "A straight run down the Forrest Highway, so Fremantle depot stock is the variable",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck or side loader for 40ft and for the older streets around East and South Bunbury",
    "metaDesc": "Shipping containers for sale and hire in Bunbury. Short-haul from Fremantle to the South West, with honest advice on sand, estuary ground and salt air.",
    "line": "Bunbury is the easy one on this list. The Forrest Highway puts a truck here in about two hours from the depot, there is a working port in town, and the industrial land at Picton and Davenport is flat, sealed and built for heavy vehicles. So the interesting part of a Bunbury job is never getting the container to Bunbury. It is the last thirty metres, where coastal sand carries far less than it looks like it should, the low ground near the estuary stays soft most of winter, and a peppermint tree has had sixty years to lean out over the road.",
@@ -105,7 +105,7 @@
    "faqs": [
     {
      "q": "How quickly can you deliver a container to Bunbury?",
-     "a": "Three to six business days is the normal window, and it can be quicker on a standard 20ft going to an address with clear access. Bunbury benefits from being a short run down the Forrest Highway from the depot rather than a linehaul, so we are not waiting for a truck heading that way once a fortnight. What stretches it is a crane booking, a unit that needs modification first, or wet weather on soft ground where waiting two days beats bogging a truck in your paddock. Give us your date at the enquiry and we will build the run around it."
+     "a": "A standard 20ft going to an address with clear access is the simplest case; the variable is what is standing at Fremantle. Bunbury benefits from being a short run down the Forrest Highway from the depot rather than a linehaul, so we are not waiting for a truck heading that way once a fortnight. What stretches it is a crane booking, a unit that needs modification first, or wet weather on soft ground where waiting two days beats bogging a truck in your paddock. Give us your date at the enquiry and we will build the run around it."
     },
     {
      "q": "Can you deliver further south, to Busselton, Margaret River or Manjimup?",
@@ -135,7 +135,7 @@
    "postcode": "6530",
    "flagship": true,
    "depot": "our Fremantle depot, roughly four and a half hours north on the Brand Highway",
-   "leadTime": "Usually 5-9 business days from order to on the ground",
+   "leadTime": "Fremantle depot stock, and the northbound run up the Brand Highway",
    "truck": "Tilt-tray for 10ft and 20ft; side loader or crane truck for 40ft, with lifts booked for the morning where possible",
    "metaDesc": "Shipping containers for sale and hire in Geraldton. Carted up the Brand Highway for fishing, grain, mining and Mid West farm jobs. Call 1300 467 776.",
    "line": "Wind decides more Geraldton deliveries than anything else does. The southerly comes in hard most summer afternoons and it has no respect at all for a container hanging off a crane hook, because an empty 20ft is a very effective sail. So lifts get booked early in the day and occasionally get moved when the forecast is ugly. Everything else about Geraldton is straightforward by the standards of remote Western Australia: a sealed run up the Brand Highway, a town that has moved freight through its port for a century, and industrial ground at Narngulu that a truck can actually use.",
@@ -169,7 +169,7 @@
    "faqs": [
     {
      "q": "How long does delivery to Geraldton take?",
-     "a": "Usually five to nine business days from order to on the ground. The run up the Brand Highway is sealed the whole way and reasonably quick, so the timing is mostly about when a truck is heading north with room on it and whether the unit needs anything fitted first. Crane jobs can add a day or two because they have to fit a morning slot with a workable forecast. If you have a fixed date, tell us at the enquiry rather than after, and order a week earlier than you think you need to."
+     "a": "It follows Fremantle depot stock and the northbound run up the Brand Highway. The run up the Brand Highway is sealed the whole way and reasonably quick, so the timing is mostly about when a truck is heading north with room on it and whether the unit needs anything fitted first. Crane jobs can add a day or two because they have to fit a morning slot with a workable forecast. If you have a fixed date, tell us at the enquiry rather than after, and order a week earlier than you think you need to."
     },
     {
      "q": "Can wind actually delay my delivery?",
@@ -199,10 +199,10 @@
    "postcode": "6721",
    "flagship": false,
    "depot": "our Fremantle depot, with roughly sixteen hundred kilometres of Great Northern and North West Coastal Highway between there and the Pilbara",
-   "leadTime": "Usually 2-4 weeks from order to on the ground, and longer through the wet season",
+   "leadTime": "Sixteen hundred kilometres of highway, and the wet season, both have a say",
    "truck": "Side loader or crane truck for most Pilbara work, since 40ft is common and site cranes are not always free; tilt-tray for 10ft and 20ft into town addresses",
    "metaDesc": "Shipping containers for sale and hire in Port Hedland and South Hedland. Honest lead times, cyclone tie-down and ground prep advice for the Pilbara.",
-   "line": "Think in weeks, not days. Port Hedland is around sixteen hundred kilometres north of the nearest depot, and the honest answer to how fast a container can get here is that it depends on when a truck next runs this way with room on the deck. From November through April it depends on the weather as well, because the Turner, Yule and De Grey crossings cut the highway after a serious rain event and the port clears out ahead of a cyclone. None of that is a reason not to order. It is the reason to order early and to be specific.",
+   "line": "Distance sets the pace here. Port Hedland is around sixteen hundred kilometres north of the nearest depot, and the honest answer to how fast a container can get here is that it depends on when a truck next runs this way with room on the deck. From November through April it depends on the weather as well, because the Turner, Yule and De Grey crossings cut the highway after a serious rain event and the port clears out ahead of a cyclone. None of that is a reason not to order. It is the reason to order early and to be specific.",
    "uses": "lay-down and consumable stores for the contractors working the port, rail and the Boodarie industrial land, spares and tooling storage for shutdown crews who need everything on site before day one, secure trade stores across the Wedgefield industrial estate, crib rooms, first aid rooms and site offices on construction packages, dry storage on the stations running out toward Marble Bar and Nullagine, and household storage for people arriving on a transfer into South Hedland before a house is ready",
    "access": [
     "Hedland splits into two towns for delivery purposes and they behave differently. The West End and the older port-side streets are hemmed in by the harbour, the rail and the stockpiles, with heavy vehicle routes, restricted areas and traffic management that a container truck has to work around rather than through. South Hedland is easier: it was planned in one go, the streets are wide, the estates have room, and a rigid can generally get square to a block without drama. Wedgefield is the best of the lot, purpose-built for industry with hardstand, wide aprons and gear already on site to help. Ground in the Pilbara is mostly excellent. Red laterite gravel and compacted pindan carry a container without complaint, and where a pad has been properly built you can put four castings down and forget about it. The exceptions are worth knowing. The tidal flats around the harbour and out toward Boodarie are soft, saline and unforgiving of a loaded truck, and anything on made-up ground within a year of being placed will still be moving. The wet season changes all of it: what was a hardstand in August is a bog in February, and the black soil pockets around the creek systems hold water long after the rain has stopped. The bigger constraint, though, is the highway itself. When the Turner or the De Grey come up, the road shuts, and it stays shut until the water goes down and the road authority reopens it. Trucks sit and wait, sometimes for days. We build that into the estimate rather than pretending it does not happen. Send site photos, the site contact and the induction requirements with your enquiry, and we will tell you what is realistic on timing before anything gets booked."
@@ -233,7 +233,7 @@
    "faqs": [
     {
      "q": "How long does a container take to reach Port Hedland?",
-     "a": "Plan on two to four weeks from order to on the ground in the dry, and allow more between November and April. The distance is only part of it. The date is really set by when a truck runs north with room on the deck, and a container that travels on a scheduled run rather than a dedicated trip is a very different proposition. Wet season adds road closures at the river crossings that nobody can plan around. If you have a shutdown or a site start date, order well ahead of it and tell us the date at the enquiry."
+     "a": "Plan around the northbound run rather than a date of your own choosing, and allow more between November and April. The distance is only part of it. The date is really set by when a truck runs north with room on the deck, and a container that travels on a scheduled run rather than a dedicated trip is a very different proposition. Wet season adds road closures at the river crossings that nobody can plan around. If you have a shutdown or a site start date, order well ahead of it and tell us the date at the enquiry."
     },
     {
      "q": "Can you still deliver during the wet or cyclone season?",
@@ -263,7 +263,7 @@
    "postcode": "6714",
    "flagship": false,
    "depot": "our Fremantle depot, about fifteen hundred kilometres south, often on the same northbound run as Hedland freight",
-   "leadTime": "Usually 2-4 weeks from order to on the ground; allow longer between December and March",
+   "leadTime": "Often rides the same northbound run as Hedland freight; cyclone season adds to it",
    "truck": "Side loader or crane truck for 40ft and for anything going inside a fence line; tilt-tray for 10ft and 20ft into town and Gap Ridge",
    "metaDesc": "Shipping containers for sale and hire in Karratha and Dampier. Straight talk on Pilbara lead times, pad prep and cyclone tie-down. Call 1300 467 776.",
    "line": "Nothing in Karratha is made in Karratha. The town runs on iron ore, salt and gas, and virtually every piece of steel in it arrived on the back of a truck that came fifteen hundred kilometres up the North West Coastal Highway. Containers are no different. What that buys you is a freight network well practised at moving big awkward things a long way. What it costs you is time and a bit of flexibility, because the trip only makes financial sense on a truck already heading north with room on the deck, and that is not every day of the week.",
@@ -297,7 +297,7 @@
    "faqs": [
     {
      "q": "How long does delivery to Karratha take?",
-     "a": "Two to four weeks from order to on the ground is the usual window in the dry, and December through March can push it out. The date depends less on the distance than on when a truck runs north with room on it, so a customer who can give us a window rather than a fixed day almost always gets a better outcome. Cyclone warnings and wet ground stop craning entirely for a few days at a time. If you are working to a shutdown date, order well ahead of it and say so at the enquiry."
+     "a": "It follows the northbound run out of Fremantle, and December through March can push it out. The date depends less on the distance than on when a truck runs north with room on it, so a customer who can give us a window rather than a fixed day almost always gets a better outcome. Cyclone warnings and wet ground stop craning entirely for a few days at a time. If you are working to a shutdown date, order well ahead of it and say so at the enquiry."
     },
     {
      "q": "Can you deliver to Dampier, Wickham, Roebourne or Point Samson?",
@@ -327,7 +327,7 @@
    "postcode": "6725",
    "flagship": false,
    "depot": "our Fremantle depot up the coast, or our Darwin depot west along the Victoria and Great Northern Highways, whichever has a truck running",
-   "leadTime": "Usually 3-5 weeks from order to on the ground in the dry, and the wet season can push it out further",
+   "leadTime": "Whichever of Fremantle or Darwin has a truck running that way",
    "truck": "Side loader or crane truck for 40ft and for the industrial addresses; tilt-tray for 10ft and 20ft into town blocks with a firm approach",
    "metaDesc": "Shipping containers for sale and hire in Broome and the Kimberley. Honest wet season lead times, pindan ground advice and real delivery planning.",
    "line": "Ask about Broome in July and ask about Broome in January and you will get two different answers. Through the dry, a container run up from the south is long but predictable. Through the wet, the Great Northern Highway goes under at Willare and at the Fitzroy crossing, sometimes for days at a stretch, and a truck that left on Monday can still be waiting on Friday for the water to drop. We would rather say that at the enquiry than promise a date we have no business promising and then explain it away later.",
@@ -361,7 +361,7 @@
    "faqs": [
     {
      "q": "How long does a container take to get to Broome?",
-     "a": "Three to five weeks from order to on the ground is a realistic window in the dry, and the wet can push it out further. Distance is only part of the story. The date is set by when a truck runs the Kimberley with room on the deck, whether that is up the coast or across from the Territory. From November to April, road closures at Willare and the Fitzroy crossing are the real variable and they are outside anybody's control. If you know you will need a container next wet season, buy it during the dry and let it wait for you here."
+     "a": "It depends on whether Fremantle or Darwin has a truck running that way, and the wet can push it out further. Distance is only part of the story. The date is set by when a truck runs the Kimberley with room on the deck, whether that is up the coast or across from the Territory. From November to April, road closures at Willare and the Fitzroy crossing are the real variable and they are outside anybody's control. If you know you will need a container next wet season, buy it during the dry and let it wait for you here."
     },
     {
      "q": "Can you deliver during the wet season?",
@@ -391,7 +391,7 @@
    "postcode": "0870",
    "flagship": true,
    "depot": "our Darwin depot, roughly fifteen hundred kilometres straight down the Stuart Highway, or an eastern states unit carted through Adelaide and up the same road from the south",
-   "leadTime": "Usually 2-4 weeks from order to on the ground",
+   "leadTime": "Down the Stuart from Darwin, or up through Adelaide — whichever is moving",
    "truck": "Side loader or crane truck for 40ft and for anything lifted over a fence; tilt-tray for 10ft and 20ft into town blocks and the industrial estates",
    "metaDesc": "Shipping containers for sale and hire in Alice Springs. Delivered up or down the Stuart Highway for Central Australian stations, communities and trades.",
    "line": "There is no short way into Alice Springs. It is about fifteen hundred kilometres down the Stuart from Darwin and roughly the same again up from Adelaide, so whichever direction a container comes from it is a multi-day linehaul before anybody so much as thinks about a crane. The upside is that the Stuart is sealed the whole way and the corridor is busy, so a container bound for the Alice is not an exotic request. It is a matter of getting it onto a truck already making the trip, and that is mostly a question of notice.",
@@ -404,7 +404,7 @@
      "h": "Fifteen hundred kilometres either way",
      "p": [
       "The Alice sits almost exactly halfway between Darwin and Adelaide, which is either a curse or a convenience depending on how you look at it. It is a curse because there is no short run, no local depot around the corner, and no possibility of a same-week delivery for somebody who rings on a Friday having forgotten. It is a convenience because the Stuart Highway is one of the busiest freight corridors in the country and there is nearly always something moving in one direction or the other. A container that can wait for the right truck travels far more sensibly than one that cannot.",
-      "What that means in practice is notice. Two to four weeks is the usual window, and the customers who get the best of that range are the ones who ring early with a window rather than a deadline. Batching matters too: if a job needs two or three units, ordering them as a group gets them onto one run. And getting the specification right before the container leaves is worth real money out here, because sending a wrong unit back down the Stuart is not a small correction. Ring 1300 467 776 with the address, the job and what is going inside, and we will quote the container and the cartage as a single figure with nothing waiting on the invoice."
+      "What that means in practice is notice. It follows whatever is moving down the Stuart or up through Adelaide, and the customers who do best are the ones who ring early with a window rather than a deadline. Batching matters too: if a job needs two or three units, ordering them as a group gets them onto one run. And getting the specification right before the container leaves is worth real money out here, because sending a wrong unit back down the Stuart is not a small correction. Ring 1300 467 776 with the address, the job and what is going inside, and we will quote the container and the cartage as a single figure with nothing waiting on the invoice."
      ]
     },
     {
@@ -425,7 +425,7 @@
    "faqs": [
     {
      "q": "How long does delivery to Alice Springs take?",
-     "a": "Two to four weeks from order to on the ground is the normal window. The Stuart Highway is sealed the whole way from both Darwin and Adelaide and it is a busy corridor, so the timing is really about when a truck is running with room on the deck rather than about the distance itself. Units needing modification first, a personnel door, extra vents or paint, add a few days. If you have a fixed date, a lease start, a tour season, a site handover, tell us at the enquiry and give us as much notice as the job allows."
+     "a": "It depends on what is running down the Stuart from Darwin or up through Adelaide from the south. The Stuart Highway is sealed the whole way from both Darwin and Adelaide and it is a busy corridor, so the timing is really about when a truck is running with room on the deck rather than about the distance itself. Units needing modification first, a personnel door, extra vents or paint, add a few days. If you have a fixed date, a lease start, a tour season, a site handover, tell us at the enquiry and give us as much notice as the job allows."
     },
     {
      "q": "Can you deliver out to a station or a remote community from Alice Springs?",
