@@ -7,7 +7,7 @@
    "postcode": "4217",
    "flagship": true,
    "depot": "Our own yard at 51-55 Bromley Street, Cornubia, which sits at the top of the M1 run into the northern Gold Coast",
-   "leadTime": "Usually 2-4 business days between the order and the truck arriving",
+   "leadTime": "Set by what is standing at Cornubia and where your address sits on the M1 run",
    "truck": "Tilt-tray where side access exists, in 10ft and 20ft; crane truck for 40ft and for anything lifted over a fence, a pool or a roofline",
    "metaDesc": "Buy or hire a shipping container on the Gold Coast, run down the M1 from our Cornubia yard. Canal-block lifts and sandy ground sorted out first.",
    "line": "Our yard is at Cornubia, which is effectively the top of the Gold Coast run, so the drive south is short and predictable and a truck can be on your street early in the day rather than late. That is the easy half. The other half is that the Coast hides some of the hardest suburban placements in the country behind some of its best addresses, and a waterfront lot with a metre and a half of side access is a crane job whether or not anybody has used the word yet.",
@@ -71,7 +71,7 @@
    "postcode": "4551",
    "flagship": true,
    "depot": "Our Cornubia yard south of Brisbane, with stock also moving through our Gympie depot just north of the Coast",
-   "leadTime": "Usually 3-5 business days; range and hinterland drops are slotted into the run up the escarpment",
+   "leadTime": "Which yard holds the unit, and when the next run goes up the escarpment",
    "truck": "Tilt-tray in 10ft and 20ft; crane for 40ft, canal-estate lots and anything that has to clear a fence",
    "metaDesc": "Shipping containers for sale and hire across the Sunshine Coast, Caloundra to Noosa and up the range. Sand, salt air and tight estate streets allowed for.",
    "line": "Two things decide a Sunshine Coast delivery and neither of them is the container: altitude and ground. Below the escarpment you are on sand over a shallow water table, threaded with canal estates and new subdivisions drawn for cars rather than trucks. Above it, the roads to Maleny, Montville and Mapleton set a hard limit on what can physically arrive. Sort out which of those you are dealing with before you order and a Coast delivery is a non-event. Leave it and you find out on the morning.",
@@ -113,7 +113,7 @@
     },
     {
      "q": "How long does delivery to the Sunshine Coast take?",
-     "a": "Three to five business days is the usual window, with coastal addresses at the quicker end. Anything above the escarpment gets grouped into a range run, so those can sit an extra day or two, and steady rain will push an unsealed-driveway drop back rather than putting a truck into soft ground on your property. Where the date cannot move, because of a settlement, a site start or removalists already locked in, say so when you enquire and the run gets built around it instead of you hearing afterwards that it did not fit."
+     "a": "Coastal addresses are the quicker end of it, simply because they do not involve the escarpment. Anything above the escarpment gets grouped into a range run, so those can sit an extra day or two, and steady rain will push an unsealed-driveway drop back rather than putting a truck into soft ground on your property. Where the date cannot move, because of a settlement, a site start or removalists already locked in, say so when you enquire and the run gets built around it instead of you hearing afterwards that it did not fit."
     },
     {
      "q": "Where does a Sunshine Coast container actually come from?",
@@ -135,7 +135,7 @@
    "postcode": "4305",
    "flagship": true,
    "depot": "Our Cornubia yard, run straight through on the Logan Motorway",
-   "leadTime": "Usually 2-3 business days between the order and the container landing",
+   "leadTime": "Comes down to Cornubia stock and the run straight through on the Logan Motorway",
    "truck": "Tilt-tray in 10ft and 20ft; crane truck for 40ft and for the older streets around the town centre",
    "metaDesc": "Shipping containers for sale and hire in Ipswich, delivered from our Cornubia yard. Old mine workings, river flats and new-estate streets accounted for.",
    "line": "Ipswich sits on a hundred and fifty years of coal mining and in a fair few suburbs the old workings are still down there under the houses. That is not something anybody thinks about when they buy a shed, but a container puts its whole weight through four small footprints and where it goes matters. Add the Bremer and Brisbane River flats on one side and cracking clay on the other and the ground is the entire story here. The trucking to Ipswich is simple. The placement is where the thinking goes.",
@@ -181,7 +181,7 @@
     },
     {
      "q": "How quickly can you deliver to Ipswich, and can I see the container first?",
-     "a": "Two to three business days is normal for a standard 20ft with clear access, and it is often quicker. What stretches it is a crane booking, wet weather on clay where waiting a day beats bogging a truck in your yard, or a unit needing a lockbox or vents fitted before it goes. The yard is at 51-55 Bromley Street, Cornubia, straight through on the Logan Motorway, open Monday to Friday 7:30am to 5pm and Saturday 8am to 12pm, and you are welcome to come and inspect. Ring first so the unit is accessible, or ask and we will photograph the exact one and send it to you before delivery."
+     "a": "A standard 20ft with clear access is the straightforward case, and Ipswich is a short run through on the Logan Motorway. What stretches it is a crane booking, wet weather on clay where waiting a day beats bogging a truck in your yard, or a unit needing a lockbox or vents fitted before it goes. The yard is at 51-55 Bromley Street, Cornubia, straight through on the Logan Motorway, open Monday to Friday 7:30am to 5pm and Saturday 8am to 12pm, and you are welcome to come and inspect. Ring first so the unit is accessible, or ask and we will photograph the exact one and send it to you before delivery."
     }
    ],
    "near": [
@@ -199,7 +199,7 @@
    "postcode": "4114",
    "flagship": true,
    "depot": "Our own yard at 51-55 Bromley Street, Cornubia, which is inside the Logan City boundary",
-   "leadTime": "Often next business day, and rarely more than two",
+   "leadTime": "A short run from the Cornubia yard inside the city boundary; stock on hand decides it",
    "truck": "Tilt-tray in 10ft and 20ft; crane for 40ft and for estate frontages with nowhere to set up",
    "metaDesc": "Shipping containers for sale and hire in Logan, from our yard at Cornubia. Walk in, look at the actual unit, and have it on the ground tomorrow.",
    "line": "The yard is in Logan. 51-55 Bromley Street, Cornubia, with signage on the fence and containers standing in rows you can walk down. For a Logan delivery that means the cartage leg is fifteen or twenty minutes, a booking can be moved without it costing anybody a day, and you can come and inspect the exact unit you are buying instead of a photograph of one like it. What still takes planning is the far end, because Logan is seventy-odd suburbs and they do not deliver anything alike.",
@@ -211,7 +211,7 @@
     {
      "h": "Fifteen minutes from the yard",
      "p": [
-      "Being local is not a slogan here, it changes what we can do for you. A Logan address is a short run from Cornubia, which means next business day is genuinely normal rather than a best case, a delivery pushed by rain costs us a short trip rather than a full day of cartage, and if a container has to come back and be swapped for a different size or grade that is an inconvenience instead of an argument. Suppliers become flexible or inflexible depending on what a mistake costs them, and on a Logan job a mistake costs us very little.",
+      "Being local is not a slogan here, it changes what we can do for you. A Logan address is a short run from the yard, which means a delivery pushed by rain costs us a short trip rather than a full day of cartage, and if a container has to come back and be swapped for a different size or grade that is an inconvenience instead of an argument. Suppliers become flexible or inflexible depending on what a mistake costs them, and on a Logan job a mistake costs us very little.",
       "It also means you can do the sensible thing and look before you buy. Come to 51-55 Bromley Street, Cornubia, Monday to Friday between 7:30am and 5pm or Saturday morning 8am to 12pm, and walk the rows. Swing the doors, sight down the floor, look at the seals and the corner posts, and put your head inside to see what light comes through. That is a fifteen minute drive from most of Logan and it removes every argument that normally happens after delivery. Ring 1300 467 776 before you come so the units you are interested in are standing where you can get at them, and so somebody is free to take you through the differences between grades rather than leaving you guessing."
      ]
     },
@@ -241,7 +241,7 @@
     },
     {
      "q": "How fast can you get a container onto a site in Logan?",
-     "a": "Next business day comes up regularly, since the yard is at Cornubia rather than the far side of Brisbane. A plain 20ft heading somewhere with open access is the quick end of it. Time gets added by a crane booking, a modification such as a lockbox or vents, or wet weather on soft ground, where waiting a day is better than a truck buried on your block. Where the date is fixed by a settlement, a site start or removalists already locked in, say so up front and the run gets built around it."
+     "a": "The yard is at Cornubia rather than the far side of Brisbane, which takes the linehaul out of it entirely. A plain 20ft heading somewhere with open access is the quick end of it. Time gets added by a crane booking, a modification such as a lockbox or vents, or wet weather on soft ground, where waiting a day is better than a truck buried on your block. Where the date is fixed by a settlement, a site start or removalists already locked in, say so up front and the run gets built around it."
     },
     {
      "q": "Does a container on a residential block in Logan need approval?",
@@ -263,7 +263,7 @@
    "postcode": "4163",
    "flagship": false,
    "depot": "Our Cornubia yard, a short run over Mount Cotton Road into the shire",
-   "leadTime": "Usually 1-3 business days on the mainland; island jobs are arranged around the barge",
+   "leadTime": "Mainland drops turn on yard stock; island jobs are arranged around the barge",
    "truck": "Tilt-tray wherever there is a usable side access; crane for 40ft, small bayside blocks and over-fence work",
    "metaDesc": "Shipping containers for sale and hire across the Redlands, minutes from our Cornubia yard. Bayside ground, tight blocks and bay island barge runs.",
    "line": "Cornubia is on the Redlands doorstep. Up over Mount Cotton Road and you are in the shire, which makes this one of the shortest runs we do and one of the simplest to move if the weather turns. The complications are all local. Ground that changes character between one street and the next, older bayside blocks with no way down the side of the house, and a set of inhabited islands where the last leg of the delivery goes across water rather than over bitumen.",
@@ -308,7 +308,7 @@
     },
     {
      "q": "How quickly can you deliver to the Redlands, and can I inspect first?",
-     "a": "One to three business days is normal on the mainland, because the yard at 51-55 Bromley Street, Cornubia is only a short run over Mount Cotton Road. Island jobs get arranged around the barge and take longer to line up. You are very welcome to come and look at the containers first, Monday to Friday 7:30am to 5pm or Saturday 8am to 12pm. Ring 1300 467 776 so the units are accessible. If the trip does not suit, we will photograph the exact unit on request and send it through before delivery."
+     "a": "Mainland drops are straightforward, because the yard at 51-55 Bromley Street, Cornubia is only a short run over Mount Cotton Road. Island jobs get arranged around the barge and take longer to line up. You are very welcome to come and look at the containers first, Monday to Friday 7:30am to 5pm or Saturday 8am to 12pm. Ring 1300 467 776 so the units are accessible. If the trip does not suit, we will photograph the exact unit on request and send it through before delivery."
     }
    ],
    "near": [
@@ -326,7 +326,7 @@
    "postcode": "4280",
    "flagship": false,
    "depot": "Our Cornubia yard, out through Logan and down the Mount Lindesay Highway",
-   "leadTime": "Usually 2-4 business days; a wet week moves an unsealed-driveway drop rather than cancelling it",
+   "leadTime": "Stock at Cornubia, and what an unsealed driveway is doing after rain",
    "truck": "Tilt-tray for most acreage placements; crane truck where the gate, the grid or the turning room says otherwise",
    "metaDesc": "Buy or hire a shipping container around Jimboomba. Acreage delivery planned properly, from cattle grids and gravel drives to horse paddocks.",
    "line": "Nobody out this way is short of space, which is exactly why acreage deliveries look simple on paper and occasionally are not. There is no body corporate, no parked Corolla in the one spot the truck needs, and room to swing a rigid vehicle around twice. What there is instead is a private grid nobody can vouch for, four hundred metres of gravel that behaves entirely differently after rain, and a gate that measures narrower than it looks from the ute.",
@@ -389,7 +389,7 @@
    "postcode": "4285",
    "flagship": false,
    "depot": "Our Cornubia yard, run out along the Mount Lindesay Highway",
-   "leadTime": "Usually 2-4 business days, and we watch the crossings through the wet",
+   "leadTime": "Whether the unit is on hand, and how the crossings are running out along the Mount Lindesay",
    "truck": "Tilt-tray in 10ft and 20ft; crane truck wherever the approach or the yard leaves no room to sit square",
    "metaDesc": "Containers for sale and hire across Beaudesert and the Scenic Rim, carted from our Cornubia yard. Causeways, gravel and working properties allowed for.",
    "line": "Beaudesert town is a simple delivery and always has been. The interesting part starts once you turn off the highway, out toward Kooralbyn, Rathdowney, Christmas Creek, Laravale and the roads running up under Mount Barney, where a low-level causeway that was bone dry yesterday decides whether a truck comes today. Rain in the ranges puts water over crossings on properties where nobody saw a drop, and it can sit there for a day or two afterwards. Plan for that and it is easy country to deliver into.",
