@@ -112,7 +112,7 @@
     "asOf": null,
     "source": "Google Business Profile",
     "maxAgeDays": 120,
-    "note": "OFF until the exact rating and count are read off the verified Koala Containers Google Business Profile. Do NOT invent figures - the 4.9/180 placeholder pulled off outback-website on 02/08/2026 is exactly this mistake. When the real numbers are read, set rating, count and asOf together and flip show to true; build.js then FAILS THE BUILD if asOf goes older than maxAgeDays."
+    "note": "OFF. Do NOT invent figures - the 4.9/180 placeholder pulled off outback-website on 02/08/2026 is exactly this mistake. If the current rating and count are read off the verified Koala Containers Google Business Profile, set rating, count and asOf together; the figures may then be shown as VISIBLE TEXT on the page only. They must NOT go into structured data: a business rating its own reviews is a self-serving review under https://developers.google.com/search/docs/appearance/structured-data/review-snippet - ineligible for stars and against the policy. The schema AggregateRating was removed on 21/09/2026 and is not to be re-added. A stale asOf (older than maxAgeDays) prints a build WARNING; it does not fail the build."
   },
   "depotsHeading": "Where your container comes from"
 }
