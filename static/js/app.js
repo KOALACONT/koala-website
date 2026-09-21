@@ -87,7 +87,7 @@
   // Replace the whole attribution on a new campaign; never mix Google and Meta.
   var ATTR_KEY = "koala_campaign_attribution_v1";
   var ATTR_TTL = 30 * 60 * 1000;
-  var ATTR_FIELDS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
+  var ATTR_FIELDS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid", "campaignid", "adgroupid", "adid", "network", "device", "matchtype"];
   function utm() {
     var o = {};
     try {
@@ -290,7 +290,10 @@
       if (f.written === "yes") ctxLines.push("Wants the quote IN WRITING (email)");
       ctxLines.push("Page: " + location.pathname);
       if (u.utm_source) ctxLines.push("Source: " + u.utm_source + (u.utm_campaign ? " / " + u.utm_campaign : ""));
-      if (u.gclid) ctxLines.push("Google Ads click");
+      if (u.gclid || u.gbraid || u.wbraid) ctxLines.push("Google Ads click");
+      if (u.campaignid) ctxLines.push("Campaign ID: " + u.campaignid);
+      if (u.adgroupid) ctxLines.push("Ad group ID: " + u.adgroupid);
+      if (u.adid) ctxLines.push("Ad ID: " + u.adid);
 
       /* The location field accepts a suburb OR a postcode. Send the raw string
          as the suburb, and only populate postcode when the value really is a
@@ -324,7 +327,12 @@
         page_title: document.title,
         submitted_at: new Date().toISOString(),
         utm_source: u.utm_source || null, utm_medium: u.utm_medium || null,
-        utm_campaign: u.utm_campaign || null, gclid: u.gclid || null
+        utm_campaign: u.utm_campaign || null,
+        utm_term: u.utm_term || null, utm_content: u.utm_content || null,
+        gclid: u.gclid || null, gbraid: u.gbraid || null, wbraid: u.wbraid || null,
+        campaignid: u.campaignid || null, adgroupid: u.adgroupid || null,
+        adid: u.adid || null, network: u.network || null,
+        device: u.device || null, matchtype: u.matchtype || null
       };
 
       var btn = form.querySelector('button[type="submit"]');
