@@ -5,7 +5,7 @@
 
    The group's flagship. Forked from the Fair Dinkum engine on 17/08/2026
    because that build carries seven brands' worth of fixes the older Mackay
-   engine does not — content-hash cache busting, the review freshness guard,
+   engine does not — content-hash cache busting, the review freshness warning,
    the locality copy-rotation collision check and the regional data split.
 
    Every brand string comes from data/site.json. Nothing about the brand is
@@ -147,31 +147,34 @@ const SERVICE_AREA = S.serviceArea || "Australia-wide";
 const PROMISE = S.responsePromise;
 const PROMISE_DETAIL = S.responseDetail;
 
-/* Reviews. James, 13/08/2026: turn them on. The numbers come from the verified
-   Google Business Profile — 4.8 from 34 — so unlike every previous case in this
-   programme the claim is evidenced rather than invented.
+/* Reviews. A rating may appear as VISIBLE TEXT on the page, and only once
+   someone has read the current figures off the verified Google Business
+   Profile and recorded the date. It must NOT go into structured data — see
+   the note in biz() below: a self-serving AggregateRating never earns stars
+   and breaches Google's review snippet policy.
 
-   The danger with a published review count has never been the first day. It is
-   day four hundred, when the figure is wrong, nobody remembers where it came
-   from, and an unevidenced claim is sitting on a money page. So the freshness
-   is enforced rather than trusted: `asOf` must be within `maxAgeDays` or THE
-   BUILD FAILS. Refresh the numbers and the date together, or set show:false.
-   That is what makes this safe to leave switched on. */
+   Freshness is warned about, not enforced. The danger with a published review
+   count has never been the first day; it is day four hundred, when the figure
+   is wrong and nobody remembers where it came from. So a stale `asOf` prints
+   a loud warning — it does NOT fail the build. A build that dies because a
+   date passed breaks CI silently while the repo still looks healthy.
+   Changed 21/09/2026. */
 const SHOW_REVIEWS = !!(S.reviews && S.reviews.show === true);
 const REV = S.reviews || {};
 if (SHOW_REVIEWS) {
   if (!(REV.rating > 0) || !(REV.count > 0) || !REV.asOf) {
-    throw new Error("reviews.show is true but rating, count or asOf is missing");
-  }
-  const ageDays = Math.floor((Date.now() - Date.parse(REV.asOf + "T00:00:00Z")) / 86400000);
-  const maxAge = REV.maxAgeDays || 120;
-  if (ageDays > maxAge) {
-    throw new Error(
-      `Review figures are ${ageDays} days old (limit ${maxAge}). ` +
-      `Re-read the rating and count off the Google Business Profile, update ` +
-      `rating/count/asOf in data/site.json together, or set reviews.show to false. ` +
-      `A stale review count is an unevidenced claim.`
-    );
+    console.warn("WARNING: reviews.show is true but rating, count or asOf is missing.");
+  } else {
+    const ageDays = Math.floor((Date.now() - Date.parse(REV.asOf + "T00:00:00Z")) / 86400000);
+    const maxAge = REV.maxAgeDays || 120;
+    if (ageDays > maxAge) {
+      console.warn(
+        `WARNING: review figures are ${ageDays} days old (limit ${maxAge}). ` +
+        `Re-read the rating and count off the Google Business Profile and update ` +
+        `rating/count/asOf in data/site.json together, or set reviews.show to false. ` +
+        `A stale review count is an unevidenced claim.`
+      );
+    }
   }
 }
 /* One string, used everywhere the rating appears, so it cannot drift. */
@@ -386,9 +389,15 @@ const biz = () => {
     ...(Array.isArray(S.hoursSchema) && S.hoursSchema.length ? { openingHours: S.hoursSchema } : {}),
     areaServed: [{ "@type": "Country", name: "Australia" }].concat(LOCS.map((l) => ({ "@type": "City", name: l.name })))
   };
-  if (SHOW_REVIEWS && S.reviews.rating && S.reviews.count) {
-    b.aggregateRating = { "@type": "AggregateRating", ratingValue: S.reviews.rating, reviewCount: S.reviews.count };
-  }
+  /* No aggregateRating here, deliberately, and it is not to be added back.
+     A business marking up its own rating on its own site is a "self-serving
+     review" under Google's review snippet policy: "If the entity that's being
+     reviewed controls the reviews about itself, their pages that use
+     LocalBusiness or any other type of Organization structured data are
+     ineligible for star review feature."
+     https://developers.google.com/search/docs/appearance/structured-data/review-snippet
+     So it never earns stars and it breaches the policy. The rating may still
+     appear as VISIBLE TEXT on the page — that part is fine. Removed 21/09/2026. */
   return b;
 };
 const crumbsLd = (c) => ({ "@type": "BreadcrumbList", itemListElement: c.map((x, i) => ({ "@type": "ListItem", position: i + 1, name: x[0], item: `${D}${x[1]}` })) });
