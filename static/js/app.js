@@ -237,11 +237,13 @@
        if something is typed it has to be a four digit Australian postcode. */
     if (f.postcode && !/^\d{4}$/.test(f.postcode)) { el = form.querySelector('[name="postcode"]'); errs.push([el, "Postcodes are four digits."]); }
     if (!f.name) { el = form.querySelector('[name="name"]'); errs.push([el, "We need a name to reply to."]); }
-    var hasPhone = /\d{6,}/.test((f.phone || "").replace(/\D/g, ""));
+    /* 22/09/2026, James: every web lead must carry a phone number. Email stays optional
+       unless they ask for the price in writing. */
+    var hasPhone = /\d{8,}/.test((f.phone || "").replace(/\D/g, ""));
     var hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email || "");
     if (f.email && !hasEmail) { el = form.querySelector('[name="email"]'); errs.push([el, "That email address doesn't look right."]); }
-    if (f.phone && !hasPhone) { el = form.querySelector('[name="phone"]'); errs.push([el, "That phone number doesn't look right."]); }
-    if (!f.phone && !f.email) { el = form.querySelector('[name="phone"]'); errs.push([el, "Give us a phone number or an email so we can get back to you."]); }
+    if (!f.phone) { el = form.querySelector('[name="phone"]'); errs.push([el, "We need a phone number to call you back with the price."]); }
+    else if (!hasPhone) { el = form.querySelector('[name="phone"]'); errs.push([el, "That phone number doesn't look right."]); }
     if (f.written === "yes" && !hasEmail) { el = form.querySelector('[name="email"]'); errs.push([el, "A written quote needs an email address to go to."]); }
     if (q && !f.message) { el = form.querySelector('[name="message"]'); errs.push([el, "Type your question in the box."]); }
     if (f.quantity !== undefined && f.quantity !== "" && !(parseInt(f.quantity, 10) >= 1)) { el = form.querySelector('[name="quantity"]'); errs.push([el, "How many containers? One or more."]); }
