@@ -492,8 +492,9 @@ const promiseStrip = () => `<div class="promise"><div class="wrap"><b>${esc(PROM
      - Hire never offers as-is (nothing goes out on hire below cargo-worthy).
      - Delivery suburb or postcode is REQUIRED and is never pre-filled from the
        page. A Mackay landing page does not mean a Mackay delivery.
-     - Name plus ONE working contact method is the floor. Email becomes
-       required only when the person asks for the quote in writing.
+     - Name plus a PHONE NUMBER is the floor (James, 22/09/2026 — every lead
+       gets a call back). Email becomes required only when the person asks
+       for the quote in writing.
      - "Just a question" hides the container questions and is flagged in the
        notes, so a specialist enquiry can never land in the CRM as a 20ft
        purchase by default.
@@ -516,7 +517,7 @@ function quoteForm(u, compact, mode, preset) {
   /* "mini" is the hero form (and the compact variant's opener). 15/09/2026, James: name, email,
      phone, container size, suburb, postcode, message — and nothing else. Buying/hiring stays
      as a one-tap toggle because the sales desk needs it. Same rules as the
-     full form: POST, suburb required, one working contact method. */
+     full form: POST, suburb required, phone required (James, 22/09/2026). */
   if (mode === "mini") {
     return `<form class="askcard askcard-mini" data-quote method="post" action="/contact/#quote" novalidate>
       ${noscript}
@@ -628,10 +629,10 @@ function quoteForm(u, compact, mode, preset) {
       <input name="suburb" id="q-suburb${u}" type="text" autocomplete="address-level2" placeholder="e.g. Cornubia or 4130" required aria-required="true">
       <div class="qgrid">
         <div><label for="q-name${u}">Your name ${req}</label><input name="name" id="q-name${u}" type="text" autocomplete="name" required aria-required="true"></div>
-        <div><label for="q-phone${u}">Phone</label><input name="phone" id="q-phone${u}" type="tel" autocomplete="tel" inputmode="tel"></div>
+        <div><label for="q-phone${u}">Phone ${req}</label><input name="phone" id="q-phone${u}" type="tel" autocomplete="tel" inputmode="tel" required aria-required="true"></div>
       </div>
       <label for="q-email${u}">Email</label><input name="email" id="q-email${u}" type="email" autocomplete="email" inputmode="email">
-      <p class="qhint" id="q-contact-hint${u}">A phone number or an email is enough — we need one that works.</p>
+      <p class="qhint" id="q-contact-hint${u}">We'll ring you with the price. Add an email if you'd like it in writing too.</p>
       <label class="qcheck"><input type="checkbox" name="written" value="yes" id="q-written${u}"> I'd like the price in writing (we'll need your email)</label>
       <label for="q-msg${u}">Anything we should know? ${opt}</label><textarea name="message" id="q-msg${u}" rows="2" placeholder="What's going in it, what the access is like, or your question"></textarea>
       <p class="qhint">Got photos of the site or the entry? Email them to <a href="mailto:${S.email}">${esc(S.email)}</a> after you send this and quote your suburb — they usually settle the truck and the timing in one reply.</p>
