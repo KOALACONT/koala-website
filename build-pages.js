@@ -8,7 +8,7 @@ const { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, HOURS, 
   crumbsLd, faqLd, g, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat,
   rangeGrid, gallery, rank, pick, PRICES, askLink, PRICE_DISCLAIMER, PRICE_SUB, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS,
   PROCESS_LINES, FREIGHT_LINES, ASK_LINES, ask, promiseStrip,
-  plate, depotStrip, videoBlock, specTable, priceBox, productLd, reviewLine, SHOW_REVIEWS, REV } = F;
+  plate, depotStrip, videoBlock, specTable, priceBox, productLd, reviewLine, SHOW_REVIEWS, REV, fitTitle, TITLE_MAX, DESC_MAX, guideLinks, locGuides } = F;
 
 const HOME_CRUMB = ["Home", "/"];
 
@@ -95,7 +95,7 @@ ${l.sections.map((s, i) => band({
 
 ${sec("", `<div class="narrow">
   <div class="reveal"><h2>What delivery to ${esc(l.name)} costs</h2><p>${esc(freightLine)}</p></div>
-  <div class="reveal" style="margin-top:2.4rem"><h2>${esc(nearHead)}</h2><p>We also deliver to ${l.near.map((n) => esc(n)).join(", ")} and the surrounding district. If your town is not on the list, ring — it almost certainly still works.</p><div class="chips" style="margin-top:1rem"><a href="/delivery-areas/">All delivery areas</a><a href="/delivery/">How delivery works</a></div></div>
+  <div class="reveal" style="margin-top:2.4rem"><h2>${esc(nearHead)}</h2><p>We also deliver to ${l.near.map((n) => esc(n)).join(", ")} and the surrounding district. If your town is not on the list, ring — it almost certainly still works.</p>${guideLinks(locGuides(l), `Worth reading before you order for ${l.name}:`)}<div class="chips" style="margin-top:1rem"><a href="/delivery-areas/">All delivery areas</a><a href="/delivery/">How delivery works</a></div></div>
 </div>`)}
 
 ${sec("sec-wash", secHead("Common questions", `Buying a container in ${l.name}`, null) + qaHtml(l.faqs))}
@@ -103,7 +103,7 @@ ${sec("sec-wash", secHead("Common questions", `Buying a container in ${l.name}`,
 ${ask(askLine, `We deliver to ${l.name} and the surrounding district. Tell us what is going in it and what the access is like, and you will get a price with the cartage worked out.`, l.slug)}`;
 
     out(l.slug, shell({
-      t: `Shipping Containers ${l.name} — For Sale & Hire | ${BRAND}`,
+      t: fitTitle(`Shipping Containers ${l.name} — For Sale & Hire`),
       d: l.metaDesc, c: `/${l.slug}/`,
       schema: g(crumbsLd(crumbs), faqLd(l.faqs), svc)
     }, body));
@@ -121,7 +121,7 @@ function deliveryAreas() {
     WA: "Western Australia", TAS: "Tasmania", NT: "Northern Territory", ACT: "Australian Capital Territory"
   };
   const BLURB = {
-    QLD: "From the border to the Cape and out west past the range. The head yard is here, which is why so much of the Queensland work goes out on short notice.",
+    QLD: "From the border to the Cape and out west past the range. The head yard is here, which is why so much of the Queensland work is a short run.",
     NSW: "Coast, tablelands and the far west. Sydney addresses get booked around traffic windows and kerb space rather than around distance, so the metro jobs need the earliest start.",
     VIC: "Melbourne and the regional centres. Country Victorian drops are usually the simplest deliveries we do, provided the ground has had a week to dry out.",
     SA: "Adelaide, the Yorke and Eyre runs, and the towns out along the highways north and south-east of the city.",
@@ -160,7 +160,7 @@ ${order.filter((st) => byState[st]).map((st, i) => sec(i % 2 ? "" : "sec-wash", 
 ${band({ photo: "yard-cornubia", eyebrow: "Everywhere else", h: "Not on the list is not off the map", p: ["The towns above are the ones written up properly, because we have put enough steel on the ground in them to say something useful. They are not a boundary. Containers go a very long way past every one of them, including to places with a pub, a silo and not a great deal else.", `Ring ${S.phone} with an address and you will hear what the run looks like, which yard it starts from and how long it takes, before anybody starts talking about money.`], cta: ["/contact/", "Send us the address"], dark: true })}
 ${sec("", secHead("Common questions", "Coverage, timing and pick-up", null) + qaHtml(faqs))}
 ${ask("Tell us where it is going", `A suburb or a postcode is enough to start. ${PROMISE}.`, "areas")}`;
-  out("delivery-areas", shell({ t: `Container Delivery Areas — Every State And Territory | ${BRAND}`, d: `Where ${BRAND} delivers shipping containers — ${LOCS.length} towns and cities written up in detail across every state and territory, with your unit despatched from the yard that makes the shortest run to you.`, c: "/delivery-areas/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("delivery-areas", shell({ t: `Container Delivery Areas — Every State | ${BRAND}`, d: `Where ${BRAND} delivers shipping containers — ${LOCS.length} towns and cities across every state and territory, sent from the yard nearest you.`, c: "/delivery-areas/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* ============================== DELIVERY ================================ */
@@ -216,7 +216,7 @@ ${sec("", `<div class="narrow">${secHead("Cartage", "Why you will not find a del
 </div>`)}
 ${sec("sec-wash", secHead("Questions", "Delivery, access and timing", null) + qaHtml(faqs))}
 ${ask("Tell us where it is going", `An address and three photographs of the entry is usually all it takes. You will get the truck, the timing and a delivered figure back together. ${PROMISE}.`, "delivery")}`;
-  out("delivery", shell({ t: `Container Delivery Australia-Wide — Trucks, Access And Timing | ${BRAND}`, d: "How a shipping container gets to your address: which yard it leaves from, tilt-tray against side loader against crane truck, what the driver needs from your site, and how remote runs and the wet season change the job.", c: "/delivery/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("delivery", shell({ t: `Container Delivery Australia-Wide | ${BRAND}`, d: "How a shipping container reaches your address: which yard it leaves from, tilt-tray, side loader or crane truck, and what the driver needs on site.", c: "/delivery/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* ================================ HIRE ================================== */
@@ -282,7 +282,7 @@ ${sec("", `<div class="narrow">${secHead("The arrangement", "Booking, running an
 ${sec("sec-wash", secHead("Sizes", "What you can put on hire", null) + rangeGrid(P.sizes) + `<p class="fineprint" style="margin-top:1.6rem">Hire suits a job with a finish date on it. If the container is staying, compare the weekly rate against <a href="/10ft-shipping-containers/">10ft shipping containers for sale</a> or a <a href="/20ft-shipping-containers/">20ft</a> before you decide.</p>`)}
 ${sec("", secHead("Questions", "About hiring a container", null) + qaHtml(faqs))}
 ${ask("Get a hire figure", `Give us the size, roughly how long you need it and the town it is going to. You will get the weekly rate and the cartage together.`, "hire", { intent: "hire" })}`;
-  out("shipping-container-hire", shell({ t: `Container Hire — Weekly Rates, Terms And Collection | ${BRAND}`, d: `Hire a shipping container by the week in 10ft, 20ft or 40ft${PRICES ? `, from ${aud(twenty.hire)} a week ex GST` : " anywhere in Australia"}. Cargo-worthy units inspected wind and watertight, delivered and collected anywhere in Australia.`, c: "/shipping-container-hire/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("shipping-container-hire", shell({ t: `Shipping Container Hire — Weekly Terms | ${BRAND}`, d: `Hire a 10ft, 20ft or 40ft shipping container by the week${PRICES ? `, from ${aud(twenty.hire)} a week ex GST` : ""}. Hire units are cargo-worthy grade, wind and watertight, delivered nationally.`, c: "/shipping-container-hire/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* ================================ SALES ================================= */
@@ -342,7 +342,7 @@ ${sec("sec-wash", secHead("Sizes for sale", "10ft, 20ft, 40ft and high cube — 
 ${band({ photo: "inspect-yard", eyebrow: "Supply", h: "Where the unit comes from changes what is available", p: ["No two yards hold the same stock in the same week. A grade that is standing four deep at one is a long way off at another, and the honest answer sometimes is that the closest yard has an excellent container that is not quite the one you asked for. Tell us the delivery town early and the conversation gets much shorter.", "Buying a unit that is a long way from you is perfectly normal and happens every week — it just needs the photographs done properly and the cartage worked out before anything is agreed rather than after."], cta: ["/blog/buying-a-container-interstate/", "Buying from another state"], wash: true })}
 ${sec("", secHead("Questions", "About buying a container", null) + qaHtml(faqs))}
 ${ask("Request a free price", `Tell us the size, the grade you are leaning towards, the town it is going to and what the entry looks like. A person comes back with a price for the exact unit, delivered, and tells you plainly which grade the job genuinely needs.`, "sales", { intent: "buy" })}`;
-  out("container-sales", shell({ t: `Shipping Containers for Sale — New & Used | ${BRAND}`, d: "New and used shipping containers for sale — 10ft, 20ft, 40ft and high cube — delivered Australia-wide from our yard near Brisbane. Ask for today’s price.", c: "/container-sales/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("container-sales", shell({ t: `Shipping Containers for Sale — New & Used | ${BRAND}`, d: "New and used shipping containers for sale — 10ft, 20ft, 40ft and high cube — delivered Australia-wide from our yard near Brisbane. Ask for a price.", c: "/container-sales/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* =============================== STORAGE ================================ */
@@ -353,7 +353,7 @@ function storage() {
     { q: "Does a storage container need vents?", a: "If it is going to be shut up for months with anything that minds moisture, yes. Vents high at one end and low at the other let air move through the whole length rather than sit still, which is what stops the roof sweating in the first place. On a unit that will be full for years and holds something valuable, insulation or a lining panel on the roof is the more thorough answer because it stops the steel getting cold enough to condense in the first place." },
     { q: "What should the container be standing on?", a: "Something firm under each of the four corner castings — hardwood sleepers, concrete pads or a well-compacted base is the ordinary answer. What matters is that the corners carry the weight, the box sits square, and there is air moving under the floor. Setting it flat on grass traps damp against the underside, starts rust on the one surface you never inspect and, on soft ground, lets a corner sink until the doors will not line up." },
     { q: "Is a container secure enough for tools and machinery?", a: "It is a steel box with one opening, which is a strong start, and every unit comes with a lock box — a steel shroud welded over the padlock area so bolt cutters cannot reach the shackle. Put a closed-shackle padlock inside it and the lock stops being the weak point. After that it is siting: doors facing a wall or the house rather than the street, a light and a camera on the door end, and nowhere for a vehicle to back up out of sight." },
-    { q: "For storage, am I better off hiring or buying?", a: "It comes back to whether the need has an end date. Storage for the length of a build, a renovation or a season is a hire job. Storage because the shed is full and always will be is a purchase, and the money stops going out at some point. If you cannot decide, hire one for a few months and see how much of it you actually use before committing — plenty of people discover they needed a bigger box, or did not need one at all." },
+    { q: "For storage, am I better off hiring or buying?", a: "It comes back to whether the need has an end date. Storage for the length of a build, a renovation or a season is a hire job. Storage because the shed is full and always will be is a purchase, and the money stops going out at some point. If you cannot decide, hire one for a few months and see how much of it you actually use before you buy — plenty of people discover they needed a bigger box, or did not need one at all." },
     { q: "Can I keep one on a suburban block long term?", a: "Sometimes yes and sometimes only with approval, and the difference is your local council rather than any general rule. How long it stays, how visible it is from the road, how close to the boundary it sits and whether anybody is working in it all tend to come into it. Ring your own council and ask before the truck is booked — it is a short call, and it is far less painful than moving a container after a complaint." },
     { q: "Can I store fuel, chemicals or feed in one?", a: "Feed and general farm supplies are everyday container cargo and the usual advice about rodents and ventilation applies. Fuel and chemicals are a different matter — there are real rules about quantities, bunding and separation, and they vary with what you are storing and where you are. Purpose-built dangerous goods containers exist for exactly this, and the sensible order is to check your obligations first and then ring us about the right unit." }
   ];
@@ -391,7 +391,7 @@ ${sec("", `<div class="narrow">${secHead("The limits", "What a container will an
 ${sec("sec-wash", secHead("Sizes", "Working out how much room you need", null) + rangeGrid(P.sizes))}
 ${sec("", secHead("Questions", "About storing things in a container", null) + qaHtml(faqs))}
 ${ask("Work out what suits", `Tell us what is going inside, roughly how long for and the town it is going to. ${PROMISE}.`, "storage")}`;
-  out("container-storage", shell({ t: `Container Storage — Choosing, Siting And Keeping It Dry | ${BRAND}`, d: "Storing things in a shipping container: which grade suits what you are keeping, why condensation causes more damage than leaks, how to stand one so it stays square, and the security measures that actually work.", c: "/container-storage/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("container-storage", shell({ t: `Container Storage: Choosing & Siting | ${BRAND}`, d: "Storing goods in a shipping container: which grade suits, why condensation does more damage than leaks, siting it square, and security that works.", c: "/container-storage/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* ================================ GRADES ================================ */
@@ -449,7 +449,7 @@ ${sec("sec-wash", PRICES ? secHead("Guide prices", "What each grade starts at, b
 ${sec("", secHead("Common questions", "Grades, condition and what they are worth", null) + qaHtml(faqs))}
 
 ${ask("Tell us what is going inside", `That one answer decides the grade, and it is a faster conversation than reading a price list. Ring ${S.phone} or send it through.`, "grades", { grade: "unsure" })}`;
-  out("container-grades", shell({ t: `Container Grades — New Single-Trip, Cargo-Worthy Used And As-Is | ${BRAND}`, d: "The three container grades explained: what each one is really like, which are checked wind and watertight and which is not sold watertight, and how to pick the grade from what is going inside rather than from the price.", c: "/container-grades/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("container-grades", shell({ t: "Container Grades: New, Cargo-Worthy and As-Is Explained", d: "The three container grades explained: which are checked wind and watertight, which is not sold watertight, and how to pick by what goes inside.", c: "/container-grades/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 

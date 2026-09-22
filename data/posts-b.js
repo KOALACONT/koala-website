@@ -6,6 +6,8 @@ module.exports = [
     slug: "anchoring-a-shipping-container",
     title: "Anchoring a shipping container — wind, cyclones and tie-downs",
     desc: "When wind can move an empty container, how tie-downs work, what cyclone regions demand and why an engineer signs off anything that has to be certified.",
+    seoTitle: "Anchoring a shipping container — wind, cyclones, tie-downs",
+    seoDesc: "When wind can move an empty container, how tie-downs work, what cyclone regions demand and when an engineer has to sign off.",
     date: "2026-08-11",
     mins: 8,
     intro: "A 20ft container weighs a bit over two tonne, which sounds like plenty until you work out that it also presents about fifteen square metres of flat steel to a crosswind. Empty containers do get shifted in severe weather, and in cyclone country the question is not whether to anchor but to what standard. Here is how anchoring actually works and when it stops being optional.",
@@ -83,6 +85,8 @@ module.exports = [
     slug: "packing-a-shipping-container",
     title: "Packing a shipping container so nothing is ruined when you open it",
     desc: "Loading a container properly: weight distribution, what must never sit on the floor, keeping moisture away from your goods, and packing for long-term storage.",
+    seoTitle: "Packing a shipping container so nothing is ruined",
+    seoDesc: "Loading a container properly: weight distribution, what must never sit on the floor, keeping moisture off your goods, and packing for storage.",
     date: "2026-08-10",
     mins: 9,
     intro: "The container arrives sound, the roof is good, the seals are fine, and eighteen months later half the boxes at the far end are ruined. Nothing failed. The load was packed the way a garage gets packed, and a sealed steel box is not a garage. Packing one properly takes an extra hour and decides what condition everything is in when the doors open again.",
@@ -171,7 +175,7 @@ module.exports = [
 <table>
 <thead><tr><th></th><th>Shipping container</th><th>Kit shed</th></tr></thead>
 <tbody>
-<tr><td>On site and usable</td><td>Days from order</td><td>Weeks to months</td></tr>
+<tr><td>On site and usable</td><td>As soon as it is delivered</td><td>After slab, approval and erection</td></tr>
 <tr><td>Site works</td><td>Four pads, levelled</td><td>Usually a slab and footings</td></tr>
 <tr><td>Approval</td><td>Often none for storage — depends on your council</td><td>Almost always building approval</td></tr>
 <tr><td>Security</td><td>Steel box, one hardened opening</td><td>Thin sheet, roller door, cut in minutes</td></tr>
@@ -187,7 +191,7 @@ module.exports = [
 
 <h2>Where the container wins clearly</h2>
 <h3>Speed</h3>
-<p>A container can be on your ground within days of ordering, and it is usable the moment the truck leaves. A shed involves quoting, ordering, approval, a slab that has to cure, then a builder's schedule. If the need is urgent — a house move, a flooded shed, stock that has nowhere to go — this is not a close contest.</p>
+<p>A container needs no slab and no build, and it is usable the moment the truck leaves. A shed involves quoting, ordering, approval, a slab that has to cure, then a builder's schedule. If the need is urgent — a house move, a flooded shed, stock that has nowhere to go — this is not a close contest.</p>
 <h3>Security</h3>
 <p>This is the biggest practical difference and the one people underrate. A shed is thin sheet on a light frame with a roller door that can be levered in a couple of minutes and walls that open to a battery grinder. A container is 1.6 to 2 mm corrugated steel on a heavy frame, with one opening, and that opening can be fitted with a lock box that shields the shackle entirely. There is a reason tradespeople store tools in containers on sites where sheds exist a hundred metres away.</p>
 <h3>Approval and reversibility</h3>
@@ -226,7 +230,7 @@ module.exports = [
 <h2>A short way to decide</h2>
 <ol>
 <li><strong>Do you need more than 2.35 m of clear internal width?</strong> If yes, shed. The question is settled.</li>
-<li><strong>Do you need it this week?</strong> If yes, container.</li>
+<li><strong>Do you need it without waiting on a slab and a build?</strong> If yes, container.</li>
 <li><strong>Is security the main reason you are buying?</strong> Container.</li>
 <li><strong>Will you drive in and out daily?</strong> Shed.</li>
 <li><strong>Might you move, or sell, within a few years?</strong> Container.</li>
@@ -240,6 +244,7 @@ module.exports = [
     slug: "containers-on-farms-and-rural-blocks",
     title: "Containers on farms and rural blocks — what actually works",
     desc: "How containers earn their keep on Australian properties: feed and chemical storage, vermin, ground types, paddock access and moving one with your own gear.",
+    seoDesc: "How containers earn their keep on Australian properties: feed and chemical storage, vermin, ground types, paddock access and moving one yourself.",
     date: "2026-08-08",
     mins: 9,
     intro: "There is a reason containers are on nearly every working property in the country. They are the only storage you can buy that arrives finished, seals on all six sides, holds up to dust and vermin, and can be picked up and put somewhere else when the operation changes. That last point is what separates them from a shed and it is worth planning around from the start.",
@@ -315,6 +320,7 @@ module.exports = [
     slug: "stacking-shipping-containers",
     title: "Stacking shipping containers — what is safe and what is not",
     desc: "How container stacking works on land: twist locks, corner castings, level bases, wind loads, access to the top unit, and when an engineer has to sign it off.",
+    seoDesc: "How container stacking works on land: twist locks, corner castings, level bases, wind loads, top-unit access, and when an engineer must sign off.",
     date: "2026-08-07",
     mins: 8,
     intro: "Containers are stacked nine high on ships, which makes it look like the easiest thing in the world to put one on top of another in a yard. On a ship they are locked into a cell guide system, on a level deck, by people doing it all day. On your block none of those three things is true, and every one of them is the reason a stack goes wrong.",
@@ -395,6 +401,7 @@ module.exports = [
     slug: "buying-a-container-interstate",
     title: "Buying a container in another state, without seeing it first",
     desc: "Buying a container remotely in Australia: which depot it comes from, the photographs to ask for, what to confirm before loading and what to check when it lands.",
+    seoDesc: "Buying a container remotely: which depot it comes from, the photos to ask for, what to confirm before loading and what to check when it lands.",
     date: "2026-08-06",
     mins: 9,
     intro: "Most containers in this country are bought without the buyer ever standing in front of them, and that is fine — provided the right questions get asked in the right order. The risk is not distance. It is buying a description instead of a unit. Here is how to make a remote purchase as safe as walking a yard.",
@@ -438,7 +445,7 @@ module.exports = [
 <p>The other half of a remote purchase is the half most people skip. We cannot see your block either.</p>
 <p>Four measurements decide every delivery: how much straight, level run there is behind the placement spot; the narrowest pinch point on the route in; what is overhead along the route, including power lines and branches; and whether the ground will carry a loaded truck. Walk it as if you were the truck and write the four numbers down.</p>
 <p>Then send three photographs the other way. One from the road, shot straight up the access. One taken standing on the placement spot, aimed back along the route the truck has to travel. And one wide frame of the spot itself, showing the surface underfoot and the air overhead. Between those and the four measurements, we can tell you which truck suits before anyone books anything. The <a href="/delivery/">delivery page</a> covers what each vehicle needs.</p>
-<p>Regional and remote deliveries carry a bit more planning: unsealed access, wet-season road conditions, station gates, and the fact that a rescheduled run in some parts of the country is a week rather than a day. Say what you know about the last stretch, including how long it takes to dry out.</p>
+<p>Regional and remote deliveries carry a bit more planning: unsealed access, wet-season road conditions, station gates, and the fact that a rescheduled run in some parts of the country takes a while to come round again. Say what you know about the last stretch, including how long it takes to dry out.</p>
 
 <h2>Inspection by arrangement, if you want it</h2>
 <p>The Cornubia yard at 51-55 Bromley Street is a walk-in yard — ring first, drive over, open the doors and look down the floor yourself. It is open Monday to Friday 7:30am to 5pm and Saturday morning.</p>

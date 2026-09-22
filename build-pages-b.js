@@ -9,7 +9,7 @@ const { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, HOURS, 
   crumbsLd, faqLd, g, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat,
   rangeGrid, gallery, rank, pick, PRICES, PRICE_DISCLAIMER, PRICE_SUB, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS,
   PROCESS_LINES, FREIGHT_LINES, ASK_LINES, ask, promiseStrip,
-  plate, depotStrip, videoBlock, specTable, priceBox, productLd, reviewLine, SHOW_REVIEWS, REV } = F;
+  plate, depotStrip, videoBlock, specTable, priceBox, productLd, reviewLine, SHOW_REVIEWS, REV, fitTitle, TITLE_MAX, DESC_MAX } = F;
 
 const HOME_CRUMB = ["Home", "/"];
 const pageHead = F.pageHead;
@@ -82,7 +82,7 @@ ${band({ photo: "inspect-yard", eyebrow: "The yard at Cornubia", h: "Or drive ov
 ${sec("sec-wash", secHead("Common questions", "Checking a used unit", null) + qaHtml(faqs))}
 
 ${ask("Ask about the actual unit", `Give us the size and grade you are chasing and the town it is going to. We will tell you which yard has one standing and send photographs of that container on request. ${PROMISE}.`, "inspection")}`;
-  out("container-inspection", shell({ t: `Used Container Inspection — What To Check And What To Ask For In Photos | ${BRAND}`, d: "How to check a used shipping container properly: frame, doors, seals, floor, roof, rails and plate, what each fault costs you, and the six photographs to ask for when the unit is a long way from where you are.", c: "/container-inspection/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("container-inspection", shell({ t: `Used Container Inspection Checklist | ${BRAND}`, d: "How to check a used shipping container: frame, doors, seals, floor, roof and plate, what each fault means, and the photos to ask for.", c: "/container-inspection/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* ============================== DIMENSIONS ============================== */
@@ -147,7 +147,7 @@ ${sec("", secHead("The range", "Every size we deliver", null) + rangeGrid(P.size
 ${sec("sec-wash", secHead("Common questions", "Sizes, weights and capacity", null) + qaHtml(faqs))}
 
 ${ask("Not sure which size the job wants", `Describe what is going in it and how much room you have at the far end, and we will tell you which size fits and which yard has one. ${PROMISE}.`, "dims")}`;
-  out("dimensions", shell({ t: `Container Dimensions, Capacity And Tare Weights — 10ft To 40ft High Cube | ${BRAND}`, d: "Internal and external dimensions, door openings, cubic capacity and tare weight for 10ft, 20ft, 40ft and high cube shipping containers, with what each figure means for the truck, the ground and what actually fits.", c: "/dimensions/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("dimensions", shell({ t: "Shipping Container Dimensions: 10ft to 40ft High Cube", d: "Internal and external dimensions, door openings, cubic capacity and tare weight for 10ft, 20ft, 40ft and high cube shipping containers.", c: "/dimensions/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* ============================= HOW IT WORKS ============================= */
@@ -181,7 +181,7 @@ ${sec("", `<div class="narrow"><ol class="steps">
 
 ${plate("Give us the delivery address before anything else", "It is the one fact that decides the yard, the truck, the date and the price")}
 
-${band({ photo: "process-yard", eyebrow: "The long runs", h: "What happens when it is a long way out", dark: true, alt: true, p: ["A container going a few hundred kilometres inland or right across the top of the country rarely travels on its own truck, because sending one out empty in one direction is how you end up with a cartage figure nobody wants to hear. It goes with other freight heading the same way, which makes the date a scheduling question rather than a willingness question.", "In practice that means a wider delivery window, a warning that the wet can shut unsealed access for weeks at a time, and a real conversation about whether a hard deadline is achievable. We would far rather tell you three weeks and hit it than promise five days and spend the fortnight apologising."], cta: ["/delivery/", "Delivery and access"] })}
+${band({ photo: "process-yard", eyebrow: "The long runs", h: "What happens when it is a long way out", dark: true, alt: true, p: ["A container going a few hundred kilometres inland or right across the top of the country rarely travels on its own truck, because sending one out empty in one direction is how you end up with a cartage figure nobody wants to hear. It goes with other freight heading the same way, which makes the date a scheduling question rather than a willingness question.", "In practice that means a wider delivery window, a warning that the wet can shut unsealed access for weeks at a time, and a real conversation about whether a hard deadline is achievable. We would far rather give you a realistic date and hit it than an optimistic one and spend the fortnight apologising."], cta: ["/delivery/", "Delivery and access"] })}
 
 ${sec("sec-wash", secHead("Worth knowing", "The four things that slow an order down", null) + `<div class="narrow">
   <div class="reveal"><h2>An address with no access detail</h2><p>A street name tells us the distance and nothing about the job. Whether the truck can get in, turn and lay a container down is a separate question, and it is the one that decides which vehicle comes. Two photographs — one from the road looking in, one of the spot with something in frame for scale — usually settle it in a single reply.</p></div>
@@ -194,7 +194,7 @@ ${sec("sec-wash", secHead("Worth knowing", "The four things that slow an order d
 ${sec("", secHead("Common questions", "Ordering, timing and where stock comes from", null) + qaHtml(faqs))}
 
 ${ask("Start with the address", `Tell us the town and what is going in it, and the reply will name the yard, the grade and the timing. Ring ${S.phone} or send it through — both land with a person. ${PROMISE}.`, "how")}`;
-  out("how-it-works", shell({ t: `Ordering A Container — Which Yard, What Timing, What Happens On The Day | ${BRAND}`, d: "The six stages from first call to container on the ground: how we work out which yard yours comes from, what that does to timing and cartage, how long-distance runs are scheduled and what needs to be ready on delivery day.", c: "/how-it-works/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("how-it-works", shell({ t: `How Ordering a Container Works | ${BRAND}`, d: "The six stages from first call to container on the ground: which yard yours comes from, how long runs are scheduled and what to have ready on the day.", c: "/how-it-works/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* ================================ ABOUT ================================= */
@@ -235,7 +235,7 @@ ${plate(S.phone, HOURS ? `${HOURS} — one line, wherever you are.` : "One line,
 ${band({ photo: "yard-cornubia", eyebrow: "The head yard", h: `${ADDR.suburb}, half an hour south-east of the Brisbane CBD`, p: [`${ADDR_LINE}, in the Logan corridor a couple of minutes off the M1, sitting roughly midway between the city and the Gold Coast.`, HOURS ? `Open ${HOURS}. Give us a ring before you drive over so the units you want to look at are pulled out and standing clear when you arrive.` : "Give us a ring before you drive over so the units you want to look at are standing clear when you arrive."], cta: ["/contact/", "Get in touch"], dark: true })}
 ${sec("sec-wash", secHead("Common questions", `About ${SHORT}`, null) + qaHtml(faqs))}
 ${ask("Talk to us", `Tell us what the container has to do and you will be told what it needs. ${PROMISE}.`, "about")}`;
-  out("about", shell({ t: `About ${BRAND} — Australian Owned Container Sales And Hire`, d: `${BRAND} sells and hires shipping containers into every state and territory, despatched from the yard that makes the shortest run to you. Head yard at ${ADDR_LINE}. Australian owned and operated.`, c: "/about/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("about", shell({ t: fitTitle(`About ${BRAND} — Australian-Owned Sales & Hire`), d: `Australian-owned ${BRAND} sells and hires shipping containers into every state and territory. Head yard at ${[ADDR.suburb, ADDR.state].filter(Boolean).join(" ")}.`, c: "/about/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* ================================= FAQS ================================= */
@@ -287,7 +287,7 @@ function faqsPage() {
 ${groups.map((gr, i) => sec(i % 2 ? "sec-wash" : "", secHead(null, gr.h, null) + qaHtml(gr.faqs))).join("\n")}
 ${plate("Still not answered?", `Ring ${S.phone} and ask a person.`)}
 ${ask("Ask us the one that is not here", `Ring it through or type it in — both land with somebody who knows the answer. ${PROMISE}.`, "faqs")}`;
-  out("faqs", shell({ t: `Shipping Container Questions Answered | ${BRAND}`, d: "Straight answers on container sizes and heights, grades and watertightness, truck access and ground preparation, delivery, payment, hire terms, council approval, condensation and security.", c: "/faqs/", schema: g(crumbsLd(crumbs), faqLd(all)) }, body));
+  out("faqs", shell({ t: `Shipping Container Questions Answered | ${BRAND}`, d: "Straight answers on container sizes, grades, watertightness, truck access, ground preparation, payment, hire terms, council approval and security.", c: "/faqs/", schema: g(crumbsLd(crumbs), faqLd(all)) }, body));
 }
 
 /* ================================ GUIDES ================================ */
@@ -297,11 +297,16 @@ function guides() {
   const body = `${pageHead({ crumbs, photo: "head-guides", eyebrow: "Guides", h1: "Shipping container guides", lede: "Everything we end up explaining on the phone, written down properly. Grades, access, condensation, security, modifications and the rest." })}
 ${sec("", `<div class="guides">${sorted.map((p) => `<article class="guidecard reveal"><h3><a href="/blog/${p.slug}/">${esc(p.title)}</a></h3><p>${esc(p.desc)}</p><div class="meta">${esc(String(p.mins))} min read · ${esc(auDate(p.date))}</div></article>`).join("")}</div>`)}
 ${ask("Rather just ask us?", `Ring or send an enquiry and you will get a straight answer from a person. ${PROMISE}.`, "guides")}`;
-  out("blog", shell({ t: `Shipping Container Guides | ${BRAND}`, d: "Practical guides to buying, hiring, siting and living with shipping containers — grades, delivery access, dimensions, condensation, security, site preparation and modifications.", c: "/blog/", schema: g(crumbsLd(crumbs), { "@type": "CollectionPage", name: "Shipping container guides", url: `${D}/blog/` }) }, body));
+  out("blog", shell({ t: `Shipping Container Guides | ${BRAND}`, d: "Practical guides to buying, hiring and siting shipping containers — grades, delivery access, dimensions, condensation, security and modifications.", c: "/blog/", schema: g(crumbsLd(crumbs), { "@type": "CollectionPage", name: "Shipping container guides", url: `${D}/blog/` }) }, body));
 
   sorted.forEach((p, idx) => {
     const c = [HOME_CRUMB, ["Guides", "/blog/"], [p.title, `/blog/${p.slug}/`]];
-    const others = sorted.filter((x) => x.slug !== p.slug).slice(idx === 0 ? 1 : 0, (idx === 0 ? 1 : 0) + 3);
+    /* Rotate through the list rather than slicing the top three, which sent
+       every post's "related reading" to the same three guides and left the
+       rest with one inbound link each. Each post now links the next three in
+       date order (wrapping), so every guide gets three from its siblings.
+       23/09/2026. */
+    const others = [1, 2, 3].map((k) => sorted[(idx + k) % sorted.length]).filter((x) => x.slug !== p.slug);
     const art = {
       "@type": "Article", headline: p.title, description: p.desc,
       datePublished: p.date, dateModified: p.date,
@@ -319,7 +324,7 @@ ${promiseStrip()}
 ${sec("", `<div class="narrow article reveal">${p.body.replace(/<table>/g, '<div class="tablewrap"><table>').replace(/<\/table>/g, "</table></div>")}</div>`)}
 ${sec("sec-wash", secHead("More guides", "Related reading", null) + `<div class="guides">${others.map((x) => `<article class="guidecard reveal"><h3><a href="/blog/${x.slug}/">${esc(x.title)}</a></h3><p>${esc(x.desc)}</p><div class="meta">${esc(String(x.mins))} min read</div></article>`).join("")}</div>`)}
 ${ask("Got a question this did not answer?", `Ring us — ${S.phone} — or send it through. ${PROMISE}.`, "g" + idx)}`;
-    out("blog/" + p.slug, shell({ t: `${p.title} | ${BRAND}`, d: p.desc, c: `/blog/${p.slug}/`, schema: g(crumbsLd(c), art) }, body2));
+    out("blog/" + p.slug, shell({ t: fitTitle(p.seoTitle || p.title), d: p.seoDesc || p.desc, c: `/blog/${p.slug}/`, schema: g(crumbsLd(c), art) }, body2));
   });
 }
 
@@ -370,7 +375,7 @@ ${sec("sec-wash", secHead("Before you send it", "Four things that turn an enquir
 </div>`)}
 ${band({ photo: "yard-entry", eyebrow: "Finding us", h: "Cornubia, between Brisbane and the Gold Coast", p: [`${ADDR_LINE}. Come off the M1 at the Logan side and it is a short run in — hardstand, room to walk around the units and somebody to open the doors for you.`, HOURS ? `Open ${HOURS}. Give yourself twenty minutes rather than five; almost everybody rethinks the size once a 20ft and a 40ft are standing next to each other.` : "Give yourself twenty minutes rather than five; almost everybody rethinks the size once two are standing side by side."], cta: ["/depots/", "How supply works"], dark: true })}
 ${sec("", secHead("Common questions", "Getting hold of us", null) + qaHtml(faqs))}`;
-  out("contact", shell({ t: `Contact ${BRAND} — Container Prices And Enquiries`, d: `Get a price on a shipping container for sale or hire anywhere in Australia. Ring ${S.phone} or send the form — ${PROMISE.toLowerCase()}. Head yard at ${ADDR_LINE}.`, c: "/contact/", schema: g(crumbsLd(crumbs), { "@type": "ContactPage", url: `${D}/contact/` }, faqLd(faqs)) }, body));
+  out("contact", shell({ t: `Contact ${BRAND} — Container Prices And Enquiries`, d: `Price a container for sale or hire anywhere in Australia. Ring ${S.phone} or send the form — ${PROMISE.toLowerCase()}.`, c: "/contact/", schema: g(crumbsLd(crumbs), { "@type": "ContactPage", url: `${D}/contact/` }, faqLd(faqs)) }, body));
 }
 
 /* =============================== UTILITY ================================ */
@@ -456,7 +461,7 @@ ${sec("", secHead("By size", "Same condition, three sizes", null) + rangeGrid(P.
 ${others.length ? sec("sec-grey", secHead("The other two", "How this compares", null) + `<div class="range">${others.map((o) => `<article class="rangecard reveal"><div class="rangecard-body"><h3><a href="/${o.slug}/">${esc(o.name)}</a></h3><p>${esc(o.bestFor)}</p></div></article>`).join("")}</div><p style="margin-top:1.4rem"><a class="btn btn-ghost" href="/container-grades/">Grades explained in full</a></p>`) : ""}
 ${sec("sec-wash", secHead("Common questions", "About " + x.name.toLowerCase(), null) + qaHtml(faqs))}
 ${ask("Get a price", `Tell us the size, where it is going and what is going in it.`, x.slug, { grade: COND_GRADE[x.slug] || "unsure" })}`;
-    out(x.slug, shell({ t: `${x.title} For Sale | ${BRAND}`, d: x.metaDesc, c: `/${x.slug}/`, schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+    out(x.slug, shell({ t: x.seoTitle || fitTitle(`${x.title} For Sale`), d: x.seoDesc || x.metaDesc, c: `/${x.slug}/`, schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
   });
 }
 
@@ -480,7 +485,7 @@ ${plate("Tell us what it has to do", "Not what it has to be. The job decides the
 ${band({ photo: "mod-workshop", eyebrow: "The rule", h: "Framing is the whole job", p: ["A container's walls carry load. Every opening cut into one has to be reframed in steel to carry what the panel was carrying, or the unit racks and the doors stop shutting square — which is how you find out, usually about six months later.", "That is the difference between a modification and a hole. It is also why a cheap cut-in door is not a saving; it is a structural problem you have paid to install."], cta: ["/contact/", "Talk it through"], dark: true })}
 ${sec("sec-wash", secHead("Common questions", "About modifying a container", null) + qaHtml(faqs))}
 ${ask("Tell us what you want it to do", `Describe the job rather than the product and we will tell you what the container actually needs. ${PROMISE}.`, "mods")}`;
-  out("container-modifications", shell({ t: `Shipping Container Modifications | ${BRAND}`, d: `Container modifications — personnel doors, windows, roller doors, insulation, shelving and ventilation. Done before delivery wherever possible. ${BRAND}, delivered ${SERVICE_AREA}.`, c: "/container-modifications/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("container-modifications", shell({ t: `Shipping Container Modifications | ${BRAND}`, d: `Container modifications — personnel doors, windows, roller doors, insulation, shelving and vents, fitted before delivery where possible.`, c: "/container-modifications/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* ============================= DEPOTS (NEW) =============================
@@ -662,6 +667,14 @@ ${CANONICAL_CASE}
     const d = (html[f].match(/<meta name="description" content="([^"]*)"/) || [])[1];
     if (!t) failures.push(`no title in ${path.relative(DIST, f)}`); else { titles[t] = (titles[t] || 0) + 1; }
     if (!d) failures.push(`no description in ${path.relative(DIST, f)}`); else { descs[d] = (descs[d] || 0) + 1; }
+  });
+  /* Snippet length: warn, never fail. Measured on the decoded text. */
+  const decode = (x) => String(x).replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+  files.forEach((f) => {
+    const t = decode((html[f].match(/<title>([^<]*)<\/title>/) || [])[1] || "");
+    const d = decode((html[f].match(/<meta name="description" content="([^"]*)"/) || [])[1] || "");
+    if (t.length > TITLE_MAX) console.warn(`  WARNING: title ${t.length} chars (> ${TITLE_MAX}) in ${path.relative(DIST, f)}`);
+    if (d.length > DESC_MAX) console.warn(`  WARNING: description ${d.length} chars (> ${DESC_MAX}) in ${path.relative(DIST, f)}`);
   });
   Object.keys(titles).filter((t) => titles[t] > 1).forEach((t) => failures.push(`duplicate title: ${t}`));
   Object.keys(descs).filter((d) => descs[d] > 1).forEach((d) => failures.push(`duplicate description: ${d.slice(0, 60)}…`));
