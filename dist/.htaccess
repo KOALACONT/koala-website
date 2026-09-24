@@ -85,6 +85,8 @@ ErrorDocument 404 /404.html
   RewriteRule ^refrigerated-shipping-containers/?$ /refrigerated-shipping-containers/ [R=301,L,NC]
   RewriteCond %{REQUEST_URI} !^/dangerous-goods-shipping-containers/$
   RewriteRule ^dangerous-goods-shipping-containers/?$ /dangerous-goods-shipping-containers/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/buy-20ft-container/$
+  RewriteRule ^buy-20ft-container/?$ /buy-20ft-container/ [R=301,L,NC]
   RewriteCond %{REQUEST_URI} !^/brisbane/$
   RewriteRule ^brisbane/?$ /brisbane/ [R=301,L,NC]
   RewriteCond %{REQUEST_URI} !^/sydney/$
