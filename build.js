@@ -135,6 +135,13 @@ const SHORT = S.short || BRAND.replace(/\s+Containers$/i, "");
 /* E.164 for schema. Handles an 0X mobile and a 13/1300/1800 number alike. */
 const PHONE_DIGITS = String(S.phoneHref).replace(/\D/g, "");
 const TEL_E164 = "+61" + (PHONE_DIGITS.charAt(0) === "0" ? PHONE_DIGITS.slice(1) : PHONE_DIGITS);
+/* Optional sales call-back mobile. Published so caller-ID databases (Google,
+   Samsung/Hiya, Truecaller) can tie the number to the business — it was being
+   labelled "Suspected spam" on customers' phones because it appeared nowhere
+   public. Only rendered when site.json carries salesMobile + salesMobileHref. */
+const MOBILE = S.salesMobile && S.salesMobileHref ? S.salesMobile : null;
+const MOBILE_DIGITS = MOBILE ? String(S.salesMobileHref).replace(/\D/g, "") : "";
+const MOBILE_E164 = MOBILE ? "+61" + (MOBILE_DIGITS.charAt(0) === "0" ? MOBILE_DIGITS.slice(1) : MOBILE_DIGITS) : null;
 
 /* Trading hours are group-standard. "hours" and "hoursSchema" must ALWAYS be
    set together or both left absent — the hours a human reads and the hours
@@ -378,7 +385,11 @@ const biz = () => {
     "@id": `${D}/#biz`,
     name: BRAND,
     url: D,
-    telephone: TEL_E164,
+    telephone: MOBILE_E164 ? [TEL_E164, MOBILE_E164] : TEL_E164,
+    ...(MOBILE_E164 ? { contactPoint: [
+      { "@type": "ContactPoint", contactType: "sales", telephone: TEL_E164, areaServed: "AU", availableLanguage: "en" },
+      { "@type": "ContactPoint", contactType: "sales", telephone: MOBILE_E164, areaServed: "AU", availableLanguage: "en", description: "Sales call-back mobile" }
+    ] } : {}),
     email: S.email,
     priceRange: "$$",
     description: S.tagline,
@@ -680,7 +691,8 @@ function foot(hasQuote) {
       <div class="foot-brand"><a href="/" aria-label="${esc(BRAND)} home">${markLight}</a></div>
       <p class="foot-tag">${esc(S.tagline)}</p>
       <div class="foot-contact">
-        <a class="foot-tel" href="${S.phoneHref}">${esc(S.phone)}</a>
+        <a class="foot-tel" href="${S.phoneHref}">${esc(S.phone)}</a>${MOBILE ? `
+        <a class="foot-tel" style="font-size:1.1rem" href="${S.salesMobileHref}">${esc(MOBILE)}</a>` : ""}
         <a class="foot-mail" href="mailto:${S.email}">${esc(S.email)}</a>
         ${ADDR_LINE ? `<address class="foot-addr">${esc(ADDR_LINE)}</address>` : ""}
         ${HOURS ? `<span class="foot-addr">${esc(HOURS)}</span>` : ""}
@@ -1234,7 +1246,7 @@ module.exports = { esc, aud };
    below, purely to keep each file readable. Both halves share this module's
    helpers through the object exported above and the globals assigned here. */
 Object.assign(global, {
-  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, mast, promiseStrip, quoteForm, ask, askLink, foot, firstSentence, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, PRICES, PRICE_DISCLAIMER, PRICE_SUB, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
+  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, MOBILE, MOBILE_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, mast, promiseStrip, quoteForm, ask, askLink, foot, firstSentence, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, PRICES, PRICE_DISCLAIMER, PRICE_SUB, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
 });
 
 home();
