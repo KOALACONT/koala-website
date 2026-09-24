@@ -4,7 +4,7 @@
    Shares its helpers through global.__FD, exactly like part two.
    ========================================================================= */
 const F = global.__FD;
-const { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, HOURS, SERVICE_AREA,
+const { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, MOBILE, HOURS, SERVICE_AREA,
   PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto,
   crumbsLd, faqLd, g, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat,
   rangeGrid, gallery, rank, pick, PRICES, PRICE_DISCLAIMER, PRICE_SUB, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS,
@@ -327,7 +327,8 @@ ${ask("Got a question this did not answer?", `Ring us — ${S.phone} — or send
 function contact() {
   const crumbs = [HOME_CRUMB, ["Contact", "/contact/"]];
   const faqs = [
-    { q: "Is the 1300 number right for every state?", a: `Yes. ${S.phone} is the only number on the site and it reaches the same desk wherever you are ringing from. Nobody gets transferred to a branch to find out what is in stock.` },
+    { q: "Is the 1300 number right for every state?", a: `Yes. ${S.phone} reaches the same desk wherever you are ringing from. Nobody gets transferred to a branch to find out what is in stock.` },
+    ...(MOBILE ? [{ q: `Who is ringing me from ${MOBILE}?`, a: `That is us. ${MOBILE} is ${S.salesMobileNote || "the mobile our sales team rings you back from"} after you send an enquiry or leave a message on the 1300 line. Save it so you know it is ${BRAND} when it rings, and ring it back if you missed us.` }] : []),
     { q: "Can I turn up at the yard without ringing?", a: `You can, but you will get more out of the trip if you ring first. Cornubia is a working yard with machinery moving in it, and the unit you have driven over to see may be sitting behind two others. A phone call beforehand means somebody meets you and the containers you care about are standing clear.` },
     { q: "Will I get a price on the phone, or does it have to be in writing?", a: "Both work. Ring and you will get a number on the call for anything standard. Send the form and it comes back in writing with the grade, the size and the delivery to your address set out, which is usually what people want if they are comparing or getting it approved by somebody else." },
     { q: "What happens after I send the enquiry?", a: `${PROMISE_DETAIL} You get a person reading it, not an automatic reply with a reference number. If the details are enough to price it, you get the price; if something is missing, you get one short question rather than a form to fill in again.` },
@@ -339,7 +340,7 @@ function contact() {
     crumbs, photo: "head-contact", eyebrow: "Contact",
     h1: "Get a price on a container",
     lede: `Give us the postcode, what is going in it and what the truck has to get past. That is normally enough for a firm number, and it comes back from a person rather than an autoresponder.`,
-    facts: [["Call", S.phone], ["Email", S.email], ["Head yard", ADDR_LINE]].concat(HOURS ? [["Open", HOURS]] : [])
+    facts: [["Call", S.phone]].concat(MOBILE ? [["Sales mobile", MOBILE]] : []).concat([["Email", S.email], ["Head yard", ADDR_LINE]]).concat(HOURS ? [["Open", HOURS]] : [])
   })}
 ${sec("", `<div class="spec">
   <div id="quote">${F.quoteForm("-contact")}</div>
@@ -349,7 +350,8 @@ ${sec("", `<div class="spec">
       <p style="color:var(--pale);font-size:.95rem">Usually faster, and you get somebody who can see what is standing in the yards this week rather than what a price list says should be.</p>
       <a class="btn btn-primary btn-wide" href="${S.phoneHref}">${esc(S.phone)}</a>
       <a class="btn btn-ondark btn-wide" style="margin-top:.6rem" href="mailto:${S.email}">${esc(S.email)}</a>
-      <p class="pricenote">${HOURS ? esc(HOURS) + ". " : ""}${esc(PROMISE_DETAIL)}</p>
+      <p class="pricenote">${HOURS ? esc(HOURS) + ". " : ""}${esc(PROMISE_DETAIL)}</p>${MOBILE ? `
+      <p class="pricenote">We ring back from <a href="${S.salesMobileHref}">${esc(MOBILE)}</a> — ${esc(S.salesMobileNote || "our sales mobile")}. Save it so you know it is us.</p>` : ""}
     </div>
     <div class="pricebox reveal">
       <h3>Come and see them</h3>
