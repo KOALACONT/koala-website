@@ -1241,4 +1241,5 @@ home();
 hub();
 sizePages();
 typePages();
+require("./build-purchase.js");
 require("./build-pages.js");
