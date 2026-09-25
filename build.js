@@ -372,6 +372,7 @@ ${noindex || TEST ? '<meta name="robots" content="noindex,nofollow">' : '<meta n
 <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css?v=${CSS_V}">
 ${VCSS.map((f) => `<link rel="stylesheet" href="/css/${f}?v=${assetHash("css/" + f)}">`).join("")}
+<link rel="stylesheet" href="/css/mascot.css?v=${assetHash("css/mascot.css")}">
 <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
 <link rel="apple-touch-icon" href="/img/favicon.svg">
 ${schema ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>` : ""}
@@ -660,10 +661,20 @@ function quoteForm(u, compact, mode, preset) {
    The response promise is stripped from the sub-line here because it is
    already on the promise strip (inner pages) or the plate (home) — James,
    14/09/2026: "stop repeating one business day in every block". */
+
+/* Koala's approved campaign mascot, used as illustration rather than stock photography. */
+function mascotGreeting(extra = "") {
+  return `<div class="mascot-greeting ${extra}"><img src="/img/koala/quote-mate.png" width="280" height="420" alt="" loading="lazy" decoding="async"><p><strong>Room for more.</strong><span>Less mucking around.</span></p></div>`;
+}
+function mascotFeature() {
+  return `<section class="koala-feature"><div class="wrap koala-feature-grid"><figure><img src="/img/koala/sheds-chockers.jpg" srcset="/img/koala/sheds-chockers-small.jpg 640w, /img/koala/sheds-chockers.jpg 1280w" sizes="(max-width: 760px) 100vw, 55vw" width="1280" height="853" alt="Koala’s mascot beside a tidy green container and a shed full of camping gear and tools" loading="lazy" decoding="async"><figcaption>A little Koala imagination. Ask us for photos of the actual container.</figcaption></figure><div class="koala-feature-copy"><p class="eyebrow">Make room with Koala</p><h2>Shed’s chockers?<br>We know the feeling.</h2><p>Tools, camping gear and the stuff you swear you’ll need one day. A Koala container gives it a place of its own.</p><p>Tell us what you need and where it’s going. We’ll help with the size and grade, and get you a container and delivery price.</p><a class="btn btn-primary" href="#quote">Get my delivered price</a><a class="koala-text-link" href="/container-storage/">Work out what fits</a></div></div></section>`;
+}
+
 function ask(heading, sub, idSuffix, preset) {
   const u = idSuffix ? "-" + idSuffix : "";
   const subClean = String(sub || "").replace(new RegExp("\\s*" + PROMISE.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\.?", "g"), "").trim();
   return `<section class="ask" id="quote"><div class="wrap">
+  ${mascotGreeting("mascot-quote")}
   <div class="sec-head"><p class="eyebrow">Get a price</p><h2>${esc(heading)}</h2>${subClean ? `<p class="ask-sub">${esc(subClean)}</p>` : ""}</div>
   ${quoteForm(u, false, null, preset)}
   <p class="ask-or">Or skip the form and ring us — <a href="${S.phoneHref}">${esc(S.phone)}</a>${HOURS ? ", " + esc(HOURS) : ""}</p>
@@ -675,6 +686,7 @@ function ask(heading, sub, idSuffix, preset) {
    each lose what the other had typed. */
 function askLink(heading, sub) {
   return `<section class="ask ask-link"><div class="wrap">
+  ${mascotGreeting("mascot-quote")}
   <div class="sec-head"><p class="eyebrow">Get a price</p><h2>${esc(heading)}</h2><p class="ask-sub">${esc(sub)}</p></div>
   <p class="ask-cta"><a class="btn btn-primary btn-lg" href="#quote">Request a delivered price</a><a class="btn btn-ondark btn-lg" href="${S.phoneHref}">${esc(S.phone)}</a></p>
 </div></section>`;
@@ -688,6 +700,7 @@ function foot(hasQuote) {
 <div class="wrap">
   <div class="foot-top">
     <div>
+      <div class="foot-mascot"><img src="/img/koala/quote-mate.png" width="280" height="420" alt="" loading="lazy" decoding="async"></div>
       <div class="foot-brand"><a href="/" aria-label="${esc(BRAND)} home">${markLight}</a></div>
       <p class="foot-tag">${esc(S.tagline)}</p>
       <div class="foot-contact">
@@ -715,7 +728,13 @@ ${S.metaPixel && !TEST ? `<script src="/js/meta.js?v=${assetHash("js/meta.js")}"
 <script src="/js/app.js?v=${JS_V}" defer></script></body></html>`;
 }
 
-const shell = (o, body) => head(o.t, o.d, o.c, o.schema, o.noindex) + mast() + `<main id="main">` + body + `</main>` + foot(body.includes('id="quote"'));
+const mascotPages = new Set(["/20ft-shipping-containers/", "/container-storage/", "/container-sales/"]);
+function withMascotScenes(route, body) {
+  if (route === "/") return body.replace("</section>", "</section>" + mascotFeature());
+  if (mascotPages.has(route)) return body.replace('<section class="ask" id="quote">', mascotFeature() + '<section class="ask" id="quote">');
+  return body;
+}
+const shell = (o, body) => head(o.t, o.d, o.c, o.schema, o.noindex) + mast() + `<main id="main">` + withMascotScenes(o.c, body) + `</main>` + foot(body.includes('id="quote"'));
 const crumbHtml = (c) => `<nav class="crumb" aria-label="Breadcrumb"><div class="wrap">${c.map((x, i) => (i === c.length - 1 ? `<strong>${esc(x[0])}</strong>` : `<a href="${x[1]}">${esc(x[0])}</a> <span aria-hidden="true">/</span> `)).join("")}</div></nav>`;
 
 /* ------------------------------------------------------------ primitives -- */
@@ -1007,6 +1026,7 @@ function home() {
         ${heroPoints}
       </div>
       <div class="quotecard" id="quote">
+        ${mascotGreeting("mascot-purchase")}
         <h2>Get a price</h2>
         <p class="qc-sub">Tell us what you need and where it's going — a real person comes back with a delivered price.</p>
         ${quoteForm("-hero", true, "mini")}
@@ -1049,6 +1069,7 @@ function home() {
         </ul>
       </div>
       <div class="quotecard" id="quote">
+        ${mascotGreeting("mascot-purchase")}
         <h2>Get a price</h2>
         <p class="qc-sub">Four questions about the box, then the best number to get you on.</p>
         ${quoteForm("-hero", true)}
@@ -1246,7 +1267,7 @@ module.exports = { esc, aud };
    below, purely to keep each file readable. Both halves share this module's
    helpers through the object exported above and the globals assigned here. */
 Object.assign(global, {
-  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, MOBILE, MOBILE_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, mast, promiseStrip, quoteForm, ask, askLink, foot, firstSentence, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, PRICES, PRICE_DISCLAIMER, PRICE_SUB, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
+  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, MOBILE, MOBILE_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, mast, promiseStrip, quoteForm, ask, askLink, mascotGreeting, foot, firstSentence, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, PRICES, PRICE_DISCLAIMER, PRICE_SUB, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
 });
 
 home();
