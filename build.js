@@ -729,7 +729,21 @@ ${S.metaPixel && !TEST ? `<script src="/js/meta.js?v=${assetHash("js/meta.js")}"
 }
 
 const mascotPages = new Set(["/20ft-shipping-containers/", "/container-storage/", "/container-sales/"]);
+const deliveryScenes = {
+  "/delivery/": { file: "delivery-workshop", title: "Big box. Less mucking around.", copy: "A clear run, a firm landing spot and the right truck. We’ll talk through the access before delivery is booked.", alt: "Koala mascot operating a tilt tray beside a workshop", link: "/contact/#quote", cta: "Talk through my delivery" },
+  "/delivery-areas/": { file: "delivery-country", title: "More room. Right where you need it.", copy: "Tell us your postcode and what the access is like. We’ll work out the container and delivery price.", alt: "Koala mascot welcoming a container truck to a country property", link: "/contact/#quote", cta: "Get my delivered price" },
+  "/how-it-works/": { file: "delivery-sorted", title: "Room sorted. Back to the good stuff.", copy: "From choosing your container to working out delivery, we’re here to make it straightforward.", alt: "Koala mascot beside a delivered container and an empty tilt tray", link: "/delivery/", cta: "Check delivery and access" }
+};
+function deliveryScene(scene) {
+  return `<section class="koala-feature koala-delivery"><div class="wrap koala-feature-grid"><figure><img src="/img/koala/${scene.file}.jpg" srcset="/img/koala/${scene.file}-small.jpg 640w, /img/koala/${scene.file}.jpg 1280w" sizes="(max-width: 760px) 100vw, 55vw" width="1280" height="853" alt="${esc(scene.alt)}" loading="lazy" decoding="async"><figcaption>A little Koala imagination. Your truck and delivery arrangements are confirmed for your site.</figcaption></figure><div class="koala-feature-copy"><p class="eyebrow">Make room with Koala</p><h2>${esc(scene.title)}</h2><p>${esc(scene.copy)}</p><a class="btn btn-primary" href="${scene.link}">${esc(scene.cta)}</a></div></div></section>`;
+}
 function withMascotScenes(route, body) {
+  if (route === "/thank-you/") return body.replace("<h1>", '<img class="koala-thanks" src="/img/koala/quote-mate.png" width="280" height="420" alt="" decoding="async"><h1>');
+  if (deliveryScenes[route]) {
+    const scene = deliveryScene(deliveryScenes[route]);
+    if (route === "/delivery-areas/") return body.replace('<section class="ask" id="quote">', scene + '<section class="ask" id="quote">');
+    return body.replace("</section>", "</section>" + scene);
+  }
   if (route === "/") return body.replace("</section>", "</section>" + mascotFeature());
   if (mascotPages.has(route)) return body.replace('<section class="ask" id="quote">', mascotFeature() + '<section class="ask" id="quote">');
   return body;
