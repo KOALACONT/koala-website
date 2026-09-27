@@ -663,8 +663,8 @@ function quoteForm(u, compact, mode, preset) {
    14/09/2026: "stop repeating one business day in every block". */
 
 /* Koala's approved campaign mascot, used as illustration rather than stock photography. */
-function mascotGreeting(extra = "") {
-  return `<div class="mascot-greeting ${extra}"><img src="/img/koala/quote-mate.png" width="280" height="420" alt="" loading="lazy" decoding="async"><p><strong>Room for more.</strong><span>Less mucking around.</span></p></div>`;
+function mascotGreeting(extra = "", pose = "clipboard") {
+  return `<div class="mascot-greeting ${extra}"><img src="/img/koala/pose-${pose}.webp" width="280" height="420" alt="" loading="lazy" decoding="async"><p><strong>Room for more.</strong><span>Less mucking around.</span></p></div>`;
 }
 function mascotFeature() {
   return `<section class="koala-feature"><div class="wrap koala-feature-grid"><figure><img src="/img/koala/sheds-chockers.jpg" srcset="/img/koala/sheds-chockers-small.jpg 640w, /img/koala/sheds-chockers.jpg 1280w" sizes="(max-width: 760px) 100vw, 55vw" width="1280" height="853" alt="Koala’s mascot beside a tidy green container and a shed full of camping gear and tools" loading="lazy" decoding="async"><figcaption>A little Koala imagination. Ask us for photos of the actual container.</figcaption></figure><div class="koala-feature-copy"><p class="eyebrow">Make room with Koala</p><h2>Shed’s chockers?<br>We know the feeling.</h2><p>Tools, camping gear and the stuff you swear you’ll need one day. A Koala container gives it a place of its own.</p><p>Tell us what you need and where it’s going. We’ll help with the size and grade, and get you a container and delivery price.</p><a class="btn btn-primary" href="#quote">Get my delivered price</a><a class="koala-text-link" href="/container-storage/">Work out what fits</a></div></div></section>`;
@@ -686,7 +686,6 @@ function ask(heading, sub, idSuffix, preset) {
    each lose what the other had typed. */
 function askLink(heading, sub) {
   return `<section class="ask ask-link"><div class="wrap">
-  ${mascotGreeting("mascot-quote")}
   <div class="sec-head"><p class="eyebrow">Get a price</p><h2>${esc(heading)}</h2><p class="ask-sub">${esc(sub)}</p></div>
   <p class="ask-cta"><a class="btn btn-primary btn-lg" href="#quote">Request a delivered price</a><a class="btn btn-ondark btn-lg" href="${S.phoneHref}">${esc(S.phone)}</a></p>
 </div></section>`;
@@ -700,7 +699,6 @@ function foot(hasQuote) {
 <div class="wrap">
   <div class="foot-top">
     <div>
-      <div class="foot-mascot"><img src="/img/koala/quote-mate.png" width="280" height="420" alt="" loading="lazy" decoding="async"></div>
       <div class="foot-brand"><a href="/" aria-label="${esc(BRAND)} home">${markLight}</a></div>
       <p class="foot-tag">${esc(S.tagline)}</p>
       <div class="foot-contact">
@@ -738,7 +736,8 @@ function deliveryScene(scene) {
   return `<section class="koala-feature koala-delivery"><div class="wrap koala-feature-grid"><figure><img src="/img/koala/${scene.file}.jpg" srcset="/img/koala/${scene.file}-small.jpg 640w, /img/koala/${scene.file}.jpg 1280w" sizes="(max-width: 760px) 100vw, 55vw" width="1280" height="853" alt="${esc(scene.alt)}" loading="lazy" decoding="async"><figcaption>A little Koala imagination. Your truck and delivery arrangements are confirmed for your site.</figcaption></figure><div class="koala-feature-copy"><p class="eyebrow">Make room with Koala</p><h2>${esc(scene.title)}</h2><p>${esc(scene.copy)}</p><a class="btn btn-primary" href="${scene.link}">${esc(scene.cta)}</a></div></div></section>`;
 }
 function withMascotScenes(route, body) {
-  if (route === "/thank-you/") return body.replace("<h1>", '<img class="koala-thanks" src="/img/koala/quote-mate.png" width="280" height="420" alt="" decoding="async"><h1>');
+  if (route === "/faqs/") body = body.replace("<h1>", '<img class="koala-faq-mate" src="/img/koala/pose-thinking.webp" width="280" height="420" alt="" decoding="async"><h1>');
+  if (route === "/thank-you/") return body.replace("<h1>", '<img class="koala-thanks" src="/img/koala/pose-thumbsup.webp" width="280" height="420" alt="" decoding="async"><h1>');
   if (deliveryScenes[route]) {
     const scene = deliveryScene(deliveryScenes[route]);
     if (route === "/delivery-areas/") return body.replace('<section class="ask" id="quote">', scene + '<section class="ask" id="quote">');
@@ -1040,7 +1039,7 @@ function home() {
         ${heroPoints}
       </div>
       <div class="quotecard" id="quote">
-        ${mascotGreeting("mascot-purchase")}
+        ${mascotGreeting("mascot-purchase", "wave")}
         <h2>Get a price</h2>
         <p class="qc-sub">Tell us what you need and where it's going — a real person comes back with a delivered price.</p>
         ${quoteForm("-hero", true, "mini")}
@@ -1083,7 +1082,7 @@ function home() {
         </ul>
       </div>
       <div class="quotecard" id="quote">
-        ${mascotGreeting("mascot-purchase")}
+        ${mascotGreeting("mascot-purchase", "wave")}
         <h2>Get a price</h2>
         <p class="qc-sub">Four questions about the box, then the best number to get you on.</p>
         ${quoteForm("-hero", true)}
