@@ -1,0 +1,18 @@
+{
+ "_readme": "Per-locality search overrides, keyed by slug and merged over the matching record from data/locations/*.json at build time (see localityPages in build-pages.js). seoTitle replaces the generated <title> and must fit 60 characters; metaDesc replaces the regional file's description and must fit 155; heroCta is an [href, label] pair rendered as the primary button in the page header. Kept in one small file so a weekly Search Console pulse touches this rather than a 90 KB regional file. Every key must be a real locality slug — the build throws otherwise. No prices, no delivery timeframes.",
+ "ballina": {
+  "seoTitle": "Shipping Containers Ballina — For Sale & Hire, Delivered",
+  "metaDesc": "Shipping containers Ballina — new and used 10ft, 20ft and 40ft for sale and hire, delivered to your address. Free price by phone: 1300 467 776.",
+  "heroCta": ["#quote", "Enquire about shipping containers for Ballina — sale & hire"]
+ },
+ "chinchilla": {
+  "seoTitle": "Shipping Container Chinchilla — For Sale & Hire, Delivered",
+  "metaDesc": "Shipping container Chinchilla — new and used 10ft, 20ft and 40ft for sale and hire, delivered to your farm or yard. Free price by phone: 1300 467 776.",
+  "heroCta": ["#quote", "Enquire about shipping containers for Chinchilla — sale & hire"]
+ },
+ "maryborough": {
+  "seoTitle": "Shipping Container Maryborough — For Sale & Hire, Delivered",
+  "metaDesc": "Shipping container Maryborough — new and used 10ft, 20ft and 40ft for sale and hire, delivered to your address. Free price by phone: 1300 467 776.",
+  "heroCta": ["#quote", "Enquire about shipping containers for Maryborough — sale & hire"]
+ }
+}
