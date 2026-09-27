@@ -9,3 +9,4 @@
 @media(max-width:760px){.koala-feature-grid{grid-template-columns:1fr;gap:24px}.mascot-hero img{width:64px;height:86px}.mascot-hero{margin-bottom:12px}.mascot-greeting strong{font-size:1.2rem}.mascot-greeting span{font-size:.92rem}.mascot-quote img{width:76px;height:100px}.koala-feature h2{font-size:2.3rem}}
 
 .koala-thanks{display:block;width:88px;height:132px;object-fit:contain;margin:0 auto 18px}
+.koala-faq-mate{display:block;width:92px;height:138px;object-fit:contain;margin:0 0 18px}
