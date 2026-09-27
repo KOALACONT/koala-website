@@ -29,10 +29,19 @@ F.pageHead = pageHead; /* shared with build-pages-b.js */
 /* 17/09/2026 SEO pulse: "shipping containers for sale" sits at position ~18
    with 1,500 impressions a month. The highest-impression locality pages send
    one contextual text link into /container-sales/ so the sale page inherits
-   their authority. Deliberately a short list, not all 67. */
-const SALE_LINK_SLUGS = new Set(["brisbane", "gold-coast", "sunshine-coast", "toowoomba", "ipswich", "logan"]);
+   their authority. Deliberately a short list, not all 67. 28/09/2026: Ballina,
+   Chinchilla and Maryborough added — each ranks near #1 for its town query. */
+const SALE_LINK_SLUGS = new Set(["brisbane", "gold-coast", "sunshine-coast", "toowoomba", "ipswich", "logan", "ballina", "chinchilla", "maryborough"]);
+/* Per-locality search overrides (seoTitle, metaDesc, heroCta) live in
+   data/locality-seo.json, keyed by slug, and are merged over the regional
+   record here. A key that matches no locality is a typo, so it throws. */
+const LOC_SEO = require("./data/locality-seo.json");
+Object.keys(LOC_SEO).filter((k) => k !== "_readme").forEach((k) => {
+  if (!LOCS.some((l) => l.slug === k)) throw new Error(`data/locality-seo.json: "${k}" is not a locality slug`);
+});
 function localityPages() {
-  LOCS.forEach((l) => {
+  LOCS.forEach((loc) => {
+    const l = Object.assign({}, loc, LOC_SEO[loc.slug] || {});
     const saleLink = SALE_LINK_SLUGS.has(l.slug) ? ` Buying outright? See our <a href="/container-sales/">shipping containers for sale</a> — new and used, with what each grade promises and what to check on the unit itself.` : "";
     const crumbs = [HOME_CRUMB, ["Where we deliver", "/delivery-areas/"], [l.name, `/${l.slug}/`]];
     const usesHead = pick(USES_HEADS, "uses", l.slug);
@@ -62,7 +71,8 @@ function localityPages() {
       crumbs, poolPhoto: ["pool-lochead", "lh", l.slug], eyebrow: `${l.name}, ${l.state}`,
       h1: `Shipping containers ${l.name}`,
       lede: l.line,
-      facts: [["Stock usually drawn from", depotLine], ["What sets the timing", timingLine(l.leadTime) + " — the date is confirmed when you place the order"], ["Likely truck", l.truck]]
+      facts: [["Stock usually drawn from", depotLine], ["What sets the timing", timingLine(l.leadTime) + " — the date is confirmed when you place the order"], ["Likely truck", l.truck]],
+      cta: l.heroCta /* optional [href, label] pair from data/locality-seo.json; most localities carry none */
     })}
 
 ${sec("", `<div class="narrow">
@@ -103,7 +113,9 @@ ${sec("sec-wash", secHead("Common questions", `Buying a container in ${l.name}`,
 ${ask(askLine, `We deliver to ${l.name} and the surrounding district. Tell us what is going in it and what the access is like, and you will get a price with the cartage worked out.`, l.slug)}`;
 
     out(l.slug, shell({
-      t: `Shipping Containers ${l.name} — For Sale & Hire | ${BRAND}`,
+      /* seoTitle, where a locality carries one, is hand-written to the exact
+         phrase Search Console shows for that town and kept inside 60 chars. */
+      t: l.seoTitle || `Shipping Containers ${l.name} — For Sale & Hire | ${BRAND}`,
       d: l.metaDesc, c: `/${l.slug}/`,
       schema: g(crumbsLd(crumbs), faqLd(l.faqs), svc)
     }, body));
@@ -342,7 +354,7 @@ ${sec("sec-wash", secHead("Sizes for sale", "10ft, 20ft, 40ft and high cube — 
 ${band({ photo: "inspect-yard", eyebrow: "Supply", h: "Where the unit comes from changes what is available", p: ["No two yards hold the same stock in the same week. A grade that is standing four deep at one is a long way off at another, and the honest answer sometimes is that the closest yard has an excellent container that is not quite the one you asked for. Tell us the delivery town early and the conversation gets much shorter.", "Buying a unit that is a long way from you is perfectly normal and happens every week — it just needs the photographs done properly and the cartage worked out before anything is agreed rather than after."], cta: ["/blog/buying-a-container-interstate/", "Buying from another state"], wash: true })}
 ${sec("", secHead("Questions", "About buying a container", null) + qaHtml(faqs))}
 ${ask("Request a free price", `Tell us the size, the grade you are leaning towards, the town it is going to and what the entry looks like. A person comes back with a price for the exact unit, delivered, and tells you plainly which grade the job genuinely needs.`, "sales", { intent: "buy" })}`;
-  out("container-sales", shell({ t: `Shipping Containers for Sale — New & Used | ${BRAND}`, d: "New and used shipping containers for sale — 10ft, 20ft, 40ft and high cube — delivered Australia-wide from our yard near Brisbane. Ask for today’s price.", c: "/container-sales/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
+  out("container-sales", shell({ t: `Shipping Containers for Sale — New & Used | ${BRAND}`, d: "Shipping containers for sale — new and used 10ft, 20ft, 40ft and high cube from our yard near Brisbane, delivered Australia-wide. Call 1300 467 776.", c: "/container-sales/", schema: g(crumbsLd(crumbs), faqLd(faqs)) }, body));
 }
 
 /* =============================== STORAGE ================================ */
