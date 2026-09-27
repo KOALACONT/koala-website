@@ -83,37 +83,56 @@
     });
   }
 
-  // Keep the latest tagged visit across pages in this tab, for up to 30 minutes.
-  // Replace the whole attribution on a new campaign; never mix Google and Meta.
+  // Remember this tab's latest tagged arrival for 30 minutes across pages.
+  // A new tagged arrival replaces ALL fields, so Google and Meta cannot mix.
   var ATTR_KEY = "koala_campaign_attribution_v1";
   var ATTR_TTL = 30 * 60 * 1000;
-  var ATTR_FIELDS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid", "campaignid", "adgroupid", "adid", "network", "device", "matchtype"];
-  function utm() {
-    var o = {};
-    try {
-      var p = new URLSearchParams(location.search);
+  var ATTR_FIELDS = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","gbraid","wbraid","fbclid","campaignid","adgroupid","adid","network","device","matchtype"];
+  var attrMemory = null;
+  var attrStorage = true;
+
+  function cleanAttribution(values) {
+    var out = {};
+    if (values && typeof values === "object" && !Array.isArray(values)) {
       ATTR_FIELDS.forEach(function (k) {
-        if (p.get(k)) o[k] = p.get(k).slice(0, 500);
-      });
-    } catch (e) {}
-    try {
-      if (Object.keys(o).length) {
-        sessionStorage.setItem(ATTR_KEY, JSON.stringify({ at: Date.now(), values: o }));
-      } else {
-        var saved = JSON.parse(sessionStorage.getItem(ATTR_KEY) || "null");
-        var age = saved && Date.now() - saved.at;
-        if (saved && typeof saved.at === "number" && age >= 0 && age < ATTR_TTL && saved.values) {
-          ATTR_FIELDS.forEach(function (k) {
-            if (typeof saved.values[k] === "string") o[k] = saved.values[k].slice(0, 500);
-          });
-        } else {
-          sessionStorage.removeItem(ATTR_KEY);
+        if (Object.prototype.hasOwnProperty.call(values, k) && typeof values[k] === "string" && values[k]) {
+          out[k] = values[k].slice(0, 500);
         }
-      }
-    } catch (e) {} // Blocked/full storage must never prevent an enquiry.
-    return o;
+      });
+    }
+    return out;
   }
-  utm(); // Capture on arrival, before the visitor navigates to another page.
+
+  function utm() {
+    var saved = attrMemory;
+    try { if (attrStorage) saved = JSON.parse(sessionStorage.getItem(ATTR_KEY) || "null"); } catch (e) {}
+    var age = saved && Date.now() - saved.at;
+    if (saved && typeof saved.at === "number" && age >= 0 && age < ATTR_TTL) {
+      return cleanAttribution(saved.values);
+    }
+    attrMemory = null;
+    try { sessionStorage.removeItem(ATTR_KEY); } catch (e) {}
+    return {};
+  }
+
+  // Capture on arrival, including pages without a form. Submitting never
+  // refreshes the expiry. Storage restrictions must never block an enquiry.
+  (function () {
+    var values = {};
+    try {
+      var params = new URLSearchParams(location.search);
+      ATTR_FIELDS.forEach(function (k) { if (params.get(k)) values[k] = params.get(k).slice(0, 500); });
+    } catch (e) {}
+    if (Object.keys(values).length) {
+      attrMemory = { at: Date.now(), values: values };
+      try { sessionStorage.setItem(ATTR_KEY, JSON.stringify(attrMemory)); } catch (e) {
+        attrStorage = false;
+        try { sessionStorage.removeItem(ATTR_KEY); } catch (ignored) {}
+      }
+    } else {
+      utm();
+    }
+  })();
 
   /* ---- the enquiry form ---------------------------------------------------
      Rebuilt 14/09/2026. One shared component (build.js quoteForm) on every
@@ -331,6 +350,7 @@
         utm_source: u.utm_source || null, utm_medium: u.utm_medium || null,
         utm_campaign: u.utm_campaign || null,
         utm_term: u.utm_term || null, utm_content: u.utm_content || null,
+        fbclid: u.fbclid || null,
         gclid: u.gclid || null, gbraid: u.gbraid || null, wbraid: u.wbraid || null,
         campaignid: u.campaignid || null, adgroupid: u.adgroupid || null,
         adid: u.adid || null, network: u.network || null,
