@@ -11,6 +11,8 @@ function env(search,storage=new Map(),response={success:true,id:'mock-only'},htt
  return {c,calls,events,forms,submit:async(f=forms[0])=>{f.handlers.submit({preventDefault(){}});await new Promise(r=>setImmediate(r));}};
 }
 (async()=>{
+ for(const size of ['20ft','40ft','unsure']){const p=env('');const observed=[];p.forms[0].hasAttribute=()=>true;p.forms[0].fields.size=size;p.c.window.koalaMetaPurchaseEnquiry=s=>observed.push(s);await p.submit();assert.deepEqual(observed,[size]);}
+ for(const receipt of [{success:false},{success:true,id:'mock',duplicate:true}]){const p=env('',new Map(),receipt);const observed=[];p.forms[0].hasAttribute=()=>true;p.c.window.koalaMetaPurchaseEnquiry=s=>observed.push(s);await p.submit();assert.equal(observed.length,0);}
  const search='?'+new URLSearchParams(params),st=new Map();
  const a=env(search,st);assert.equal(a.calls.length,0);await a.submit();for(const[k,v]of Object.entries(params))assert.equal(a.calls[0][k],v,k);assert.deepEqual(a.events,['form']);assert.match(a.calls[0].message,/Ad ID: 789/);assert.match(a.calls[0].message,/Ad group ID: 456/);
  const b=env('',st);await b.submit(b.forms[1]);assert.equal(b.calls[0].adid,'789','second form/cross-page');

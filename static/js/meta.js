@@ -30,6 +30,12 @@
   fbq("init", id); // Deliberately no advanced-matching user-data object.
   fbq("trackSingle", id, "PageView");
   var leadSent = false;
+  var purchaseSent = false;
+  window.koalaMetaPurchaseEnquiry = function (size) {
+    if (purchaseSent || !/^(20ft|40ft|unsure)$/.test(size)) return;
+    purchaseSent = true;
+    try { fbq("trackSingleCustom", id, "ContainerPurchaseEnquiry", {container_size: size}); } catch (e) {}
+  };
   window.koalaMetaLead = function () {
     if (leadSent) return;
     leadSent = true;
