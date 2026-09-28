@@ -65,9 +65,11 @@ const PRICE_SUB = PRICES ? "Guide prices in AUD, ex GST. Delivery is quoted with
    single file inside what tooling will handle. The ORDER of this list sets the
    order localities appear in the footer, the delivery-areas hub and the home
    page grid. It deliberately does NOT affect the rotated locality copy: that is
-   keyed on the slug via rank(), so reordering or adding a region cannot
-   silently rewrite the wording of the existing pages. */
-const LOC_REGIONS = ["cap-a", "cap-b", "seq", "nnsw", "qld-coast", "qld-inland", "nsw-vic", "vic-tas-sa", "wa-nt"];
+   keyed on the slug via rank(), so reordering a region cannot silently
+   rewrite the wording of the existing pages. NEW localities must carry
+   "ownCopy": true — rank() is a position among all ranked slugs, so an
+   unflagged addition reshuffles every existing page (see rank()). */
+const LOC_REGIONS = ["cap-a", "cap-b", "seq", "nnsw", "qld-coast", "qld-inland", "nsw-vic", "vic-tas-sa", "wa-nt", "wa-nt-b"];
 const LOCS = LOC_REGIONS.reduce((a, r) => a.concat(require(`./data/locations/${r}.json`).locations), []);
 (function checkLocalities() {
   const seen = new Set();
@@ -857,11 +859,15 @@ function hash32(str) {
 const RANKS = Object.create(null);
 function rank(salt, slug) {
   if (!RANKS[salt]) {
-    const order = LOCS.map((l) => l.slug).slice().sort((a, b) => hash32(salt + ":" + a) - hash32(salt + ":" + b));
+    /* ownCopy rows (added 29/09/2026 onward) are left out of the ranking so
+       that adding them cannot reshuffle the rotated copy on existing pages;
+       they fall back to a straight hash of the slug instead. */
+    const order = LOCS.filter((l) => !l.ownCopy).map((l) => l.slug).sort((a, b) => hash32(salt + ":" + a) - hash32(salt + ":" + b));
     RANKS[salt] = Object.create(null);
     order.forEach((s, i) => { RANKS[salt][s] = i; });
   }
-  return RANKS[salt][slug] || 0;
+  if (!(slug in RANKS[salt])) return hash32(salt + ":" + slug);
+  return RANKS[salt][slug];
 }
 const pick = (pool, salt, slug) => pool[rank(salt, slug) % pool.length];
 

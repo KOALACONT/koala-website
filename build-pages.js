@@ -39,6 +39,10 @@ const LOC_SEO = require("./data/locality-seo.json");
 Object.keys(LOC_SEO).filter((k) => k !== "_readme").forEach((k) => {
   if (!LOCS.some((l) => l.slug === k)) throw new Error(`data/locality-seo.json: "${k}" is not a locality slug`);
 });
+/* 29/09/2026: a "near" town that has its own locality page is linked to it,
+   so Perth points at Rockingham/Joondalup/Mandurah and Darwin at Palmerston/
+   Humpty Doo. Own-site links only, matched on the locality name. */
+const LOC_BY_NAME = LOCS.reduce((m, x) => { m[x.name.toLowerCase()] = x.slug; return m; }, {});
 function localityPages() {
   LOCS.forEach((loc) => {
     const l = Object.assign({}, loc, LOC_SEO[loc.slug] || {});
@@ -105,7 +109,7 @@ ${l.sections.map((s, i) => band({
 
 ${sec("", `<div class="narrow">
   <div class="reveal"><h2>What delivery to ${esc(l.name)} costs</h2><p>${esc(freightLine)}</p></div>
-  <div class="reveal" style="margin-top:2.4rem"><h2>${esc(nearHead)}</h2><p>We also deliver to ${l.near.map((n) => esc(n)).join(", ")} and the surrounding district. If your town is not on the list, ring — it almost certainly still works.</p><div class="chips" style="margin-top:1rem"><a href="/delivery-areas/">All delivery areas</a><a href="/delivery/">How delivery works</a></div></div>
+  <div class="reveal" style="margin-top:2.4rem"><h2>${esc(nearHead)}</h2><p>We also deliver to ${l.near.map((n) => { const s = LOC_BY_NAME[n.toLowerCase()]; return s && s !== l.slug ? `<a href="/${s}/">${esc(n)}</a>` : esc(n); }).join(", ")} and the surrounding district. If your town is not on the list, ring — it almost certainly still works.</p><div class="chips" style="margin-top:1rem"><a href="/delivery-areas/">All delivery areas</a><a href="/delivery/">How delivery works</a></div></div>
 </div>`)}
 
 ${sec("sec-wash", secHead("Common questions", `Buying a container in ${l.name}`, null) + qaHtml(l.faqs))}
