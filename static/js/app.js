@@ -384,6 +384,7 @@
         if (receipt.duplicate !== true) {
           adsConvert("form");
           if (typeof window.koalaMetaLead === "function") window.koalaMetaLead();
+          if (typeof window.koalaMetaPurchaseEnquiry === "function" && form.hasAttribute("data-purchase-enquiry") && i === "buy") window.koalaMetaPurchaseEnquiry(f.size);
         }
         if (location.pathname !== "/thank-you/") setTimeout(function () { location.href = "/thank-you/"; }, 900);
       }

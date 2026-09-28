@@ -1288,6 +1288,7 @@ hub();
 sizePages();
 typePages();
 require("./build-purchase.js");
+require("./build-purchase-social.js");
 require("./build-pages.js");
 
 /* IndexNow: tells Bing & friends which pages changed. See indexnow.js. Never fails the build. */
