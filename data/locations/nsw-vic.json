@@ -9,7 +9,7 @@
    "depot": "Stock for the Hunter comes south down the Pacific Highway from our Grafton depot, with anything out of the ordinary carted from the Cornubia yard in south-east Queensland.",
    "leadTime": "The southbound schedule from Grafton, and what that run is already carrying",
    "truck": "Tilt-tray for 10ft and 20ft; crane truck for 40ft, for the old terrace streets and for any lift over a fence",
-   "metaDesc": "Shipping containers for sale and hire in Newcastle and the Hunter. Delivery planned for terrace streets, harbour fill, Stockton sand and soft river flats.",
+   "metaDesc": "Shipping containers for sale and hire in Newcastle and the Hunter, planned around terrace streets, harbour fill, Stockton sand and river flats.",
    "line": "Nobody in Newcastle needs a container explained to them. The harbour handles them by the thousand, the industrial land at Mayfield and Kooragang was laid out around moving steel and coal, and half the trades in the city have worked around one at some point. That familiarity is worth something, because it means the conversation starts at the useful end. What still catches people out is the last hundred metres. The inner suburbs were surveyed for a horse and cart, the coastal end is dune sand, and a fair slice of the western suburbs sits over ground that was mined long before anybody built on it.",
    "uses": "lock-up storage behind the terraces at Cooks Hill, Islington and Carrington where the back yard is four metres wide, plant and consumables storage across the industrial land at Mayfield, Cardiff, Beresfield and Thornton, site stores on the constant knockdown and infill work through Adamstown, New Lambton and Merewether, gear storage for the marine and boating trades around Carrington and Stockton, feed, fencing and machinery storage on the small holdings out through Paterson, Dungog and the Williams valley, and vineyard equipment kept dry and locked around Pokolbin, Lovedale and Rothbury",
    "access": [
@@ -19,7 +19,7 @@
     {
      "h": "Coming down the highway, not out of a Newcastle yard",
      "p": [
-      "We will be straight about how a Newcastle container reaches you. It is carted down the Pacific Highway from the Grafton depot, or occasionally from the Cornubia yard further north, and it travels on a scheduled run rather than on a truck kept idling in the Hunter waiting for your order. That is why we talk about which run you are going on rather than promising you tomorrow afternoon. What you get in exchange is that the run is regular and the container is chosen before it is loaded, so you are not taking whatever happened to be nearest the gate.",
+      "We will be straight about how a Newcastle container reaches you. It is carted down the Pacific Highway from the Grafton depot, or occasionally from the Cornubia yard further north, and it travels on a scheduled run rather than on a truck kept idling in the Hunter waiting for your order. That is why we talk about which run you are going on rather than promising a delivery slot nobody can see yet. What you get in exchange is that the run is regular and the container is chosen before it is loaded, so you are not taking whatever happened to be nearest the gate.",
       "The practical upshot is planning. If you have a fixed date — a settlement, a site start, a removalist already booked, a shed being demolished — tell us at the enquiry rather than after you have ordered, and we will build the run around it. If your date is soft, say that too, because a flexible date can often slot into a truck that is already coming this way. The one thing that does not help anybody is finding out on the Thursday that the container was needed on the Monday."
      ]
     },
@@ -49,7 +49,7 @@
     },
     {
      "q": "How long does delivery to Newcastle actually take?",
-     "a": "The southbound run from Grafton is what sets it, and how loaded that run already is. The container comes south from the Grafton depot on a scheduled run rather than sitting in a Hunter yard, so this is a planned delivery, not a same-day one. A crane booking, a unit that needs a lockbox or vents fitted, or a stretch of wet weather on soft ground will add a day or two. Give us your date at the enquiry and we will work the schedule around it."
+     "a": "The southbound run from Grafton is what sets it, and how loaded that run already is. The container comes south from the Grafton depot on a scheduled run rather than sitting in a Hunter yard, so it is a planned delivery and the date is confirmed when you order. A crane booking, a unit that needs a lockbox or vents fitted, or a stretch of wet weather on soft ground can move that date. Give us your date at the enquiry and we will work the schedule around it."
     },
     {
      "q": "Can I see the container before it turns up in Newcastle?",
@@ -73,7 +73,7 @@
    "depot": "Containers for the Illawarra run down from our Grafton depot on the coastal schedule, with the last leg through Sydney and down the motorway.",
    "leadTime": "The coastal run down from Grafton, then the last leg through Sydney and down the motorway",
    "truck": "Tilt-tray where there is a straight run onto the block; crane truck for below-street houses, the northern villages and most 40ft work",
-   "metaDesc": "Shipping containers for sale and hire in Wollongong and the Illawarra. Mount Ousley, Bulli Pass, below-street driveways and escarpment ground allowed for.",
+   "metaDesc": "Shipping containers for sale and hire in Wollongong and the Illawarra. Mount Ousley, Bulli Pass, below-street drives and escarpment ground covered.",
    "line": "There is not much flat ground in Wollongong and what there is has a house on it. The city is wedged onto a narrow shelf between the escarpment and the sea, which is lovely to live on and awkward to deliver to, because the streets follow contours rather than a grid and a great many houses sit below the level of the road they are addressed from. Add the grades a loaded truck has to negotiate to get here at all, and the Illawarra becomes a place where the access conversation happens before the price conversation, not after it.",
    "uses": "trade and maintenance storage around the Port Kembla industrial area, Unanderra and Kembla Grange, board, wetsuit and dive gear storage in the northern villages where the garage was lost years ago, site stores on the steep rebuild blocks through Figtree, Mount Pleasant and Keiraville, materials and tool storage for the estate work at Kembla Grange, Calderwood and Tullimbah, dry storage for dairy and small holdings on the Jamberoo and Kangaroo Valley side, and household storage while a Thirroul or Austinmer cottage is lifted and rebuilt",
    "access": [
@@ -117,7 +117,7 @@
     },
     {
      "q": "How long is delivery to Wollongong?",
-     "a": "It is set by the coastal run down from Grafton and the last leg through Sydney. Illawarra containers come down from the Grafton depot on a scheduled coastal run, so it is a planned delivery rather than a next-day one, and a crane booking or a northern-suburbs address can add a day. If you have a fixed date, tell us at the enquiry and we will build the run around it instead of telling you afterwards it did not fit."
+     "a": "It is set by the coastal run down from Grafton and the last leg through Sydney. Illawarra containers come down from the Grafton depot on a scheduled coastal run, so it is a planned delivery with the date confirmed at the order, and a crane booking or a northern-suburbs address can shift it. If you have a fixed date, tell us at the enquiry and we will build the run around it instead of telling you afterwards it did not fit."
     }
    ],
    "near": [
@@ -141,7 +141,7 @@
    "line": "Half the containers we send to Tamworth end up on a property with horses on it, and that changes how a delivery has to be run. The other half go to town blocks and to the sheds at Taminda, where the job is simpler. What links the two is the soil. Black soil is the best growing dirt in the country and the worst thing you can stand a heavy truck on after rain, and it does not give you much warning about which mode it is in. Getting the timing and the pad right is most of the work here.",
    "uses": "hay, chaff and hard feed kept dry and away from vermin, tack, rugs and float gear stored properly instead of in the corner of a shed, vet supplies and drenches locked up out of the heat, fencing wire, posts and strainers in one place, trade storage on the industrial land at Taminda and Westdale, gear and materials for the constant build work at Calala, Hillvue and Moore Creek, and machinery parts and workshop tools on the cropping and grazing country out through Manilla, Kootingal, Nemingha and the Liverpool Plains",
    "access": [
-    "The first question on a Tamworth property delivery is what the driveway is made of and when it last rained. Black soil country does two things. In a dry spell it sets like a road, cracks open wide enough to lose a fencing tool down, and carries anything you put on it. Within an hour of decent rain the same surface turns to a grease that a loaded rigid truck will not climb, will not steer on, and will not stop on. There is no in-between and no way to tell from the house. That is why we ask, why we will move a booking by two days, and why the honest answer to a wet week is next week. The red basalt around Moore Creek and up toward Nundle behaves better but not by much. After that it is the usual property list, and every item on it is worth checking before you order. Cattle grids first: most private grids out here were built by a previous owner out of whatever rail was going, sized for a ute and a float, with no plate and no rating. A loaded truck is a different animal. If you do not know what the grid will take, say so and we will look at the side gate, a drop on firm ground near the road, or a crane lift instead. Then gates, which measure narrower at the swing than they look at the posts. Then culverts of unknown vintage on the driveway. Then turning space at the far end, which needs to be genuinely truck-sized, because a tilt-tray must line up straight to unload and nobody wants to reverse four hundred metres back to the road. And then the horses. A tilt bed unloading is loud — hydraulics, chains and a steel box sliding on a steel deck — so move stock out of the laneway and out of the paddock the truck has to pass through before we arrive, not while the driver is halfway down a drive with nowhere to turn."
+    "The first question on a Tamworth property delivery is what the driveway is made of and when it last rained. Black soil country does two things. In a dry spell it sets like a road, cracks open wide enough to lose a fencing tool down, and carries anything you put on it. Within an hour of decent rain the same surface turns to a grease that a loaded rigid truck will not climb, will not steer on, and will not stop on. There is no in-between and no way to tell from the house. That is why we ask, why we will move a booking rather than risk the drive, and why the honest answer to a wet week is to wait for the ground. The red basalt around Moore Creek and up toward Nundle behaves better but not by much. After that it is the usual property list, and every item on it is worth checking before you order. Cattle grids first: most private grids out here were built by a previous owner out of whatever rail was going, sized for a ute and a float, with no plate and no rating. A loaded truck is a different animal. If you do not know what the grid will take, say so and we will look at the side gate, a drop on firm ground near the road, or a crane lift instead. Then gates, which measure narrower at the swing than they look at the posts. Then culverts of unknown vintage on the driveway. Then turning space at the far end, which needs to be genuinely truck-sized, because a tilt-tray must line up straight to unload and nobody wants to reverse four hundred metres back to the road. And then the horses. A tilt bed unloading is loud — hydraulics, chains and a steel box sliding on a steel deck — so move stock out of the laneway and out of the paddock the truck has to pass through before we arrive, not while the driver is halfway down a drive with nowhere to turn."
    ],
    "sections": [
     {
@@ -173,7 +173,7 @@
     },
     {
      "q": "Can you deliver onto black soil after rain?",
-     "a": "Not while it is wet, and we will say so rather than try. Black soil goes from concrete-hard to unusable within an hour of rain, and a loaded rigid truck on it will bog, chew a trench across the paddock or slide on a slope. We would rather ring you and move the day. If you have a hardstand near the road, a gravelled shed apron or a stretch of the drive that always stays firm, tell us — that is often the difference between delivering this week and waiting for the ground to dry out."
+     "a": "Not while it is wet, and we will say so rather than try. Black soil goes from concrete-hard to unusable within an hour of rain, and a loaded rigid truck on it will bog, chew a trench across the paddock or slide on a slope. We would rather ring you and move the day. If you have a hardstand near the road, a gravelled shed apron or a stretch of the drive that always stays firm, tell us — that is often the difference between delivering on the booked day and waiting for the ground to dry out."
     },
     {
      "q": "Is a container any good for storing feed and tack out here?",
@@ -212,7 +212,7 @@
      "h": "A freight town is easier to schedule for",
      "p": [
       "Dubbo has one real advantage over most inland towns: it is on the way to everywhere. The road network converges here, so a container heading west from the Grafton depot is on a run that would exist anyway rather than a dedicated trip made for one order. That is what keeps a Dubbo delivery a scheduled job rather than a special trip, and it is why a flexible delivery date is worth something to you. If you can take the container in a window rather than on a named day, tell us — it often slots into a truck already coming this way.",
-      "The other side is that we will not pretend to a same-week turnaround we cannot make. Dubbo is a road run from the eastern seaboard, not a local yard job, and anyone promising you tomorrow is either guessing or has already loaded something for somebody else. If you have a hard date — a lease starting, a shed coming down, a contractor arriving — give it to us at the enquiry, and we will tell you honestly whether it fits the schedule."
+      "The other side is that we will not promise a delivery date we cannot keep. Dubbo is a road run from the eastern seaboard, not a local yard job, and anyone promising you a date before checking the run is guessing. If you have a hard date — a lease starting, a shed coming down, a contractor arriving — give it to us at the enquiry, and we will tell you honestly whether it fits the schedule."
      ]
     },
     {
@@ -265,7 +265,7 @@
    "depot": "Riverina orders come down the inland route from our Grafton depot and are scheduled onto the southern run.",
    "leadTime": "The inland route from Grafton onto the southern run, rather than a Riverina yard",
    "truck": "Tilt-tray for town blocks, industrial yards and firm farm access; crane truck where a yard is tight or the container has to go over something",
-   "metaDesc": "Shipping containers for sale and hire in Wagga Wagga and the Riverina. Frost, river flats, defence-base access and honest lead times on the southern run.",
+   "metaDesc": "Shipping containers for sale and hire in Wagga Wagga and the Riverina. Frost, river flats, defence-base access and the southern run explained.",
    "line": "Wagga is a good town to deliver to and a long way to deliver from. The road in is easy — the Sturt and the Olympic Highway feed straight into a town laid out with room in it, and the industrial land at Bomen was built around rail and freight, so heavy vehicles are not a novelty. The distance is the honest constraint. This is a scheduled southern run, not a truck sitting at Bomen waiting on your order, and the two local factors that then decide the job are the river flats and the cold.",
    "uses": "grain, seed and chemical storage on the cropping country out through Coolamon, Junee and Lockhart, wool and shearing gear kept dry between sheds, plant and consumables storage across the Bomen and East Wagga industrial estates, site stores for the build work at Estella, Boorooma and Gobbagombalin, secure storage for contractors working the defence establishments, machinery and irrigation parts on the river flats country, and household storage while a North Wagga or Turvey Park place is renovated",
    "access": [
@@ -393,7 +393,7 @@
    "depot": "Central west orders are carted inland from our Grafton depot and go onto the scheduled tablelands run.",
    "leadTime": "The scheduled tablelands run, and what winter has done to unsealed ground",
    "truck": "Tilt-tray for town blocks, orchards and firm farm tracks; crane truck for tight yards and where a truck cannot get close to the spot",
-   "metaDesc": "Shipping containers for sale and hire in Orange and district. Cold-climate condensation, basalt soil, orchard and vineyard access and honest lead times.",
+   "metaDesc": "Shipping containers for sale and hire in Orange and district. Cold-climate condensation, basalt soil, and orchard and vineyard access.",
    "line": "Orange sits high enough that the weather is a genuine part of the specification, not small talk. Frost most of winter, snow on Canobolas some years, and cold clear nights that make a steel box sweat on the inside if nobody has thought about ventilation. Then there is the soil, which is the deep red basalt that grows the apples and the cherries and holds water like a sponge through a long wet winter. Both of those change what you should buy and how the delivery has to be timed, and both are easier to deal with before the truck is booked.",
    "uses": "bin, netting and irrigation gear storage on the orchards through Nashdale, Borenore and Spring Hill, vineyard equipment and harvest gear kept dry and locked, contractor and maintenance storage for the mining and services businesses working out of the district, trade storage on the industrial land around Leewood and the northern distributor, hay, fencing and stock gear on the grazing country through Molong, Cargo and Lucknow, site stores on the newer build work at Clifton Grove and North Orange, and household storage while a period cottage in the older streets is renovated",
    "access": [
@@ -417,7 +417,7 @@
     {
      "h": "Orchard, vineyard and mine-services work",
      "p": [
-      "The district's container work has a distinct local flavour. Orchards want bin storage, netting, irrigation fittings and spray gear locked up and dry between seasons. Vineyards want the same for harvest equipment and hoses. The mining and services businesses want secure, weatherproof stores that can be shifted when a contract moves. Every one of those is a good use for a container, and every one of them has the same two requirements: it has to stay dry inside and it has to be able to be moved later.",
+      "The district's container work has a distinct local flavour. Orchards want bin storage, netting, irrigation fittings and spray gear locked up and dry between seasons. Vineyards want the same for harvest equipment and hoses. The mining and services businesses want secure, lockable stores that can be shifted when a contract moves. Every one of those is a good use for a container, and every one of them has the same two requirements: it has to stay dry inside and it has to be able to be moved later.",
       "Both come back to setup rather than to the container. A unit that has bedded itself into wet basalt over five years has to be dug out before a truck can lift it, whereas one sitting on pads comes straight up. If it lives outdoors holding anything that must stay dry, ask for cargo-worthy — those units are inspected wind and watertight before they are loaded. The grades page goes through what separates one grade from another, so you can choose on what you are storing rather than on the number at the bottom of the quote."
      ]
     }
@@ -433,7 +433,7 @@
     },
     {
      "q": "How long is delivery to Orange?",
-     "a": "The scheduled tablelands run sets it, along with what winter has done to unsealed ground. Containers for the central west are carted inland from the Grafton depot on a scheduled run rather than sitting in a yard here, so it is a planned delivery rather than a next-day one. Winter ground conditions and crane bookings can add a day or two. If you have a fixed date — a harvest, a contractor starting, a shed coming down — tell us at the enquiry and we will schedule around it."
+     "a": "The scheduled tablelands run sets it, along with what winter has done to unsealed ground. Containers for the central west are carted inland from the Grafton depot on a scheduled run rather than sitting in a yard here, so it is a planned delivery with the date confirmed at the order. Winter ground conditions and crane bookings can move that date. If you have a fixed date — a harvest, a contractor starting, a shed coming down — tell us at the enquiry and we will schedule around it."
     },
     {
      "q": "What can I do about damp getting into stored goods over winter?",
@@ -457,7 +457,7 @@
    "depot": "Bathurst orders travel inland from our Grafton depot and are scheduled onto the same tablelands run as the rest of the central west.",
    "leadTime": "The tablelands run from Grafton; the October race meeting is the week to work around",
    "truck": "Tilt-tray for town blocks, industrial yards and firm rural access; crane truck where the yard is tight or the spot cannot be reached directly",
-   "metaDesc": "Shipping containers for sale and hire in Bathurst, Kelso and district. Frost hollows, granite country, race-week scheduling and cold-climate condensation.",
+   "metaDesc": "Shipping containers for sale and hire in Bathurst, Kelso and district. Frost hollows, granite country, race-week scheduling and condensation.",
    "line": "Two things shape a Bathurst delivery and neither of them is the container. The first is cold. This is a frost hollow on a plain at nine hundred metres, the fog sits in it on winter mornings, and a sealed steel box in that climate will collect water on the inside of its roof unless somebody has thought about airflow. The second is one week in October, when the town's population multiplies, every road in is busy and a truck on a schedule is optimistic. Plan around both and the rest of the job is comparatively simple.",
    "uses": "hay, feed and fencing storage on the grazing country out through Perthville, Rockley and O'Connell, tool and materials storage on the industrial land at Kelso and Raglan, site stores for the estate build work at Kelso, Eglinton and Windradyne, timber and milling gear storage around Oberon, gear storage for motorsport, car clubs and event operators who need everything locked away for eleven months of the year, machinery parts and workshop storage on small holdings through Sofala and Wattle Flat, and household storage while a heritage cottage in the older streets is worked on",
    "access": [
@@ -553,7 +553,7 @@
    "faqs": [
     {
      "q": "Why is a Geelong delivery slower than a coastal New South Wales one?",
-     "a": "Distance, plainly. Containers for Geelong are carted south from our Cornubia yard and Grafton depot on an interstate schedule rather than pulled out of a local yard, so the schedule is what sets your date. It is a scheduled truck, not a next-day service. The trade-off is that the unit is chosen and checked before it is loaded rather than being whatever was closest to the gate. Give us your date at the enquiry and we will tell you honestly whether it works."
+     "a": "Distance, plainly. Containers for Geelong are carted south from our Cornubia yard and Grafton depot on an interstate schedule rather than pulled out of a local yard, so the schedule is what sets your date. It is a scheduled truck, and the date is set when you order. The trade-off is that the unit is chosen and checked before it is loaded rather than being whatever was closest to the gate. Give us your date at the enquiry and we will tell you honestly whether it works."
     },
     {
      "q": "My Geelong West house only has a rear laneway. Can you deliver?",
