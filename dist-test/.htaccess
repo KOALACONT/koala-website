@@ -221,6 +221,20 @@ ErrorDocument 404 /404.html
   RewriteRule ^broome/?$ /broome/ [R=301,L,NC]
   RewriteCond %{REQUEST_URI} !^/alice-springs/$
   RewriteRule ^alice-springs/?$ /alice-springs/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/mandurah/$
+  RewriteRule ^mandurah/?$ /mandurah/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/rockingham/$
+  RewriteRule ^rockingham/?$ /rockingham/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/joondalup/$
+  RewriteRule ^joondalup/?$ /joondalup/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/busselton/$
+  RewriteRule ^busselton/?$ /busselton/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/albany/$
+  RewriteRule ^albany/?$ /albany/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/palmerston/$
+  RewriteRule ^palmerston/?$ /palmerston/ [R=301,L,NC]
+  RewriteCond %{REQUEST_URI} !^/humpty-doo/$
+  RewriteRule ^humpty-doo/?$ /humpty-doo/ [R=301,L,NC]
   RewriteCond %{REQUEST_URI} !^/delivery-areas/$
   RewriteRule ^delivery-areas/?$ /delivery-areas/ [R=301,L,NC]
   RewriteCond %{REQUEST_URI} !^/delivery/$
