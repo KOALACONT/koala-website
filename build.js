@@ -1017,6 +1017,7 @@ function home() {
           <a class="btn btn-primary btn-lg" href="#quote">Get a price</a>
           <a class="btn btn-ondark btn-lg" href="${S.phoneHref}">${esc(S.phone)}</a>
         </div>`;
+
   const HERO_COMPACT = `
 <section class="hero hero-compact">
   <div class="wrap">
