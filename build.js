@@ -376,7 +376,8 @@ ${noindex || TEST ? '<meta name="robots" content="noindex,nofollow">' : '<meta n
 <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css?v=${CSS_V}">
 ${VCSS.map((f) => `<link rel="stylesheet" href="/css/${f}?v=${assetHash("css/" + f)}">`).join("")}
-<link rel="stylesheet" href="/css/mascot.css?v=${assetHash("css/mascot.css")}">
+<link rel="stylesheet" href="/css/mascot.css?v=${assetHash("css/mascot.css")}">${["/", "/buy-shipping-containers/"].includes(canon) ? `
+<link rel="stylesheet" href="/css/aussie.css?v=${assetHash("css/aussie.css")}">` : ""}
 <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
 <link rel="apple-touch-icon" href="/img/favicon.svg">
 ${schema ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>` : ""}
@@ -709,6 +710,13 @@ function quoteForm(u, compact, mode, preset) {
    already on the promise strip (inner pages) or the plate (home) — James,
    14/09/2026: "stop repeating one business day in every block". */
 
+function aussieBadge() {
+  return '<p class="aussie-badge"><img src="/img/australian-flag.svg" width="48" height="24" alt="" decoding="async"><span>Proudly Aussie owned</span></p>';
+}
+function aussieService() {
+  return `<section class="aussie-service" aria-labelledby="aussie-service-title"><div class="wrap aussie-service-grid"><div class="aussie-mate"><img src="/img/koala/pose-thumbsup.webp" width="280" height="420" alt="Koala mascot giving a thumbs up" loading="lazy" decoding="async"></div><div class="aussie-service-copy"><p class="eyebrow">Good people. Practical help.</p><h2 id="aussie-service-title">Aussie owned.<br><em>No bull.</em></h2><p class="aussie-intro">A bit of extra space shouldn't be a big headache. Talk to our friendly Aussie team and we'll help you work it out.</p><ul class="aussie-promises"><li><strong>See what you're getting.</strong><span>Ask for photos of the actual container and a straight explanation of its condition.</span></li><li><strong>Get the delivery picture.</strong><span>Tell us your postcode and access. We'll quote the container and delivery to your address.</span></li><li><strong>Talk it through with a person.</strong><span>Size, grade or where to put it: no container expertise needed. That's what we're here for.</span></li></ul><a class="btn btn-primary" href="#quote">Get my delivered price</a></div></div></section>`;
+}
+
 /* Koala's approved campaign mascot, used as illustration rather than stock photography. */
 function mascotGreeting(extra = "", pose = "clipboard") {
   return `<div class="mascot-greeting ${extra}"><img src="/img/koala/pose-${pose}.webp" width="280" height="420" alt="" loading="lazy" decoding="async"><p><strong>Room for more.</strong><span>Less mucking around.</span></p></div>`;
@@ -1024,7 +1032,8 @@ function home() {
     <div class="hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">Sales &amp; hire · every state and territory</p>
-        <h1>Wherever you are, <em>a container is closer than you think</em></h1>
+        ${aussieBadge()}
+        <h1 class="aussie-title">Aussie owned.<br><em>Big on space.</em></h1>
         <p class="hero-lede">${esc(S.tagline)}</p>
         ${heroPoints}
       </div>
@@ -1049,7 +1058,8 @@ function home() {
     <div class="hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">Sales &amp; hire · every state and territory</p>
-        <h1>Wherever you are, <em>a container is closer than you think</em></h1>
+        ${aussieBadge()}
+        <h1 class="aussie-title">Aussie owned.<br><em>Big on space.</em></h1>
         <p class="hero-lede">${esc(S.tagline)}</p>
         ${heroPoints}
         ${heroCta}
@@ -1084,7 +1094,8 @@ function home() {
     <div class="hero-grid">
       <div>
         <p class="eyebrow">Sales &amp; hire · every state and territory</p>
-        <h1>Wherever you are, <em>a container is closer than you think</em></h1>
+        ${aussieBadge()}
+        <h1 class="aussie-title">Aussie owned.<br><em>Big on space.</em></h1>
         <p class="hero-lede">${esc(S.tagline)}</p>
         ${heroCta}
         ${heroPoints}
@@ -1105,7 +1116,8 @@ function home() {
   <div class="cine-media">${videoBlock()}</div>
   <div class="cine-copy"><div class="wrap">
     <p class="eyebrow">Sales &amp; hire · every state and territory</p>
-    <h1>Wherever you are, <em>a container is closer than you think</em></h1>
+    ${aussieBadge()}
+        <h1 class="aussie-title">Aussie owned.<br><em>Big on space.</em></h1>
     <p class="hero-lede">${esc(S.tagline)}</p>
     ${heroCta}
     ${heroPoints}
@@ -1118,7 +1130,8 @@ function home() {
     <div class="hero-grid">
       <div>
         <p class="eyebrow">Sales &amp; hire · every state and territory</p>
-        <h1>Wherever you are, <em>a container is closer than you think</em></h1>
+        ${aussieBadge()}
+        <h1 class="aussie-title">Aussie owned.<br><em>Big on space.</em></h1>
         <p class="hero-lede">${esc(S.tagline)}</p>
         <div class="hero-cta">
           <a class="btn btn-primary btn-lg" href="#quote">Get a price</a>
@@ -1148,7 +1161,9 @@ function home() {
   const body = `
 ${HERO}
 
-${plate(SHORT + " Containers — " + (HOURS || "Mon–Fri"), PROMISE + ". " + PROMISE_DETAIL)}
+${aussieService()}
+
+${plate(SHORT + " Containers - " + (HOURS || "Mon-Fri"), PROMISE + ". " + PROMISE_DETAIL)}
 
 ${depotStrip()}
 
@@ -1331,7 +1346,7 @@ module.exports = { esc, aud };
    below, purely to keep each file readable. Both halves share this module's
    helpers through the object exported above and the globals assigned here. */
 Object.assign(global, {
-  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, MOBILE, MOBILE_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, guideLinks, locGuides, fitTitle, TITLE_MAX, DESC_MAX, mast, promiseStrip, quoteForm, ask, askLink, mascotGreeting, foot, firstSentence, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, PRICES, PRICE_DISCLAIMER, PRICE_SUB, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
+  __FD: { fs, path, S, LOCS, P, POSTS, DIST, TEST, D, pages, BRAND, SHORT, TEL_E164, MOBILE, MOBILE_E164, HOURS, SERVICE_AREA, PROMISE, PROMISE_DETAIL, ADDR, ADDR_LINE, postalAddress, esc, aud, auDate, para, paras, out, IMG, IMGP, havePhoto, PHOTO_USED, markDark, markLight, head, biz, crumbsLd, faqLd, productLd, g, guideLinks, locGuides, fitTitle, TITLE_MAX, DESC_MAX, mast, promiseStrip, quoteForm, ask, askLink, mascotGreeting, aussieBadge, aussieService, foot, firstSentence, shell, crumbHtml, sec, secHead, qaHtml, typeChips, band, asIs, locCaveat, rangeGrid, specTable, priceBox, gallery, hash32, rank, pick, reviewLine, REV, plate, PRICES, PRICE_DISCLAIMER, PRICE_SUB, depotStrip, videoBlock, NAV, USES_HEADS, ACCESS_HEADS, NEAR_HEADS, OPENERS, PROCESS_LINES, FREIGHT_LINES, ASK_LINES, SHOW_REVIEWS }
 });
 
 home();
